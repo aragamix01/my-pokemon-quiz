@@ -48,7 +48,6 @@ export class PokemonAPI {
   async getPokemonsByGeneration(genNumber: GenerationNumber): Promise<Pokemon[]> {
     const generation = await this.getGeneration(genNumber)
     const pokemonPromises = generation.pokemon_species
-      .slice(0, 50) // Limit to first 50 for performance
       .map(species => this.getPokemon(species.name))
     
     return Promise.all(pokemonPromises)

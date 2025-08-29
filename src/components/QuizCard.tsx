@@ -86,7 +86,10 @@ export default function QuizCard({
         </p>
         <div className="w-48 h-48 mx-auto relative mb-4 pixel-smooth flex items-center justify-center">
           {!imageLoaded ? (
-            <div className="pixel-spinner"></div>
+            <div className="pixel-spinner">
+              <div className="pokeball-line"></div>
+              <div className="pokeball-center"></div>
+            </div>
           ) : (
             <Image
               src={imageUrl}

@@ -113,6 +113,8 @@ export default function QuizPage({ params }: QuizPageProps) {
           </h2>
           <div className="flex flex-col items-center space-y-4">
             <div className="pixel-spinner mx-auto">
+              <div className="pokeball-line"></div>
+              <div className="pokeball-center"></div>
             </div>
             <div className="text-sm animate-pulse" style={{ color: 'var(--pixel-white)' }}>
               Preparing quiz questions...
