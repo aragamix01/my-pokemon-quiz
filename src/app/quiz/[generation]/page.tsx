@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import QuizCard from '@/components/QuizCard'
 import { pokemonAPI } from '@/lib/pokemon-api'
 import { Pokemon, GenerationNumber, QuizQuestion } from '@/types/pokemon'
@@ -16,10 +16,15 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled
 }
 
-export default function QuizPage() {
-  const params = useParams()
+interface QuizPageProps {
+  params: Promise<{
+    generation: string
+  }>
+}
+
+export default function QuizPage({ params }: QuizPageProps) {
   const router = useRouter()
-  const generation = parseInt(params.generation as string) as GenerationNumber
+  const [generation, setGeneration] = useState<GenerationNumber | null>(null)
   
   const [questions, setQuestions] = useState<QuizQuestion[]>([])
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -29,10 +34,24 @@ export default function QuizPage() {
   const [gameComplete, setGameComplete] = useState(false)
 
   useEffect(() => {
-    generateQuestions()
+    const initializeGeneration = async () => {
+      const resolvedParams = await params
+      const gen = parseInt(resolvedParams.generation) as GenerationNumber
+      setGeneration(gen)
+    }
+    
+    initializeGeneration()
+  }, [params])
+
+  useEffect(() => {
+    if (generation !== null) {
+      generateQuestions()
+    }
   }, [generation])
 
   const generateQuestions = async () => {
+    if (generation === null) return
+    
     setLoading(true)
     try {
       const allPokemon = await pokemonAPI.getPokemonsByGeneration(generation)
@@ -90,12 +109,12 @@ export default function QuizPage() {
     generateQuestions()
   }
 
-  if (loading) {
+  if (loading || generation === null) {
     return (
       <div className="text-center">
         <div className="pixel-card">
           <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--pixel-accent)' }}>
-            Loading Gen {generation} Pokemon...
+            Loading Gen {generation || '...'} Pokemon...
           </h2>
           <div className="flex flex-col items-center space-y-4">
             <div className="pixel-spinner mx-auto">
