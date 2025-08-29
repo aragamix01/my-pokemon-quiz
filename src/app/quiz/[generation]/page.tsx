@@ -30,7 +30,6 @@ export default function QuizPage({ params }: QuizPageProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [score, setScore] = useState(0)
   const [loading, setLoading] = useState(true)
-  const [questionLoading, setQuestionLoading] = useState(false)
   const [gameComplete, setGameComplete] = useState(false)
 
   useEffect(() => {
@@ -92,11 +91,7 @@ export default function QuizPage({ params }: QuizPageProps) {
     }
 
     if (currentQuestion < questions.length - 1) {
-      setQuestionLoading(true)
-      setTimeout(() => {
-        setCurrentQuestion(currentQuestion + 1)
-        setQuestionLoading(false)
-      }, 800)
+      setCurrentQuestion(currentQuestion + 1)
     } else {
       setGameComplete(true)
     }
@@ -206,28 +201,13 @@ export default function QuizPage({ params }: QuizPageProps) {
         </div>
       </div>
 
-      {questionLoading ? (
-        <div className="text-center">
-          <div className="cozy-card max-w-2xl mx-auto">
-            <div className="flex flex-col items-center space-y-4">
-              <div className="relative w-12 h-12">
-                <div className="absolute inset-0 border-4 border-purple-600 border-t-yellow-400 rounded-full animate-spin"></div>
-              </div>
-              <div className="text-purple-200 animate-pulse">
-                Loading next question...
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <QuizCard
-          correctPokemon={questions[currentQuestion].correctPokemon}
-          options={questions[currentQuestion].options}
-          questionNumber={questions[currentQuestion].questionNumber}
-          totalQuestions={questions.length}
-          onAnswer={handleAnswer}
-        />
-      )}
+      <QuizCard
+        correctPokemon={questions[currentQuestion].correctPokemon}
+        options={questions[currentQuestion].options}
+        questionNumber={questions[currentQuestion].questionNumber}
+        totalQuestions={questions.length}
+        onAnswer={handleAnswer}
+      />
     </div>
   )
 }

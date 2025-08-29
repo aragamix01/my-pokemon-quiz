@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Pokemon } from '@/types/pokemon'
 
@@ -45,6 +45,24 @@ export default function QuizCard({
 }: QuizCardProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<Pokemon | null>(null)
   const [showAnswer, setShowAnswer] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+
+  const imageUrl = correctPokemon.sprites.other['official-artwork']?.front_default || 
+                   correctPokemon.sprites.front_default ||
+                   '/pokemon-placeholder.png'
+
+  // Reset states when Pokemon changes and preload image
+  useEffect(() => {
+    setSelectedAnswer(null)
+    setShowAnswer(false)
+    setImageLoaded(false)
+    
+    // Preload the image using native HTMLImageElement
+    const img = document.createElement('img')
+    img.onload = () => setImageLoaded(true)
+    img.onerror = () => setImageLoaded(true) // Still show even if error
+    img.src = imageUrl
+  }, [correctPokemon.id, imageUrl])
 
   const handleAnswer = (selectedPokemon: Pokemon) => {
     if (showAnswer) return
@@ -60,23 +78,24 @@ export default function QuizCard({
     }, 2000)
   }
 
-  const imageUrl = correctPokemon.sprites.other['official-artwork']?.front_default || 
-                   correctPokemon.sprites.front_default ||
-                   '/pokemon-placeholder.png'
-
   return (
     <div className="pixel-card max-w-2xl mx-auto">
       <div className="text-center mb-6">
         <p className="text-xs mb-2" style={{ color: 'var(--pixel-gray)' }}>
           Question {questionNumber} of {totalQuestions}
         </p>
-        <div className="w-48 h-48 mx-auto relative mb-4 pixel-smooth">
-          <Image
-            src={imageUrl}
-            alt={showAnswer ? correctPokemon.name : "Pokemon silhouette"}
-            fill
-            className={`object-contain pixel-smooth ${!showAnswer ? 'brightness-0' : ''}`}
-          />
+        <div className="w-48 h-48 mx-auto relative mb-4 pixel-smooth flex items-center justify-center">
+          {!imageLoaded ? (
+            <div className="pixel-spinner"></div>
+          ) : (
+            <Image
+              src={imageUrl}
+              alt={showAnswer ? correctPokemon.name : "Pokemon silhouette"}
+              fill
+              className={`object-contain pixel-smooth ${!showAnswer ? 'brightness-0' : ''}`}
+              priority
+            />
+          )}
         </div>
         <div className="flex justify-center gap-2 mb-4">
           {correctPokemon.types.map((typeInfo, index) => (

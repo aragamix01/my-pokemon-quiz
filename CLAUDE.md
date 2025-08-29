@@ -39,3 +39,4 @@ npm run lint    # Run ESLint
 
 ## Notes
 This project are base on mobile web app device so supporting responsive on mobile an desktop
+Use strict syntax for deploy on Vercel
