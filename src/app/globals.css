@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --pixel-bg: #0f0f23;
+  --pixel-primary: #1e1e3f;
+  --pixel-secondary: #2a2a5a;
+  --pixel-accent: #ffd700;
+  --pixel-red: #ff4444;
+  --pixel-blue: #4488ff;
+  --pixel-green: #44ff44;
+  --pixel-purple: #8844ff;
+  --pixel-white: #ffffff;
+  --pixel-gray: #666666;
+  --pixel-border: #333366;
+}
+
+body {
+  color: var(--pixel-white);
+  background: var(--pixel-bg);
+  font-family: 'Press Start 2P', monospace;
+  min-height: 100vh;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .pixel-text {
+    font-family: 'Press Start 2P', monospace;
+    text-rendering: optimizeSpeed;
+  }
+  
+  .pixel-smooth {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges; 
+    image-rendering: crisp-edges;
+  }
+}
+
+.pixel-border {
+  border: 3px solid var(--pixel-border);
+  box-shadow: 
+    inset -3px -3px 0px var(--pixel-gray),
+    inset 3px 3px 0px var(--pixel-white),
+    0px 0px 0px 2px var(--pixel-bg);
+  background: var(--pixel-primary);
+}
+
+.pixel-border:hover {
+  box-shadow: 
+    inset -2px -2px 0px var(--pixel-gray),
+    inset 2px 2px 0px var(--pixel-white),
+    0px 0px 0px 2px var(--pixel-bg);
+}
+
+.pixel-card {
+  background: var(--pixel-primary);
+  border: 3px solid var(--pixel-border);
+  box-shadow: 
+    inset -3px -3px 0px var(--pixel-gray),
+    inset 3px 3px 0px rgba(255, 255, 255, 0.3),
+    0px 0px 0px 2px var(--pixel-bg),
+    4px 4px 0px var(--pixel-border);
+  padding: 1rem;
+  position: relative;
+}
+
+.pixel-card::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, 
+    var(--pixel-secondary) 0%, 
+    var(--pixel-primary) 50%, 
+    var(--pixel-secondary) 100%);
+  z-index: -1;
+}
+
+.pixel-button {
+  background: var(--pixel-secondary);
+  border: 2px solid var(--pixel-border);
+  box-shadow: 
+    inset -2px -2px 0px var(--pixel-gray),
+    inset 2px 2px 0px var(--pixel-white);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: var(--pixel-white);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pixel-button:hover {
+  background: var(--pixel-accent);
+  color: var(--pixel-bg);
+  box-shadow: 
+    inset -1px -1px 0px var(--pixel-gray),
+    inset 1px 1px 0px var(--pixel-white);
+  transform: translate(1px, 1px);
+}
+
+.pixel-button:active {
+  box-shadow: 
+    inset 2px 2px 0px var(--pixel-gray);
+  transform: translate(2px, 2px);
+}
+
+.pixel-button.correct {
+  background: var(--pixel-green);
+  color: var(--pixel-bg);
+}
+
+.pixel-button.wrong {
+  background: var(--pixel-red);
+  color: var(--pixel-white);
+}
+
+.pixel-button.disabled {
+  background: var(--pixel-gray);
+  color: var(--pixel-border);
+  cursor: not-allowed;
+}
+
+/* Pixel-perfect spinner */
+.pixel-spinner {
+  width: 32px;
+  height: 32px;
+  background: var(--pixel-accent);
+  border: 2px solid var(--pixel-border);
+  position: relative;
+  animation: pixelSpin 1s steps(8, end) infinite;
+}
+
+.pixel-spinner::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 4px;
+  height: 4px;
+  background: var(--pixel-red);
+}
+
+@keyframes pixelSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Pixel dots animation */
+.pixel-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.pixel-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--pixel-accent);
+  border: 1px solid var(--pixel-border);
+  animation: pixelBounce 1.2s ease-in-out infinite;
+}
+
+.pixel-dot:nth-child(2) { animation-delay: -0.1s; }
+.pixel-dot:nth-child(3) { animation-delay: -0.2s; }
+
+@keyframes pixelBounce {
+  0%, 80%, 100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  40% { 
+    transform: scale(1.5);
+    opacity: 0.7;
+  }
+}
