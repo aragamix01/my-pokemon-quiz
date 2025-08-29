@@ -61,7 +61,8 @@ export default function QuizCard({
   }
 
   const imageUrl = correctPokemon.sprites.other['official-artwork']?.front_default || 
-                   correctPokemon.sprites.front_default
+                   correctPokemon.sprites.front_default ||
+                   '/pokemon-placeholder.png'
 
   return (
     <div className="pixel-card max-w-2xl mx-auto">
