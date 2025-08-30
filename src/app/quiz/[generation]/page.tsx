@@ -107,22 +107,22 @@ export default function QuizPage({ params }: QuizPageProps) {
   if (loading || generation === null) {
     return (
       <div className="text-center">
-        <div className="pixel-card">
-          <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--pixel-accent)' }}>
+        <div className="modern-card">
+          <h2 className="text-xl font-bold mb-4 gradient-text">
             Loading Gen {generation || '...'} Pokemon...
           </h2>
           <div className="flex flex-col items-center space-y-4">
-            <div className="pixel-spinner mx-auto">
+            <div className="modern-spinner mx-auto">
               <div className="pokeball-line"></div>
               <div className="pokeball-center"></div>
             </div>
-            <div className="text-sm animate-pulse" style={{ color: 'var(--pixel-white)' }}>
+            <div className="text-sm animate-pulse" style={{ color: 'var(--text-primary)' }}>
               Preparing quiz questions...
             </div>
-            <div className="pixel-dots justify-center">
-              <div className="pixel-dot"></div>
-              <div className="pixel-dot"></div>
-              <div className="pixel-dot"></div>
+            <div className="modern-dots justify-center">
+              <div className="modern-dot"></div>
+              <div className="modern-dot"></div>
+              <div className="modern-dot"></div>
             </div>
           </div>
         </div>
@@ -134,29 +134,29 @@ export default function QuizPage({ params }: QuizPageProps) {
     const percentage = Math.round((score / questions.length) * 100)
     return (
       <div className="text-center">
-        <div className="pixel-card">
-          <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--pixel-accent)' }}>
+        <div className="modern-card">
+          <h2 className="text-2xl font-bold mb-4 gradient-text">
             Quiz Complete!
           </h2>
           <div className="text-4xl mb-4">
             {percentage >= 80 ? '★★★' : percentage >= 60 ? '★★☆' : '★☆☆'}
           </div>
-          <p className="text-lg font-bold mb-2" style={{ color: 'var(--pixel-white)' }}>
+          <p className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
             Score: {score}/{questions.length}
           </p>
-          <p className="text-sm mb-6" style={{ color: 'var(--pixel-gray)' }}>
+          <p className="text-sm mb-6" style={{ color: 'var(--text-muted)' }}>
             {percentage}% correct
           </p>
           <div className="flex gap-4 justify-center">
             <button
               onClick={resetGame}
-              className="pixel-button"
+              className="modern-button"
             >
               Play Again
             </button>
             <button
               onClick={() => router.push('/')}
-              className="pixel-button"
+              className="modern-button"
             >
               Menu
             </button>
@@ -169,8 +169,8 @@ export default function QuizPage({ params }: QuizPageProps) {
   if (questions.length === 0) {
     return (
       <div className="text-center">
-        <div className="pixel-card">
-          <h2 className="text-xl font-bold" style={{ color: 'var(--pixel-red)' }}>
+        <div className="modern-card">
+          <h2 className="text-xl font-bold" style={{ color: '#fd79a8' }}>
             Failed to load questions
           </h2>
           <button
@@ -190,11 +190,11 @@ export default function QuizPage({ params }: QuizPageProps) {
         <div className="flex justify-between items-center max-w-2xl mx-auto">
           <button
             onClick={() => router.push('/')}
-            className="pixel-button text-xs px-3 py-2"
+            className="modern-button text-xs px-3 py-2"
           >
             ← Menu
           </button>
-          <div className="text-sm" style={{ color: 'var(--pixel-white)' }}>
+          <div className="text-sm" style={{ color: 'var(--text-primary)' }}>
             <span className="font-bold">Gen {generation}</span>
             <span className="mx-2">|</span>
             <span>Score: {score}/10</span>

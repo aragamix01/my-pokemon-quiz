@@ -4,30 +4,9 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Pokemon, GenerationNumber } from '@/types/pokemon'
 import { pokemonAPI } from '@/lib/pokemon-api'
+import GenerationSelector from './GenerationSelector'
+import { getTypeIcon } from '@/lib/type-effectiveness'
 
-const getTypeColor = (type: string): string => {
-  const typeColors: Record<string, string> = {
-    normal: 'bg-gray-500 text-white',
-    fire: 'bg-red-500 text-white',
-    water: 'bg-blue-500 text-white',
-    electric: 'bg-yellow-500 text-black',
-    grass: 'bg-green-500 text-white',
-    ice: 'bg-cyan-300 text-black',
-    fighting: 'bg-red-700 text-white',
-    poison: 'bg-purple-600 text-white',
-    ground: 'bg-yellow-600 text-white',
-    flying: 'bg-indigo-400 text-white',
-    psychic: 'bg-pink-500 text-white',
-    bug: 'bg-lime-500 text-black',
-    rock: 'bg-yellow-800 text-white',
-    ghost: 'bg-purple-800 text-white',
-    dragon: 'bg-indigo-700 text-white',
-    dark: 'bg-gray-800 text-white',
-    steel: 'bg-gray-400 text-black',
-    fairy: 'bg-pink-300 text-black',
-  }
-  return typeColors[type] || 'bg-gray-500 text-white'
-}
 
 export default function Pokedex() {
   const [selectedGeneration, setSelectedGeneration] = useState<GenerationNumber>(1)
@@ -65,82 +44,84 @@ export default function Pokedex() {
 
   if (!showPokedex) {
     return (
-      <div className="pixel-card">
-        <h2 className="text-2xl font-bold mb-4 text-center" style={{ color: 'var(--pixel-accent)' }}>
-          POKEDEX
-        </h2>
-        <div className="text-sm mb-6 text-center" style={{ color: 'var(--pixel-white)' }}>
-          Browse Pokemon by generation (ordered by Pokedex number)
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((gen) => (
-            <button
-              key={gen}
-              onClick={() => handleGenerationSelect(gen as GenerationNumber)}
-              className="pixel-button"
-            >
-              Gen {gen}
-            </button>
-          ))}
-        </div>
-      </div>
+      <GenerationSelector
+        title="POKEDEX"
+        subtitle="Browse Pokemon by generation (ordered by Pokedex number)"
+        onGenerationSelect={handleGenerationSelect}
+      />
     )
   }
 
   return (
-    <div className="pixel-card">
+    <>
+      {/* Floating Shiny Toggle */}
+      <button
+        onClick={() => setShowShiny(!showShiny)}
+        className={`floating-shiny-toggle ${showShiny ? 'active' : ''}`}
+        title={showShiny ? 'Switch to Normal Pokemon' : 'Switch to Shiny Pokemon'}
+      >
+        ✨
+      </button>
+      
+      <div className="modern-card">
       <div className="flex justify-between items-center mb-6">
         <button
           onClick={() => setShowPokedex(false)}
-          className="pixel-button text-xs px-3 py-2"
+          className="modern-button text-xs px-3 py-2"
         >
           ← Back
         </button>
-        <h2 className="text-xl font-bold" style={{ color: 'var(--pixel-accent)' }}>
+        <h2 className="text-xl font-bold gradient-text">
           Generation {selectedGeneration}
         </h2>
         <div className="w-16"></div>
       </div>
 
-      <div className="flex gap-2 mb-4 flex-wrap justify-center">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((gen) => (
-          <button
-            key={gen}
-            onClick={() => setSelectedGeneration(gen as GenerationNumber)}
-            className={`pixel-button text-xs px-3 py-2 ${
-              selectedGeneration === gen ? 'bg-opacity-100' : 'bg-opacity-50'
-            }`}
-            style={{
-              background: selectedGeneration === gen ? 'var(--pixel-accent)' : 'var(--pixel-secondary)',
-              color: selectedGeneration === gen ? 'var(--pixel-bg)' : 'var(--pixel-white)'
-            }}
-          >
-            {gen}
-          </button>
-        ))}
+      <div className="compact-generation-grid mb-4">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((gen) => {
+          const regionData = [
+            { gen: 1, name: 'Kanto', color: '#ff6b6b', emoji: '🔥' },
+            { gen: 2, name: 'Johto', color: '#4ecdc4', emoji: '🌸' },
+            { gen: 3, name: 'Hoenn', color: '#45b7d1', emoji: '🌊' },
+            { gen: 4, name: 'Sinnoh', color: '#96ceb4', emoji: '⚡' },
+            { gen: 5, name: 'Unova', color: '#ffeaa7', emoji: '❄️' },
+            { gen: 6, name: 'Kalos', color: '#dda0dd', emoji: '🌟' },
+            { gen: 7, name: 'Alola', color: '#ff9ff3', emoji: '🌺' },
+            { gen: 8, name: 'Galar', color: '#74b9ff', emoji: '⚔️' },
+            { gen: 9, name: 'Paldea', color: '#fd79a8', emoji: '🎓' }
+          ].find(r => r.gen === gen)!
+          
+          return (
+            <button
+              key={gen}
+              onClick={() => setSelectedGeneration(gen as GenerationNumber)}
+              className={`compact-generation-button ${
+                selectedGeneration === gen ? 'selected' : ''
+              }`}
+              style={{
+                background: `linear-gradient(135deg, ${regionData.color} 0%, ${regionData.color}dd 100%)`,
+                boxShadow: `0 2px 8px ${regionData.color}33`,
+                opacity: selectedGeneration === gen ? 1 : 0.7
+              }}
+            >
+              <span className="gen-emoji-small">{regionData.emoji}</span>
+              <div className="gen-info-compact">
+                <div className="gen-number-small">Gen {gen}</div>
+                <div className="gen-name-small">{regionData.name}</div>
+              </div>
+            </button>
+          )
+        })}
       </div>
 
-      <div className="flex justify-center mb-6">
-        <button
-          onClick={() => setShowShiny(!showShiny)}
-          className={`pixel-button text-xs px-4 py-2 ${showShiny ? '' : 'bg-opacity-50'}`}
-          style={{
-            background: showShiny ? 'var(--pixel-accent)' : 'var(--pixel-secondary)',
-            color: showShiny ? 'var(--pixel-bg)' : 'var(--pixel-white)'
-          }}
-        >
-          ✨ {showShiny ? 'Shiny' : 'Normal'}
-        </button>
-      </div>
 
       {loading ? (
         <div className="text-center py-8">
-          <div className="pixel-spinner mx-auto mb-4">
+          <div className="modern-spinner mx-auto mb-4">
             <div className="pokeball-line"></div>
             <div className="pokeball-center"></div>
           </div>
-          <div className="text-sm" style={{ color: 'var(--pixel-white)' }}>
+          <div className="text-sm" style={{ color: 'var(--text-primary)' }}>
             Loading Pokemon...
           </div>
         </div>
@@ -161,8 +142,8 @@ export default function Pokedex() {
             return (
               <div
                 key={p.id}
-                className="pixel-card p-3 text-center hover:scale-105 transition-transform cursor-pointer relative"
-                style={{ background: 'var(--pixel-secondary)' }}
+                className="modern-card p-3 text-center cursor-pointer relative"
+                style={{ background: 'var(--surface-bg)' }}
               >
                 {showShiny && hasShiny && (
                   <div className="absolute top-1 right-1 text-xs">✨</div>
@@ -171,7 +152,7 @@ export default function Pokedex() {
                   <div className="absolute top-1 right-1 text-xs opacity-30">❌</div>
                 )}
                 
-                <div className="text-xs mb-2" style={{ color: 'var(--pixel-gray)' }}>
+                <div className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>
                   #{p.id.toString().padStart(3, '0')}
                 </div>
                 
@@ -180,27 +161,26 @@ export default function Pokedex() {
                     src={imageUrl}
                     alt={showShiny && hasShiny ? `Shiny ${p.name}` : p.name}
                     fill
-                    className="object-contain pixel-smooth"
+                    className="object-contain"
                   />
                 </div>
                 
-                <div className="text-xs font-bold mb-2 capitalize" style={{ color: 'var(--pixel-white)' }}>
+                <div className="text-xs font-bold mb-2 capitalize" style={{ color: 'var(--text-primary)' }}>
                   {p.name}
-                  {showShiny && hasShiny && ' ✨'}
+                  
                 </div>
                 
                 <div className="flex gap-1 justify-center flex-wrap">
                   {p.types.map((typeInfo, index) => (
-                    <span
+                    <Image
                       key={index}
-                      className={`px-1 py-0.5 text-xs font-bold uppercase ${getTypeColor(typeInfo.type.name)}`}
-                      style={{ 
-                        border: '1px solid var(--pixel-border)',
-                        fontSize: '0.6rem'
-                      }}
-                    >
-                      {typeInfo.type.name}
-                    </span>
+                      src={getTypeIcon(typeInfo.type.name as any, 'modern')}
+                      alt={typeInfo.type.name}
+                      width={56}
+                      height={56}
+                      className="object-contain hover:scale-110 transition-transform duration-200"
+                      title={typeInfo.type.name}
+                    />
                   ))}
                 </div>
               </div>
@@ -209,5 +189,6 @@ export default function Pokedex() {
         </div>
       )}
     </div>
+    </>
   )
 }

@@ -1,0 +1,1190 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "source": "PokeAPI v2",
+    "description": "Complete Pokemon type effectiveness data for all 18 types",
+    "lastUpdated": "2024-08-30",
+    "totalTypes": 18
+  },
+  "types": {
+    "normal": {
+      "id": 1,
+      "name": "normal",
+      "color": "#A8A878",
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/1.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/1.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/1.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/1.png"
+      },
+      "damageRelations": {
+        "superEffectiveAgainst": [],
+        "notVeryEffectiveAgainst": [
+          "rock",
+          "steel"
+        ],
+        "noEffectAgainst": [
+          "ghost"
+        ],
+        "weakTo": [
+          "fighting"
+        ],
+        "resists": [],
+        "immuneTo": [
+          "ghost"
+        ]
+      }
+    },
+    "fighting": {
+      "id": 2,
+      "name": "fighting",
+      "color": "#C03028",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "normal",
+          "rock",
+          "steel",
+          "ice",
+          "dark"
+        ],
+        "notVeryEffectiveAgainst": [
+          "flying",
+          "poison",
+          "bug",
+          "psychic",
+          "fairy"
+        ],
+        "noEffectAgainst": [
+          "ghost"
+        ],
+        "weakTo": [
+          "flying",
+          "psychic",
+          "fairy"
+        ],
+        "resists": [
+          "rock",
+          "bug",
+          "dark"
+        ],
+        "immuneTo": []
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/2.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/2.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/2.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/2.png"
+      }
+    },
+    "flying": {
+      "id": 3,
+      "name": "flying",
+      "color": "#A890F0",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "fighting",
+          "bug",
+          "grass"
+        ],
+        "notVeryEffectiveAgainst": [
+          "rock",
+          "steel",
+          "electric"
+        ],
+        "noEffectAgainst": [],
+        "weakTo": [
+          "rock",
+          "electric",
+          "ice"
+        ],
+        "resists": [
+          "fighting",
+          "bug",
+          "grass"
+        ],
+        "immuneTo": [
+          "ground"
+        ]
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/3.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/3.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/3.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/3.png"
+      }
+    },
+    "poison": {
+      "id": 4,
+      "name": "poison",
+      "color": "#A040A0",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "grass",
+          "fairy"
+        ],
+        "notVeryEffectiveAgainst": [
+          "poison",
+          "ground",
+          "rock",
+          "ghost"
+        ],
+        "noEffectAgainst": [
+          "steel"
+        ],
+        "weakTo": [
+          "ground",
+          "psychic"
+        ],
+        "resists": [
+          "fighting",
+          "poison",
+          "bug",
+          "grass",
+          "fairy"
+        ],
+        "immuneTo": []
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/4.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/4.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/4.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/4.png"
+      }
+    },
+    "ground": {
+      "id": 5,
+      "name": "ground",
+      "color": "#E0C068",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "poison",
+          "rock",
+          "steel",
+          "fire",
+          "electric"
+        ],
+        "notVeryEffectiveAgainst": [
+          "bug",
+          "grass"
+        ],
+        "noEffectAgainst": [
+          "flying"
+        ],
+        "weakTo": [
+          "water",
+          "grass",
+          "ice"
+        ],
+        "resists": [
+          "poison",
+          "rock",
+          "electric"
+        ],
+        "immuneTo": []
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/5.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/5.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/5.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/5.png"
+      }
+    },
+    "rock": {
+      "id": 6,
+      "name": "rock",
+      "color": "#B8A038",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "flying",
+          "bug",
+          "fire",
+          "ice"
+        ],
+        "notVeryEffectiveAgainst": [
+          "fighting",
+          "ground",
+          "steel"
+        ],
+        "noEffectAgainst": [],
+        "weakTo": [
+          "fighting",
+          "ground",
+          "steel",
+          "water",
+          "grass"
+        ],
+        "resists": [
+          "normal",
+          "flying",
+          "poison",
+          "fire"
+        ],
+        "immuneTo": []
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/6.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/6.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/6.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/6.png"
+      }
+    },
+    "bug": {
+      "id": 7,
+      "name": "bug",
+      "color": "#A8B820",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "grass",
+          "psychic",
+          "dark"
+        ],
+        "notVeryEffectiveAgainst": [
+          "fighting",
+          "flying",
+          "poison",
+          "ghost",
+          "steel",
+          "fire",
+          "fairy"
+        ],
+        "noEffectAgainst": [],
+        "weakTo": [
+          "flying",
+          "rock",
+          "fire"
+        ],
+        "resists": [
+          "fighting",
+          "ground",
+          "grass"
+        ],
+        "immuneTo": []
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/7.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/7.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/7.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/7.png"
+      }
+    },
+    "ghost": {
+      "id": 8,
+      "name": "ghost",
+      "color": "#705898",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "ghost",
+          "psychic"
+        ],
+        "notVeryEffectiveAgainst": [
+          "dark"
+        ],
+        "noEffectAgainst": [
+          "normal"
+        ],
+        "weakTo": [
+          "ghost",
+          "dark"
+        ],
+        "resists": [
+          "poison",
+          "bug"
+        ],
+        "immuneTo": [
+          "normal",
+          "fighting"
+        ]
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/8.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/8.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/8.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/8.png"
+      }
+    },
+    "steel": {
+      "id": 9,
+      "name": "steel",
+      "color": "#B7B7CE",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "rock",
+          "ice",
+          "fairy"
+        ],
+        "notVeryEffectiveAgainst": [
+          "steel",
+          "fire",
+          "water",
+          "electric"
+        ],
+        "noEffectAgainst": [],
+        "weakTo": [
+          "fighting",
+          "ground",
+          "fire"
+        ],
+        "resists": [
+          "normal",
+          "flying",
+          "rock",
+          "bug",
+          "steel",
+          "grass",
+          "psychic",
+          "ice",
+          "dragon",
+          "fairy"
+        ],
+        "immuneTo": [
+          "poison"
+        ]
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/9.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/9.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/9.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/9.png"
+      }
+    },
+    "fire": {
+      "id": 10,
+      "name": "fire",
+      "color": "#F08030",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "bug",
+          "steel",
+          "grass",
+          "ice"
+        ],
+        "notVeryEffectiveAgainst": [
+          "rock",
+          "fire",
+          "water",
+          "dragon"
+        ],
+        "noEffectAgainst": [],
+        "weakTo": [
+          "ground",
+          "rock",
+          "water"
+        ],
+        "resists": [
+          "bug",
+          "steel",
+          "fire",
+          "grass",
+          "ice",
+          "fairy"
+        ],
+        "immuneTo": []
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/10.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/10.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/10.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/10.png"
+      }
+    },
+    "water": {
+      "id": 11,
+      "name": "water",
+      "color": "#6890F0",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "ground",
+          "rock",
+          "fire"
+        ],
+        "notVeryEffectiveAgainst": [
+          "water",
+          "grass",
+          "dragon"
+        ],
+        "noEffectAgainst": [],
+        "weakTo": [
+          "grass",
+          "electric"
+        ],
+        "resists": [
+          "steel",
+          "fire",
+          "water",
+          "ice"
+        ],
+        "immuneTo": []
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/11.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/11.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/11.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/11.png"
+      }
+    },
+    "grass": {
+      "id": 12,
+      "name": "grass",
+      "color": "#78C850",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "ground",
+          "rock",
+          "water"
+        ],
+        "notVeryEffectiveAgainst": [
+          "flying",
+          "poison",
+          "bug",
+          "steel",
+          "fire",
+          "grass",
+          "dragon"
+        ],
+        "noEffectAgainst": [],
+        "weakTo": [
+          "flying",
+          "poison",
+          "bug",
+          "fire",
+          "ice"
+        ],
+        "resists": [
+          "ground",
+          "water",
+          "grass",
+          "electric"
+        ],
+        "immuneTo": []
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/12.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/12.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/12.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/12.png"
+      }
+    },
+    "electric": {
+      "id": 13,
+      "name": "electric",
+      "color": "#F8D030",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "flying",
+          "water"
+        ],
+        "notVeryEffectiveAgainst": [
+          "grass",
+          "electric",
+          "dragon"
+        ],
+        "noEffectAgainst": [
+          "ground"
+        ],
+        "weakTo": [
+          "ground"
+        ],
+        "resists": [
+          "flying",
+          "steel",
+          "electric"
+        ],
+        "immuneTo": []
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/13.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/13.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/13.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/13.png"
+      }
+    },
+    "psychic": {
+      "id": 14,
+      "name": "psychic",
+      "color": "#F85888",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "fighting",
+          "poison"
+        ],
+        "notVeryEffectiveAgainst": [
+          "steel",
+          "psychic"
+        ],
+        "noEffectAgainst": [
+          "dark"
+        ],
+        "weakTo": [
+          "bug",
+          "ghost",
+          "dark"
+        ],
+        "resists": [
+          "fighting",
+          "psychic"
+        ],
+        "immuneTo": []
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/14.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/14.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/14.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/14.png"
+      }
+    },
+    "ice": {
+      "id": 15,
+      "name": "ice",
+      "color": "#98D8D8",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "flying",
+          "ground",
+          "grass",
+          "dragon"
+        ],
+        "notVeryEffectiveAgainst": [
+          "steel",
+          "fire",
+          "water",
+          "ice"
+        ],
+        "noEffectAgainst": [],
+        "weakTo": [
+          "fighting",
+          "rock",
+          "steel",
+          "fire"
+        ],
+        "resists": [
+          "ice"
+        ],
+        "immuneTo": []
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/15.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/15.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/15.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/15.png"
+      }
+    },
+    "dragon": {
+      "id": 16,
+      "name": "dragon",
+      "color": "#7038F8",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "dragon"
+        ],
+        "notVeryEffectiveAgainst": [
+          "steel"
+        ],
+        "noEffectAgainst": [
+          "fairy"
+        ],
+        "weakTo": [
+          "ice",
+          "dragon",
+          "fairy"
+        ],
+        "resists": [
+          "fire",
+          "water",
+          "electric",
+          "grass"
+        ],
+        "immuneTo": []
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/16.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/16.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/16.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/16.png"
+      }
+    },
+    "dark": {
+      "id": 17,
+      "name": "dark",
+      "color": "#705848",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "ghost",
+          "psychic"
+        ],
+        "notVeryEffectiveAgainst": [
+          "fighting",
+          "dark",
+          "fairy"
+        ],
+        "noEffectAgainst": [],
+        "weakTo": [
+          "fighting",
+          "bug",
+          "fairy"
+        ],
+        "resists": [
+          "ghost",
+          "dark"
+        ],
+        "immuneTo": [
+          "psychic"
+        ]
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/17.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/17.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/17.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/17.png"
+      }
+    },
+    "fairy": {
+      "id": 18,
+      "name": "fairy",
+      "color": "#EE99AC",
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "fighting",
+          "dragon",
+          "dark"
+        ],
+        "notVeryEffectiveAgainst": [
+          "poison",
+          "steel",
+          "fire"
+        ],
+        "noEffectAgainst": [],
+        "weakTo": [
+          "poison",
+          "steel"
+        ],
+        "resists": [
+          "fighting",
+          "bug",
+          "dark"
+        ],
+        "immuneTo": [
+          "dragon"
+        ]
+      },
+      "icons": {
+        "generation8": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/18.png",
+        "generation9": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/18.png",
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/18.png",
+        "classic": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/18.png"
+      }
+    }
+  },
+  "effectivenessMatrix": {
+    "normal": {
+      "normal": 1,
+      "fighting": 1,
+      "flying": 1,
+      "poison": 1,
+      "ground": 1,
+      "rock": 0.5,
+      "bug": 1,
+      "ghost": 0,
+      "steel": 0.5,
+      "fire": 1,
+      "water": 1,
+      "grass": 1,
+      "electric": 1,
+      "psychic": 1,
+      "ice": 1,
+      "dragon": 1,
+      "dark": 1,
+      "fairy": 1
+    },
+    "fighting": {
+      "normal": 2,
+      "fighting": 1,
+      "flying": 0.5,
+      "poison": 0.5,
+      "ground": 1,
+      "rock": 2,
+      "bug": 0.5,
+      "ghost": 0,
+      "steel": 2,
+      "fire": 1,
+      "water": 1,
+      "grass": 1,
+      "electric": 1,
+      "psychic": 0.5,
+      "ice": 2,
+      "dragon": 1,
+      "dark": 2,
+      "fairy": 0.5
+    },
+    "flying": {
+      "normal": 1,
+      "fighting": 2,
+      "flying": 1,
+      "poison": 1,
+      "ground": 1,
+      "rock": 0.5,
+      "bug": 2,
+      "ghost": 1,
+      "steel": 0.5,
+      "fire": 1,
+      "water": 1,
+      "grass": 2,
+      "electric": 0.5,
+      "psychic": 1,
+      "ice": 1,
+      "dragon": 1,
+      "dark": 1,
+      "fairy": 1
+    },
+    "poison": {
+      "normal": 1,
+      "fighting": 1,
+      "flying": 1,
+      "poison": 0.5,
+      "ground": 0.5,
+      "rock": 0.5,
+      "bug": 1,
+      "ghost": 0.5,
+      "steel": 0,
+      "fire": 1,
+      "water": 1,
+      "grass": 2,
+      "electric": 1,
+      "psychic": 1,
+      "ice": 1,
+      "dragon": 1,
+      "dark": 1,
+      "fairy": 2
+    },
+    "ground": {
+      "normal": 1,
+      "fighting": 1,
+      "flying": 0,
+      "poison": 2,
+      "ground": 1,
+      "rock": 2,
+      "bug": 0.5,
+      "ghost": 1,
+      "steel": 2,
+      "fire": 2,
+      "water": 1,
+      "grass": 0.5,
+      "electric": 2,
+      "psychic": 1,
+      "ice": 1,
+      "dragon": 1,
+      "dark": 1,
+      "fairy": 1
+    },
+    "rock": {
+      "normal": 1,
+      "fighting": 0.5,
+      "flying": 2,
+      "poison": 1,
+      "ground": 0.5,
+      "rock": 1,
+      "bug": 2,
+      "ghost": 1,
+      "steel": 0.5,
+      "fire": 2,
+      "water": 1,
+      "grass": 1,
+      "electric": 1,
+      "psychic": 1,
+      "ice": 2,
+      "dragon": 1,
+      "dark": 1,
+      "fairy": 1
+    },
+    "bug": {
+      "normal": 1,
+      "fighting": 0.5,
+      "flying": 0.5,
+      "poison": 0.5,
+      "ground": 1,
+      "rock": 1,
+      "bug": 1,
+      "ghost": 0.5,
+      "steel": 0.5,
+      "fire": 0.5,
+      "water": 1,
+      "grass": 2,
+      "electric": 1,
+      "psychic": 2,
+      "ice": 1,
+      "dragon": 1,
+      "dark": 2,
+      "fairy": 0.5
+    },
+    "ghost": {
+      "normal": 0,
+      "fighting": 1,
+      "flying": 1,
+      "poison": 1,
+      "ground": 1,
+      "rock": 1,
+      "bug": 1,
+      "ghost": 2,
+      "steel": 1,
+      "fire": 1,
+      "water": 1,
+      "grass": 1,
+      "electric": 1,
+      "psychic": 2,
+      "ice": 1,
+      "dragon": 1,
+      "dark": 0.5,
+      "fairy": 1
+    },
+    "steel": {
+      "normal": 1,
+      "fighting": 1,
+      "flying": 1,
+      "poison": 1,
+      "ground": 1,
+      "rock": 2,
+      "bug": 1,
+      "ghost": 1,
+      "steel": 0.5,
+      "fire": 0.5,
+      "water": 0.5,
+      "grass": 1,
+      "electric": 0.5,
+      "psychic": 1,
+      "ice": 2,
+      "dragon": 1,
+      "dark": 1,
+      "fairy": 2
+    },
+    "fire": {
+      "normal": 1,
+      "fighting": 1,
+      "flying": 1,
+      "poison": 1,
+      "ground": 1,
+      "rock": 0.5,
+      "bug": 2,
+      "ghost": 1,
+      "steel": 2,
+      "fire": 0.5,
+      "water": 0.5,
+      "grass": 2,
+      "electric": 1,
+      "psychic": 1,
+      "ice": 2,
+      "dragon": 0.5,
+      "dark": 1,
+      "fairy": 1
+    },
+    "water": {
+      "normal": 1,
+      "fighting": 1,
+      "flying": 1,
+      "poison": 1,
+      "ground": 2,
+      "rock": 2,
+      "bug": 1,
+      "ghost": 1,
+      "steel": 1,
+      "fire": 2,
+      "water": 0.5,
+      "grass": 0.5,
+      "electric": 1,
+      "psychic": 1,
+      "ice": 1,
+      "dragon": 0.5,
+      "dark": 1,
+      "fairy": 1
+    },
+    "grass": {
+      "normal": 1,
+      "fighting": 1,
+      "flying": 0.5,
+      "poison": 0.5,
+      "ground": 2,
+      "rock": 2,
+      "bug": 0.5,
+      "ghost": 1,
+      "steel": 0.5,
+      "fire": 0.5,
+      "water": 2,
+      "grass": 0.5,
+      "electric": 1,
+      "psychic": 1,
+      "ice": 1,
+      "dragon": 0.5,
+      "dark": 1,
+      "fairy": 1
+    },
+    "electric": {
+      "normal": 1,
+      "fighting": 1,
+      "flying": 2,
+      "poison": 1,
+      "ground": 0,
+      "rock": 1,
+      "bug": 1,
+      "ghost": 1,
+      "steel": 1,
+      "fire": 1,
+      "water": 2,
+      "grass": 0.5,
+      "electric": 0.5,
+      "psychic": 1,
+      "ice": 1,
+      "dragon": 0.5,
+      "dark": 1,
+      "fairy": 1
+    },
+    "psychic": {
+      "normal": 1,
+      "fighting": 2,
+      "flying": 1,
+      "poison": 2,
+      "ground": 1,
+      "rock": 1,
+      "bug": 1,
+      "ghost": 1,
+      "steel": 0.5,
+      "fire": 1,
+      "water": 1,
+      "grass": 1,
+      "electric": 1,
+      "psychic": 0.5,
+      "ice": 1,
+      "dragon": 1,
+      "dark": 0,
+      "fairy": 1
+    },
+    "ice": {
+      "normal": 1,
+      "fighting": 1,
+      "flying": 2,
+      "poison": 1,
+      "ground": 2,
+      "rock": 1,
+      "bug": 1,
+      "ghost": 1,
+      "steel": 0.5,
+      "fire": 0.5,
+      "water": 0.5,
+      "grass": 2,
+      "electric": 1,
+      "psychic": 1,
+      "ice": 0.5,
+      "dragon": 2,
+      "dark": 1,
+      "fairy": 1
+    },
+    "dragon": {
+      "normal": 1,
+      "fighting": 1,
+      "flying": 1,
+      "poison": 1,
+      "ground": 1,
+      "rock": 1,
+      "bug": 1,
+      "ghost": 1,
+      "steel": 0.5,
+      "fire": 1,
+      "water": 1,
+      "grass": 1,
+      "electric": 1,
+      "psychic": 1,
+      "ice": 1,
+      "dragon": 2,
+      "dark": 1,
+      "fairy": 0
+    },
+    "dark": {
+      "normal": 1,
+      "fighting": 0.5,
+      "flying": 1,
+      "poison": 1,
+      "ground": 1,
+      "rock": 1,
+      "bug": 1,
+      "ghost": 2,
+      "steel": 1,
+      "fire": 1,
+      "water": 1,
+      "grass": 1,
+      "electric": 1,
+      "psychic": 2,
+      "ice": 1,
+      "dragon": 1,
+      "dark": 0.5,
+      "fairy": 0.5
+    },
+    "fairy": {
+      "normal": 1,
+      "fighting": 2,
+      "flying": 1,
+      "poison": 0.5,
+      "ground": 1,
+      "rock": 1,
+      "bug": 1,
+      "ghost": 1,
+      "steel": 0.5,
+      "fire": 0.5,
+      "water": 1,
+      "grass": 1,
+      "electric": 1,
+      "psychic": 1,
+      "ice": 1,
+      "dragon": 2,
+      "dark": 2,
+      "fairy": 1
+    }
+  },
+  "commonMatchups": {
+    "quadrupleWeaknesses": [
+      {
+        "types": [
+          "ice",
+          "flying"
+        ],
+        "weakTo": [
+          "rock"
+        ]
+      },
+      {
+        "types": [
+          "grass",
+          "ice"
+        ],
+        "weakTo": [
+          "fire"
+        ]
+      },
+      {
+        "types": [
+          "bug",
+          "grass"
+        ],
+        "weakTo": [
+          "fire",
+          "flying",
+          "rock"
+        ]
+      },
+      {
+        "types": [
+          "fire",
+          "flying"
+        ],
+        "weakTo": [
+          "rock"
+        ]
+      },
+      {
+        "types": [
+          "ground",
+          "rock"
+        ],
+        "weakTo": [
+          "grass",
+          "water"
+        ]
+      }
+    ],
+    "quadrupleResistances": [
+      {
+        "types": [
+          "fire",
+          "steel"
+        ],
+        "resists": [
+          "grass",
+          "ice",
+          "bug"
+        ]
+      },
+      {
+        "types": [
+          "water",
+          "ground"
+        ],
+        "resists": [
+          "rock"
+        ]
+      },
+      {
+        "types": [
+          "electric",
+          "steel"
+        ],
+        "resists": [
+          "steel"
+        ]
+      },
+      {
+        "types": [
+          "psychic",
+          "steel"
+        ],
+        "resists": [
+          "psychic"
+        ]
+      }
+    ],
+    "immunities": [
+      {
+        "attacker": "normal",
+        "defender": "ghost",
+        "multiplier": 0
+      },
+      {
+        "attacker": "fighting",
+        "defender": "ghost",
+        "multiplier": 0
+      },
+      {
+        "attacker": "poison",
+        "defender": "steel",
+        "multiplier": 0
+      },
+      {
+        "attacker": "ground",
+        "defender": "flying",
+        "multiplier": 0
+      },
+      {
+        "attacker": "psychic",
+        "defender": "dark",
+        "multiplier": 0
+      },
+      {
+        "attacker": "dragon",
+        "defender": "fairy",
+        "multiplier": 0
+      }
+    ]
+  },
+  "typesByGeneration": {
+    "generation1": [
+      "normal",
+      "fighting",
+      "flying",
+      "poison",
+      "ground",
+      "rock",
+      "bug",
+      "ghost",
+      "steel",
+      "fire",
+      "water",
+      "grass",
+      "electric",
+      "psychic",
+      "ice",
+      "dragon"
+    ],
+    "generation2": [
+      "dark",
+      "steel"
+    ],
+    "generation6": [
+      "fairy"
+    ]
+  }
+}

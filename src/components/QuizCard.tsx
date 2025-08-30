@@ -3,30 +3,8 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Pokemon } from '@/types/pokemon'
+import { getTypeIcon } from '@/lib/type-effectiveness'
 
-const getTypeColor = (type: string): string => {
-  const typeColors: Record<string, string> = {
-    normal: 'bg-gray-500 text-white',
-    fire: 'bg-red-500 text-white',
-    water: 'bg-blue-500 text-white',
-    electric: 'bg-yellow-500 text-black',
-    grass: 'bg-green-500 text-white',
-    ice: 'bg-cyan-300 text-black',
-    fighting: 'bg-red-700 text-white',
-    poison: 'bg-purple-600 text-white',
-    ground: 'bg-yellow-600 text-white',
-    flying: 'bg-indigo-400 text-white',
-    psychic: 'bg-pink-500 text-white',
-    bug: 'bg-lime-500 text-black',
-    rock: 'bg-yellow-800 text-white',
-    ghost: 'bg-purple-800 text-white',
-    dragon: 'bg-indigo-700 text-white',
-    dark: 'bg-gray-800 text-white',
-    steel: 'bg-gray-400 text-black',
-    fairy: 'bg-pink-300 text-black',
-  }
-  return typeColors[type] || 'bg-gray-500 text-white'
-}
 
 interface QuizCardProps {
   correctPokemon: Pokemon
@@ -57,6 +35,14 @@ export default function QuizCard({
     setShowAnswer(false)
     setImageLoaded(false)
     
+    // Clear any lingering focus/hover states from buttons
+    const buttons = document.querySelectorAll('button')
+    buttons.forEach(button => {
+      if (button instanceof HTMLElement) {
+        button.blur()
+      }
+    })
+    
     // Preload the image using native HTMLImageElement
     const img = document.createElement('img')
     img.onload = () => setImageLoaded(true)
@@ -79,14 +65,14 @@ export default function QuizCard({
   }
 
   return (
-    <div className="pixel-card max-w-2xl mx-auto">
+    <div className="modern-card max-w-2xl mx-auto">
       <div className="text-center mb-6">
-        <p className="text-xs mb-2" style={{ color: 'var(--pixel-gray)' }}>
+        <p className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>
           Question {questionNumber} of {totalQuestions}
         </p>
-        <div className="w-48 h-48 mx-auto relative mb-4 pixel-smooth flex items-center justify-center">
+        <div className="w-48 h-48 mx-auto relative mb-4 flex items-center justify-center">
           {!imageLoaded ? (
-            <div className="pixel-spinner">
+            <div className="modern-spinner">
               <div className="pokeball-line"></div>
               <div className="pokeball-center"></div>
             </div>
@@ -95,33 +81,32 @@ export default function QuizCard({
               src={imageUrl}
               alt={showAnswer ? correctPokemon.name : "Pokemon silhouette"}
               fill
-              className={`object-contain pixel-smooth ${!showAnswer ? 'brightness-0' : ''}`}
+              className={`object-contain ${!showAnswer ? 'brightness-0' : ''}`}
               priority
             />
           )}
         </div>
-        <div className="flex justify-center gap-2 mb-4">
+        <div className="flex justify-center gap-3 mb-4">
           {correctPokemon.types.map((typeInfo, index) => (
-            <span
+            <Image
               key={index}
-              className={`px-2 py-1 text-xs font-bold uppercase ${getTypeColor(typeInfo.type.name)}`}
-              style={{ 
-                border: '1px solid var(--pixel-border)',
-                fontFamily: 'Press Start 2P, monospace'
-              }}
-            >
-              {typeInfo.type.name}
-            </span>
+              src={getTypeIcon(typeInfo.type.name as any, 'modern')}
+              alt={typeInfo.type.name}
+              width={64}
+              height={64}
+              className="object-contain hover:scale-110 transition-transform duration-200"
+              title={typeInfo.type.name}
+            />
           ))}
         </div>
-        <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--pixel-accent)' }}>
+        <h3 className="text-lg font-bold mb-4 gradient-text">
           Who's that Pokemon?
         </h3>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         {options.map((pokemon) => {
-          let buttonClass = "pixel-button text-center capitalize"
+          let buttonClass = "modern-button text-center capitalize"
           
           if (showAnswer) {
             if (pokemon.id === correctPokemon.id) {
@@ -149,11 +134,11 @@ export default function QuizCard({
       {showAnswer && (
         <div className="mt-6 text-center">
           <p className="text-sm font-bold" style={{ 
-            color: selectedAnswer?.id === correctPokemon.id ? 'var(--pixel-green)' : 'var(--pixel-red)'
+            color: selectedAnswer?.id === correctPokemon.id ? '#00b894' : '#fd79a8'
           }}>
             {selectedAnswer?.id === correctPokemon.id ? 'Correct!' : 'Wrong!'}
           </p>
-          <p className="text-xs mt-1" style={{ color: 'var(--pixel-white)' }}>
+          <p className="text-xs mt-1" style={{ color: 'var(--text-primary)' }}>
             It's {correctPokemon.name}!
           </p>
         </div>
