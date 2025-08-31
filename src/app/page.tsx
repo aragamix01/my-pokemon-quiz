@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Pokedex from '@/components/Pokedex'
 import GenerationSelector from '@/components/GenerationSelector'
 import TypeAdvantage from '@/components/TypeAdvantage'
 import { GenerationNumber } from '@/types/pokemon'
 
-export default function Home() {
+function HomeContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [activeSection, setActiveSection] = useState<'quiz' | 'pokedex' | 'types'>('quiz')
@@ -113,5 +113,13 @@ export default function Home() {
         {activeSection === 'types' && <TypeAdvantage />}
       </div>
     </div>
+  )
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   )
 }
