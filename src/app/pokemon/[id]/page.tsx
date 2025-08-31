@@ -3,9 +3,10 @@
 import { useState, useEffect, use } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
-import { Pokemon, PokemonSpecies, EvolutionChain, EvolutionChainLink } from '@/types/pokemon'
+import { Pokemon, PokemonSpecies, EvolutionChain, EvolutionChainLink, GenerationNumber } from '@/types/pokemon'
 import { pokemonAPI } from '@/lib/pokemon-api'
 import { getTypeIcon } from '@/lib/type-effectiveness'
+import { getMoveData, getMoveTypeColor, hasMoveData } from '@/lib/moves-database'
 
 interface PokemonData {
   pokemon: Pokemon
@@ -24,6 +25,8 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
   const [movesExpanded, setMovesExpanded] = useState(false)
   const [audioPlaying, setAudioPlaying] = useState(false)
   const [selectedForm, setSelectedForm] = useState(0)
+  const [previousPokemon, setPreviousPokemon] = useState<Pokemon | null>(null)
+  const [nextPokemon, setNextPokemon] = useState<Pokemon | null>(null)
 
   useEffect(() => {
     if (resolvedParams.id) {
@@ -65,6 +68,17 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
       }
       
       setData({ pokemon, species, evolutionChain, allForms })
+
+      // Load previous/next Pokemon navigation
+      const generation = searchParams.get('gen')
+      if (generation) {
+        const genNumber = parseInt(generation) as GenerationNumber
+        console.log('Loading navigation for Pokemon', pokemon.id, 'in generation', genNumber)
+        const { previous, next } = await pokemonAPI.getPreviousNextPokemon(pokemon.id, genNumber)
+        console.log('Navigation data:', { previous: previous?.id, next: next?.id })
+        setPreviousPokemon(previous)
+        setNextPokemon(next)
+      }
     } catch (error) {
       console.error('Failed to load Pokemon data:', error)
       setData(null)
@@ -163,6 +177,14 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${itemName}.png`
   }
 
+  const navigateToPokemon = (pokemonId: number) => {
+    const generation = searchParams.get('gen')
+    if (generation) {
+      router.push(`/pokemon/${pokemonId}?gen=${generation}`)
+    }
+  }
+
+
   const renderEvolutionChain = (chainLink: EvolutionChainLink, depth = 0) => {
     const pokemonName = chainLink.species.name
     
@@ -227,6 +249,65 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
 
   return (
     <div className="min-h-screen relative overflow-hidden">
+      {/* Floating Navigation Buttons - Always show for debugging */}
+      {(previousPokemon || nextPokemon) && (
+        <>
+          {/* Previous Button */}
+          {previousPokemon && (
+            <button
+              onClick={() => navigateToPokemon(previousPokemon.id)}
+              className="fixed left-4 top-1/2 transform -translate-y-1/2 z-50 rounded-full shadow-lg hover:scale-110 transition-transform"
+              title={`Previous: ${previousPokemon.name} #${previousPokemon.id.toString().padStart(3, '0')}`}
+              style={{ 
+                background: '#16213e', 
+                border: '3px solid #e94560',
+                color: 'white',
+                width: '60px',
+                height: '60px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0'
+              }}
+            >
+              <span style={{ 
+                fontSize: '32px',
+                fontWeight: 'bold',
+                lineHeight: '0.8',
+                marginTop: '-1px'
+              }}>‹</span>
+            </button>
+          )}
+          
+          {/* Next Button */}
+          {nextPokemon && (
+            <button
+              onClick={() => navigateToPokemon(nextPokemon.id)}
+              className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 rounded-full shadow-lg hover:scale-110 transition-transform"
+              title={`Next: ${nextPokemon.name} #${nextPokemon.id.toString().padStart(3, '0')}`}
+              style={{ 
+                background: '#16213e', 
+                border: '3px solid #e94560',
+                color: 'white',
+                width: '60px',
+                height: '60px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0'
+              }}
+            >
+              <span style={{ 
+                fontSize: '32px',
+                fontWeight: 'bold',
+                lineHeight: '0.8',
+                marginTop: '-1px'
+              }}>›</span>
+            </button>
+          )}
+        </>
+      )}
+
       {/* Animated background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="floating-pokeball" style={{
@@ -291,7 +372,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
             </div>
           </div>
         ) : data ? (
-          <div className="modern-card p-2 sm:p-4">
+          <div className="modern-card p-2 sm:p-4" style={{ opacity: 1, transform: 'none' }}>
             <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
               {/* Left Side - Sprite, Types, Controls */}
               <div className="flex-shrink-0 lg:w-48 w-full">
@@ -513,17 +594,237 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                     <span>{movesExpanded ? '▼' : '▶'}</span>
                   </button>
                   {movesExpanded && (
-                    <div className="max-h-52 overflow-y-auto">
-                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1.5">
-                        {getCurrentForm().moves.map((move, index) => (
-                          <div key={index} className="p-1.5 bg-gray-600 rounded text-center">
-                            <span className="text-xs capitalize font-semibold">
-                              {move.move.name.replace('-', ' ')}
-                            </span>
+                    <>
+                      {/* Desktop Table Layout */}
+                      <div className="hidden md:block border border-gray-600 rounded-lg overflow-hidden">
+                        <div className="max-h-96 overflow-y-auto overflow-x-auto">
+                          <table className="w-full text-xs min-w-full">
+                            <thead className="sticky top-0 bg-gray-800 z-10 shadow-lg">
+                              <tr className="border-b-2 border-gray-600">
+                                <th className="text-left p-3 font-semibold bg-gray-800 whitespace-nowrap min-w-32" style={{ color: 'var(--text-primary)' }}>Move</th>
+                                <th className="text-center p-3 font-semibold bg-gray-800 whitespace-nowrap min-w-20" style={{ color: 'var(--text-primary)' }}>Type</th>
+                                <th className="text-center p-3 font-semibold bg-gray-800 whitespace-nowrap min-w-24" style={{ color: 'var(--text-primary)' }}>Category</th>
+                                <th className="text-center p-3 font-semibold bg-gray-800 whitespace-nowrap min-w-16" style={{ color: 'var(--text-primary)' }}>Power</th>
+                                <th className="text-center p-3 font-semibold bg-gray-800 whitespace-nowrap min-w-12" style={{ color: 'var(--text-primary)' }}>PP</th>
+                                <th className="text-center p-3 font-semibold bg-gray-800 whitespace-nowrap min-w-16" style={{ color: 'var(--text-primary)' }}>Acc</th>
+                                <th className="text-left p-3 font-semibold bg-gray-800 min-w-48" style={{ color: 'var(--text-primary)' }}>Effect</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {getCurrentForm().moves
+                                .map((move) => {
+                                  const moveName = move.move.name
+                                  const moveData = getMoveData(moveName)
+                                  return { moveName, moveData }
+                                })
+                                .sort((a, b) => {
+                                  // Sort by type first, then by name
+                                  const typeA = a.moveData?.type || 'zzz'
+                                  const typeB = b.moveData?.type || 'zzz'
+                                  if (typeA !== typeB) return typeA.localeCompare(typeB)
+                                  return a.moveName.localeCompare(b.moveName)
+                                })
+                                .map(({ moveName, moveData }, index) => (
+                                  <tr 
+                                    key={index} 
+                                    className="border-b border-gray-600 hover:bg-gray-700 transition-colors"
+                                  >
+                                    <td className="p-3 whitespace-nowrap">
+                                      <div className="capitalize font-medium text-white text-sm">
+                                        {moveName.replace('-', ' ')}
+                                      </div>
+                                    </td>
+                                    <td className="p-3 text-center">
+                                      {moveData && (
+                                        <span 
+                                          className="inline-block px-3 py-1 rounded text-xs font-bold text-white min-w-16 text-center"
+                                          style={{ backgroundColor: getMoveTypeColor(moveData.type) }}
+                                        >
+                                          {moveData.type.toUpperCase()}
+                                        </span>
+                                      )}
+                                      {!moveData && <span style={{ color: 'var(--text-muted)' }}>—</span>}
+                                    </td>
+                                    <td className="p-3 text-center">
+                                      {moveData && (
+                                        <span 
+                                          className={`inline-block px-3 py-1 rounded text-xs font-medium capitalize min-w-16 text-center ${
+                                            moveData.damageClass === 'physical' 
+                                              ? 'bg-red-600 text-white' 
+                                              : moveData.damageClass === 'special'
+                                              ? 'bg-blue-600 text-white'
+                                              : 'bg-gray-600 text-white'
+                                          }`}
+                                        >
+                                          {moveData.damageClass}
+                                        </span>
+                                      )}
+                                      {!moveData && <span style={{ color: 'var(--text-muted)' }}>—</span>}
+                                    </td>
+                                    <td className="p-3 text-center font-mono">
+                                      {moveData?.power ? (
+                                        <span className="font-semibold text-white text-sm">{moveData.power}</span>
+                                      ) : (
+                                        <span style={{ color: 'var(--text-muted)' }}>—</span>
+                                      )}
+                                    </td>
+                                    <td className="p-3 text-center font-mono">
+                                      {moveData?.pp !== null && moveData?.pp !== undefined ? (
+                                        <span className="text-white text-sm">{moveData.pp}</span>
+                                      ) : (
+                                        <span style={{ color: 'var(--text-muted)' }}>—</span>
+                                      )}
+                                    </td>
+                                    <td className="p-3 text-center font-mono">
+                                      {moveData?.accuracy ? (
+                                        <span className="text-white text-sm">{moveData.accuracy}%</span>
+                                      ) : moveData?.accuracy === null && moveData ? (
+                                        <span style={{ color: 'var(--text-muted)' }}>—</span>
+                                      ) : (
+                                        <span style={{ color: 'var(--text-muted)' }}>—</span>
+                                      )}
+                                    </td>
+                                    <td className="p-3">
+                                      {moveData?.shortEffect ? (
+                                        <div className="text-xs max-w-sm" style={{ color: 'var(--text-muted)' }}>
+                                          {moveData.shortEffect.length > 80 
+                                            ? `${moveData.shortEffect.substring(0, 80)}...`
+                                            : moveData.shortEffect
+                                          }
+                                          {moveData.effectChance && (
+                                            <span className="ml-1 text-orange-400 font-semibold">
+                                              ({moveData.effectChance}%)
+                                            </span>
+                                          )}
+                                        </div>
+                                      ) : (
+                                        <span style={{ color: 'var(--text-muted)' }}>No data available</span>
+                                      )}
+                                    </td>
+                                  </tr>
+                                ))}
+                            </tbody>
+                          </table>
+                        </div>
+                        
+                        <div className="flex justify-center items-center p-2 bg-gray-800 text-xs border-t border-gray-600">
+                          <div style={{ color: 'var(--text-muted)' }}>
+                            All {getCurrentForm().moves.length} moves • 937 in database
                           </div>
-                        ))}
+                        </div>
                       </div>
-                    </div>
+
+                      {/* Mobile Card Layout */}
+                      <div className="md:hidden">
+                        <div className="max-h-96 overflow-y-auto space-y-2">
+                          {getCurrentForm().moves
+                            .map((move) => {
+                              const moveName = move.move.name
+                              const moveData = getMoveData(moveName)
+                              return { moveName, moveData }
+                            })
+                            .sort((a, b) => {
+                              // Sort by type first, then by name
+                              const typeA = a.moveData?.type || 'zzz'
+                              const typeB = b.moveData?.type || 'zzz'
+                              if (typeA !== typeB) return typeA.localeCompare(typeB)
+                              return a.moveName.localeCompare(b.moveName)
+                            })
+                            .map(({ moveName, moveData }, index) => (
+                              <div 
+                                key={index} 
+                                className="bg-gray-700 rounded-lg p-3 border border-gray-600"
+                              >
+                                {/* Move Name and Type */}
+                                <div className="flex justify-between items-start mb-2">
+                                  <h4 className="capitalize font-bold text-white text-sm">
+                                    {moveName.replace('-', ' ')}
+                                  </h4>
+                                  {moveData && (
+                                    <span 
+                                      className="inline-block px-3 py-1 rounded text-xs font-bold text-white"
+                                      style={{ backgroundColor: getMoveTypeColor(moveData.type) }}
+                                    >
+                                      {moveData.type.toUpperCase()}
+                                    </span>
+                                  )}
+                                </div>
+
+                                {/* Stats Row */}
+                                <div className="flex items-center gap-3 mb-2">
+                                  {/* Category */}
+                                  {moveData && (
+                                    <span 
+                                      className={`inline-block px-2 py-1 rounded text-xs font-medium capitalize ${
+                                        moveData.damageClass === 'physical' 
+                                          ? 'bg-red-600 text-white' 
+                                          : moveData.damageClass === 'special'
+                                          ? 'bg-blue-600 text-white'
+                                          : 'bg-gray-600 text-white'
+                                      }`}
+                                    >
+                                      {moveData.damageClass}
+                                    </span>
+                                  )}
+
+                                  {/* Power */}
+                                  <div className="text-xs">
+                                    <span style={{ color: 'var(--text-secondary)' }}>Power: </span>
+                                    <span className="font-semibold text-white">
+                                      {moveData?.power || '—'}
+                                    </span>
+                                  </div>
+
+                                  {/* PP */}
+                                  <div className="text-xs">
+                                    <span style={{ color: 'var(--text-secondary)' }}>PP: </span>
+                                    <span className="text-white">
+                                      {moveData?.pp !== null && moveData?.pp !== undefined ? moveData.pp : '—'}
+                                    </span>
+                                  </div>
+
+                                  {/* Accuracy */}
+                                  <div className="text-xs">
+                                    <span style={{ color: 'var(--text-secondary)' }}>Acc: </span>
+                                    <span className="text-white">
+                                      {moveData?.accuracy ? `${moveData.accuracy}%` : '—'}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                {/* Effect */}
+                                {moveData?.shortEffect && (
+                                  <div className="mt-2 pt-2 border-t border-gray-600">
+                                    <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                                      {moveData.shortEffect.length > 100 
+                                        ? `${moveData.shortEffect.substring(0, 100)}...`
+                                        : moveData.shortEffect
+                                      }
+                                      {moveData.effectChance && (
+                                        <span className="ml-1 text-orange-400 font-semibold">
+                                          ({moveData.effectChance}%)
+                                        </span>
+                                      )}
+                                    </div>
+                                  </div>
+                                )}
+
+                                {!moveData && (
+                                  <div className="text-xs mt-2" style={{ color: 'var(--text-muted)' }}>
+                                    Move data not available
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                        </div>
+                        
+                        <div className="flex justify-center items-center p-3 bg-gray-800 text-xs border border-gray-600 rounded-lg mt-2">
+                          <div style={{ color: 'var(--text-muted)' }}>
+                            All {getCurrentForm().moves.length} moves • 937 in database
+                          </div>
+                        </div>
+                      </div>
+                    </>
                   )}
                 </div>
               </div>

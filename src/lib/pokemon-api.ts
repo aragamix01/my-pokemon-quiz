@@ -79,6 +79,23 @@ export class PokemonAPI {
            pokemon.sprites.front_default || 
            '/pokemon-placeholder.png'
   }
+
+  async getPreviousNextPokemon(currentId: number, generation: GenerationNumber): Promise<{previous: Pokemon | null, next: Pokemon | null}> {
+    const allPokemon = await this.getPokemonsByGeneration(generation)
+    const sortedPokemon = allPokemon.sort((a, b) => a.id - b.id)
+    
+    const currentIndex = sortedPokemon.findIndex(p => p.id === currentId)
+    
+    if (currentIndex === -1) {
+      return { previous: null, next: null }
+    }
+    
+    const previous = currentIndex > 0 ? sortedPokemon[currentIndex - 1] : null
+    const next = currentIndex < sortedPokemon.length - 1 ? sortedPokemon[currentIndex + 1] : null
+    
+    return { previous, next }
+  }
+
 }
 
 export const pokemonAPI = new PokemonAPI()

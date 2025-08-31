@@ -46,6 +46,25 @@ export default function Pokedex() {
     }
   }, [selectedGeneration, showPokedex])
 
+  // Restore scroll position when coming back from Pokemon detail
+  useEffect(() => {
+    if (showPokedex && !loading && pokemon.length > 0) {
+      const savedScrollPosition = sessionStorage.getItem('pokedex-scroll-position')
+      const lastClickedPokemon = sessionStorage.getItem('pokedex-last-clicked-pokemon')
+      
+      if (savedScrollPosition && lastClickedPokemon) {
+        // Clear the stored values
+        sessionStorage.removeItem('pokedex-scroll-position')
+        sessionStorage.removeItem('pokedex-last-clicked-pokemon')
+        
+        // Restore scroll position
+        setTimeout(() => {
+          window.scrollTo(0, parseInt(savedScrollPosition))
+        }, 100)
+      }
+    }
+  }, [showPokedex, loading, pokemon])
+
   const handleGenerationSelect = (gen: GenerationNumber) => {
     setSelectedGeneration(gen)
     if (!showPokedex) {
@@ -54,6 +73,9 @@ export default function Pokedex() {
   }
 
   const handlePokemonClick = (pokemonId: number) => {
+    // Store scroll position and clicked Pokemon ID
+    sessionStorage.setItem('pokedex-scroll-position', window.scrollY.toString())
+    sessionStorage.setItem('pokedex-last-clicked-pokemon', pokemonId.toString())
     router.push(`/pokemon/${pokemonId}?gen=${selectedGeneration}`)
   }
 
@@ -111,7 +133,7 @@ export default function Pokedex() {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4" style={{ opacity: 1, transform: 'none' }}>
           {pokemon.map((p) => {
             const normalImageUrl = p.sprites.other['official-artwork']?.front_default || 
                                   p.sprites.front_default || 
@@ -127,8 +149,8 @@ export default function Pokedex() {
             return (
               <div
                 key={p.id}
-                className="modern-card p-2 sm:p-3 text-center cursor-pointer relative hover:scale-105 transition-transform duration-200"
-                style={{ background: 'var(--surface-bg)' }}
+                className="modern-card p-2 sm:p-3 text-center cursor-pointer relative"
+                style={{ background: 'var(--surface-bg)', transform: 'none', opacity: 1 }}
                 onClick={() => handlePokemonClick(p.id)}
               >
                 {showShiny && hasShiny && (
@@ -164,7 +186,7 @@ export default function Pokedex() {
                       alt={typeInfo.type.name}
                       width={40}
                       height={40}
-                      className="object-contain hover:scale-110 transition-transform duration-200 sm:w-14 sm:h-14"
+                      className="object-contain sm:w-14 sm:h-14"
                       title={typeInfo.type.name}
                     />
                   ))}
