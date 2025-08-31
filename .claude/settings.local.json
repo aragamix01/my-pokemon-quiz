@@ -14,7 +14,8 @@
       "Bash(npm run build:*)",
       "Bash(npx tsc:*)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:pokeapi.co)"
+      "WebFetch(domain:pokeapi.co)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

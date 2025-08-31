@@ -182,7 +182,7 @@ export default function Pokedex() {
                   {p.types.map((typeInfo, index) => (
                     <Image
                       key={index}
-                      src={getTypeIcon(typeInfo.type.name as any, 'modern')}
+                      src={getTypeIcon(typeInfo.type.name as any)}
                       alt={typeInfo.type.name}
                       width={40}
                       height={40}

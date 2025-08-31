@@ -88,16 +88,27 @@ get pokemon name and image from this docs -> https://github.com/PokeAPI/pokedex-
 
 ## Technical Architecture
 
-### Database Systems
+### Standardized Local Database System
 - **Moves Database**: Complete local database with 937 Pokemon moves
-- **Type Effectiveness**: Comprehensive type matchup data with multipliers
-- **Pokemon API Integration**: Uses pokedex-promise-v2 for Pokemon data
-- **Caching System**: Efficient caching for API calls to reduce server load
+- **Type Effectiveness Database**: Comprehensive type matchup data with multipliers
+- **Abilities Database**: All Pokemon abilities with effects and associations
+- **Items Database**: Complete Pokemon items catalog with costs and categories
+- **Database Utilities**: Standardized search, filter, and utility functions for all databases
+- **Pokemon API Integration**: Uses pokedex-promise-v2 for Pokemon data with local database fallbacks
+- **Performance Optimization**: Instant local data access without API calls
+
+### Database Management Scripts
+- **Master Data Fetcher**: `scripts/fetch-all-data.js` - Generate all databases with one command
+- **Move Fetcher**: `scripts/fetch-moves.js` - Automated script to fetch all moves from PokeAPI
+- **Type Fetcher**: `scripts/fetch-types.js` - Generate complete type effectiveness database
+- **Ability Fetcher**: `scripts/fetch-abilities.js` - Fetch all Pokemon abilities database
+- **Item Fetcher**: `scripts/fetch-items.js` - Generate complete items database
+- **Database Utilities**: `src/lib/database-utils.ts` - Common functions for all database operations
 
 ### Build Tools & Scripts
-- **Move Fetcher**: `scripts/fetch-moves.js` - Automated script to fetch all moves from PokeAPI
 - **Type Safety**: Full TypeScript coverage with custom interfaces and types
 - **Build Optimization**: Next.js optimized builds with code splitting
+- **Local Database Architecture**: JSON + TypeScript dual format for optimal performance
 
 ## Commands
 
@@ -109,10 +120,21 @@ npm run build   # Build for production
 npm run start   # Start production server
 npm run lint    # Run ESLint
 
-# Developer Scripts
-node scripts/fetch-moves.js  # Regenerate moves database from PokeAPI
+# Database Management Scripts
+node scripts/fetch-all-data.js        # Generate all databases (recommended)
+node scripts/fetch-all-data.js moves  # Regenerate only moves database
+node scripts/fetch-all-data.js types  # Regenerate only types database
+node scripts/fetch-all-data.js abilities # Regenerate only abilities database
+node scripts/fetch-all-data.js items  # Regenerate only items database
+
+# Individual Database Scripts (if needed)
+node scripts/fetch-moves.js      # Regenerate moves database from PokeAPI
+node scripts/fetch-types.js      # Regenerate type effectiveness database
+node scripts/fetch-abilities.js  # Regenerate abilities database
+node scripts/fetch-items.js      # Regenerate items database
 ```
 
 ## Notes
 This project are base on mobile web app device so supporting responsive on mobile an desktop
 Use strict syntax for deploy on Vercel
+- to memorize

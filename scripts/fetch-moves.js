@@ -12,20 +12,39 @@ async function fetchAllMoves() {
   console.log('🚀 Starting to fetch all Pokemon moves from PokeAPI...')
   
   try {
-    // First, get the list of all moves
-    console.log('📋 Fetching moves list...')
-    const movesListResponse = await fetch('https://pokeapi.co/api/v2/move?limit=2000')
-    const movesList = await movesListResponse.json()
+    // Collect all moves using proper pagination
+    console.log('📋 Fetching moves list with pagination...')
+    const allMovesRefs = []
+    let nextUrl = 'https://pokeapi.co/api/v2/move?limit=100'
+    let pageCount = 1
     
-    console.log(`📊 Found ${movesList.results.length} moves to fetch`)
+    while (nextUrl) {
+      console.log(`📄 Fetching page ${pageCount}...`)
+      const response = await fetch(nextUrl)
+      const data = await response.json()
+      
+      console.log(`📊 Page ${pageCount}: Found ${data.results.length} moves`)
+      console.log(`📊 Total count from API: ${data.count}`)
+      
+      allMovesRefs.push(...data.results)
+      nextUrl = data.next
+      pageCount++
+      
+      // Small delay between pages
+      if (nextUrl) {
+        await new Promise(resolve => setTimeout(resolve, 500))
+      }
+    }
+    
+    console.log(`✅ Collected ${allMovesRefs.length} move references from ${pageCount - 1} pages`)
     
     const allMoves = {}
-    const total = movesList.results.length
+    const total = allMovesRefs.length
     
     // Fetch details for each move (in batches to avoid overwhelming the API)
     const batchSize = 50
     for (let i = 0; i < total; i += batchSize) {
-      const batch = movesList.results.slice(i, i + batchSize)
+      const batch = allMovesRefs.slice(i, i + batchSize)
       console.log(`⏳ Processing batch ${Math.floor(i/batchSize) + 1}/${Math.ceil(total/batchSize)} (moves ${i + 1}-${Math.min(i + batchSize, total)})`)
       
       const promises = batch.map(async (move) => {
@@ -51,16 +70,16 @@ async function fetchAllMoves() {
             target: moveData.target?.name || 'selected-pokemon',
             ailment: moveData.meta?.ailment?.name || null,
             category: moveData.meta?.category?.name || null,
-            minHits: moveData.meta?.min_hits,
-            maxHits: moveData.meta?.max_hits,
-            minTurns: moveData.meta?.min_turns,
-            maxTurns: moveData.meta?.max_turns,
-            drain: moveData.meta?.drain,
-            healing: moveData.meta?.healing,
-            critRate: moveData.meta?.crit_rate,
-            ailmentChance: moveData.meta?.ailment_chance,
-            flinchChance: moveData.meta?.flinch_chance,
-            statChance: moveData.meta?.stat_chance
+            minHits: moveData.meta?.min_hits || null,
+            maxHits: moveData.meta?.max_hits || null,
+            minTurns: moveData.meta?.min_turns || null,
+            maxTurns: moveData.meta?.max_turns || null,
+            drain: moveData.meta?.drain || null,
+            healing: moveData.meta?.healing || null,
+            critRate: moveData.meta?.crit_rate || null,
+            ailmentChance: moveData.meta?.ailment_chance || null,
+            flinchChance: moveData.meta?.flinch_chance || null,
+            statChance: moveData.meta?.stat_chance || null
           }
           
           allMoves[moveData.name] = processedMove
@@ -88,14 +107,14 @@ async function fetchAllMoves() {
 
 export type MoveDamageClass = 'physical' | 'special' | 'status'
 export type MoveCategory = 'damage' | 'ailment' | 'net-good-stats' | 'heal' | 'damage+ailment' | 'swagger' | 'damage+lower' | 'damage+raise' | 'damage+heal' | 'ohko' | 'whole-field-effect' | 'field-effect' | 'force-switch' | 'unique'
-export type MoveTarget = 'selected-pokemon' | 'all-other-pokemon' | 'user' | 'random-opponent' | 'all-opponents' | 'entire-field' | 'user-or-ally' | 'user-and-allies' | 'all-pokemon'
+export type MoveTarget = 'selected-pokemon' | 'all-other-pokemon' | 'user' | 'random-opponent' | 'all-opponents' | 'entire-field' | 'user-or-ally' | 'user-and-allies' | 'all-pokemon' | 'all-allies' | 'ally' | 'fainting-pokemon' | 'opponents-field' | 'selected-pokemon-me-first' | 'specific-move' | 'users-field'
 
 export interface MoveData {
   id: number
   name: string
   type: string
   power: number | null
-  pp: number
+  pp: number | null
   accuracy: number | null
   priority: number
   damageClass: MoveDamageClass

@@ -75,7 +75,7 @@ export default function TypeAdvantage() {
                   <td className="p-4">
                     <div className="flex items-center">
                       <Image
-                        src={getTypeIcon(type, 'modern')}
+                        src={getTypeIcon(type)}
                         alt={type}
                         width={56}
                         height={56}
@@ -93,7 +93,7 @@ export default function TypeAdvantage() {
                         {displayTypes.map((targetType) => (
                           <Image
                             key={targetType}
-                            src={getTypeIcon(targetType, 'modern')}
+                            src={getTypeIcon(targetType)}
                             alt={targetType}
                             width={56}
                             height={56}

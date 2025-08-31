@@ -10,7 +10,7 @@ import typeEffectivenessData from '../../type-effectiveness.json'
 export type PokemonTypeName = 
   | 'normal' | 'fighting' | 'flying' | 'poison' | 'ground' | 'rock'
   | 'bug' | 'ghost' | 'steel' | 'fire' | 'water' | 'grass' 
-  | 'electric' | 'psychic' | 'ice' | 'dragon' | 'dark' | 'fairy'
+  | 'electric' | 'psychic' | 'ice' | 'dragon' | 'dark' | 'fairy' | 'stellar'
 
 export type EffectivenessMultiplier = 0 | 0.25 | 0.5 | 1 | 2 | 4
 
@@ -19,10 +19,7 @@ export interface TypeEffectiveness {
   name: PokemonTypeName
   color: string
   icons?: {
-    generation8: string
-    generation9: string
     modern: string
-    classic: string
   }
   damageRelations: {
     superEffectiveAgainst: PokemonTypeName[]
@@ -43,7 +40,7 @@ export interface TypeAnalysis {
 }
 
 // Main data export
-export const TYPE_EFFECTIVENESS = typeEffectivenessData.types as Record<PokemonTypeName, TypeEffectiveness>
+export const TYPE_EFFECTIVENESS = typeEffectivenessData.types as any as Record<PokemonTypeName, TypeEffectiveness>
 export const EFFECTIVENESS_MATRIX = typeEffectivenessData.effectivenessMatrix as Record<PokemonTypeName, Record<PokemonTypeName, EffectivenessMultiplier>>
 
 /**
@@ -163,13 +160,12 @@ export function getTypeColor(type: PokemonTypeName): string {
 }
 
 /**
- * Get type icon URL
+ * Get type icon URL (modern style)
  * @param type - Pokemon type name
- * @param generation - Icon generation ('modern', 'classic', 'generation8', 'generation9')
- * @returns Icon URL string
+ * @returns Modern icon URL string
  */
-export function getTypeIcon(type: PokemonTypeName, generation: 'modern' | 'classic' | 'generation8' | 'generation9' = 'modern'): string {
-  return TYPE_EFFECTIVENESS[type].icons?.[generation] || TYPE_EFFECTIVENESS[type].icons?.modern || ''
+export function getTypeIcon(type: PokemonTypeName): string {
+  return TYPE_EFFECTIVENESS[type].icons?.modern || ''
 }
 
 /**
@@ -248,9 +244,9 @@ export function extractPokemonTypes(pokemon: any): PokemonTypeName[] {
     .map((typeInfo: any) => typeInfo.type.name as PokemonTypeName)
 }
 
-// Export commonly used type sets
+// Export commonly used type sets (based on classic physical/special split, but stellar is special)
 export const PHYSICAL_TYPES: PokemonTypeName[] = ['normal', 'fighting', 'rock', 'ground', 'flying', 'poison', 'bug', 'ghost', 'steel']
-export const SPECIAL_TYPES: PokemonTypeName[] = ['fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy']
+export const SPECIAL_TYPES: PokemonTypeName[] = ['fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy', 'stellar']
 
 // Export generation data
 export const TYPE_GENERATIONS = typeEffectivenessData.typesByGeneration
