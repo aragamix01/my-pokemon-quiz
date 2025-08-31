@@ -4,7 +4,11 @@ This file contains configuration and instructions for Claude Code.
 
 ## Project Overview
 
-This is free time project base on next.js that help me memorize pokemon name with a quiz game and browse complete pokedex
+This is a comprehensive Pokemon toolkit built with Next.js featuring multiple tools and utilities for Pokemon enthusiasts:
+- Quiz game for memorizing Pokemon names
+- Complete Pokedex browser with generation filtering
+- Type effectiveness calculator and reference
+- Additional Pokemon-related tools and features
 
 ## Quiz Game
 The game is seperate by generation of pokemon
@@ -21,6 +25,14 @@ Complete pokemon directory organized by generation
 - Shiny toggle feature to view shiny variants when available
 - Visual indicators for pokemon with/without shiny sprites
 - Responsive grid layout (2-5 columns based on screen size)
+- Generation selector component for easy navigation between generations
+
+## Type Effectiveness System
+- Complete Pokemon type effectiveness data and calculations
+- Type advantage/disadvantage system with multiplier values
+- Interactive type effectiveness display component
+- Comprehensive type matchup data for all Pokemon types
+- Support for dual-type Pokemon effectiveness calculations
 
 ## Theme
 - **Pixel Art Style**: Retro 8-bit/16-bit aesthetic with pixelated rendering

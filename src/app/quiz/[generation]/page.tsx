@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import QuizCard from '@/components/QuizCard'
 import { pokemonAPI } from '@/lib/pokemon-api'
@@ -24,7 +24,8 @@ interface QuizPageProps {
 
 export default function QuizPage({ params }: QuizPageProps) {
   const router = useRouter()
-  const [generation, setGeneration] = useState<GenerationNumber | null>(null)
+  const resolvedParams = use(params)
+  const generation = parseInt(resolvedParams.generation) as GenerationNumber
   
   const [questions, setQuestions] = useState<QuizQuestion[]>([])
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -33,23 +34,10 @@ export default function QuizPage({ params }: QuizPageProps) {
   const [gameComplete, setGameComplete] = useState(false)
 
   useEffect(() => {
-    const initializeGeneration = async () => {
-      const resolvedParams = await params
-      const gen = parseInt(resolvedParams.generation) as GenerationNumber
-      setGeneration(gen)
-    }
-    
-    initializeGeneration()
-  }, [params])
-
-  useEffect(() => {
-    if (generation !== null) {
-      generateQuestions()
-    }
+    generateQuestions()
   }, [generation])
 
   const generateQuestions = async () => {
-    if (generation === null) return
     
     setLoading(true)
     try {

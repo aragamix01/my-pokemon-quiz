@@ -21,6 +21,7 @@ interface GenerationSelectorProps {
   showBackButton?: boolean
   onBack?: () => void
   selectedGeneration?: GenerationNumber
+  minimized?: boolean
 }
 
 export default function GenerationSelector({ 
@@ -29,8 +30,31 @@ export default function GenerationSelector({
   onGenerationSelect, 
   showBackButton = false, 
   onBack,
-  selectedGeneration
+  selectedGeneration,
+  minimized = false
 }: GenerationSelectorProps) {
+  if (minimized) {
+    return (
+      <div className="flex flex-wrap gap-2 justify-center mb-4">
+        {generationsData.map((region) => (
+          <button
+            key={region.gen}
+            onClick={() => onGenerationSelect(region.gen as GenerationNumber)}
+            className={`w-10 h-10 rounded-lg font-bold text-white text-sm flex items-center justify-center transition-all duration-200 hover:scale-110 ${
+              selectedGeneration === region.gen ? 'scale-110 ring-2 ring-white ring-opacity-50' : 'opacity-70'
+            }`}
+            style={{
+              background: region.color,
+              boxShadow: `0 2px 8px ${region.color}33`
+            }}
+          >
+            {region.gen}
+          </button>
+        ))}
+      </div>
+    )
+  }
+
   return (
     <div className="modern-card">
       {showBackButton && onBack && (

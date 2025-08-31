@@ -1,5 +1,5 @@
 import Pokedex from 'pokedex-promise-v2'
-import { Pokemon, PokemonSpecies, Generation, GenerationNumber } from '@/types/pokemon'
+import { Pokemon, PokemonSpecies, Generation, GenerationNumber, EvolutionChain } from '@/types/pokemon'
 
 const P = new Pokedex()
 
@@ -45,10 +45,25 @@ export class PokemonAPI {
     return this.getCached(`species-${nameOrId}`, () => P.getPokemonSpeciesByName(nameOrId))
   }
 
+  async getEvolutionChain(id: number): Promise<EvolutionChain> {
+    return this.getCached(`evolution-chain-${id}`, () => P.getEvolutionChainById(id))
+  }
+
+  async getEvolutionChainFromSpecies(species: PokemonSpecies): Promise<EvolutionChain> {
+    const evolutionChainId = parseInt(species.evolution_chain.url.split('/').slice(-2, -1)[0])
+    return this.getEvolutionChain(evolutionChainId)
+  }
+
   async getPokemonsByGeneration(genNumber: GenerationNumber): Promise<Pokemon[]> {
     const generation = await this.getGeneration(genNumber)
+    
+    // Extract ID from species URL and use that instead of name
     const pokemonPromises = generation.pokemon_species
-      .map(species => this.getPokemon(species.name))
+      .map(species => {
+        // Extract ID from URL like "https://pokeapi.co/api/v2/pokemon-species/1/"
+        const speciesId = species.url.split('/').slice(-2, -1)[0]
+        return this.getPokemon(parseInt(speciesId))
+      })
     
     return Promise.all(pokemonPromises)
   }

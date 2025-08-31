@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Pokedex from '@/components/Pokedex'
 import GenerationSelector from '@/components/GenerationSelector'
 import TypeAdvantage from '@/components/TypeAdvantage'
@@ -9,7 +9,15 @@ import { GenerationNumber } from '@/types/pokemon'
 
 export default function Home() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [activeSection, setActiveSection] = useState<'quiz' | 'pokedex' | 'types'>('quiz')
+
+  useEffect(() => {
+    const section = searchParams.get('section')
+    if (section && (section === 'quiz' || section === 'pokedex' || section === 'types')) {
+      setActiveSection(section as 'quiz' | 'pokedex' | 'types')
+    }
+  }, [searchParams])
 
   const startQuiz = (generation: GenerationNumber) => {
     router.push(`/quiz/${generation}`)
@@ -58,10 +66,10 @@ export default function Home() {
             <span className="text-orange-500">N</span>
           </h1>
           <div className="text-lg md:text-xl gradient-text font-semibold mb-2">
-            QUIZ MASTER
+            TOOLKIT
           </div>
           <div className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-            ⚡ Test your Pokemon knowledge! ⚡
+            ⚡ Complete Pokemon companion tools! ⚡
           </div>
         </div>
 
