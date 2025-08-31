@@ -5,10 +5,13 @@ This file contains configuration and instructions for Claude Code.
 ## Project Overview
 
 This is a comprehensive Pokemon toolkit built with Next.js featuring multiple tools and utilities for Pokemon enthusiasts:
-- Quiz game for memorizing Pokemon names
-- Complete Pokedex browser with generation filtering
-- Type effectiveness calculator and reference
-- Additional Pokemon-related tools and features
+- **Quiz Game**: Generation-based Pokemon identification with shadows and multiple choice
+- **Complete Pokedex**: Browse all Pokemon by generation with shiny variants
+- **Detailed Pokemon Pages**: Individual Pokemon information with complete movesets
+- **Comprehensive Moves Database**: All 937 Pokemon moves with complete details
+- **Type Effectiveness System**: Complete type matchup calculator and reference
+- **Navigation System**: Seamless browsing with memory and scroll position restoration
+- **Dual Responsive Design**: Optimized layouts for both mobile and desktop experiences
 
 ## Quiz Game
 The game is seperate by generation of pokemon
@@ -26,6 +29,37 @@ Complete pokemon directory organized by generation
 - Visual indicators for pokemon with/without shiny sprites
 - Responsive grid layout (2-5 columns based on screen size)
 - Generation selector component for easy navigation between generations
+- Click-through navigation to detailed Pokemon information pages
+- Scroll position restoration when returning from Pokemon details
+- Back button remembers selected generation and scroll position
+
+## Pokemon Detail Pages
+Comprehensive individual Pokemon information pages featuring:
+- **Complete Pokemon Data**: ID, name, height, weight, base experience, generation, habitat
+- **Visual Elements**: High-quality official artwork, shiny variants toggle, Pokemon cries audio
+- **Type Information**: Color-coded type badges with official Pokemon type styling
+- **Form Variations**: Support for different Pokemon forms (Alolan, Galarian, etc.)
+- **Base Stats Display**: All 6 base stats with visual progress bars and color gradients
+- **Abilities Information**: Normal and hidden abilities with clear indicators
+- **Species Data**: Capture rate, base happiness, flavor text descriptions
+- **Evolution Chain**: Complete evolution line with conditions and requirements
+- **Navigation**: Floating left/right buttons for previous/next Pokemon within generation
+- **Responsive Design**: Optimized layout for both mobile and desktop viewing
+
+## Moves Database System
+Comprehensive Pokemon moves system with complete database:
+- **Complete Coverage**: All 937 Pokemon moves from Generation 1-9 with full details
+- **Rich Move Data**: Power, PP, accuracy, type, damage class, effects, and more
+- **Local Database**: No API calls required - instant loading of all move information
+- **Dual Layout System**: 
+  - **Desktop**: Professional table format with sticky headers and sortable columns
+  - **Mobile**: Clean card layout optimized for touch interaction
+- **Advanced Features**:
+  - Moves sorted by type then alphabetically for easy browsing
+  - Color-coded type and category badges for quick identification
+  - Effect descriptions with probability percentages
+  - Support for all move categories: Physical, Special, Status
+  - Comprehensive move metadata including generation, contest type, target info
 
 ## Type Effectiveness System
 - Complete Pokemon type effectiveness data and calculations
@@ -52,6 +86,19 @@ Complete pokemon directory organized by generation
 get pokemon name and image from this docs -> https://github.com/PokeAPI/pokedex-promise-v2?tab=readme-ov-file#install-
 
 
+## Technical Architecture
+
+### Database Systems
+- **Moves Database**: Complete local database with 937 Pokemon moves
+- **Type Effectiveness**: Comprehensive type matchup data with multipliers
+- **Pokemon API Integration**: Uses pokedex-promise-v2 for Pokemon data
+- **Caching System**: Efficient caching for API calls to reduce server load
+
+### Build Tools & Scripts
+- **Move Fetcher**: `scripts/fetch-moves.js` - Automated script to fetch all moves from PokeAPI
+- **Type Safety**: Full TypeScript coverage with custom interfaces and types
+- **Build Optimization**: Next.js optimized builds with code splitting
+
 ## Commands
 
 Add frequently used commands here for easy reference:
@@ -61,6 +108,9 @@ npm run dev     # Start development server
 npm run build   # Build for production
 npm run start   # Start production server
 npm run lint    # Run ESLint
+
+# Developer Scripts
+node scripts/fetch-moves.js  # Regenerate moves database from PokeAPI
 ```
 
 ## Notes
