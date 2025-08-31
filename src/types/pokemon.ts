@@ -81,7 +81,7 @@ export interface PokemonSpecies {
     url: string
   } | null
   capture_rate: number
-  base_happiness: number
+  base_happiness: number | null
   varieties: Array<{
     is_default: boolean
     pokemon: {
