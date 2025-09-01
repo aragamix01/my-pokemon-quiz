@@ -15,7 +15,13 @@
       "Bash(npx tsc:*)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:pokeapi.co)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(find:*)",
+      "Bash(timeout 10s npm run dev)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npm run lint)"
     ],
     "deny": [],
     "ask": []

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Pokemon } from '@/types/pokemon'
+import { pokemonAPI } from '@/lib/pokemon-api'
 import { getTypeIcon } from '@/lib/type-effectiveness'
 
 
@@ -25,9 +26,7 @@ export default function QuizCard({
   const [showAnswer, setShowAnswer] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
 
-  const imageUrl = correctPokemon.sprites.other['official-artwork']?.front_default || 
-                   correctPokemon.sprites.front_default ||
-                   '/pokemon-placeholder.png'
+  const imageUrl = pokemonAPI.getPokemonImageUrl(correctPokemon, false)
 
   // Reset states when Pokemon changes and preload image
   useEffect(() => {

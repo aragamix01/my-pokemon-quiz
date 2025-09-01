@@ -7,6 +7,7 @@ import { Pokemon, GenerationNumber } from '@/types/pokemon'
 import { pokemonAPI } from '@/lib/pokemon-api'
 import GenerationSelector from './GenerationSelector'
 import { getTypeIcon } from '@/lib/type-effectiveness'
+import PokemonImage from './PokemonImage'
 
 
 export default function Pokedex() {
@@ -135,16 +136,9 @@ export default function Pokedex() {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4" style={{ opacity: 1, transform: 'none' }}>
           {pokemon.map((p) => {
-            const normalImageUrl = p.sprites.other['official-artwork']?.front_default || 
-                                  p.sprites.front_default || 
-                                  '/pokemon-placeholder.png'
-            
-            const shinyImageUrl = p.sprites.other['official-artwork']?.front_shiny || 
-                                p.sprites.front_shiny || 
-                                null
-            
-            const imageUrl = showShiny && shinyImageUrl ? shinyImageUrl : normalImageUrl
-            const hasShiny = shinyImageUrl !== null
+            // Check if shiny sprites exist
+            const shinyFallbacks = pokemonAPI.getPokemonImageFallbacks(p, true)
+            const hasShiny = shinyFallbacks.some(url => !url.includes('placeholder'))
             
             return (
               <div
@@ -165,9 +159,9 @@ export default function Pokedex() {
                 </div>
                 
                 <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-2 relative">
-                  <Image
-                    src={imageUrl}
-                    alt={showShiny && hasShiny ? `Shiny ${p.name}` : p.name}
+                  <PokemonImage
+                    pokemon={p}
+                    shiny={showShiny}
                     fill
                     className="object-contain"
                   />

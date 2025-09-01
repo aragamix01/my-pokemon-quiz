@@ -74,10 +74,112 @@ export class PokemonAPI {
     return shuffled.slice(0, count)
   }
 
+  // Get Pokemon image URL - Optimized WebP sprites with variant form support
+  getPokemonImageUrl(pokemon: Pokemon, shiny: boolean = false): string {
+    const pokemonId = pokemon.id
+    const pokemonName = pokemon.name
+    
+    // Check if this is a variant form by ID ranges or name patterns
+    const isVariantForm = this.isVariantFormPokemon(pokemonId, pokemonName)
+    
+    if (isVariantForm) {
+      // For variant forms, use the forms directory with the Pokemon ID
+      if (shiny) {
+        return `/sprites/optimized/pokemon-forms/shiny/${pokemonId}.webp`
+      } else {
+        return `/sprites/optimized/pokemon-forms/${pokemonId}.webp`
+      }
+    }
+    
+    if (shiny) {
+      // Try local shiny WebP artwork first
+      return `/sprites/optimized/pokemon-artwork/shiny/${pokemonId}.webp`
+    } else {
+      // For normal sprites, use local optimized WebP sprites
+      return `/sprites/optimized/pokemon-artwork/${pokemonId}.webp`
+    }
+  }
+  
+  // Helper function to determine if a Pokemon is a variant form
+  private isVariantFormPokemon(pokemonId: number, pokemonName: string): boolean {
+    // Check by complete ID range (more reliable) - all variant forms from 10001 to 10277
+    // This includes Mega, Primal, Alolan, Galarian, Hisuian, Paldean, and other variant forms
+    const isInIdRange = pokemonId >= 10001 && pokemonId <= 10277
+    
+    // Also check by name patterns as fallback for edge cases
+    const isInNamePattern = pokemonName.includes('-alola') || pokemonName.includes('-galar') || 
+                           pokemonName.includes('-hisui') || pokemonName.includes('-paldea') ||
+                           pokemonName.includes('-mega') || pokemonName.includes('-primal') ||
+                           pokemonName.includes('-origin') || pokemonName.includes('-altered')
+    
+    return isInIdRange || isInNamePattern
+  }
+  
+  // Get fallback URLs with optimized WebP, variant forms, and GitHub backup support
+  getPokemonImageFallbacks(pokemon: Pokemon, shiny: boolean = false): string[] {
+    const pokemonId = pokemon.id
+    const pokemonName = pokemon.name
+    
+    // Check if this is a variant form using the same logic as getPokemonImageUrl
+    const isVariantForm = this.isVariantFormPokemon(pokemonId, pokemonName)
+    
+    if (isVariantForm) {
+      // Variant form fallbacks - use ID-based paths
+      const fallbacks: string[] = []
+      
+      if (shiny) {
+        // For shiny variants, try shiny form first, then regular form
+        fallbacks.push(`/sprites/optimized/pokemon-forms/shiny/${pokemonId}.webp`)
+        fallbacks.push(`/sprites/optimized/pokemon-forms/${pokemonId}.webp`)
+      } else {
+        fallbacks.push(`/sprites/optimized/pokemon-forms/${pokemonId}.webp`)
+      }
+      
+      // Add GitHub fallbacks for variants
+      const artwork = pokemon.sprites.other?.['official-artwork']
+      const regularSprites = pokemon.sprites
+      
+      if (shiny) {
+        if (artwork?.front_shiny) fallbacks.push(artwork.front_shiny)
+        if (regularSprites.front_shiny) fallbacks.push(regularSprites.front_shiny)
+        // Fallback to non-shiny if shiny doesn't exist
+        if (artwork?.front_default) fallbacks.push(artwork.front_default)
+        if (regularSprites.front_default) fallbacks.push(regularSprites.front_default)
+      } else {
+        if (artwork?.front_default) fallbacks.push(artwork.front_default)
+        if (regularSprites.front_default) fallbacks.push(regularSprites.front_default)
+      }
+      
+      fallbacks.push('/pokemon-placeholder.png')
+      return fallbacks
+    }
+    
+    if (shiny) {
+      // Shiny fallbacks - optimized WebP first, PNG fallback, then GitHub backup
+      const fallbacks: string[] = [
+        `/sprites/optimized/pokemon-artwork/shiny/${pokemonId}.webp`,
+        `/sprites/pokemon-artwork/shiny/${pokemonId}.png` // PNG fallback
+      ]
+      
+      // Add GitHub fallbacks as backup
+      const artwork = pokemon.sprites.other?.['official-artwork']
+      const regularSprites = pokemon.sprites
+      if (artwork?.front_shiny) fallbacks.push(artwork.front_shiny)
+      if (regularSprites.front_shiny) fallbacks.push(regularSprites.front_shiny)
+      fallbacks.push('/pokemon-placeholder.png')
+      return fallbacks
+    } else {
+      // Normal sprite fallbacks - WebP first, PNG fallback, then placeholder
+      return [
+        `/sprites/optimized/pokemon-artwork/${pokemonId}.webp`,
+        `/sprites/pokemon-artwork/${pokemonId}.png`, // PNG fallback
+        '/pokemon-placeholder.png'
+      ]
+    }
+  }
+
   getSilhouetteUrl(pokemon: Pokemon): string {
-    return pokemon.sprites.other['official-artwork'].front_default || 
-           pokemon.sprites.front_default || 
-           '/pokemon-placeholder.png'
+    return this.getPokemonImageUrl(pokemon, false)
   }
 
   async getPreviousNextPokemon(currentId: number, generation: GenerationNumber): Promise<{previous: Pokemon | null, next: Pokemon | null}> {

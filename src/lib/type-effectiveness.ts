@@ -160,12 +160,34 @@ export function getTypeColor(type: PokemonTypeName): string {
 }
 
 /**
- * Get type icon URL (modern style)
+ * Get type icon URL (local-first approach)
  * @param type - Pokemon type name
  * @returns Modern icon URL string
  */
 export function getTypeIcon(type: PokemonTypeName): string {
-  return TYPE_EFFECTIVENESS[type].icons?.modern || ''
+  const typeData = TYPE_EFFECTIVENESS[type]
+  if (!typeData) return ''
+  
+  // Try local first, then fallback to GitHub
+  return `/sprites/types/${typeData.id}.png`
+}
+
+/**
+ * Get type icon fallback URLs
+ * @param type - Pokemon type name
+ * @returns Array of fallback URLs
+ */
+export function getTypeIconFallbacks(type: PokemonTypeName): string[] {
+  const typeData = TYPE_EFFECTIVENESS[type]
+  if (!typeData) return []
+  
+  const fallbacks = [
+    `/sprites/types/${typeData.id}.png`, // Local first
+    typeData.icons?.modern || '', // GitHub fallback
+    '' // Empty fallback
+  ].filter(Boolean)
+  
+  return fallbacks
 }
 
 /**

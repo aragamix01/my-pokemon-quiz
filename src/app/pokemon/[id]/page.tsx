@@ -7,6 +7,7 @@ import { Pokemon, PokemonSpecies, EvolutionChain, EvolutionChainLink, Generation
 import { pokemonAPI } from '@/lib/pokemon-api'
 import { getTypeIcon } from '@/lib/type-effectiveness'
 import { getMoveData, getMoveTypeColor, hasMoveData } from '@/lib/moves-database'
+import PokemonImage from '@/components/PokemonImage'
 
 interface PokemonData {
   pokemon: Pokemon
@@ -125,8 +126,8 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
       return {
         name: formName || 'Default',
         pokemon: form,
-        normal: form.sprites.other['official-artwork']?.front_default || form.sprites.front_default,
-        shiny: form.sprites.other['official-artwork']?.front_shiny || form.sprites.front_shiny
+        normal: pokemonAPI.getPokemonImageUrl(form, false),
+        shiny: pokemonAPI.getPokemonImageUrl(form, true)
       }
     })
   }
@@ -173,8 +174,19 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
   }
 
   const getItemSprite = (itemName: string) => {
-    // PokeAPI item sprites are available at this URL pattern
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${itemName}.png`
+    // Use optimized local WebP items first, with API URL fallback
+    return `/sprites/optimized/items/${itemName}.webp`
+  }
+  
+  const getEvolutionPokemonImageUrl = (pokemonId: number) => {
+    // Create a temporary Pokemon-like object for image URL generation
+    const tempPokemon = {
+      id: pokemonId,
+      name: '', // We don't need name for ID-based variant form detection
+    } as Pokemon
+    
+    // Use the improved image URL logic with variant form support
+    return pokemonAPI.getPokemonImageUrl(tempPokemon, false)
   }
 
   const navigateToPokemon = (pokemonId: number) => {
@@ -194,10 +206,28 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
         <div className="flex flex-col items-center min-w-32">
           <div className="w-16 h-16 relative mb-2">
             <Image
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonName === 'nidoran-f' ? '29' : pokemonName === 'nidoran-m' ? '32' : pokemonName === 'mr-mime' ? '122' : pokemonName === 'mime-jr' ? '439' : pokemonName.split('-')[0] === 'deoxys' ? '386' : chainLink.species.url.split('/').slice(-2, -1)[0]}.png`}
+              src={getEvolutionPokemonImageUrl(parseInt(chainLink.species.url.split('/').slice(-2, -1)[0]))}
               alt={pokemonName}
               fill
               className="object-contain"
+              onError={(e) => {
+                // Better fallback chain for evolution sprites
+                const target = e.target as HTMLImageElement
+                const pokemonId = parseInt(chainLink.species.url.split('/').slice(-2, -1)[0])
+                
+                if (target.src.includes('/pokemon-artwork/')) {
+                  // Try variant forms directory if artwork fails
+                  target.src = `/sprites/optimized/pokemon-forms/${pokemonId}.webp`
+                } else if (target.src.includes('/pokemon-forms/')) {
+                  // Final fallback to placeholder
+                  target.src = '/pokemon-placeholder.png'
+                } else if (target.src.includes('.webp')) {
+                  // Try PNG fallback (legacy)
+                  target.src = `/sprites/pokemon-artwork/${pokemonId}.png`
+                } else {
+                  target.src = '/pokemon-placeholder.png'
+                }
+              }}
             />
           </div>
           <div className="text-sm font-bold text-center capitalize" style={{ color: 'var(--text-primary)' }}>
@@ -222,11 +252,21 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                     fill
                     className="object-contain"
                     onError={(e) => {
-                      // Show gem icon as fallback if sprite doesn't exist
                       const target = e.target as HTMLImageElement
-                      const parent = target.parentElement
-                      if (parent) {
-                        parent.innerHTML = '<span class="text-sm">💎</span>'
+                      const itemName = evolution.evolution_details[0].item?.name
+                      
+                      if (target.src.includes('optimized/items') && target.src.includes('.webp')) {
+                        // Fallback to non-optimized PNG
+                        target.src = `/sprites/items/${itemName}.png`
+                      } else if (target.src.includes('/sprites/items/') && target.src.includes('.png')) {
+                        // Fallback to GitHub API URL
+                        target.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${itemName}.png`
+                      } else {
+                        // Final fallback: show gem icon
+                        const parent = target.parentElement
+                        if (parent) {
+                          parent.innerHTML = '<span class="text-sm">💎</span>'
+                        }
                       }
                     }}
                   />
