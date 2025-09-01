@@ -79,7 +79,7 @@ function HomeContent() {
             onClick={() => setActiveSection('quiz')}
             className={`compact-nav-button ${activeSection === 'quiz' ? 'active' : ''}`}
           >
-            🎯 Quiz Battle
+            🎯 Who's that Pokemon?
           </button>
           <button
             onClick={() => setActiveSection('pokedex')}

@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Pokemon Quiz Game',
-  description: 'A cozy Pokemon quiz game to help memorize Pokemon names',
+  title: 'Pokemon toolkit',
+  description: 'This is a comprehensive Pokemon toolkit built with Next.js featuring multiple tools and utilities for Pokemon enthusiasts',
 }
 
 export default function RootLayout({
