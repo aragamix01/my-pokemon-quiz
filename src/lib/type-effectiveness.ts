@@ -169,7 +169,7 @@ export function getTypeIcon(type: PokemonTypeName): string {
   if (!typeData) return ''
   
   // Try local first, then fallback to GitHub
-  return `/sprites/types/${typeData.id}.png`
+  return `/sprites/optimized/types/${typeData.id}.webp`
 }
 
 /**
@@ -182,7 +182,7 @@ export function getTypeIconFallbacks(type: PokemonTypeName): string[] {
   if (!typeData) return []
   
   const fallbacks = [
-    `/sprites/types/${typeData.id}.png`, // Local first
+    `/sprites/optimized/types/${typeData.id}.webp`, // Local first
     typeData.icons?.modern || '', // GitHub fallback
     '' // Empty fallback
   ].filter(Boolean)
