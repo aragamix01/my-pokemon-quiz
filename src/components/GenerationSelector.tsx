@@ -17,10 +17,10 @@ const generationsData = [
 interface GenerationSelectorProps {
   title: string
   subtitle?: string
-  onGenerationSelect: (generation: GenerationNumber) => void
+  onGenerationSelect: (generation: GenerationNumber | null) => void
   showBackButton?: boolean
   onBack?: () => void
-  selectedGeneration?: GenerationNumber
+  selectedGeneration?: GenerationNumber | null
   minimized?: boolean
 }
 
@@ -36,6 +36,21 @@ export default function GenerationSelector({
   if (minimized) {
     return (
       <div className="flex flex-wrap gap-2 justify-center mb-4">
+        {/* All Generations Button */}
+        <button
+          onClick={() => onGenerationSelect(null)}
+          className={`w-12 h-10 rounded-lg font-bold text-white text-xs flex items-center justify-center transition-all duration-200 hover:scale-110 ${
+            selectedGeneration === null ? 'scale-110 ring-2 ring-white ring-opacity-50' : 'opacity-70'
+          }`}
+          style={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            boxShadow: '0 2px 8px #667eea33'
+          }}
+          title="All Generations"
+        >
+          All
+        </button>
+        
         {generationsData.map((region) => (
           <button
             key={region.gen}
@@ -80,6 +95,24 @@ export default function GenerationSelector({
       )}
       
       <div className="compact-generation-grid">
+        {/* All Generations Button */}
+        <button
+          onClick={() => onGenerationSelect(null)}
+          className={`compact-generation-button ${
+            selectedGeneration === null ? 'selected' : ''
+          }`}
+          style={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2dd 100%)',
+            boxShadow: '0 2px 8px #667eea33'
+          }}
+        >
+          <span className="gen-emoji-small">🌍</span>
+          <div className="gen-info-compact">
+            <div className="gen-number-small">All</div>
+            <div className="gen-name-small">Regions</div>
+          </div>
+        </button>
+        
         {generationsData.map((region) => (
           <button
             key={region.gen}

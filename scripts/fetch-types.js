@@ -171,8 +171,13 @@ async function fetchAllTypes() {
       typesByGeneration: typesByGeneration
     }
     
-    // Write the JSON database file
-    const jsonOutputPath = path.join(__dirname, '..', 'type-effectiveness.json')
+    // Write the JSON database file  
+    const dataDir = path.join(__dirname, '..', 'src', 'data')
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true })
+    }
+    
+    const jsonOutputPath = path.join(dataDir, 'pokemon-type-effectiveness.json')
     fs.writeFileSync(jsonOutputPath, JSON.stringify(databaseStructure, null, 2))
     
     console.log(`📁 JSON Database saved to: ${jsonOutputPath}`)

@@ -4,7 +4,7 @@
  * Data source: PokeAPI v2
  */
 
-import typeEffectivenessData from '../../type-effectiveness.json'
+import typeEffectivenessData from '../data/pokemon-type-effectiveness.json'
 
 // Type definitions
 export type PokemonTypeName = 

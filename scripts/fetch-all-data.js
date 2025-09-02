@@ -9,10 +9,18 @@ const { execSync } = require('child_process')
 const path = require('path')
 
 const DATABASES = {
-  moves: 'fetch-moves.js',
-  types: 'fetch-types.js', 
-  abilities: 'fetch-abilities.js',
-  items: 'fetch-items.js'
+  // JSON-based databases (new format)
+  metadata: 'fetch-pokemon-metadata.js',
+  types: 'fetch-types.js',
+  moves: 'fetch-moves-json.js',
+  abilities: 'fetch-abilities-json.js', 
+  items: 'fetch-items-json.js',
+  'evolution-items': 'fetch-evolution-items.js',
+  
+  // Legacy TypeScript databases (deprecated)
+  'moves-legacy': 'fetch-moves.js',
+  'abilities-legacy': 'fetch-abilities.js',
+  'items-legacy': 'fetch-items.js'
 }
 
 async function runScript(scriptName, databaseName) {
@@ -40,15 +48,19 @@ async function main() {
   console.log('🚀 Pokemon Database Generator')
   console.log('============================')
   console.log(`Target: ${targetDatabase}`)
-  console.log(`Available databases: ${Object.keys(DATABASES).join(', ')}, all`)
+  console.log(`Available databases: ${Object.keys(DATABASES).filter(k => !k.includes('legacy')).join(', ')}, all`)
+  if (targetDatabase === 'all') {
+    console.log('📊 Note: "all" generates only the new JSON-based databases (recommended)')
+  }
   
   const startTime = Date.now()
   let successCount = 0
   let totalCount = 0
   
   if (targetDatabase === 'all') {
-    // Generate all databases
-    for (const [dbName, scriptName] of Object.entries(DATABASES)) {
+    // Generate only new JSON-based databases (exclude legacy)
+    const jsonDatabases = Object.entries(DATABASES).filter(([name, _]) => !name.includes('legacy'))
+    for (const [dbName, scriptName] of jsonDatabases) {
       totalCount++
       const success = await runScript(scriptName, dbName)
       if (success) successCount++
@@ -74,23 +86,36 @@ async function main() {
   if (successCount > 0) {
     console.log('\n📁 Generated files:')
     if (targetDatabase === 'all' || targetDatabase === 'moves') {
-      console.log('  - src/lib/moves-database.ts')
+      console.log('  - src/data/pokemon-moves.json')
+      console.log('  - src/types/pokemon-moves.ts')
     }
     if (targetDatabase === 'all' || targetDatabase === 'types') {
-      console.log('  - type-effectiveness.json')
+      console.log('  - src/data/pokemon-type-effectiveness.json')
     }
     if (targetDatabase === 'all' || targetDatabase === 'abilities') {
-      console.log('  - src/lib/abilities-database.ts')
+      console.log('  - src/data/pokemon-abilities.json')
+      console.log('  - src/types/pokemon-abilities.ts')
     }
     if (targetDatabase === 'all' || targetDatabase === 'items') {
-      console.log('  - src/lib/items-database.ts')
+      console.log('  - src/data/pokemon-items.json')
+      console.log('  - src/types/pokemon-items.ts')
+    }
+    if (targetDatabase === 'all' || targetDatabase === 'evolution-items') {
+      console.log('  - src/data/evolution-items.json')
+      console.log('  - src/types/evolution-items.ts')
+    }
+    if (targetDatabase === 'all' || targetDatabase === 'metadata') {
+      console.log('  - src/data/pokemon-metadata.json')
+      console.log('  - src/data/pokemon-generations.json')
+      console.log('  - src/types/pokemon-metadata.ts')
     }
     
     console.log('\n💡 Tips:')
-    console.log('  - Use these local databases instead of API calls for better performance')
-    console.log('  - Import the TypeScript databases in your components')
+    console.log('  - All databases now use JSON format for better performance')
+    console.log('  - Import JSON data directly or use utility functions in src/lib/')
     console.log('  - Run this script periodically to update data from PokeAPI')
-    console.log('  - All databases include search and utility functions')
+    console.log('  - Evolution items database provides lightweight evolution-only data')
+    console.log('  - Use src/lib/*-utils.ts for search and filter functions')
   }
   
   if (successCount < totalCount) {

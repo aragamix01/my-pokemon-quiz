@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { Pokemon, PokemonSpecies, EvolutionChain, EvolutionChainLink, GenerationNumber } from '@/types/pokemon'
 import { pokemonAPI } from '@/lib/pokemon-api'
 import { getTypeIcon } from '@/lib/type-effectiveness'
-import { getMoveData, getMoveTypeColor, hasMoveData } from '@/lib/moves-database'
+import { getMoveData, getMoveTypeColor, hasMoveData } from '@/lib/moves-utils'
 import PokemonImage from '@/components/PokemonImage'
 
 interface PokemonData {
@@ -210,6 +210,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
               alt={pokemonName}
               fill
               className="object-contain"
+              draggable={false}
               onError={(e) => {
                 // Better fallback chain for evolution sprites
                 const target = e.target as HTMLImageElement
@@ -251,6 +252,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                     alt={evolution.evolution_details[0].item.name}
                     fill
                     className="object-contain"
+                    draggable={false}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement
                       const itemName = evolution.evolution_details[0].item?.name
@@ -423,6 +425,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                     alt={getEnglishName()}
                     fill
                     className="object-contain"
+                    draggable={false}
                   />
                 </div>
                 
@@ -437,6 +440,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                         width={70}
                         height={70}
                         className="object-contain"
+                        draggable={false}
                         title={typeInfo.type.name}
                       />
                     ))}
@@ -680,7 +684,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                                           className="inline-block px-3 py-1 rounded text-xs font-bold text-white min-w-16 text-center"
                                           style={{ backgroundColor: getMoveTypeColor(moveData.type) }}
                                         >
-                                          {moveData.type.toUpperCase()}
+                                          {moveData.type?.toUpperCase() || 'UNKNOWN'}
                                         </span>
                                       )}
                                       {!moveData && <span style={{ color: 'var(--text-muted)' }}>—</span>}
@@ -785,7 +789,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                                       className="inline-block px-3 py-1 rounded text-xs font-bold text-white"
                                       style={{ backgroundColor: getMoveTypeColor(moveData.type) }}
                                     >
-                                      {moveData.type.toUpperCase()}
+                                      {moveData.type?.toUpperCase() || 'UNKNOWN'}
                                     </span>
                                   )}
                                 </div>

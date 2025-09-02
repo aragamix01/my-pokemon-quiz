@@ -77,9 +77,10 @@ export default function TypeAdvantage() {
                       <Image
                         src={getTypeIcon(type)}
                         alt={type}
-                        width={56}
-                        height={56}
+                        width={72}
+                        height={72}
                         className="object-contain"
+                        draggable={false}
                       />
                     </div>
                   </td>
@@ -95,10 +96,11 @@ export default function TypeAdvantage() {
                             key={targetType}
                             src={getTypeIcon(targetType)}
                             alt={targetType}
-                            width={56}
-                            height={56}
+                            width={72}
+                            height={72}
                             className="object-contain hover:scale-110 transition-transform duration-200"
                             title={showMode === 'weakTo' ? `Weak to ${targetType}` : `Super effective against ${targetType}`}
+                            draggable={false}
                           />
                         ))}
                       </div>

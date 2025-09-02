@@ -79,6 +79,7 @@ export default function PokemonImage({
       style={style}
       priority={priority}
       onError={handleError}
+      draggable={false}
       key={`${pokemon.id}-${shiny}-${currentSrcIndex}`} // Force re-render on fallback
     />
   )

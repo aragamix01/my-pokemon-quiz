@@ -19,8 +19,12 @@ function HomeContent() {
     }
   }, [searchParams])
 
-  const startQuiz = (generation: GenerationNumber) => {
-    router.push(`/quiz/${generation}`)
+  const startQuiz = (generation: GenerationNumber | null) => {
+    if (generation === null) {
+      router.push('/quiz/all')
+    } else {
+      router.push(`/quiz/${generation}`)
+    }
   }
 
   return (

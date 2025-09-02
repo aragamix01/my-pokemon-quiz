@@ -3,7 +3,7 @@
 import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import QuizCard from '@/components/QuizCard'
-import { pokemonAPI } from '@/lib/pokemon-api'
+import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import { Pokemon, GenerationNumber, QuizQuestion } from '@/types/pokemon'
 
 // Fisher-Yates shuffle for better randomization
@@ -25,7 +25,7 @@ interface QuizPageProps {
 export default function QuizPage({ params }: QuizPageProps) {
   const router = useRouter()
   const resolvedParams = use(params)
-  const generation = parseInt(resolvedParams.generation) as GenerationNumber
+  const generation = resolvedParams.generation === 'all' ? null : parseInt(resolvedParams.generation) as GenerationNumber
   
   const [questions, setQuestions] = useState<QuizQuestion[]>([])
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -37,11 +37,55 @@ export default function QuizPage({ params }: QuizPageProps) {
     generateQuestions()
   }, [generation])
 
-  const generateQuestions = async () => {
-    
+  const generateQuestions = () => {
     setLoading(true)
     try {
-      const allPokemon = await pokemonAPI.getPokemonsByGeneration(generation)
+      // Get metadata based on generation (null = all generations)
+      const metadata = generation === null 
+        ? pokemonMetadataService.getAllMetadata()
+        : pokemonMetadataService.getMetadataByGeneration(generation)
+      
+      if (metadata.length === 0) {
+        console.error('No Pokemon metadata found')
+        setLoading(false)
+        return
+      }
+
+      // Convert metadata to Pokemon format for quiz
+      const allPokemon: Pokemon[] = metadata.map(meta => ({
+        id: meta.id,
+        name: meta.name,
+        types: meta.types.map((type: string) => ({
+          type: { name: type, url: '' },
+          slot: 1
+        })),
+        species: { name: meta.species_name, url: '' },
+        sprites: {
+          front_default: null,
+          front_shiny: null,
+          other: {
+            'official-artwork': {
+              front_default: null,
+              front_shiny: null
+            }
+          }
+        },
+        height: meta.height,
+        weight: meta.weight,
+        base_experience: meta.base_experience,
+        abilities: [],
+        moves: [],
+        cries: { latest: null, legacy: null },
+        stats: [
+          { base_stat: meta.stats.hp, effort: 0, stat: { name: 'hp', url: '' } },
+          { base_stat: meta.stats.attack, effort: 0, stat: { name: 'attack', url: '' } },
+          { base_stat: meta.stats.defense, effort: 0, stat: { name: 'defense', url: '' } },
+          { base_stat: meta.stats['special-attack'], effort: 0, stat: { name: 'special-attack', url: '' } },
+          { base_stat: meta.stats['special-defense'], effort: 0, stat: { name: 'special-defense', url: '' } },
+          { base_stat: meta.stats.speed, effort: 0, stat: { name: 'speed', url: '' } }
+        ]
+      }))
+
       const quizQuestions: QuizQuestion[] = []
       
       // Create a shuffled copy of all Pokemon to avoid duplicates
@@ -51,7 +95,7 @@ export default function QuizPage({ params }: QuizPageProps) {
       const questionsCount = Math.min(10, shuffledPokemon.length)
 
       for (let i = 0; i < questionsCount; i++) {
-        const correctPokemon = shuffledPokemon[i] // Use sequential selection from shuffled array
+        const correctPokemon = shuffledPokemon[i]
         const wrongOptions = shuffleArray(
           allPokemon.filter(p => p.id !== correctPokemon.id)
         ).slice(0, 3)
@@ -92,12 +136,12 @@ export default function QuizPage({ params }: QuizPageProps) {
     generateQuestions()
   }
 
-  if (loading || generation === null) {
+  if (loading) {
     return (
       <div className="text-center">
         <div className="modern-card">
           <h2 className="text-xl font-bold mb-4 gradient-text">
-            Loading Gen {generation || '...'} Pokemon...
+            Loading {generation === null ? 'All Generations' : `Gen ${generation}`} Pokemon...
           </h2>
           <div className="flex flex-col items-center space-y-4">
             <div className="modern-spinner mx-auto">
@@ -183,7 +227,7 @@ export default function QuizPage({ params }: QuizPageProps) {
             ← Menu
           </button>
           <div className="text-sm" style={{ color: 'var(--text-primary)' }}>
-            <span className="font-bold">Gen {generation}</span>
+            <span className="font-bold">{generation === null ? 'All Generations' : `Gen ${generation}`}</span>
             <span className="mx-2">|</span>
             <span>Score: {score}/10</span>
           </div>

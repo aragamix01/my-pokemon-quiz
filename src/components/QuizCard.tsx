@@ -82,6 +82,7 @@ export default function QuizCard({
               fill
               className={`object-contain ${!showAnswer ? 'brightness-0' : ''}`}
               priority
+              draggable={false}
             />
           )}
         </div>
@@ -95,6 +96,7 @@ export default function QuizCard({
               height={64}
               className="object-contain hover:scale-110 transition-transform duration-200"
               title={typeInfo.type.name}
+              draggable={false}
             />
           ))}
         </div>

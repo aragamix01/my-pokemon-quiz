@@ -21,7 +21,8 @@
       "Bash(find:*)",
       "Bash(timeout 10s npm run dev)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "Bash(npm run lint)"
+      "Bash(npm run lint)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []
