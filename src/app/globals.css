@@ -739,3 +739,51 @@ body {
   width: 12px;
   height: 12px;
 }
+
+/* Mobile-specific touch and focus fixes */
+.quiz-option-button {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+/* Prevent iOS hover states from sticking on buttons */
+@media (hover: none) and (pointer: coarse) {
+  .quiz-option-button:hover,
+  .quiz-option-button:focus,
+  .quiz-option-button:active {
+    background: var(--surface-bg) !important;
+    transform: none !important;
+    box-shadow: 0 2px 8px var(--shadow-color) !important;
+  }
+  
+  .quiz-option-button.correct:hover,
+  .quiz-option-button.correct:focus,
+  .quiz-option-button.correct:active {
+    background: linear-gradient(135deg, #00b894 0%, #00a085 100%) !important;
+  }
+  
+  .quiz-option-button.wrong:hover,
+  .quiz-option-button.wrong:focus,  
+  .quiz-option-button.wrong:active {
+    background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%) !important;
+  }
+  
+  .quiz-option-button.disabled:hover,
+  .quiz-option-button.disabled:focus,
+  .quiz-option-button.disabled:active {
+    background: var(--surface-bg) !important;
+    opacity: 0.5 !important;
+  }
+}
+
+/* Additional mobile touch improvements */
+@media (max-width: 768px) {
+  .quiz-option-button {
+    min-height: 48px; /* Better touch target */
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+}

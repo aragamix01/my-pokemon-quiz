@@ -52,6 +52,21 @@ export default function QuizCard({
   const handleAnswer = (selectedPokemon: Pokemon) => {
     if (showAnswer) return
     
+    // Clear button focus/hover states immediately on mobile
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
+    }
+    
+    // Also clear all button states to prevent mobile hover persistence  
+    const buttons = document.querySelectorAll('.quiz-option-button')
+    buttons.forEach(button => {
+      if (button instanceof HTMLElement) {
+        button.blur()
+        // Force remove any touch/active states on mobile
+        button.style.setProperty('-webkit-tap-highlight-color', 'transparent')
+      }
+    })
+    
     setSelectedAnswer(selectedPokemon)
     setShowAnswer(true)
     const isCorrect = selectedPokemon.id === correctPokemon.id
@@ -123,8 +138,19 @@ export default function QuizCard({
             <button
               key={pokemon.id}
               onClick={() => handleAnswer(pokemon)}
-              className={buttonClass}
+              className={`${buttonClass} quiz-option-button`}
               disabled={showAnswer}
+              style={{
+                WebkitTapHighlightColor: 'transparent',
+                WebkitTouchCallout: 'none',
+                WebkitUserSelect: 'none',
+                userSelect: 'none'
+              }}
+              onTouchEnd={(e) => {
+                // Prevent mobile hover states from persisting
+                const target = e.currentTarget
+                setTimeout(() => target.blur(), 100)
+              }}
             >
               {pokemon.name}
             </button>

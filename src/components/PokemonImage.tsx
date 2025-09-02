@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import Image from 'next/image'
 import { Pokemon } from '@/types/pokemon'
 import { pokemonAPI } from '@/lib/pokemon-api'
@@ -32,6 +32,7 @@ export default function PokemonImage({
 }: PokemonImageProps) {
   const [currentSrcIndex, setCurrentSrcIndex] = useState(0)
   const [hasError, setHasError] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   
   // Get fallback URLs (all pre-downloaded local sprites)
   const fallbackUrls = pokemonAPI.getPokemonImageFallbacks(pokemon, shiny)
@@ -46,9 +47,21 @@ export default function PokemonImage({
       // All fallbacks exhausted
       console.log('All image fallbacks exhausted for Pokemon', pokemon.id)
       setHasError(true)
+      setIsLoading(false)
       onError?.()
     }
   }, [currentSrc, currentSrcIndex, fallbackUrls.length, pokemon.id, onError])
+
+  const handleLoad = useCallback(() => {
+    setIsLoading(false)
+  }, [])
+
+  // Reset loading state when Pokemon changes
+  useEffect(() => {
+    setIsLoading(true)
+    setCurrentSrcIndex(0)
+    setHasError(false)
+  }, [pokemon.id, shiny])
   
   const displayAlt = alt || `${shiny ? 'Shiny ' : ''}${pokemon.name}`
   
@@ -69,18 +82,34 @@ export default function PokemonImage({
   }
   
   return (
-    <Image
-      src={currentSrc}
-      alt={displayAlt}
-      width={fill ? undefined : width}
-      height={fill ? undefined : height}
-      fill={fill}
-      className={className}
-      style={style}
-      priority={priority}
-      onError={handleError}
-      draggable={false}
-      key={`${pokemon.id}-${shiny}-${currentSrcIndex}`} // Force re-render on fallback
-    />
+    <div className="relative" style={{ width: fill ? '100%' : width, height: fill ? '100%' : height }}>
+      {/* Loading skeleton */}
+      {isLoading && (
+        <div 
+          className={`absolute inset-0 bg-gray-600 rounded animate-pulse ${className || ''}`}
+          style={{
+            opacity: 0.3,
+            zIndex: 1,
+            ...style
+          }}
+        />
+      )}
+      
+      {/* Actual image */}
+      <Image
+        src={currentSrc}
+        alt={displayAlt}
+        width={fill ? undefined : width}
+        height={fill ? undefined : height}
+        fill={fill}
+        className={`transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'} ${className || ''}`}
+        style={style}
+        priority={priority}
+        onError={handleError}
+        onLoad={handleLoad}
+        draggable={false}
+        key={`${pokemon.id}-${shiny}-${currentSrcIndex}`} // Force re-render on fallback
+      />
+    </div>
   )
 }
