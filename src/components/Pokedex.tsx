@@ -152,7 +152,8 @@ export default function Pokedex() {
         let anchorOffset = 0
         
         // Find the best anchor element (closest to viewport center)
-        for (const card of pokemonCards) {
+        for (let i = 0; i < pokemonCards.length; i++) {
+          const card = pokemonCards[i]
           const rect = card.getBoundingClientRect()
           const elementTop = rect.top + currentScrollY
           const elementCenter = elementTop + rect.height / 2
