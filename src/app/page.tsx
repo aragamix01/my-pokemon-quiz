@@ -10,14 +10,25 @@ import { GenerationNumber } from '@/types/pokemon'
 function HomeContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [activeSection, setActiveSection] = useState<'quiz' | 'pokedex' | 'types'>('quiz')
+  const [activeSection, setActiveSection] = useState<'quiz' | 'pokedex' | 'types'>('pokedex')
 
   useEffect(() => {
     const section = searchParams.get('section')
     if (section && (section === 'quiz' || section === 'pokedex' || section === 'types')) {
       setActiveSection(section as 'quiz' | 'pokedex' | 'types')
+    } else {
+      // Check if we should restore active section from localStorage
+      const savedActiveSection = sessionStorage.getItem('active-section')
+      if (savedActiveSection && (savedActiveSection === 'quiz' || savedActiveSection === 'pokedex' || savedActiveSection === 'types')) {
+        setActiveSection(savedActiveSection as 'quiz' | 'pokedex' | 'types')
+      }
     }
   }, [searchParams])
+
+  // Save active section when it changes
+  useEffect(() => {
+    sessionStorage.setItem('active-section', activeSection)
+  }, [activeSection])
 
   const startQuiz = (generation: GenerationNumber | null) => {
     if (generation === null) {
@@ -57,9 +68,9 @@ function HomeContent() {
         }}>🔵</div>
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto p-4">
+      <div className="relative z-10 max-w-6xl mx-auto p-2 sm:p-4">
         {/* Compact Header */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-4 sm:mb-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-2 game-title">
             <span className="text-yellow-400">P</span>
             <span className="text-red-500">O</span>
@@ -78,13 +89,7 @@ function HomeContent() {
         </div>
 
         {/* Compact Navigation */}
-        <div className="flex gap-3 justify-center mb-6">
-          <button
-            onClick={() => setActiveSection('quiz')}
-            className={`compact-nav-button ${activeSection === 'quiz' ? 'active' : ''}`}
-          >
-            🎯 Who's that Pokemon?
-          </button>
+        <div className="flex gap-2 sm:gap-3 justify-center mb-4 sm:mb-6">
           <button
             onClick={() => setActiveSection('pokedex')}
             className={`compact-nav-button ${activeSection === 'pokedex' ? 'active' : ''}`}
@@ -97,7 +102,19 @@ function HomeContent() {
           >
             ⚔️ Type Chart
           </button>
+          <button
+            onClick={() => setActiveSection('quiz')}
+            className={`compact-nav-button ${activeSection === 'quiz' ? 'active' : ''}`}
+          >
+            🎯 Who's that Pokemon?
+          </button>
         </div>
+
+        {/* Pokedex Section */}
+        {activeSection === 'pokedex' && <Pokedex />}
+
+        {/* Type Chart Section */}
+        {activeSection === 'types' && <TypeAdvantage />}
 
         {/* Quiz Section */}
         {activeSection === 'quiz' && (
@@ -109,12 +126,6 @@ function HomeContent() {
             />
           </div>
         )}
-
-        {/* Pokedex Section */}
-        {activeSection === 'pokedex' && <Pokedex />}
-
-        {/* Type Chart Section */}
-        {activeSection === 'types' && <TypeAdvantage />}
       </div>
     </div>
   )
