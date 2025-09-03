@@ -48,6 +48,7 @@ export interface Pokemon {
     legacy: string | null
   }
   species: {
+    name: string
     url: string
   }
 }

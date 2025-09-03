@@ -286,3 +286,4 @@ node scripts/download-and-optimize-sprites.js forms-only  # All 277 variant form
 ## Notes
 This project is based on mobile web app device so supporting responsive design on mobile and desktop.
 Uses strict TypeScript syntax for deployment on Vercel.
+- to memorize

@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect } from 'react'
 import Image from 'next/image'
 import { Pokemon } from '@/types/pokemon'
 import { pokemonAPI } from '@/lib/pokemon-api'
+import { imageStateManager } from '@/lib/image-state-manager'
 
 interface PokemonImageProps {
   pokemon: Pokemon
@@ -30,9 +31,14 @@ export default function PokemonImage({
   priority = false,
   onError
 }: PokemonImageProps) {
-  const [currentSrcIndex, setCurrentSrcIndex] = useState(0)
-  const [hasError, setHasError] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+  // Create a stable key for this image
+  const imageKey = `${pokemon.id}-${shiny ? 'shiny' : 'normal'}`
+  
+  // Initialize state from global manager
+  const globalState = imageStateManager.getImageState(imageKey)
+  const [currentSrcIndex, setCurrentSrcIndex] = useState(globalState.currentSrcIndex)
+  const [hasError, setHasError] = useState(globalState.hasError)
+  const [isLoading, setIsLoading] = useState(!globalState.isLoaded)
   
   // Get fallback URLs (all pre-downloaded local sprites)
   const fallbackUrls = pokemonAPI.getPokemonImageFallbacks(pokemon, shiny)
@@ -42,26 +48,52 @@ export default function PokemonImage({
     // Try next fallback URL
     if (currentSrcIndex < fallbackUrls.length - 1) {
       console.log(`Image failed: ${currentSrc}, trying fallback ${currentSrcIndex + 1}`)
-      setCurrentSrcIndex(prev => prev + 1)
+      const newIndex = currentSrcIndex + 1
+      setCurrentSrcIndex(newIndex)
+      // Persist to global state
+      imageStateManager.setImageState(imageKey, {
+        currentSrcIndex: newIndex,
+        hasError: false,
+        isLoaded: false
+      })
     } else {
       // All fallbacks exhausted
       console.log('All image fallbacks exhausted for Pokemon', pokemon.id)
       setHasError(true)
       setIsLoading(false)
+      // Persist error state
+      imageStateManager.setImageState(imageKey, {
+        hasError: true,
+        isLoaded: false
+      })
       onError?.()
     }
-  }, [currentSrc, currentSrcIndex, fallbackUrls.length, pokemon.id, onError])
+  }, [currentSrc, currentSrcIndex, fallbackUrls.length, pokemon.id, onError, imageKey])
 
   const handleLoad = useCallback(() => {
     setIsLoading(false)
-  }, [])
+    // Persist loaded state
+    imageStateManager.setImageState(imageKey, {
+      isLoaded: true,
+      hasError: false,
+      currentSrcIndex
+    })
+  }, [imageKey, currentSrcIndex])
 
-  // Reset loading state when Pokemon changes
+  // Only reset loading state if this image isn't already loaded in global state
   useEffect(() => {
-    setIsLoading(true)
-    setCurrentSrcIndex(0)
-    setHasError(false)
-  }, [pokemon.id, shiny])
+    const globalState = imageStateManager.getImageState(imageKey)
+    if (!globalState.isLoaded && !globalState.hasError) {
+      setIsLoading(true)
+      setCurrentSrcIndex(0)
+      setHasError(false)
+    } else {
+      // Use cached state
+      setIsLoading(!globalState.isLoaded)
+      setCurrentSrcIndex(globalState.currentSrcIndex)
+      setHasError(globalState.hasError)
+    }
+  }, [pokemon.id, shiny, imageKey])
   
   const displayAlt = alt || `${shiny ? 'Shiny ' : ''}${pokemon.name}`
   

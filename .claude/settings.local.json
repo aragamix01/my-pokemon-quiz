@@ -22,7 +22,16 @@
       "Bash(timeout 10s npm run dev)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(npm run lint)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(compgen -c)",
+      "Bash(npx playwright test:*)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_resize",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
