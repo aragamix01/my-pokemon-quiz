@@ -5,14 +5,37 @@ const P = new Pokedex()
 
 export class PokemonAPI {
   private cache = new Map<string, any>()
+  private pendingRequests = new Map<string, Promise<any>>()
 
   private async getCached<T>(key: string, fetcher: () => Promise<T>): Promise<T> {
+    // Return cached result if available
     if (this.cache.has(key)) {
+      console.log(`🎯 Cache HIT for ${key}`)
       return this.cache.get(key)
     }
-    const result = await fetcher()
-    this.cache.set(key, result)
-    return result
+    
+    // Return pending request if already in progress (prevents duplicate requests)
+    if (this.pendingRequests.has(key)) {
+      console.log(`⏳ Using pending request for ${key}`)
+      return this.pendingRequests.get(key)
+    }
+    
+    // Start new request and cache the promise
+    console.log(`🔄 Making API call for ${key}`)
+    const promise = fetcher()
+    this.pendingRequests.set(key, promise)
+    
+    try {
+      const result = await promise
+      this.cache.set(key, result)
+      this.pendingRequests.delete(key)
+      console.log(`✅ Cached result for ${key}`)
+      return result
+    } catch (error) {
+      this.pendingRequests.delete(key)
+      console.error(`❌ Failed request for ${key}:`, error)
+      throw error
+    }
   }
 
   async getGeneration(genNumber: GenerationNumber): Promise<Generation> {
@@ -183,17 +206,32 @@ export class PokemonAPI {
   }
 
   async getPreviousNextPokemon(currentId: number, generation: GenerationNumber): Promise<{previous: Pokemon | null, next: Pokemon | null}> {
-    const allPokemon = await this.getPokemonsByGeneration(generation)
-    const sortedPokemon = allPokemon.sort((a, b) => a.id - b.id)
+    // Use local metadata instead of fetching all Pokemon (much faster!)
+    const { pokemonMetadataService } = await import('@/lib/pokemon-metadata')
     
-    const currentIndex = sortedPokemon.findIndex(p => p.id === currentId)
+    // Get Pokemon IDs for this generation from metadata (instant, no API calls)
+    const pokemonIds = pokemonMetadataService.getPokemonIdsForGeneration(generation)
+    const sortedIds = pokemonIds.sort((a, b) => a - b)
+    
+    const currentIndex = sortedIds.findIndex(id => id === currentId)
     
     if (currentIndex === -1) {
       return { previous: null, next: null }
     }
     
-    const previous = currentIndex > 0 ? sortedPokemon[currentIndex - 1] : null
-    const next = currentIndex < sortedPokemon.length - 1 ? sortedPokemon[currentIndex + 1] : null
+    // Only fetch the specific previous/next Pokemon if they exist (2 API calls max instead of 100+)
+    let previous: Pokemon | null = null
+    let next: Pokemon | null = null
+    
+    if (currentIndex > 0) {
+      const previousId = sortedIds[currentIndex - 1]
+      previous = await this.getPokemon(previousId)
+    }
+    
+    if (currentIndex < sortedIds.length - 1) {
+      const nextId = sortedIds[currentIndex + 1] 
+      next = await this.getPokemon(nextId)
+    }
     
     return { previous, next }
   }

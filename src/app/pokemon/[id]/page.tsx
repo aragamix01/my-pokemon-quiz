@@ -1,13 +1,16 @@
 'use client'
 
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect, useCallback, use } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { Pokemon, PokemonSpecies, EvolutionChain, EvolutionChainLink, GenerationNumber } from '@/types/pokemon'
 import { pokemonAPI } from '@/lib/pokemon-api'
 import { getTypeIcon } from '@/lib/type-effectiveness'
 import { getMoveData, getMoveTypeColor, hasMoveData } from '@/lib/moves-utils'
+import { getAbility } from '@/lib/abilities-utils'
+import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import PokemonImage from '@/components/PokemonImage'
+import PokemonStatsChart from '@/components/PokemonStatsChart'
 
 interface PokemonData {
   pokemon: Pokemon
@@ -24,18 +27,13 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
   const [loading, setLoading] = useState(true)
   const [showShiny, setShowShiny] = useState(false)
   const [movesExpanded, setMovesExpanded] = useState(false)
+  const [expandedAbility, setExpandedAbility] = useState<string | null>(null)
   const [audioPlaying, setAudioPlaying] = useState(false)
   const [selectedForm, setSelectedForm] = useState(0)
   const [previousPokemon, setPreviousPokemon] = useState<Pokemon | null>(null)
   const [nextPokemon, setNextPokemon] = useState<Pokemon | null>(null)
 
-  useEffect(() => {
-    if (resolvedParams.id) {
-      loadPokemonData()
-    }
-  }, [resolvedParams.id])
-
-  const loadPokemonData = async () => {
+  const loadPokemonData = useCallback(async () => {
     setLoading(true)
     try {
       const [pokemon, species] = await Promise.all([
@@ -85,7 +83,13 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
       setData(null)
     }
     setLoading(false)
-  }
+  }, [resolvedParams.id, searchParams])
+
+  useEffect(() => {
+    if (resolvedParams.id) {
+      loadPokemonData()
+    }
+  }, [resolvedParams.id, loadPokemonData])
 
   const playPokemonCry = () => {
     const currentForm = getCurrentForm()
@@ -109,6 +113,39 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
 
   const getFlavorText = () => {
     return data?.species.flavor_text_entries.find(entry => entry.language.name === 'en')?.flavor_text.replace(/\f/g, ' ') || ''
+  }
+
+  const getBreedingData = () => {
+    if (!data?.pokemon) return null
+    
+    const metadata = pokemonMetadataService.getMetadataById(data.pokemon.id)
+    if (!metadata) return null
+
+    return {
+      eggGroups: metadata.egg_groups,
+      growthRate: metadata.growth_rate,
+      captureRate: data.species.capture_rate,
+      baseHappiness: data.species.base_happiness
+    }
+  }
+
+  const formatEggGroup = (eggGroup: string) => {
+    return eggGroup.split('-').map(word => 
+      word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ')
+  }
+
+  const getGrowthRateColor = (growthRate: string) => {
+    const colors: { [key: string]: string } = {
+      'slow': '#e74c3c',
+      'medium-slow': '#e67e22', 
+      'medium': '#f39c12',
+      'medium-fast': '#27ae60',
+      'fast': '#2ecc71',
+      'erratic': '#9b59b6',
+      'fluctuating': '#3498db'
+    }
+    return colors[growthRate] || '#95a5a6'
   }
 
   const getAllForms = () => {
@@ -414,12 +451,12 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
             </div>
           </div>
         ) : data ? (
-          <div className="modern-card p-2 sm:p-4" style={{ opacity: 1, transform: 'none' }}>
+          <div className="modern-card p-4" style={{ opacity: 1, transform: 'none' }}>
             <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
               {/* Left Side - Sprite, Types, Controls */}
               <div className="flex-shrink-0 lg:w-48 w-full">
                 {/* Pokemon Sprite */}
-                <div className="relative w-40 h-40 mx-auto mb-3">
+                <div className="relative w-40 h-40 mx-auto mb-4">
                   <Image
                     src={getCurrentSprite() || '/pokemon-placeholder.png'}
                     alt={getEnglishName()}
@@ -430,7 +467,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                 </div>
                 
                 {/* Types under sprite */}
-                <div className="text-center mb-3">
+                <div className="text-center mb-4">
                   <div className="flex gap-2 justify-center">
                     {getCurrentForm().types.map((typeInfo, index) => (
                       <Image
@@ -448,17 +485,17 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                 </div>
 
                 {/* Shiny and Cries buttons */}
-                <div className="flex gap-1 justify-center mb-4">
+                <div className="flex gap-2 justify-center mb-4">
                   <button
                     onClick={() => setShowShiny(!showShiny)}
-                    className={`modern-button text-xs px-2 py-1 ${showShiny ? 'bg-yellow-500' : ''}`}
+                    className={`modern-button text-xs px-3 py-2 ${showShiny ? 'bg-yellow-500' : ''}`}
                     disabled={!getAllForms()[selectedForm]?.shiny}
                   >
                     ✨ {showShiny ? 'Normal' : 'Shiny'}
                   </button>
                   <button
                     onClick={playPokemonCry}
-                    className={`modern-button text-xs px-2 py-1 ${audioPlaying ? 'bg-blue-500' : ''}`}
+                    className={`modern-button text-xs px-3 py-2 ${audioPlaying ? 'bg-blue-500' : ''}`}
                     disabled={!getCurrentForm()?.cries?.latest || audioPlaying}
                   >
                     🔊 Cry
@@ -494,20 +531,20 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                       <table className="w-full text-xs">
                         <tbody>
                           <tr>
-                            <td className="py-0.5 font-semibold" style={{ color: 'var(--text-secondary)' }}>ID:</td>
-                            <td className="py-0.5 font-bold">#{data.pokemon.id.toString().padStart(3, '0')}</td>
+                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>ID:</td>
+                            <td className="py-1 font-bold">#{data.pokemon.id.toString().padStart(3, '0')}</td>
                           </tr>
                           <tr>
-                            <td className="py-0.5 font-semibold" style={{ color: 'var(--text-secondary)' }}>Name:</td>
-                            <td className="py-0.5 font-bold">{getEnglishName()}</td>
+                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Name:</td>
+                            <td className="py-1 font-bold">{getEnglishName()}</td>
                           </tr>
                           <tr>
-                            <td className="py-0.5 font-semibold" style={{ color: 'var(--text-secondary)' }}>Romaji:</td>
-                            <td className="py-0.5 font-bold">{getJapaneseName() || 'N/A'}</td>
+                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Romaji:</td>
+                            <td className="py-1 font-bold">{getJapaneseName() || 'N/A'}</td>
                           </tr>
                           <tr>
-                            <td className="py-0.5 font-semibold" style={{ color: 'var(--text-secondary)' }}>Height:</td>
-                            <td className="py-0.5 font-bold">{(getCurrentForm().height / 10).toFixed(1)} m</td>
+                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Height:</td>
+                            <td className="py-1 font-bold">{(getCurrentForm().height / 10).toFixed(1)} m</td>
                           </tr>
                         </tbody>
                       </table>
@@ -516,20 +553,20 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                       <table className="w-full text-xs">
                         <tbody>
                           <tr>
-                            <td className="py-0.5 font-semibold" style={{ color: 'var(--text-secondary)' }}>Weight:</td>
-                            <td className="py-0.5 font-bold">{(getCurrentForm().weight / 10).toFixed(1)} kg</td>
+                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Weight:</td>
+                            <td className="py-1 font-bold">{(getCurrentForm().weight / 10).toFixed(1)} kg</td>
                           </tr>
                           <tr>
-                            <td className="py-0.5 font-semibold" style={{ color: 'var(--text-secondary)' }}>Generation:</td>
-                            <td className="py-0.5 font-bold capitalize">{data.species.generation?.name.replace('generation-', 'Gen ') || 'Unknown'}</td>
+                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Generation:</td>
+                            <td className="py-1 font-bold capitalize">{data.species.generation?.name.replace('generation-', 'Gen ') || 'Unknown'}</td>
                           </tr>
                           <tr>
-                            <td className="py-0.5 font-semibold" style={{ color: 'var(--text-secondary)' }}>Habitat:</td>
-                            <td className="py-0.5 font-bold capitalize">{data.species.habitat?.name || 'Unknown'}</td>
+                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Habitat:</td>
+                            <td className="py-1 font-bold capitalize">{data.species.habitat?.name || 'Unknown'}</td>
                           </tr>
                           <tr>
-                            <td className="py-0.5 font-semibold" style={{ color: 'var(--text-secondary)' }}>Base EXP:</td>
-                            <td className="py-0.5 font-bold">{getCurrentForm().base_experience || 'N/A'}</td>
+                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Base EXP:</td>
+                            <td className="py-1 font-bold">{getCurrentForm().base_experience || 'N/A'}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -553,17 +590,95 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                   {/* Abilities Section */}
                   <div>
                     <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Abilities</h3>
-                    <div className="space-y-1">
-                      {getCurrentForm().abilities.map((abilityInfo, index) => (
-                        <div key={index} className="flex items-center justify-between py-1">
-                          <span className="capitalize text-xs font-semibold">
-                            {abilityInfo.ability.name.replace('-', ' ')}
-                          </span>
-                          {abilityInfo.is_hidden && (
-                            <span className="text-xs px-1.5 py-0.5 bg-purple-600 text-white rounded">Hidden</span>
-                          )}
-                        </div>
-                      ))}
+                    <div className="space-y-2">
+                      {getCurrentForm().abilities.map((abilityInfo, index) => {
+                        const abilityData = getAbility(abilityInfo.ability.name)
+                        const isExpanded = expandedAbility === abilityInfo.ability.name
+                        
+                        return (
+                          <div key={index} className="border border-gray-600 rounded-lg overflow-hidden">
+                            {/* Ability Header */}
+                            <button
+                              onClick={() => setExpandedAbility(isExpanded ? null : abilityInfo.ability.name)}
+                              className="w-full flex items-center justify-between p-3 hover:bg-gray-700 transition-colors"
+                              style={{ backgroundColor: isExpanded ? 'var(--bg-secondary)' : 'transparent' }}
+                            >
+                              <div className="flex items-center gap-3">
+                                <span className="capitalize text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+                                  {abilityData?.displayName || abilityInfo.ability.name.replace('-', ' ')}
+                                </span>
+                                {abilityInfo.is_hidden && (
+                                  <span className="text-xs px-2 py-1 bg-purple-600 text-white rounded">Hidden</span>
+                                )}
+                              </div>
+                              <div className="flex items-center gap-2">
+                                {abilityData && (
+                                  <span className="text-xs px-2 py-1 bg-blue-600 text-white rounded">
+                                    Gen {abilityData.generation?.replace('generation-', '').toUpperCase() || '?'}
+                                  </span>
+                                )}
+                                <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                                  {isExpanded ? '▼' : '▶'}
+                                </span>
+                              </div>
+                            </button>
+                            
+                            {/* Expanded Content */}
+                            {isExpanded && abilityData && (
+                              <div className="p-3 pt-0 border-t border-gray-600">
+                                {/* Short Effect */}
+                                {abilityData.shortEffect && (
+                                  <div className="mb-3">
+                                    <h5 className="text-xs font-semibold mb-1" style={{ color: 'var(--text-secondary)' }}>Quick Summary:</h5>
+                                    <p className="text-sm" style={{ color: 'var(--accent-color)' }}>
+                                      {abilityData.shortEffect}
+                                    </p>
+                                  </div>
+                                )}
+                                
+                                {/* Flavor Text */}
+                                {abilityData.flavorText && (
+                                  <div className="mb-3">
+                                    <h5 className="text-xs font-semibold mb-1" style={{ color: 'var(--text-secondary)' }}>Description:</h5>
+                                    <p className="text-xs italic" style={{ color: 'var(--text-muted)' }}>
+                                      {abilityData.flavorText}
+                                    </p>
+                                  </div>
+                                )}
+                                
+                                {/* Full Effect */}
+                                {abilityData.effect && (
+                                  <div className="mb-3">
+                                    <h5 className="text-xs font-semibold mb-1" style={{ color: 'var(--text-secondary)' }}>Detailed Effect:</h5>
+                                    <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
+                                      {abilityData.effect.length > 300 
+                                        ? `${abilityData.effect.substring(0, 300)}...`
+                                        : abilityData.effect
+                                      }
+                                    </p>
+                                  </div>
+                                )}
+                                
+                                {/* Pokemon Count */}
+                                {abilityData.pokemon && (
+                                  <div className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+                                    Used by {abilityData.pokemon.length} Pokemon
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                            
+                            {/* Fallback if no ability data */}
+                            {isExpanded && !abilityData && (
+                              <div className="p-3 pt-0 border-t border-gray-600">
+                                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                                  Detailed ability information not available.
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        )
+                      })}
                     </div>
                   </div>
 
@@ -586,27 +701,93 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                 {/* Separator Line */}
                 <hr className="border-gray-600 my-4" />
 
-                {/* Base Stats Section */}
-                <div className="mb-4">
-                  <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Base Stats</h3>
-                  <div className="space-y-0.5">
-                    {getCurrentForm().stats.map((stat, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <div className="w-16 sm:w-20 text-xs font-semibold capitalize" style={{ color: 'var(--text-secondary)' }}>
-                          {stat.stat.name.replace('-', ' ')}
+                {/* Breeding Information Section */}
+                <div className="grid md:grid-cols-2 gap-4 mb-4">
+                  {/* Breeding Section */}
+                  <div>
+                    <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Breeding Info</h3>
+                    {getBreedingData() ? (
+                      <div className="space-y-2">
+                        {/* Egg Groups */}
+                        <div>
+                          <h4 className="text-xs font-semibold mb-1" style={{ color: 'var(--text-secondary)' }}>Egg Groups:</h4>
+                          <div className="flex flex-wrap gap-1">
+                            {getBreedingData()!.eggGroups.map((group, index) => (
+                              <span
+                                key={index}
+                                className="text-xs px-2 py-1 rounded"
+                                style={{ 
+                                  backgroundColor: '#2c3e50',
+                                  color: '#ecf0f1',
+                                  border: '1px solid #34495e'
+                                }}
+                              >
+                                {formatEggGroup(group)}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                        <div className="w-8 sm:w-12 text-xs sm:text-sm font-bold text-right" style={{ color: 'var(--text-primary)' }}>
-                          {stat.base_stat}
-                        </div>
-                        <div className="flex-1 bg-gray-600 rounded-full h-1">
-                          <div 
-                            className="bg-gradient-to-r from-red-500 to-green-500 h-1 rounded-full"
-                            style={{ width: `${Math.min(stat.base_stat / 255 * 100, 100)}%` }}
-                          ></div>
+
+                        {/* Growth Rate */}
+                        <div className="flex justify-between items-center py-1">
+                          <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Growth Rate:</span>
+                          <span 
+                            className="text-xs font-bold px-2 py-1 rounded capitalize"
+                            style={{ 
+                              backgroundColor: getGrowthRateColor(getBreedingData()!.growthRate || ''),
+                              color: 'white'
+                            }}
+                          >
+                            {getBreedingData()!.growthRate?.replace('-', ' ') || 'Unknown'}
+                          </span>
                         </div>
                       </div>
-                    ))}
+                    ) : (
+                      <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                        Breeding information not available
+                      </p>
+                    )}
                   </div>
+
+                  {/* Additional Breeding Details */}
+                  <div>
+                    <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Breeding Details</h3>
+                    <div className="space-y-1">
+                      <div className="flex justify-between py-1">
+                        <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Catch Difficulty:</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold">{data.species.capture_rate}/255</span>
+                          <div className="w-12 bg-gray-600 rounded-full h-1">
+                            <div 
+                              className="bg-gradient-to-r from-red-500 to-green-500 h-1 rounded-full"
+                              style={{ width: `${(data.species.capture_rate / 255) * 100}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex justify-between py-1">
+                        <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Friendship:</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold">{data.species.base_happiness}/255</span>
+                          <div className="w-12 bg-gray-600 rounded-full h-1">
+                            <div 
+                              className="bg-gradient-to-r from-red-500 to-green-500 h-1 rounded-full"
+                              style={{ width: `${((data.species.base_happiness || 0) / 255) * 100}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Separator Line */}
+                <hr className="border-gray-600 my-4" />
+
+                {/* Base Stats Section - Radar Chart */}
+                <div className="mb-4">
+                  <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Base Stats</h3>
+                  <PokemonStatsChart stats={getCurrentForm().stats} showTotal={true} />
                 </div>
 
                 {/* Separator Line */}
