@@ -10,17 +10,18 @@ import { GenerationNumber } from '@/types/pokemon'
 function HomeContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [activeSection, setActiveSection] = useState<'quiz' | 'pokedex' | 'types'>('pokedex')
+  const [activeSection, setActiveSection] = useState<'quiz' | 'pokedex' | 'types' | 'partner-quiz'>('pokedex')
+  const [partnerQuizLanguage, setPartnerQuizLanguage] = useState<'th' | 'en'>('th')
 
   useEffect(() => {
     const section = searchParams.get('section')
-    if (section && (section === 'quiz' || section === 'pokedex' || section === 'types')) {
-      setActiveSection(section as 'quiz' | 'pokedex' | 'types')
+    if (section && (section === 'quiz' || section === 'pokedex' || section === 'types' || section === 'partner-quiz')) {
+      setActiveSection(section as 'quiz' | 'pokedex' | 'types' | 'partner-quiz')
     } else {
       // Check if we should restore active section from localStorage
       const savedActiveSection = sessionStorage.getItem('active-section')
-      if (savedActiveSection && (savedActiveSection === 'quiz' || savedActiveSection === 'pokedex' || savedActiveSection === 'types')) {
-        setActiveSection(savedActiveSection as 'quiz' | 'pokedex' | 'types')
+      if (savedActiveSection && (savedActiveSection === 'quiz' || savedActiveSection === 'pokedex' || savedActiveSection === 'types' || savedActiveSection === 'partner-quiz')) {
+        setActiveSection(savedActiveSection as 'quiz' | 'pokedex' | 'types' | 'partner-quiz')
       }
     }
   }, [searchParams])
@@ -36,6 +37,12 @@ function HomeContent() {
     } else {
       router.push(`/quiz/${generation}`)
     }
+  }
+
+  const startPartnerQuiz = () => {
+    // Clear any existing quiz session data for fresh start
+    sessionStorage.removeItem('quiz-answers')
+    router.push('/partner-quiz')
   }
 
   return (
@@ -89,7 +96,7 @@ function HomeContent() {
         </div>
 
         {/* Compact Navigation */}
-        <div className="flex gap-2 sm:gap-3 justify-center mb-4 sm:mb-6">
+        <div className="flex gap-2 sm:gap-3 justify-center mb-4 sm:mb-6 flex-wrap">
           <button
             onClick={() => setActiveSection('pokedex')}
             className={`compact-nav-button ${activeSection === 'pokedex' ? 'active' : ''}`}
@@ -108,6 +115,12 @@ function HomeContent() {
           >
             🎯 Who's that Pokemon?
           </button>
+          <button
+            onClick={() => setActiveSection('partner-quiz')}
+            className={`compact-nav-button ${activeSection === 'partner-quiz' ? 'active' : ''}`}
+          >
+            💖 Partner Quiz
+          </button>
         </div>
 
         {/* Pokedex Section */}
@@ -124,6 +137,57 @@ function HomeContent() {
               subtitle="💡 Identify Pokemon silhouettes • 10 questions per quiz • Score tracking"
               onGenerationSelect={startQuiz}
             />
+          </div>
+        )}
+
+        {/* Partner Quiz Section */}
+        {activeSection === 'partner-quiz' && (
+          <div className="partner-quiz-section">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                <span className="mr-3">🎯</span>
+                <span className="gradient-text thai-text">หา Pokemon คู่ใจ</span>
+              </h2>
+              <p className="text-lg mb-6 thai-text" style={{ color: 'var(--text-secondary)' }}>
+                💫 ตอบคำถามบุคลิกเพื่อค้นหา Pokemon ที่เหมาะกับคุณมากที่สุด
+              </p>
+              <div className="mb-6 text-sm thai-text" style={{ color: 'var(--text-secondary)' }}>
+                ✨ 10 คำถามสุ่มจาก 30 ข้อ • วิเคราะห์บุคลิกจากคำตอบ • ได้รับคำอธิบายเชิงบวก
+              </div>
+              <button
+                onClick={startPartnerQuiz}
+                className="start-quiz-button bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-4 rounded-xl text-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg thai-text"
+              >
+                🚀 เริ่มทำแบบทดสอบ
+              </button>
+            </div>
+
+            {/* Features */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+              <div className="feature-card p-6 rounded-lg" style={{ backgroundColor: 'var(--card-bg)', border: '2px solid var(--border-color)' }}>
+                <div className="text-4xl mb-4">🧠</div>
+                <h3 className="text-lg font-bold mb-2 thai-text">วิเคราะห์บุคลิก</h3>
+                <p className="text-sm thai-text" style={{ color: 'var(--text-secondary)' }}>
+                  คำถามที่ออกแบบมาเพื่อเข้าใจบุคลิกของคุณอย่างลึกซึ้ง
+                </p>
+              </div>
+
+              <div className="feature-card p-6 rounded-lg" style={{ backgroundColor: 'var(--card-bg)', border: '2px solid var(--border-color)' }}>
+                <div className="text-4xl mb-4">⚡</div>
+                <h3 className="text-lg font-bold mb-2 thai-text">ผลลัพธ์ทันที</h3>
+                <p className="text-sm thai-text" style={{ color: 'var(--text-secondary)' }}>
+                  ระบบจับคู่ Pokemon ที่เหมาะกับบุคลิกของคุณภายในไม่กี่วินาที
+                </p>
+              </div>
+
+              <div className="feature-card p-6 rounded-lg" style={{ backgroundColor: 'var(--card-bg)', border: '2px solid var(--border-color)' }}>
+                <div className="text-4xl mb-4">💝</div>
+                <h3 className="text-lg font-bold mb-2 thai-text">คำอธิบายเชิงบวก</h3>
+                <p className="text-sm thai-text" style={{ color: 'var(--text-secondary)' }}>
+                  ได้รับคำอธิบายบุคลิกที่สร้างแรงบันดาลใจและทำให้รู้สึกดี
+                </p>
+              </div>
+            </div>
           </div>
         )}
       </div>

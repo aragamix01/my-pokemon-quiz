@@ -1,0 +1,1121 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": {
+        "th": "สีที่คุณชอบมากที่สุดคือ?",
+        "en": "What's your favorite color?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "เขียว - ธรรมชาติและสงบ",
+            "en": "Green - Natural and peaceful"
+          }, 
+          "traits": ["grass", "calm"] 
+        },
+        { 
+          "text": {
+            "th": "น้ำเงิน - เย็นและลื่นไหล",
+            "en": "Blue - Cool and flowing"
+          }, 
+          "traits": ["water", "adaptable"] 
+        },
+        { 
+          "text": {
+            "th": "แดง - โดดเด่นและเร่าร้อน",
+            "en": "Red - Bold and fiery"
+          }, 
+          "traits": ["fire", "energetic"] 
+        },
+        { 
+          "text": {
+            "th": "เหลือง - สดใสและมีพลัง",
+            "en": "Yellow - Bright and electric"
+          }, 
+          "traits": ["electric", "cheerful"] 
+        },
+        { 
+          "text": {
+            "th": "ม่วง - ลึกลับและมีเวทมนตร์",
+            "en": "Purple - Mysterious and mystical"
+          }, 
+          "traits": ["psychic", "mysterious"] 
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "question": {
+        "th": "กิจกรรมสุดสัปดาห์ในฝันของคุณคือ?",
+        "en": "What's your ideal weekend activity?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "เดินป่าขึ้นเขา",
+            "en": "Hiking in the mountains"
+          }, 
+          "traits": ["rock", "ground", "adventurous"] 
+        },
+        { 
+          "text": {
+            "th": "ว่ายน้ำที่ชายหาด",
+            "en": "Swimming at the beach"
+          }, 
+          "traits": ["water", "relaxed"] 
+        },
+        { 
+          "text": {
+            "th": "อ่านหนังสือดีๆ",
+            "en": "Reading a good book"
+          }, 
+          "traits": ["psychic", "intellectual"] 
+        },
+        { 
+          "text": {
+            "th": "จัดปาร์ตี้บาร์บีคิวกับเพื่อน",
+            "en": "Having a barbecue with friends"
+          }, 
+          "traits": ["fire", "social"] 
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "question": {
+        "th": "คุณจัดการกับความเครียดอย่างไร?",
+        "en": "How do you handle stress?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "หายใจลึกๆ และทำสมาธิ",
+            "en": "Take deep breaths and meditate"
+          }, 
+          "traits": ["calm", "psychic"] 
+        },
+        { 
+          "text": {
+            "th": "ไปวิ่งหรือออกกำลังกาย",
+            "en": "Go for a run or exercise"
+          }, 
+          "traits": ["fighting", "energetic"] 
+        },
+        { 
+          "text": {
+            "th": "คุยกับเพื่อนและครอบครัว",
+            "en": "Talk to friends and family"
+          }, 
+          "traits": ["social", "normal"] 
+        },
+        { 
+          "text": {
+            "th": "หาที่เงียบๆ อยู่คนเดียว",
+            "en": "Find a quiet place to be alone"
+          }, 
+          "traits": ["solitary", "dark"] 
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "question": {
+        "th": "คุณเกิดในเดือนไหน?",
+        "en": "What's your birth month?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "มกราคม-มีนาคม (ฤดูหนาว)",
+            "en": "January-March (Winter)"
+          }, 
+          "traits": ["ice", "resilient"] 
+        },
+        { 
+          "text": {
+            "th": "เมษายน-มิถุนายน (ฤดูใบไม้ผลิ)",
+            "en": "April-June (Spring)"
+          }, 
+          "traits": ["grass", "cheerful"] 
+        },
+        { 
+          "text": {
+            "th": "กรกฎาคม-กันยายน (ฤดูร้อน)",
+            "en": "July-September (Summer)"
+          }, 
+          "traits": ["fire", "energetic"] 
+        },
+        { 
+          "text": {
+            "th": "ตุลาคม-ธันวาคม (ฤดูใบไม้ร่วง)",
+            "en": "October-December (Autumn)"
+          }, 
+          "traits": ["ground", "wise"] 
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "question": {
+        "th": "สภาพแวดล้อมแบบไหนที่คุณรู้สึกสบายใจมากที่สุด?",
+        "en": "What type of environment do you feel most comfortable in?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ป่าไผ่และทุ่งหญ้าเขียวขจี",
+            "en": "Lush forests and grasslands"
+          }, 
+          "traits": ["grass", "grassland"] 
+        },
+        { 
+          "text": {
+            "th": "ใกล้แหล่งน้ำ เช่น ทะเลสาบหรือมหาสมุทร",
+            "en": "Near water bodies like lakes or oceans"
+          }, 
+          "traits": ["water", "waters-edge"] 
+        },
+        { 
+          "text": {
+            "th": "เมืองใหญ่ที่มีผู้คนมากมาย",
+            "en": "Urban cities with lots of people"
+          }, 
+          "traits": ["normal", "urban"] 
+        },
+        { 
+          "text": {
+            "th": "ถ้ำเงียบๆ หรือบนภูเขา",
+            "en": "Quiet caves or mountains"
+          }, 
+          "traits": ["rock", "cave"] 
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "question": {
+        "th": "คุณชอบแก้ปัญหาด้วยวิธีไหน?",
+        "en": "How do you prefer to solve problems?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ใช้เหตุผลและวางแผนอย่างรอบคอบ",
+            "en": "Use logic and careful planning"
+          }, 
+          "traits": ["psychic", "strategic"] 
+        },
+        { 
+          "text": {
+            "th": "กระโดดเข้าไปทำและปรับไปเรื่อยๆ",
+            "en": "Jump in and figure it out as I go"
+          }, 
+          "traits": ["fighting", "impulsive"] 
+        },
+        { 
+          "text": {
+            "th": "ขอความช่วยเหลือและคำแนะนำจากคนอื่น",
+            "en": "Ask others for help and advice"
+          }, 
+          "traits": ["social", "collaborative"] 
+        },
+        { 
+          "text": {
+            "th": "ศึกษาข้อมูลให้ละเอียดก่อนลงมือ",
+            "en": "Research thoroughly before acting"
+          }, 
+          "traits": ["intellectual", "careful"] 
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "question": {
+        "th": "สัตว์เลี้ยงในฝันของคุณคือ?",
+        "en": "What's your ideal pet?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "สุนัขที่ซื่อสัตย์",
+            "en": "A loyal dog"
+          }, 
+          "traits": ["normal", "loyal"] 
+        },
+        { 
+          "text": {
+            "th": "แมวลึกลับ",
+            "en": "A mysterious cat"
+          }, 
+          "traits": ["dark", "independent"] 
+        },
+        { 
+          "text": {
+            "th": "นกสีสันสวยงาม",
+            "en": "A colorful bird"
+          }, 
+          "traits": ["flying", "cheerful"] 
+        },
+        { 
+          "text": {
+            "th": "สัตว์เลื้อยคลานที่แปลกตา",
+            "en": "A unique reptile"
+          }, 
+          "traits": ["dragon", "unique"] 
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "question": {
+        "th": "ช่วงเวลาไหนของวันที่คุณมีพลังมากที่สุด?",
+        "en": "What time of day are you most active?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "เช้าตรู่ - ฉันรักพระอาทิตย์ขึ้น",
+            "en": "Early morning - I love sunrise"
+          }, 
+          "traits": ["cheerful", "energetic"] 
+        },
+        { 
+          "text": {
+            "th": "เที่ยงวัน - เมื่อแสงแดดสาดส่อง",
+            "en": "Midday - When the sun is brightest"
+          }, 
+          "traits": ["fire", "electric"] 
+        },
+        { 
+          "text": {
+            "th": "ตอนเย็น - เมื่อวันใกล้จะหมด",
+            "en": "Evening - As the day winds down"
+          }, 
+          "traits": ["calm", "peaceful"] 
+        },
+        { 
+          "text": {
+            "th": "กลางคืน - ฉันเป็นนกเค้าแมว",
+            "en": "Night time - I'm a night owl"
+          }, 
+          "traits": ["dark", "mysterious"] 
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "question": {
+        "th": "จุดแข็งที่ใหญ่ที่สุดของคุณคือ?",
+        "en": "What's your biggest strength?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ความแข็งแกร่งทางกายและความอดทน",
+            "en": "My physical strength and endurance"
+          }, 
+          "traits": ["fighting", "rock"] 
+        },
+        { 
+          "text": {
+            "th": "สติปัญญาและความรอบรู้",
+            "en": "My intelligence and wisdom"
+          }, 
+          "traits": ["psychic", "intellectual"] 
+        },
+        { 
+          "text": {
+            "th": "ความสามารถในการปรับตัวกับสถานการณ์ใดๆ",
+            "en": "My ability to adapt to any situation"
+          }, 
+          "traits": ["normal", "adaptable"] 
+        },
+        { 
+          "text": {
+            "th": "ความเร็วและปฏิกิริยาตอบสนองที่รวดเร็ว",
+            "en": "My speed and quick reflexes"
+          }, 
+          "traits": ["electric", "flying"] 
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "question": {
+        "th": "สภาพอากาศแบบไหนที่คุณชิน?",
+        "en": "What weather do you enjoy most?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "วันแดดใสและอบอุ่น",
+            "en": "Sunny and warm days"
+          }, 
+          "traits": ["fire", "grass"] 
+        },
+        { 
+          "text": {
+            "th": "วันฝนตกและอากาศเย็น",
+            "en": "Rainy and cool weather"
+          }, 
+          "traits": ["water", "electric"] 
+        },
+        { 
+          "text": {
+            "th": "หิมะตกและอากาศหนาวเซาะ",
+            "en": "Snowy and crisp winter"
+          }, 
+          "traits": ["ice", "calm"] 
+        },
+        { 
+          "text": {
+            "th": "พายุฟ้าผ่าและอากาศเร้าใจ",
+            "en": "Stormy and dramatic weather"
+          }, 
+          "traits": ["electric", "dark"] 
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "question": {
+        "th": "คุณตัดสินใจด้วยวิธีไหน?",
+        "en": "How do you make decisions?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ตามใจและสัญชาตญาณ",
+            "en": "Follow my heart and intuition"
+          }, 
+          "traits": ["emotional", "psychic"] 
+        },
+        { 
+          "text": {
+            "th": "คิดวิเคราะห์อย่างมีเหตุผล",
+            "en": "Think it through logically"
+          }, 
+          "traits": ["intellectual", "strategic"] 
+        },
+        { 
+          "text": {
+            "th": "ขอคำแนะนำจากคนอื่น",
+            "en": "Ask for advice from others"
+          }, 
+          "traits": ["social", "collaborative"] 
+        },
+        { 
+          "text": {
+            "th": "ทำตามสัญชาตญาณแรกของฉัน",
+            "en": "Go with my first instinct"
+          }, 
+          "traits": ["impulsive", "brave"] 
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "question": {
+        "th": "การเดินทางในฝันของคุณคือ?",
+        "en": "What's your ideal vacation?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ตั้งแคมป์ในอุทยานแห่งชาติ",
+            "en": "Camping in a national park"
+          }, 
+          "traits": ["grass", "ground", "adventurous"] 
+        },
+        { 
+          "text": {
+            "th": "ผ่อนคลายบนชายหาดเขตร้อน",
+            "en": "Relaxing on a tropical beach"
+          }, 
+          "traits": ["water", "relaxed"] 
+        },
+        { 
+          "text": {
+            "th": "สำรวจซากปรักหักพังโบราณ",
+            "en": "Exploring ancient ruins"
+          }, 
+          "traits": ["rock", "ghost", "mysterious"] 
+        },
+        { 
+          "text": {
+            "th": "เที่ยวชมเมืองใหญ่ที่คึกคัก",
+            "en": "Visiting a bustling city"
+          }, 
+          "traits": ["normal", "social"] 
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "question": {
+        "th": "อะไรเป็นแรงบันดาลใจให้คุณมากที่สุด?",
+        "en": "What motivates you the most?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ช่วยเหลือผู้อื่นและสร้างความแตกต่าง",
+            "en": "Helping others and making a difference"
+          }, 
+          "traits": ["healing", "supportive"] 
+        },
+        { 
+          "text": {
+            "th": "บรรลุเป้าหมายส่วนตัว",
+            "en": "Achieving personal goals"
+          }, 
+          "traits": ["determined", "strong"] 
+        },
+        { 
+          "text": {
+            "th": "เรียนรู้สิ่งใหม่ๆ",
+            "en": "Learning new things"
+          }, 
+          "traits": ["intellectual", "curious"] 
+        },
+        { 
+          "text": {
+            "th": "สนุกสนานและเพลิดเพลินกับชีวิต",
+            "en": "Having fun and enjoying life"
+          }, 
+          "traits": ["cheerful", "playful"] 
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "question": {
+        "th": "คนอื่นมักจะบรรยายคุณว่ายังไง?",
+        "en": "How do others describe you?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "เชื่อถือได้และไว้วางใจได้",
+            "en": "Reliable and trustworthy"
+          }, 
+          "traits": ["loyal", "stable"] 
+        },
+        { 
+          "text": {
+            "th": "มีความคิดสร้างสรรค์และจินตนาการ",
+            "en": "Creative and imaginative"
+          }, 
+          "traits": ["artistic", "unique"] 
+        },
+        { 
+          "text": {
+            "th": "มีพลังและกระตือรือร้น",
+            "en": "Energetic and enthusiastic"
+          }, 
+          "traits": ["energetic", "fire"] 
+        },
+        { 
+          "text": {
+            "th": "สงบและมีความสุข",
+            "en": "Calm and peaceful"
+          }, 
+          "traits": ["calm", "wise"] 
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "question": {
+        "th": "ประเภทอาหารที่คุณชอบคือ?",
+        "en": "What's your favorite type of food?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ผลไม้และผักสดใหม่",
+            "en": "Fresh fruits and vegetables"
+          }, 
+          "traits": ["grass", "healthy"] 
+        },
+        { 
+          "text": {
+            "th": "อาหารทะเลและปลา",
+            "en": "Seafood and fish"
+          }, 
+          "traits": ["water", "refined"] 
+        },
+        { 
+          "text": {
+            "th": "อาหารเผ็ดและรสจัด",
+            "en": "Spicy and hot dishes"
+          }, 
+          "traits": ["fire", "bold"] 
+        },
+        { 
+          "text": {
+            "th": "ขนมหวานและลูกอม",
+            "en": "Sweet desserts and candy"
+          }, 
+          "traits": ["fairy", "cheerful"] 
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "question": {
+        "th": "สิ่งที่ทำให้คุณกลัวมากที่สุดคือ?",
+        "en": "What scares you the most?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "การอยู่คนเดียวโดยสิ้นเชิง",
+            "en": "Being completely alone"
+          }, 
+          "traits": ["social", "supportive"] 
+        },
+        { 
+          "text": {
+            "th": "การสูญเสียการควบคุมสถานการณ์",
+            "en": "Losing control of a situation"
+          }, 
+          "traits": ["strategic", "careful"] 
+        },
+        { 
+          "text": {
+            "th": "ไม่สามารถช่วยเหลือคนที่ต้องการความช่วยเหลือ",
+            "en": "Not being able to help someone in need"
+          }, 
+          "traits": ["compassionate", "healing"] 
+        },
+        { 
+          "text": {
+            "th": "ล้มเหลวในสิ่งที่สำคัญ",
+            "en": "Failing at something important"
+          }, 
+          "traits": ["perfectionist", "determined"] 
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "question": {
+        "th": "วิธีออกกำลังกายที่เหมาะกับคุณมากที่สุดคือ?",
+        "en": "What's your ideal way to exercise?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ศิลปะการต่อสู้หรือมวย",
+            "en": "Martial arts or boxing"
+          }, 
+          "traits": ["fighting", "disciplined"] 
+        },
+        { 
+          "text": {
+            "th": "ว่ายน้ำหรือกีฬาทางน้ำ",
+            "en": "Swimming or water sports"
+          }, 
+          "traits": ["water", "fluid"] 
+        },
+        { 
+          "text": {
+            "th": "วิ่งหรือกรีฑา",
+            "en": "Running or track and field"
+          }, 
+          "traits": ["speed", "endurance"] 
+        },
+        { 
+          "text": {
+            "th": "โยคะหรือทำสมาธิ",
+            "en": "Yoga or meditation"
+          }, 
+          "traits": ["flexible", "calm"] 
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "question": {
+        "th": "ธาตุใดที่คุณรู้สึกผูกพันมากที่สุด?",
+        "en": "What element do you feel most connected to?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ดิน - มั่นคงและเป็นพื้นฐาน",
+            "en": "Earth - Solid and grounding"
+          }, 
+          "traits": ["ground", "rock"] 
+        },
+        { 
+          "text": {
+            "th": "น้ำ - ลื่นไหลและปรับตัวได้",
+            "en": "Water - Flowing and adaptable"
+          }, 
+          "traits": ["water", "ice"] 
+        },
+        { 
+          "text": {
+            "th": "ไฟ - เร่าร้อนและมีพลัง",
+            "en": "Fire - Passionate and energetic"
+          }, 
+          "traits": ["fire", "electric"] 
+        },
+        { 
+          "text": {
+            "th": "ลม - เสรีและเบา",
+            "en": "Air - Free and light"
+          }, 
+          "traits": ["flying", "psychic"] 
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "question": {
+        "th": "คุณจัดการกับความขัดแย้งอย่างไร?",
+        "en": "How do you handle conflict?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "เผชิญหน้าด้วยความกล้าหาญ",
+            "en": "Face it head-on with courage"
+          }, 
+          "traits": ["brave", "fighting"] 
+        },
+        { 
+          "text": {
+            "th": "พยายามหาทางออกอย่างสันติ",
+            "en": "Try to find a peaceful solution"
+          }, 
+          "traits": ["diplomatic", "calm"] 
+        },
+        { 
+          "text": {
+            "th": "หลีกเลี่ยงถ้าเป็นไปได้",
+            "en": "Avoid it if possible"
+          }, 
+          "traits": ["gentle", "peaceful"] 
+        },
+        { 
+          "text": {
+            "th": "ใช้กลยุทธ์เพื่อเอาชนะ",
+            "en": "Use strategy to outmaneuver"
+          }, 
+          "traits": ["strategic", "clever"] 
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "question": {
+        "th": "งานในฝันของคุณคือ?",
+        "en": "What's your dream job?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ครูหรือที่ปรึกษา",
+            "en": "Teacher or counselor"
+          }, 
+          "traits": ["supportive", "wise"] 
+        },
+        { 
+          "text": {
+            "th": "นักกีฬาหรือเทรนเนอร์",
+            "en": "Athlete or trainer"
+          }, 
+          "traits": ["strong", "energetic"] 
+        },
+        { 
+          "text": {
+            "th": "นักวิทยาศาสตร์หรือนักวิจัย",
+            "en": "Scientist or researcher"
+          }, 
+          "traits": ["intellectual", "curious"] 
+        },
+        { 
+          "text": {
+            "th": "ศิลปินหรือนักแสดง",
+            "en": "Artist or performer"
+          }, 
+          "traits": ["creative", "expressive"] 
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "question": {
+        "th": "สิ่งที่สำคัญที่สุดในมิตรภาพสำหรับคุณคือ?",
+        "en": "What's most important to you in friendships?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ความจงรักภักดีและไว้วางใจ",
+            "en": "Loyalty and trust"
+          }, 
+          "traits": ["loyal", "reliable"] 
+        },
+        { 
+          "text": {
+            "th": "ความสนุกและการผจญภัย",
+            "en": "Fun and adventure"
+          }, 
+          "traits": ["playful", "adventurous"] 
+        },
+        { 
+          "text": {
+            "th": "การสนทนาที่มีความหมายลึกซึ้ง",
+            "en": "Deep meaningful conversations"
+          }, 
+          "traits": ["intellectual", "empathetic"] 
+        },
+        { 
+          "text": {
+            "th": "การสนับสนุนและดูแลซึ่งกันและกัน",
+            "en": "Mutual support and care"
+          }, 
+          "traits": ["caring", "supportive"] 
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "question": {
+        "th": "คุณชาร์จพลังหลังจากวันที่เหนื่อยยังไง?",
+        "en": "How do you recharge after a long day?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ใช้เวลากับธรรมชาติ",
+            "en": "Spend time in nature"
+          }, 
+          "traits": ["peaceful", "grass"] 
+        },
+        { 
+          "text": {
+            "th": "อาบน้ำร้อนหรือแช่น้ำ",
+            "en": "Take a hot bath or shower"
+          }, 
+          "traits": ["relaxing", "water"] 
+        },
+        { 
+          "text": {
+            "th": "ฟังเพลงหรือดูหนัง",
+            "en": "Listen to music or watch movies"
+          }, 
+          "traits": ["artistic", "calm"] 
+        },
+        { 
+          "text": {
+            "th": "ออกกำลังกายหรือกิจกรรมทางกาย",
+            "en": "Exercise or do physical activity"
+          }, 
+          "traits": ["energetic", "active"] 
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "question": {
+        "th": "คุณเข้าหาความท้าทายใหม่ๆ อย่างไร?",
+        "en": "What's your approach to new challenges?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "วางแผนอย่างรอบคอบก่อนเริ่ม",
+            "en": "Plan carefully before starting"
+          }, 
+          "traits": ["strategic", "careful"] 
+        },
+        { 
+          "text": {
+            "th": "กระโดดเข้าไปด้วยความกระตือรือร้น",
+            "en": "Dive right in with enthusiasm"
+          }, 
+          "traits": ["brave", "impulsive"] 
+        },
+        { 
+          "text": {
+            "th": "ศึกษาจากคนที่ประสบความสำเร็จก่อน",
+            "en": "Study others who succeeded first"
+          }, 
+          "traits": ["wise", "observant"] 
+        },
+        { 
+          "text": {
+            "th": "แบ่งเป็นขั้นตอนเล็กๆ",
+            "en": "Break it down into smaller steps"
+          }, 
+          "traits": ["methodical", "patient"] 
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "question": {
+        "th": "ดนตรีประเภทไหนที่คุณชอบ?",
+        "en": "What kind of music do you prefer?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "คลาสสิกหรือดนตรีเครื่องดนตรี",
+            "en": "Classical or instrumental"
+          }, 
+          "traits": ["sophisticated", "calm"] 
+        },
+        { 
+          "text": {
+            "th": "ร็อคหรือเมทัล",
+            "en": "Rock or metal"
+          }, 
+          "traits": ["strong", "energetic"] 
+        },
+        { 
+          "text": {
+            "th": "ป็อปหรืออิเล็กทรอนิกส์",
+            "en": "Pop or electronic"
+          }, 
+          "traits": ["modern", "electric"] 
+        },
+        { 
+          "text": {
+            "th": "โฟล์คหรือดนตรีอคูสติก",
+            "en": "Folk or acoustic"
+          }, 
+          "traits": ["natural", "peaceful"] 
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "question": {
+        "th": "อุณหภูมิห้องที่เหมาะกับคุณคือ?",
+        "en": "What's your ideal room temperature?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "เย็นและสดชื่น",
+            "en": "Cool and crisp"
+          }, 
+          "traits": ["ice", "focused"] 
+        },
+        { 
+          "text": {
+            "th": "อบอุ่นและสบาย",
+            "en": "Warm and cozy"
+          }, 
+          "traits": ["fire", "comfortable"] 
+        },
+        { 
+          "text": {
+            "th": "ปานกลางและสมดุล",
+            "en": "Moderate and balanced"
+          }, 
+          "traits": ["balanced", "adaptable"] 
+        },
+        { 
+          "text": {
+            "th": "ตามธรรมชาติก็พอ",
+            "en": "Whatever feels natural"
+          }, 
+          "traits": ["flexible", "easy-going"] 
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "question": {
+        "th": "คุณฉลองความสำเร็จอย่างไร?",
+        "en": "How do you celebrate success?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "จัดงานใหญ่กับทุกคน",
+            "en": "Throw a big party with everyone"
+          }, 
+          "traits": ["social", "celebratory"] 
+        },
+        { 
+          "text": {
+            "th": "ซื้อของพิเศษให้ตัวเอง",
+            "en": "Treat yourself to something special"
+          }, 
+          "traits": ["self-caring", "rewarding"] 
+        },
+        { 
+          "text": {
+            "th": "แบ่งปันช่วงเวลากับครอบครัวใกล้ชิด",
+            "en": "Share the moment with close family"
+          }, 
+          "traits": ["family-oriented", "intimate"] 
+        },
+        { 
+          "text": {
+            "th": "ครุ่นคิดถึงความสำเร็จอย่างเงียบๆ",
+            "en": "Quietly reflect on the achievement"
+          }, 
+          "traits": ["humble", "introspective"] 
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "question": {
+        "th": "พลังเหนือธรรมชาติที่คุณอยากมีคือ?",
+        "en": "What supernatural ability would you want?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "กระซิบใจและอ่านใจ",
+            "en": "Telepathy and mind reading"
+          }, 
+          "traits": ["psychic", "intuitive"] 
+        },
+        { 
+          "text": {
+            "th": "ความแข็งแกร่งพิเศษและทนทาน",
+            "en": "Super strength and durability"
+          }, 
+          "traits": ["strong", "fighting"] 
+        },
+        { 
+          "text": {
+            "th": "ล่องหนและแอบแฝง",
+            "en": "Invisibility and stealth"
+          }, 
+          "traits": ["sneaky", "mysterious"] 
+        },
+        { 
+          "text": {
+            "th": "บินได้และเคลื่อนไหวอย่างเสรี",
+            "en": "Flight and freedom of movement"
+          }, 
+          "traits": ["free", "flying"] 
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "question": {
+        "th": "ความสัมพันธ์ของคุณกับเทคโนโลยีเป็นยังไง?",
+        "en": "What's your relationship with technology?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "รักเครื่องมือใหม่ล่าสุด",
+            "en": "Love the latest gadgets"
+          }, 
+          "traits": ["modern", "electric"] 
+        },
+        { 
+          "text": {
+            "th": "ใช้เท่าที่จำเป็น",
+            "en": "Use what's necessary"
+          }, 
+          "traits": ["practical", "balanced"] 
+        },
+        { 
+          "text": {
+            "th": "ชอบแบบง่ายๆ แบบดั้งเดิม",
+            "en": "Prefer simple, traditional ways"
+          }, 
+          "traits": ["traditional", "simple"] 
+        },
+        { 
+          "text": {
+            "th": "รู้สึกหนักใจบางครั้ง",
+            "en": "Find it overwhelming sometimes"
+          }, 
+          "traits": ["natural", "peaceful"] 
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "question": {
+        "th": "คุณแสดงความใส่ใจต่อคนที่คุณรักอย่างไร?",
+        "en": "How do you show you care about someone?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ใช้เวลาที่มีคุณภาพกับเขา",
+            "en": "Spend quality time with them"
+          }, 
+          "traits": ["devoted", "caring"] 
+        },
+        { 
+          "text": {
+            "th": "ช่วยเขาแก้ปัญหา",
+            "en": "Help them solve their problems"
+          }, 
+          "traits": ["supportive", "helpful"] 
+        },
+        { 
+          "text": {
+            "th": "ให้ของขวัญที่มีความหมาย",
+            "en": "Give them thoughtful gifts"
+          }, 
+          "traits": ["generous", "thoughtful"] 
+        },
+        { 
+          "text": {
+            "th": "ปกป้องเขาจากอันตราย",
+            "en": "Protect them from harm"
+          }, 
+          "traits": ["protective", "strong"] 
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "question": {
+        "th": "ปรัชญาชีวิตของคุณคือ?",
+        "en": "What's your philosophy on life?"
+      },
+      "choices": [
+        { 
+          "text": {
+            "th": "ใช้ชีวิตแต่ละวันให้เต็มที่",
+            "en": "Live each day to the fullest"
+          }, 
+          "traits": ["energetic", "optimistic"] 
+        },
+        { 
+          "text": {
+            "th": "ความสมดุลคือกุญแจสู่ความสุข",
+            "en": "Balance is key to happiness"
+          }, 
+          "traits": ["balanced", "wise"] 
+        },
+        { 
+          "text": {
+            "th": "ช่วยเหลือผู้อื่นและสร้างความแตกต่าง",
+            "en": "Help others and make a difference"
+          }, 
+          "traits": ["altruistic", "caring"] 
+        },
+        { 
+          "text": {
+            "th": "ซื่อสัตย์กับตัวเอง",
+            "en": "Stay true to yourself"
+          }, 
+          "traits": ["authentic", "independent"] 
+        }
+      ]
+    }
+  ]
+}

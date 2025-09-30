@@ -187,7 +187,7 @@ export default function QuizPage({ params }: QuizPageProps) {
               Play Again
             </button>
             <button
-              onClick={() => router.push('/')}
+              onClick={() => router.push('/?section=quiz')}
               className="modern-button"
             >
               Menu
@@ -206,7 +206,7 @@ export default function QuizPage({ params }: QuizPageProps) {
             Failed to load questions
           </h2>
           <button
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/?section=quiz')}
             className="pixel-button mt-4"
           >
             Go Back
@@ -221,7 +221,7 @@ export default function QuizPage({ params }: QuizPageProps) {
       <div className="text-center mb-6">
         <div className="flex justify-between items-center max-w-2xl mx-auto">
           <button
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/?section=quiz')}
             className="modern-button text-xs px-3 py-2"
           >
             ← Menu

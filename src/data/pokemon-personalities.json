@@ -1,0 +1,404 @@
+{
+  "personalities": {
+    "1": {
+      "pokemon": "Bulbasaur",
+      "personality": {
+        "th": "คุณเป็นคนที่มีธรรมชาติของการดูแลและหลอมใจผู้อื่น มีความสงบและมั่นคง เหมือนฟุชิงิดาเนะ คุณนำมาซึ่งการเติบโตและการรักษาไปทุกที่ที่คุณไป ความอดทนและความน่าเชื่อถือของคุณทำให้คุณเป็นคนที่ผู้อื่นสามารถพึ่งพาได้เสมอ คุณมีความผูกพันอย่างลึกซึ้งกับธรรมชาติและพบความสงบในช่วงเวลาที่เงียบสงบ",
+        "en": "You are a natural nurturer with a calm, steady presence. Like Bulbasaur, you bring growth and healing wherever you go. Your patience and reliability make you someone others can always count on. You have a deep connection to nature and find peace in quiet moments."
+      },
+      "traits": ["nurturing", "patient", "reliable", "healing", "calm"]
+    },
+    "4": {
+      "pokemon": "Charmander",
+      "personality": {
+        "th": "คุณมีไฟภายในที่ขับเคลื่อนให้คุณบรรลุความฝัน เหมือนฮิโตคาเงะ คุณมีความหลงใหลและความมุ่งมั่น ไม่เคยยอมแพ้แม้เมื่อเผชิญกับความท้าทาย ความกระตือรือร้นของคุณติดต่อได้และคุณสร้างแรงบันดาลใจให้ผู้อื่นไล่ตามเป้าหมายด้วยความแรงกล้าเช่นเดียวกัน",
+        "en": "You possess an inner fire that drives you to achieve your dreams. Like Charmander, you're passionate, determined, and never give up even when facing challenges. Your enthusiasm is contagious and you inspire others to pursue their goals with the same vigor."
+      },
+      "traits": ["passionate", "determined", "inspiring", "brave", "energetic"]
+    },
+    "6": {
+      "pokemon": "Charizard",
+      "personality": {
+        "th": "คุณเป็นผู้นำที่แข็งแกร่งและมีความมั่นใจในตัวเอง เหมือนริซาดอน คุณไม่กลัวที่จะยืนหยัดเพื่อสิ่งที่คุณเชื่อและปกป้องคนที่คุณรัก ความกล้าหาญและจิตวิญญาณเสรีของคุณสร้างแรงบันดาลใจให้ผู้อื่นติดตามคุณ คุณมีใจที่ร้อนแรงแต่เมตตา",
+        "en": "You're a strong leader with unwavering confidence. Like Charizard, you're not afraid to stand up for what you believe in and protect those you love. Your courage and free spirit inspire others to follow you. You have a fiery heart tempered with kindness."
+      },
+      "traits": ["leadership", "confident", "protective", "free", "courageous"]
+    },
+    "7": {
+      "pokemon": "Squirtle",
+      "personality": {
+        "th": "คุณสามารถปรับตัวได้และไปตามกระแสพร้อมกับรักษาจิตวิญญาณที่ขี้เล่น เหมือนเซนิกาเมะ คุณสามารถจัดการกับความขึ้นลงของชีวิตด้วยความงดงามและอารมณ์ขัน ธรรมชาติที่เป็นมิตรและความสามารถในการรักษาความเย็นใต้ความกดดันทำให้คุณเป็นเพื่อนและเพื่อนร่วมทีมที่ยอดเยี่ยม",
+        "en": "You are adaptable and go with the flow while maintaining a playful spirit. Like Squirtle, you can handle life's ups and downs with grace and humor. Your friendly nature and ability to stay cool under pressure make you a wonderful friend and teammate."
+      },
+      "traits": ["adaptable", "playful", "cool-headed", "friendly", "resilient"]
+    },
+    "25": {
+      "pokemon": "Pikachu",
+      "personality": {
+        "th": "คุณเต็มไปด้วยพลังไฟฟ้าและนำความสุขไปทุกที่ที่คุณไป เหมือนปิกาจู คุณซื่อสัตย์ ร่าเริง และมีทัศนคติเชิงบวกที่ติดต่อได้ ความเปล่งประกายของคุณส่องสว่างห้องใดๆ และความภักดีต่อเพื่อนของคุณไม่เปลี่ยนแปลง คุณเชื่อในพลังของมิตรภาพและความมุ่งมั่น",
+        "en": "You're full of electric energy and bring joy wherever you go. Like Pikachu, you're loyal, cheerful, and have an infectious positive attitude. Your spark lights up any room and your loyalty to friends is unwavering. You believe in the power of friendship and determination."
+      },
+      "traits": ["energetic", "loyal", "cheerful", "optimistic", "friendly"]
+    },
+    "39": {
+      "pokemon": "Jigglypuff",
+      "personality": {
+        "th": "คุณมีจิตใจที่อ่อนโยนและหัวใจที่เป็นศิลปิน เหมือนพูรินุ คุณนำความสบายใจและความสงบมาให้ผู้อื่นผ่านธรรมชาติที่เอาใจใส่ คุณมีการแสดงออก มีความคิดสร้างสรรค์ และมีความสามารถธรรมชาติในการปลอบประโลมหัวใจที่ปวดร้าวด้วยการปรากฏตัวของคุณ",
+        "en": "You have a gentle soul with an artistic heart. Like Jigglypuff, you bring comfort and peace to others through your caring nature. You're expressive, creative, and have a natural ability to soothe troubled hearts with your presence."
+      },
+      "traits": ["gentle", "artistic", "comforting", "creative", "peaceful"]
+    },
+    "52": {
+      "pokemon": "Meowth",
+      "personality": {
+        "th": "คุณฉลาด เป็นอิสระ และรู้วิธีได้สิ่งที่คุณต้องการผ่านไหวพริบมากกว่าการใช้กำลัง เหมือนเหมียว คุณมีไหวพริบและปรับตัวได้ สามารถหาวิธีแก้ปัญหาที่สร้างสรรค์ได้กับปัญหาใดๆ เสน่ห์และความฉลาดของคุณเปิดประตูหลายบาน",
+        "en": "You're clever, independent, and know how to get what you want through wit rather than force. Like Meowth, you're resourceful and adaptable, able to find creative solutions to any problem. Your charm and intelligence open many doors."
+      },
+      "traits": ["clever", "independent", "resourceful", "charming", "witty"]
+    },
+    "54": {
+      "pokemon": "Psyduck",
+      "personality": {
+        "th": "คุณมีความลึกซึ้งที่ซ่อนอยู่และศักยภาพที่ยังไม่ได้ใช้ซึ่งทำให้ทุกคนประหลาดใจ รวมทั้งตัวคุณเอง เหมือนโคดั๊ก คุณอาจดูสับสนบางครั้ง แต่คุณมีความสามารถอันทรงพลังที่จะออกมาเมื่อจำเป็นที่สุด ความถูกต้องแท้จริงและความเปราะบางของคุณคือจุดแข็งที่ยิ่งใหญ่ที่สุดของคุณ",
+        "en": "You have hidden depths and untapped potential that surprises everyone, including yourself. Like Psyduck, you may seem confused at times, but you possess powerful abilities that emerge when needed most. Your authenticity and vulnerability are actually your greatest strengths."
+      },
+      "traits": ["authentic", "potential", "surprising", "vulnerable", "powerful"]
+    },
+    "58": {
+      "pokemon": "Growlithe",
+      "personality": {
+        "th": "คุณซื่อสัตย์อย่างไม่น่าเชื่อและปกป้องคนที่คุณรัก เหมือนการ์ดี คุณมีหัวใจที่อบอุ่นและความทุ่มเทอย่างแรงกล้าต่อเพื่อนและครอบครัว ความกล้าหาญและความน่าเชื่อถือของคุณทำให้คุณเป็นคนที่ผู้อื่นหันมาขอการสนับสนุนและคำแนะนำโดยธรรมชาติ",
+        "en": "You're incredibly loyal and protective of those you love. Like Growlithe, you have a warm heart and fierce dedication to your friends and family. Your courage and reliability make you someone others naturally turn to for support and guidance."
+      },
+      "traits": ["loyal", "protective", "warm", "courageous", "reliable"]
+    },
+    "94": {
+      "pokemon": "Gengar",
+      "personality": {
+        "th": "คุณมีด้านที่ซุกซนและลึกลับ แต่ก็มีหัวใจที่ดี เหมือนเกนการ์ คุณรักการเล่นตลกและสร้างความสนุกสนาน แม้ว่าจะมีบุคลิกที่เข้มข้น แต่คุณเป็นเพื่อนที่ซื่อสัตย์และปกป้องคนที่คุณรักอย่างดุเดือด ด้านที่ขี้เล่นของคุณซ่อนใจที่เมตตา",
+        "en": "You have a mischievous and mysterious side, but a good heart. Like Gengar, you love pranks and creating fun, and while you may have an intense personality, you're a loyal friend who fiercely protects those you care about. Your playful side hides a caring heart."
+      },
+      "traits": ["mischievous", "mysterious", "loyal", "protective", "playful"]
+    },
+    "104": {
+      "pokemon": "Cubone",
+      "personality": {
+        "th": "คุณมีจิตใจที่ละเอียดอ่อนด้วยความฉลาดทางอารมณ์ที่ลึกซึ้ง เหมือนคาราคาระ คุณเข้าใจการต่อสู้ของชีวิตและใช้ความเข้าใจนั้นในการช่วยเหลือผู้อื่น ความเห็นอกเห็นใจและความยืดหยุ่นของคุณเมื่อเผชิญกับความท้าทายทำให้คุณแข็งแกร่งอย่างไม่น่าเชื่อและฉลาดเหนือวัย",
+        "en": "You have a sensitive soul with deep emotional intelligence. Like Cubone, you understand life's struggles and use that understanding to help others. Your empathy and resilience in the face of challenges make you incredibly strong and wise beyond your years."
+      },
+      "traits": ["empathetic", "resilient", "sensitive", "wise", "understanding"]
+    },
+    "113": {
+      "pokemon": "Chansey",
+      "personality": {
+        "th": "คุณเป็นนักรักษาโดยธรรมชาติด้วยความใจดีอันยิ่งใหญ่ เหมือนลัคกี้ คุณใส่ใจความต้องการของผู้อื่นก่อนตัวเองและพบความสุขในการช่วยให้คนรู้สึกดีขึ้น จิตวิญญาณที่หลอมเหลาและพลังงานเชิงบวกของคุณสร้างพื้นที่ปลอดภัยสำหรับทุกคนรอบตัวคุณ",
+        "en": "You're a natural healer with an enormous capacity for kindness. Like Chansey, you put others' needs before your own and find joy in helping people feel better. Your nurturing spirit and positive energy create a safe space for everyone around you."
+      },
+      "traits": ["nurturing", "kind", "healing", "selfless", "positive"]
+    },
+    "124": {
+      "pokemon": "Jynx",
+      "personality": {
+        "th": "คุณมีบุคลิกที่น่าหลงใหลและมีเสน่ห์เป็นเอกลักษณ์ เหมือนรูเงีย คุณมีความคิดสร้างสรรค์สูงและมีพลังจิตที่แข็งแกร่ง คุณเป็นคนที่ลึกลับและมีแรงบันดาลใจ สามารถมองเห็นความงามและความหมายในสิ่งที่ผู้อื่นมองข้าม ความเป็นตัวของตัวเองของคุณทำให้คุณโดดเด่นและน่าจดจำ",
+        "en": "You have a captivating and uniquely charming personality. Like Jynx, you're highly creative with strong psychic intuition. You're mysterious and inspiring, able to see beauty and meaning where others might overlook. Your authentic self makes you stand out and be memorable."
+      },
+      "traits": ["creative", "psychic", "mysterious", "charming", "unique"]
+    },
+    "131": {
+      "pokemon": "Lapras",
+      "personality": {
+        "th": "คุณอ่อนโยน ฉลาด และมีการปรากฏตัวที่สงบซึ่งนำความสงบมาสู่สถานการณ์ที่วุ่นวาย เหมือนราเปราส์ คุณเป็นผู้ไกล่เกลี่ยตามธรรมชาติที่ช่วยผู้อื่นนำทางผ่านน้ำที่หยาบกระด้าง ความฉลาดและความเห็นอกเห็นใจของคุณทำให้คุณเป็นผู้นำทางและเพื่อนที่ยอดเยี่ยม",
+        "en": "You're gentle, wise, and have a calming presence that brings peace to turbulent situations. Like Lapras, you're a natural mediator who helps others navigate rough waters. Your intelligence and compassion make you an excellent guide and friend."
+      },
+      "traits": ["gentle", "wise", "calming", "intelligent", "compassionate"]
+    },
+    "133": {
+      "pokemon": "Eevee",
+      "personality": {
+        "th": "คุณปรับตัวได้อย่างไม่น่าเชื่อและเต็มไปด้วยศักยภาพ เหมือนอีวุย คุณมีความสามารถในการวิวัฒนาการและเติบโตไปในทิศทางใดก็ตามที่ชีวิตพาคุณไป ความหลากหลายและธรรมชาติที่เปิดกว้างของคุณช่วยให้คุณเจริญเติบโตในสภาพแวดล้อมใดๆ และเชื่อมต่อกับคนทุกประเภท",
+        "en": "You're incredibly adaptable and full of potential. Like Eevee, you have the ability to evolve and grow in any direction life takes you. Your versatility and open-minded nature allow you to thrive in any environment and connect with all types of people."
+      },
+      "traits": ["adaptable", "versatile", "potential", "open-minded", "evolving"]
+    },
+    "143": {
+      "pokemon": "Snorlax",
+      "personality": {
+        "th": "คุณเป็นคนใจดี สงบ และมีการปรากฏตัวที่ปลอบใจ เหมือนคาบิกอน คุณสามารถทำให้ผู้อื่นรู้สึกปลอดภัยและผ่อนคลายเพียงแค่อยู่ที่นั่น คุณรู้ค่าของการพักผ่อนและความสุขอย่างง่ายๆ และช่วยให้ผู้อื่นหยุดลงและเพลิดเพลินกับชีวิต",
+        "en": "You're gentle, peaceful, and have a comforting presence. Like Snorlax, you can make others feel safe and relaxed just by being there. You understand the value of rest and simple pleasures, and help others slow down and enjoy life."
+      },
+      "traits": ["peaceful", "comforting", "relaxed", "gentle", "grounding"]
+    },
+    "149": {
+      "pokemon": "Dragonite",
+      "personality": {
+        "th": "คุณมีจิตใจที่ใจดีในตัวที่ดูแข็งแกร่ง เหมือนคาอิริว์ แม้ว่าคุณจะมีพลังมหาศาล แต่คุณเลือกที่จะใช้มันเพื่อช่วยเหลือและปกป้องผู้อื่น คุณเป็นผู้ให้และมีความสุขกับการสร้างความแตกต่างเชิงบวกในโลก ความเมตตาของคุณไม่มีขอบเขต",
+        "en": "You have a kind heart within a strong exterior. Like Dragonite, despite having immense power, you choose to use it to help and protect others. You're a natural giver and find happiness in making a positive difference in the world. Your compassion knows no bounds."
+      },
+      "traits": ["kind", "protective", "strong", "generous", "compassionate"]
+    },
+    "150": {
+      "pokemon": "Mewtwo",
+      "personality": {
+        "th": "คุณมีความแข็งแกร่งทางจิตและความลึกซึ้งของความคิด เหมือนมิวทู คุณตั้งคำถามกับโลกรอบตัวและแสวงหาความหมายที่ลึกซึ้งยิ่งขึ้นในชีวิต พลังทางปัญญาและความเป็นอิสระของคุณทำให้คุณเป็นผู้นำตามธรรมชาติ แม้ว่าคุณจะให้ค่ากับความเดียวดายเพื่อการไตร่ตรอง",
+        "en": "You possess great mental strength and depth of thought. Like Mewtwo, you question the world around you and seek deeper meaning in life. Your intellectual power and independence make you a natural leader, though you value solitude for reflection."
+      },
+      "traits": ["intellectual", "independent", "philosophical", "strong", "introspective"]
+    },
+    "151": {
+      "pokemon": "Mew",
+      "personality": {
+        "th": "คุณขี้เล่น อยากรู้อยากเห็น และเห็นเวทมนตร์ในชีวิตประจำวัน เหมือนมิว คุณมีความแปลกใจของเด็กที่ทำให้คุณยังหนุ่มสาวในใจ ความสามารถหายากของคุณในการหาความสุขในสิ่งเรียบง่ายและสัญชาตญาณจิตวิทยาตามธรรมชาติของคุณทำให้คุณพิเศษอย่างแท้จริง",
+        "en": "You're playful, curious, and see magic in everyday life. Like Mew, you have a childlike wonder that keeps you young at heart. Your rare ability to find joy in simple things and your natural psychic intuition make you truly special."
+      },
+      "traits": ["playful", "curious", "magical", "intuitive", "joyful"]
+    },
+    "155": {
+      "pokemon": "Cyndaquil",
+      "personality": {
+        "th": "คุณอาจดูขี้อายในตอนแรก แต่คุณมีหัวใจที่อบอุ่นและไฟภายในที่เผาผลาญอย่างสดใส เหมือนฮิโนอาราชิ คุณระมัดระวังแต่ซื่อสัตย์ และเมื่อคุณเปิดใจ คุณแสดงความหลงใหลและความทุ่มเทอย่างไม่น่าเชื่อ ความแข็งแกร่งที่อ่อนโยนของคุณสร้างแรงบันดาลใจให้ผู้อื่น",
+        "en": "You may seem shy at first, but you have a warm heart and inner fire that burns bright. Like Cyndaquil, you're cautious but loyal, and once you open up, you show incredible passion and dedication. Your gentle strength inspires others."
+      },
+      "traits": ["shy", "warm", "passionate", "loyal", "inspiring"]
+    },
+    "158": {
+      "pokemon": "Totodile",
+      "personality": {
+        "th": "คุณมีพลัง ขี้เล่น และเข้าหาชีวิตด้วยความกระตือรือร้น เหมือนวานิ คุณไม่กลัวที่จะกินชีวิตใหญ่ๆ และคุณเผชิญความท้าทายด้วยรอยยิ้มที่มั่นใจ ความกล้าหาญและธรรมชาติที่ร่าเริงของคุณทำให้ทุกวันเป็นการผจญภัย",
+        "en": "You're energetic, playful, and approach life with enthusiasm. Like Totodile, you're not afraid to take big bites out of life and you face challenges with a confident smile. Your boldness and cheerful nature make every day an adventure."
+      },
+      "traits": ["energetic", "playful", "confident", "bold", "adventurous"]
+    },
+    "179": {
+      "pokemon": "Mareep",
+      "personality": {
+        "th": "คุณอ่อนโยน มีใจที่นุ่มนวล และนำความสบายใจมาให้ผู้อื่นเพียงแค่การเป็นตัวคุณ เหมือนเมริป คุณมีพลังงานไฟฟ้าที่เงียบที่ชาร์จทุกคนรอบตัวคุณ ธรรมชาติที่นุ่มนวลของคุณซ่อนความแข็งแกร่งภายในและความยืดหยุ่นที่น่าประหลาดใจ",
+        "en": "You're gentle, fluffy-hearted, and bring comfort to others just by being yourself. Like Mareep, you have a quiet electric energy that charges up everyone around you. Your soft nature hides surprising inner strength and resilience."
+      },
+      "traits": ["gentle", "comforting", "energizing", "soft", "resilient"]
+    },
+    "196": {
+      "pokemon": "Espeon",
+      "personality": {
+        "th": "คุณมีสัญชาตญาณสูงและไวต่อความรู้สึกของผู้อื่น เหมือนเอสเปียน คุณมีความสามารถเหมือนจิตเกมส์ในการเข้าใจสิ่งที่ผู้คนต้องการก่อนที่พวกเขาจะขอ ความสง่างาม ความฉลาด และความภักดีของคุณทำให้คุณเป็นเพื่อนและที่ปรึกษาที่ยอดเยี่ยม",
+        "en": "You're highly intuitive and sensitive to the emotions of others. Like Espeon, you have psychic-like abilities to understand what people need before they even ask. Your grace, intelligence, and loyalty make you an exceptional friend and advisor."
+      },
+      "traits": ["intuitive", "sensitive", "graceful", "intelligent", "loyal"]
+    },
+    "197": {
+      "pokemon": "Umbreon",
+      "personality": {
+        "th": "คุณลึกลับ ซื่อสัตย์ และแข็งแกร่งที่สุดในช่วงเวลาที่เงียบ เหมือนแบล็กกี้ คุณชอบความสงบของค่ำคืนและการสนทนาลึกมากกว่าการโต้ตอบระดับผิวเผิน ธรรมชาติที่ปกป้องและความภักดีที่ไม่เปลี่ยนแปลงของคุณทำให้คุณเป็นเพื่อนที่มีค่า",
+        "en": "You're mysterious, loyal, and strongest in the quiet moments. Like Umbreon, you prefer the calm of night and deep conversations over surface-level interactions. Your protective nature and unwavering loyalty make you a treasured friend."
+      },
+      "traits": ["mysterious", "loyal", "protective", "deep", "calm"]
+    },
+    "255": {
+      "pokemon": "Torchic",
+      "personality": {
+        "th": "คุณเล็กแต่ทรงพลัง ด้วยจิตวิญญาณการต่อสู้ที่ไม่เคยยอมแพ้ เหมือนอาชาโมะ คุณอาจเล็ก แต่คุณมีการต่อยที่ทรงพลัง ความมุ่งมั่นและความกล้าหาญของคุณเมื่อเผชิญกับความท้าทายที่ใหญ่กว่าสร้างแรงบันดาลใจให้ทุกคนรอบตัวเชื่อในตัวเอง",
+        "en": "You're small but mighty, with a fighting spirit that never gives up. Like Torchic, you may be tiny but you pack a powerful punch. Your determination and courage in the face of bigger challenges inspire everyone around you to believe in themselves."
+      },
+      "traits": ["determined", "courageous", "mighty", "inspiring", "spirited"]
+    },
+    "258": {
+      "pokemon": "Mudkip",
+      "personality": {
+        "th": "คุณมั่นคง เชื่อถือได้ และมีความแข็งแกร่งภายในอย่างไม่น่าเชื่อ เหมือนมิซุโกโร คุณอาจดูสงบภายนอก แต่คุณทรงพลังอย่างไม่น่าเชื่อเมื่อคุณต้องการ ธรรมชาติที่ปฏิบัติและความภักดีของคุณทำให้คุณเป็นคนที่ผู้อื่นสามารถพึ่งพาได้เสมอ",
+        "en": "You're steady, reliable, and have incredible inner strength. Like Mudkip, you may seem calm on the surface but you're incredibly powerful when you need to be. Your practical nature and loyalty make you someone others can always depend on."
+      },
+      "traits": ["steady", "reliable", "strong", "practical", "dependable"]
+    },
+    "280": {
+      "pokemon": "Ralts",
+      "personality": {
+        "th": "คุณเห็นอกเห็นใจอย่างลึกซึ้งและสามารถรับรู้ความรู้สึกของผู้อื่นได้ เหมือนราลท์ส คุณมีของขวัญหายากในการเข้าใจความรู้สึกและให้ความสบายใจเมื่อจำเป็นที่สุด ธรรมชาติที่ไวและสัญชาตญาณจิตของคุณทำให้คุณเป็นนักรักษาตามธรรมชาติ",
+        "en": "You're deeply empathetic and can sense the emotions of others. Like Ralts, you have a rare gift for understanding feelings and providing comfort when it's needed most. Your sensitive nature and psychic intuition make you a natural healer."
+      },
+      "traits": ["empathetic", "sensitive", "intuitive", "healing", "understanding"]
+    },
+    "286": {
+      "pokemon": "Breloom",
+      "personality": {
+        "th": "คุณเป็นคนที่แข็งแกร่งและเชี่ยวชาญในสิ่งที่คุณทำ เหมือนคิโนการาน คุณมีการผสมผสานที่ไม่ธรรมดาระหว่างความอ่อนโยนและความแข็งแกร่ง สามารถปรับตัวได้ดีและมีความมุ่งมั่นสูง คุณมีความเป็นธรรมชาติและสามารถเบ่งบานได้แม้ในสภาวะที่ท้าทาย",
+        "en": "You're resilient and skilled at what you do. Like Breloom, you have an unusual combination of gentleness and strength. You're highly adaptable and determined, with a natural quality that allows you to flourish even in challenging conditions."
+      },
+      "traits": ["resilient", "skilled", "adaptable", "determined", "natural"]
+    },
+    "333": {
+      "pokemon": "Swablu",
+      "personality": {
+        "th": "คุณมีใจบริสุทธิ์และนำความเบาไปทุกที่ที่คุณไป เหมือนชิลโดะ คุณมีความนุ่มนวลเหมือนเมฆที่ทำให้ผู้อื่นรู้สึกสงบและมีความสุข มุมมองที่มองโลกในแง่ดีและธรรมชาติที่อ่อนโยนของคุณช่วยยกระดับผู้อื่นเมื่อพวกเขารู้สึกหดหู่",
+        "en": "You're pure-hearted and bring lightness wherever you go. Like Swablu, you have a cloud-like softness that makes others feel peaceful and happy. Your optimistic outlook and gentle nature help lift others up when they're feeling down."
+      },
+      "traits": ["pure-hearted", "soft", "peaceful", "optimistic", "uplifting"]
+    },
+    "390": {
+      "pokemon": "Chimchar",
+      "personality": {
+        "th": "คุณมีพลัง ขี้เล่น และพร้อมสำหรับการกระทำเสมอ เหมือนฮิกอซารุ คุณเข้าหาชีวิตด้วยความกระตือรือร้นไร้ขอบเขตและไม่กลัวที่จะเล่นซน ความคล่องตัวของคุณในการปรับตัวกับสถานการณ์ใหม่และพลังงานที่ติดต่อได้ทำให้คุณสนุกที่จะอยู่ด้วย",
+        "en": "You're energetic, playful, and always ready for action. Like Chimchar, you approach life with boundless enthusiasm and aren't afraid to monkey around. Your agility in adapting to new situations and your infectious energy make you fun to be around."
+      },
+      "traits": ["energetic", "playful", "enthusiastic", "agile", "infectious"]
+    },
+    "393": {
+      "pokemon": "Piplup",
+      "personality": {
+        "th": "คุณมีความภาคภูมิใจ มุ่งมั่น และไม่เคยถอยจากความท้าทาย เหมือนโปชาม่า คุณมีหลักการที่แข็งแกร่งและยึดมั่นในพวกมันไม่ว่าจะอย่างไร ความเป็นอิสระและความมั่นใจของคุณสร้างแรงบันดาลใจให้ผู้อื่นยืนหยัดเพื่อสิ่งที่พวกเขาเชื่อ",
+        "en": "You're proud, determined, and never back down from a challenge. Like Piplup, you have strong principles and stick to them no matter what. Your independence and confidence inspire others to stand up for what they believe in."
+      },
+      "traits": ["proud", "determined", "principled", "independent", "confident"]
+    },
+    "448": {
+      "pokemon": "Lucario",
+      "personality": {
+        "th": "คุณสูงส่ง มุ่งเน้นความยุติธรรม และมีเข็มทิศศีลธรรมที่แข็งแกร่ง เหมือนลูคาริโอ คุณสามารถรับรู้ธรรมชาติที่แท้จริงของผู้คนและสถานการณ์ด้วยความแม่นยำอย่างน่าทึ่ง ความภักดี ความกล้าหาญ และความรู้สึกยุติธรรมของคุณทำให้คุณเป็นผู้ปกป้องและผู้นำตามธรรมชาติ",
+        "en": "You're noble, justice-oriented, and have strong moral compass. Like Lucario, you can sense the true nature of people and situations with remarkable accuracy. Your loyalty, courage, and sense of justice make you a natural protector and leader."
+      },
+      "traits": ["noble", "just", "perceptive", "loyal", "protective"]
+    },
+    "461": {
+      "pokemon": "Weavile",
+      "personality": {
+        "th": "คุณเฉียบคม ฉลาด และทำงานดีที่สุดเป็นทีม เหมือนมันยูลา คุณมีสติปัญญาที่เฉียบแหลมและสามารถคิดได้อย่างรวดเร็ว คุณเป็นนักกลยุทธ์ที่เป็นธรรมชาติและทำงานได้ดีภายใต้ความกดดัน การผสมผสานระหว่างความเฉลียวฉลาดและความภักดีของคุณทำให้คุณเป็นพันธมิตรที่มีค่า",
+        "en": "You're sharp, intelligent, and work best as part of a team. Like Weavile, you have a keen intellect and can think quickly on your feet. You're a natural strategist and perform well under pressure. Your combination of cunning and loyalty makes you a valuable ally."
+      },
+      "traits": ["sharp", "intelligent", "strategic", "quick", "loyal"]
+    },
+    "493": {
+      "pokemon": "Arceus",
+      "personality": {
+        "th": "คุณฉลาด สมดุล และเห็นภาพใหญ่ในทุกสถานการณ์ เหมือนอาร์เซอุส คุณมีความเข้าใจอย่างลึกซึ้งเกี่ยวกับความซับซ้อนของชีวิตและช่วยผู้อื่นหาเส้นทางของพวกเขา ภูมิปัญญาและความสามารถในการปรับตัวกับสถานการณ์ใดๆ ของคุณทำให้คุณเป็นผู้นำทางตามธรรมชาติ",
+        "en": "You're wise, balanced, and see the bigger picture in all situations. Like Arceus, you have a deep understanding of life's complexities and help others find their path. Your wisdom and ability to adapt to any situation make you a natural guide."
+      },
+      "traits": ["wise", "balanced", "understanding", "adaptable", "guiding"]
+    },
+    "495": {
+      "pokemon": "Snivy",
+      "personality": {
+        "th": "คุณเท่ สงบ และฉลาดอย่างไม่น่าเชื่อ เหมือนซุนิบู คุณเข้าหาปัญหาด้วยตรรกะและความสง่างาม ไม่เคยสูญเสียความสงบสติอารมณ์ ความซับซ้อนและความสามารถด้านผู้นำตามธรรมชาติของคุณทำให้ผู้อื่นมองขึ้นมาหาคุณเพื่อขอคำแนะนำ",
+        "en": "You're cool, collected, and incredibly intelligent. Like Snivy, you approach problems with logic and grace, never losing your composure. Your sophistication and natural leadership abilities make others look up to you for guidance."
+      },
+      "traits": ["cool", "intelligent", "graceful", "sophisticated", "leadership"]
+    },
+    "498": {
+      "pokemon": "Tepig",
+      "personality": {
+        "th": "คุณใจอบอุ่น มีพลัง และพร้อมช่วยเหลือผู้อื่นเสมอ เหมือนโปกาบุ คุณมีจิตวิญญาณที่ร้อนแรงที่ถูกผสมด้วยความใจดีที่แท้จริง ความกระตือรือร้นและความเต็มใจที่จะทำงานหนักเพื่อผู้อื่นทำให้คุณเป็นเพื่อนและเพื่อนร่วมทีมที่รักใคร่",
+        "en": "You're warm-hearted, energetic, and always ready to help others. Like Tepig, you have a fiery spirit tempered by genuine kindness. Your enthusiasm and willingness to work hard for others make you a beloved friend and teammate."
+      },
+      "traits": ["warm-hearted", "energetic", "helpful", "kind", "hardworking"]
+    },
+    "501": {
+      "pokemon": "Oshawott",
+      "personality": {
+        "th": "คุณกล้าหาญ มุ่งมั่น และไม่เคยยอมแพ้แม้เมื่อโอกาสไม่เข้าข้าง เหมือนมิจุมารุ คุณอาจเล็ก แต่คุณมีหัวใจของนักรบ ความกล้าหาญและความเพียรพยายามของคุณในการไล่ตามเป้าหมายสร้างแรงบันดาลใจให้ผู้อื่นต่อสู้ต่อไป",
+        "en": "You're brave, determined, and never give up even when the odds are against you. Like Oshawott, you may be small but you have the heart of a warrior. Your courage and persistence in pursuing your goals inspire others to keep fighting."
+      },
+      "traits": ["brave", "determined", "persistent", "courageous", "inspiring"]
+    },
+    "570": {
+      "pokemon": "Zorua",
+      "personality": {
+        "th": "คุณขี้เล่น ลึกลับ และชอบให้ความประหลาดใจแก่ผู้อื่น เหมือนโซรัว คุณมีจิตวิญญาณที่ซุกซนและการรับรู้ที่เฉียบแหลม คุณเพลิดเพลินกับการเล่นเกมส์ทางจิตใจและสามารถปรับตัวให้เข้ากับสถานการณ์ใดๆ ได้ ความฉลาดและเสน่ห์ของคุณทำให้คุณคาดเดาไม่ได้และน่าหลงใหล",
+        "en": "You're playful, mysterious, and love to surprise others. Like Zorua, you have a mischievous spirit and sharp perception. You enjoy mind games and can adapt to any situation. Your cleverness and charm make you unpredictable and fascinating."
+      },
+      "traits": ["playful", "mysterious", "clever", "adaptable", "mischievous"]
+    },
+    "650": {
+      "pokemon": "Chespin",
+      "personality": {
+        "th": "คุณร่าเริง มองโลกในแง่ดี และมีความสามารถธรรมชาติในการทำให้ผู้อื่นยิ้ม เหมือนฮาริมารอน คุณเข้าหาชีวิตด้วยความอยากรู้อยากเห็นและความประหลาดใจ พลังงานเชิงบวกและความเอาใจใส่ผู้อื่นอย่างแท้จริงของคุณสร้างบรรยากาศที่อบอุ่นและต้อนรับทุกที่ที่คุณไป",
+        "en": "You're cheerful, optimistic, and have a natural ability to make others smile. Like Chespin, you approach life with curiosity and wonder. Your positive energy and genuine care for others create a warm, welcoming atmosphere wherever you go."
+      },
+      "traits": ["cheerful", "optimistic", "curious", "caring", "welcoming"]
+    },
+    "653": {
+      "pokemon": "Fennekin",
+      "personality": {
+        "th": "คุณฉลาด สง่างาม และมีความรู้สึกความงามที่ประณีต เหมือนฟีไนกิ คุณชื่นชมสิ่งที่ดีงามในชีวิตในขณะที่รักษาท่าทีที่อบอุ่นและเป็นมิตร การผสมผสานระหว่างสติปัญญาและเสน่ห์ของคุณทำให้คุณดึงดูดตามธรรมชาติ",
+        "en": "You're intelligent, elegant, and have a refined sense of beauty. Like Fennekin, you appreciate the finer things in life while maintaining a warm, friendly demeanor. Your combination of intellect and charm makes you naturally magnetic."
+      },
+      "traits": ["intelligent", "elegant", "refined", "warm", "charming"]
+    },
+    "656": {
+      "pokemon": "Froakie",
+      "personality": {
+        "th": "คุณสงบ มุ่งมั่น และทุ่มเทกับเป้าหมายของคุณอย่างไม่น่าเชื่อ เหมือนเคโรมัตซึ คุณทำงานอย่างเงียบๆ และมีประสิทธิภาพ ชอบการกระทำมากกว่าคำพูด ความอดทน ทักษะ และการมุ่งมั่นอย่างไม่เปลี่ยนแปลงของคุณทำให้คุณสามารถบรรลุทุกสิ่งที่คุณตั้งใจ",
+        "en": "You're calm, focused, and incredibly dedicated to your goals. Like Froakie, you work quietly and efficiently, preferring action over words. Your patience, skill, and unwavering focus make you capable of achieving anything you set your mind to."
+      },
+      "traits": ["calm", "focused", "dedicated", "patient", "skilled"]
+    },
+    "722": {
+      "pokemon": "Rowlet",
+      "personality": {
+        "th": "คุณฉลาด สังเกต และชอบคิดก่อนที่จะกระทำ เหมือนโมคุโร คุณมีความแข็งแกร่งที่เงียบและสติปัญญาตามธรรมชาติที่ผู้อื่นชื่นชม ท่าทีที่สงบและวิธีการที่ไตร่ตรองกับปัญหาทำให้คุณเป็นที่ปรึกษาและเพื่อนที่ยอดเยี่ยม",
+        "en": "You're wise, observant, and prefer to think before you act. Like Rowlet, you have a quiet strength and natural intelligence that others admire. Your calm demeanor and thoughtful approach to problems make you an excellent advisor and friend."
+      },
+      "traits": ["wise", "observant", "thoughtful", "calm", "intelligent"]
+    },
+    "725": {
+      "pokemon": "Litten",
+      "personality": {
+        "th": "คุณเป็นอิสระ เท่ และมีเสน่ห์ลึกลับ เหมือนนยะบิ คุณให้ค่ากับพื้นที่ส่วนตัวของคุณ แต่ซื่อสัตย์อย่างไม่น่าเชื่อต่อผู้ที่ได้รับความไว้วางใจของคุณ การพึ่งพาตนเองและความมั่นใจที่เงียบของคุณดึงดูดผู้อื่นมาหาคุณโดยธรรมชาติ",
+        "en": "You're independent, cool, and have a mysterious charm. Like Litten, you value your personal space but are incredibly loyal to those who earn your trust. Your self-reliance and quiet confidence draw others to you naturally."
+      },
+      "traits": ["independent", "cool", "mysterious", "loyal", "confident"]
+    },
+    "728": {
+      "pokemon": "Popplio",
+      "personality": {
+        "th": "คุณมีความสุข แสดงออก และรักที่จะสร้างความบันเทิงให้ผู้อื่น เหมือนอาชิมาริ คุณมีพรสวรรค์ธรรมชาติในการนำความสุขและเสียงหัวเราะมาสู่สถานการณ์ใดๆ จิตวิญญาณที่ขี้เล่นและความปรารถนาอย่างแท้จริงในการทำให้ผู้อื่นมีความสุขทำให้คุณเป็นเพื่อนที่มีค่า",
+        "en": "You're joyful, expressive, and love to entertain others. Like Popplio, you have a natural talent for bringing happiness and laughter to any situation. Your playful spirit and genuine desire to make others happy make you a treasured friend."
+      },
+      "traits": ["joyful", "expressive", "entertaining", "playful", "happiness-bringing"]
+    },
+    "810": {
+      "pokemon": "Grookey",
+      "personality": {
+        "th": "คุณมีพลัง มีจังหวะ และนำชีวิตมาสู่ทุกสิ่งรอบตัวคุณ เหมือนซารุโนริ คุณมีความสามารถธรรมชาติในการสร้างพลังและกระตุ้นผู้อื่น ธรรมชาติที่ขี้เล่นและความกระตือรือร้นที่ติดต่อได้ทำให้ทุกการรวมตัวสนุกและมีชีวิตชีวามากขึ้น",
+        "en": "You're energetic, rhythmic, and bring life to everything around you. Like Grookey, you have a natural ability to energize and motivate others. Your playful nature and infectious enthusiasm make every gathering more fun and lively."
+      },
+      "traits": ["energetic", "rhythmic", "motivating", "playful", "lively"]
+    },
+    "813": {
+      "pokemon": "Scorbunny",
+      "personality": {
+        "th": "คุณเป็นนักกีฬา แข่งขัน และพร้อมสำหรับการกระทำเสมอ เหมือนฮิบานี คุณเข้าหาความท้าทายด้วยพลังงานไร้ขอบเขตและความมุ่งมั่น จิตวิญญาณการต่อสู้และทัศนคติที่ไม่เคยยอมแพ้ของคุณสร้างแรงบันดาลใจให้ผู้อื่นผลักดันขีดจำกัดของพวกเขา",
+        "en": "You're athletic, competitive, and always ready for action. Like Scorbunny, you approach challenges with boundless energy and determination. Your fighting spirit and never-give-up attitude inspire others to push their limits."
+      },
+      "traits": ["athletic", "competitive", "energetic", "determined", "inspiring"]
+    },
+    "816": {
+      "pokemon": "Sobble",
+      "personality": {
+        "th": "คุณไว ใช้สัญชาตญาณ และสัมผัสกับความรู้สึกของคุณอย่างลึกซึ้ง เหมือนเมสซุน คุณอาจขี้อายในตอนแรก แต่คุณมีศักยภาพที่ซ่อนอยู่อย่างไม่น่าเชื่อ ความเห็นอกเห็นใจและความฉลาดทางอารมณ์ของคุณช่วยให้คุณเชื่อมต่อกับผู้อื่นในระดับที่ลึกซึ้ง",
+        "en": "You're sensitive, intuitive, and deeply in touch with your emotions. Like Sobble, you may be shy at first but you have incredible hidden potential. Your empathy and emotional intelligence help you connect with others on a profound level."
+      },
+      "traits": ["sensitive", "intuitive", "empathetic", "potential", "deep"]
+    },
+    "144": {
+      "pokemon": "Articuno",
+      "personality": {
+        "th": "คุณมีความสง่างาม สงบ และมีความสามารถในการนำความสงบมาในสถานการณ์ที่วุ่นวาย เหมือนฟรีเซอร์ คุณมีจิตใจที่เย็นและการตัดสินใจที่ชัดเจน คุณเป็นคนที่ผู้อื่นมองหาเมื่อต้องการคำแนะนำที่มีสติ การปรากฏตัวที่สงบของคุณมีผลการรักษาแก่คนรอบข้าง",
+        "en": "You're graceful, serene, and have the ability to bring calm to chaotic situations. Like Articuno, you possess a cool mind and clear judgment. You're someone others look to for level-headed advice. Your peaceful presence has a healing effect on those around you."
+      },
+      "traits": ["graceful", "serene", "calming", "wise", "healing"]
+    },
+    "145": {
+      "pokemon": "Zapdos",
+      "personality": {
+        "th": "คุณมีพลังงานสูง ตื่นตัว และสามารถสร้างแรงบันดาลใจให้ผู้อื่นได้ในทันที เหมือนธันเดอร์ คุณเป็นคนที่กระตือรือร้นและมีความสามารถในการกระตุ้นผู้อื่นให้ดำเนินการ ความกระตือรือร้นและความเฉลียวฉลาดของคุณทำให้คุณเป็นผู้นำตามธรรมชาติที่ผู้อื่นหาแรงบันดาลใจ",
+        "en": "You're high-energy, alert, and can instantly energize others around you. Like Zapdos, you're dynamic and have the ability to motivate others into action. Your enthusiasm and quick wit make you a natural leader that others look to for inspiration."
+      },
+      "traits": ["energetic", "dynamic", "inspiring", "quick-witted", "leadership"]
+    },
+    "146": {
+      "pokemon": "Moltres",
+      "personality": {
+        "th": "คุณมีความหลงใหล กล้าหาญ และมีไฟภายในที่ไม่มีวันดับ เหมือนไฟร์ คุณเผชิญชีวิตด้วยความมุ่งมั่นที่แรงกล้าและไม่กลัวที่จะเสี่ยง ความกล้าหาญและความมุ่งมั่นของคุณในการตามหาความฝันสร้างแรงบันดาลใจให้ผู้อื่นเผาไหม้ความหลงใหลของตัวเอง",
+        "en": "You're passionate, brave, and have an inner fire that never extinguishes. Like Moltres, you approach life with fierce determination and aren't afraid to take risks. Your courage and commitment to pursuing your dreams inspire others to ignite their own passions."
+      },
+      "traits": ["passionate", "brave", "determined", "inspiring", "fearless"]
+    }
+  }
+}
