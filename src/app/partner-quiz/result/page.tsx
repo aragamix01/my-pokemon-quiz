@@ -86,23 +86,38 @@ export default function PartnerQuizResultPage() {
 
     try {
       setIsSharing(true)
-      
+
+      // Wait for all images to load before capturing
+      const images = resultCardRef.current.querySelectorAll('img')
+      await Promise.all(
+        Array.from(images).map(img => {
+          if (img.complete) return Promise.resolve()
+          return new Promise((resolve, reject) => {
+            img.onload = resolve
+            img.onerror = resolve // Continue even if image fails
+            setTimeout(resolve, 3000) // Timeout after 3s
+          })
+        })
+      )
+
       // Generate canvas from the result card element
       const canvas = await html2canvas(resultCardRef.current, {
         backgroundColor: '#1f2937', // gray-800 background
         scale: 2, // Higher quality
         useCORS: true,
-        allowTaint: true,
+        allowTaint: false, // Changed to false for iOS compatibility
         logging: false,
         width: resultCardRef.current.offsetWidth,
-        height: resultCardRef.current.offsetHeight
+        height: resultCardRef.current.offsetHeight,
+        imageTimeout: 0, // Disable timeout since we pre-loaded images
+        foreignObjectRendering: false // Better iOS compatibility
       })
 
-      // Convert to blob
+      // Convert to blob with JPEG for better compatibility on iOS
       return new Promise<Blob | null>((resolve) => {
         canvas.toBlob((blob) => {
           resolve(blob)
-        }, 'image/png', 0.9)
+        }, 'image/jpeg', 0.92)
       })
     } catch (error) {
       console.error('Error generating share image:', error)
@@ -114,43 +129,87 @@ export default function PartnerQuizResultPage() {
 
   const handleShareImage = async () => {
     const blob = await generateShareImage()
-    if (!blob || !result) return
+    if (!blob || !result) {
+      alert(language === 'th'
+        ? 'ไม่สามารถสร้างภาพได้ กรุณาลองใหม่อีกครั้ง'
+        : 'Failed to generate image. Please try again.')
+      return
+    }
 
-    const shareText = language === 'th' 
+    const shareText = language === 'th'
       ? `🎉 ฉันได้ Pokemon คู่ใจแล้ว! มาดูกันว่าของคุณจะเป็นใคร\n\n💖 Pokemon คู่ใจของฉัน: ${result.personality.pokemon}\n🔥 ความเข้ากัน: ${result.matchScore}%\n✨ ลักษณะเด่น: ${result.dominantTraits.slice(0, 3).join(', ')}\n\n🎯 มาทำแบบทดสอบหา Pokemon คู่ใจของคุณกัน!`
       : `🎉 I found my Pokemon partner! Come see who yours will be\n\n💖 My Pokemon partner: ${result.personality.pokemon}\n🔥 Compatibility: ${result.matchScore}%\n✨ Key traits: ${result.dominantTraits.slice(0, 3).join(', ')}\n\n🎯 Take the quiz to find your Pokemon partner!`
 
-    try {
-      if (navigator.share && navigator.canShare({ files: [new File([blob], 'pokemon-partner.png', { type: 'image/png' })] })) {
-        // Native sharing (mobile)
-        await navigator.share({
-          title: language === 'th' ? 'Pokemon คู่ใจของฉัน' : 'My Pokemon Partner',
-          text: shareText,
-          files: [new File([blob], 'pokemon-partner.png', { type: 'image/png' })]
-        })
-      } else {
-        // Fallback: download image + copy text
-        const url = URL.createObjectURL(blob)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = `pokemon-partner-${result.personality.pokemon.toLowerCase()}.png`
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-        URL.revokeObjectURL(url)
+    // Use JPEG extension for the file
+    const fileName = `pokemon-partner-${result.personality.pokemon.toLowerCase()}.jpg`
+    const file = new File([blob], fileName, { type: 'image/jpeg' })
 
-        // Copy share text to clipboard
-        await navigator.clipboard.writeText(shareText)
-        
-        alert(language === 'th' 
-          ? '🎉 ภาพถูกดาวน์โหลดและข้อความถูกคัดลอกแล้ว!' 
+    try {
+      // Check if Web Share API is available and supports files
+      if (navigator.share) {
+        // Try sharing with file first (works on most mobile browsers)
+        try {
+          // On iOS, we need to check canShare before attempting
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              title: language === 'th' ? 'Pokemon คู่ใจของฉัน' : 'My Pokemon Partner',
+              text: shareText,
+              files: [file]
+            })
+            return
+          }
+        } catch (fileShareError) {
+          console.log('File sharing not supported, trying text only:', fileShareError)
+        }
+
+        // Fallback to text-only sharing if file sharing fails
+        try {
+          await navigator.share({
+            title: language === 'th' ? 'Pokemon คู่ใจของฉัน' : 'My Pokemon Partner',
+            text: shareText + '\n\n' + window.location.origin + '/partner-quiz'
+          })
+
+          // Download image separately
+          const url = URL.createObjectURL(blob)
+          const a = document.createElement('a')
+          a.href = url
+          a.download = fileName
+          document.body.appendChild(a)
+          a.click()
+          document.body.removeChild(a)
+          URL.revokeObjectURL(url)
+          return
+        } catch (textShareError) {
+          console.log('Text sharing failed:', textShareError)
+        }
+      }
+
+      // Final fallback: download image + copy text
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = fileName
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url)
+
+      // Copy share text to clipboard
+      try {
+        await navigator.clipboard.writeText(shareText + '\n\n' + window.location.origin + '/partner-quiz')
+        alert(language === 'th'
+          ? '🎉 ภาพถูกดาวน์โหลดและข้อความถูกคัดลอกแล้ว!'
           : '🎉 Image downloaded and text copied to clipboard!')
+      } catch (clipboardError) {
+        alert(language === 'th'
+          ? '📸 ภาพถูกดาวน์โหลดแล้ว!'
+          : '📸 Image downloaded!')
       }
     } catch (error) {
       console.error('Error sharing:', error)
-      alert(language === 'th' 
-        ? 'เกิดข้อผิดพลาดในการแชร์' 
-        : 'Error sharing content')
+      alert(language === 'th'
+        ? 'เกิดข้อผิดพลาดในการแชร์ กรุณาลองใหม่อีกครั้ง'
+        : 'Error sharing content. Please try again.')
     }
   }
 
@@ -281,6 +340,7 @@ export default function PartnerQuizResultPage() {
                 height={256}
                 className="relative z-10 pixelated drop-shadow-2xl"
                 onError={handleImageError}
+                crossOrigin="anonymous"
                 priority
               />
             </div>
