@@ -5,12 +5,13 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { Pokemon, PokemonSpecies, EvolutionChain, EvolutionChainLink, GenerationNumber } from '@/types/pokemon'
 import { pokemonAPI } from '@/lib/pokemon-api'
-import { getTypeIcon } from '@/lib/type-effectiveness'
+import { getTypeIcon, extractPokemonTypes } from '@/lib/type-effectiveness'
 import { getMoveData, getMoveTypeColor, hasMoveData } from '@/lib/moves-utils'
 import { getAbility } from '@/lib/abilities-utils'
 import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import PokemonImage from '@/components/PokemonImage'
 import PokemonStatsChart from '@/components/PokemonStatsChart'
+import PokemonTypeEffectiveness from '@/components/PokemonTypeEffectiveness'
 
 interface PokemonData {
   pokemon: Pokemon
@@ -519,6 +520,12 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                     </div>
                   </div>
                 )}
+
+                {/* Type Effectiveness Section - In Sidebar */}
+                <div className="mb-4">
+                  <h4 className="text-sm font-bold mb-2 text-center lg:text-left" style={{ color: 'var(--text-primary)' }}>Type Effectiveness</h4>
+                  <PokemonTypeEffectiveness types={extractPokemonTypes(getCurrentForm())} />
+                </div>
               </div>
 
               {/* Right Side - Information */}
