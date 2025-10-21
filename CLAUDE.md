@@ -10,6 +10,7 @@ This is a comprehensive Pokemon toolkit built with Next.js featuring multiple to
 - **Detailed Pokemon Pages**: Individual Pokemon information with complete movesets
 - **Comprehensive Moves Database**: All 937 Pokemon moves with complete details
 - **Type Effectiveness System**: Complete type matchup calculator and reference
+- **AI-Powered Search**: 100% free browser-based semantic search using Transformers.js
 - **Navigation System**: Seamless browsing with memory and scroll position restoration
 - **Dual Responsive Design**: Optimized layouts for both mobile and desktop experiences
 
@@ -76,6 +77,25 @@ Comprehensive Pokemon moves system with complete database:
 - Interactive type effectiveness display component
 - Comprehensive type matchup data for all Pokemon types
 - Support for dual-type Pokemon effectiveness calculations
+
+## AI-Powered Search System ✨ NEW
+100% free browser-based AI using Transformers.js for natural language search:
+- **Zero Cost**: No API fees, runs entirely in user's browser
+- **Semantic Search**: Understands natural language queries like "strong fire starter" or "fast electric types"
+- **Pokemon Search**: Natural language search over all 1000+ Pokemon
+- **Move Search**: Find moves by description (e.g., "physical fire moves with high power")
+- **Ability Search**: Search abilities by effect (e.g., "abilities that boost attack")
+- **Team Builder AI**: Suggests Pokemon to complement your team based on type coverage
+- **Privacy First**: All processing client-side, no data sent to servers
+- **Offline Ready**: Works without internet after initial model cache
+- **Fast Performance**: <100ms searches after initial model load (~23MB one-time download)
+- **Documentation**: See `docs/ai-integration/` folder for complete guides
+
+### AI Components & Libraries
+- **`src/lib/ai-search.ts`**: Core semantic search engine with embeddings
+- **`src/lib/pokemon-ai-search.ts`**: Pokemon-specific AI utilities
+- **`src/components/AISearchBar.tsx`**: Ready-to-use AI search component with pixel art styling
+- **Model**: Xenova/all-MiniLM-L6-v2 (sentence transformers for semantic similarity)
 
 ## Theme
 - **Pixel Art Style**: Retro 8-bit/16-bit aesthetic with pixelated rendering

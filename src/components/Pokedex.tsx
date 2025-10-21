@@ -11,8 +11,10 @@ import PokemonImage from './PokemonImage'
 import PokemonSkeleton from './PokemonSkeleton'
 import PokemonSearchBar from './PokemonSearchBar'
 import PokemonFilters from './PokemonFilters'
+import AISearchBar from './AISearchBar'
 import { usePokemonFilter } from '@/hooks/usePokemonFilter'
 import { pokemonMetadataService } from '@/lib/pokemon-metadata'
+import type { PokemonMetadata } from '@/types/pokemon-metadata'
 
 
 export default function Pokedex() {
@@ -28,6 +30,8 @@ export default function Pokedex() {
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [itemsPerLoad] = useState(50) // Load 50 items at a time
   const scrollPositionRef = useRef<number>(0)
+  const [useAISearch, setUseAISearch] = useState(false) // Toggle between classic and AI search
+  const [aiFilteredPokemon, setAiFilteredPokemon] = useState<Pokemon[]>([]) // Results from AI search
   
   // Use Pokemon filter hook for search and sort
   const {
@@ -671,6 +675,13 @@ export default function Pokedex() {
     router.push(url)
   }
 
+  // Handle AI search results
+  const handleAISearchResults = useCallback((results: PokemonMetadata[]) => {
+    // Convert metadata results to Pokemon format
+    const aiPokemon = convertMetadataToPokemon(results)
+    setAiFilteredPokemon(aiPokemon)
+  }, [convertMetadataToPokemon])
+
   const renderPokemonCard = useCallback((pokemonData: Pokemon, index: number) => {
     // Check if shiny sprites exist
     const shinyFallbacks = pokemonAPI.getPokemonImageFallbacks(pokemonData, true)
@@ -772,39 +783,87 @@ export default function Pokedex() {
       {/* Unified Search and Controls */}
       {isMetadataAvailable && (
         <div className="space-y-3 mb-4 sm:space-y-4 sm:mb-6">
-          {/* Main Control Row */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            {/* Search Box */}
-            <div className="flex-1">
-              <PokemonSearchBar
-                value={searchTerm}
-                onChange={setSearchTerm}
-                onClear={clearSearch}
-                placeholder="Search Pokemon by name..."
-                totalResults={totalResults}
+          {/* Search Mode Toggle */}
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span className={`text-sm font-bold ${!useAISearch ? 'text-accent' : 'text-gray-500'}`}>
+              🔍 Classic
+            </span>
+            <button
+              onClick={() => setUseAISearch(!useAISearch)}
+              className="relative inline-flex h-8 w-16 items-center rounded-full transition-colors duration-300"
+              style={{
+                backgroundColor: useAISearch ? 'var(--accent-color)' : 'var(--surface-bg)',
+                border: '3px solid var(--accent-color)',
+                boxShadow: '3px 3px 0 rgba(0, 0, 0, 0.3)'
+              }}
+              title={useAISearch ? 'Switch to Classic Search' : 'Switch to Smart Search'}
+            >
+              <span
+                className="inline-block h-6 w-6 transform rounded-full transition-transform duration-300"
+                style={{
+                  backgroundColor: useAISearch ? 'white' : 'var(--accent-color)',
+                  transform: useAISearch ? 'translateX(32px)' : 'translateX(2px)',
+                  boxShadow: '2px 2px 0 rgba(0, 0, 0, 0.2)'
+                }}
+              />
+            </button>
+            <span className={`text-sm font-bold ${useAISearch ? 'text-accent' : 'text-gray-500'}`}>
+              ✨ AI
+            </span>
+          </div>
+
+          {/* Conditional Search UI */}
+          {useAISearch ? (
+            /* AI Search Bar */
+            <div className="mb-4">
+              <AISearchBar
+                pokemonList={
+                  selectedGeneration === null
+                    ? pokemonMetadataService.getAllMetadata()
+                    : pokemonMetadataService.getMetadataByGeneration(selectedGeneration)
+                }
+                onResults={handleAISearchResults}
+                placeholder="Try: 'strong fire starter' or 'fast electric types'"
+                maxResults={50}
               />
             </div>
-          </div>
-          
-          {/* Filter and Sort Controls */}
-          <PokemonFilters
-            sortOption={sortOption}
-            onSortChange={setSortOption}
-            selectedTypes={selectedTypes}
-            onTypesChange={setSelectedTypes}
-            showLegendary={showLegendary}
-            onLegendaryChange={setShowLegendary}
-            showMythical={showMythical}
-            onMythicalChange={setShowMythical}
-            selectedHabitat={selectedHabitat}
-            onHabitatChange={setSelectedHabitat}
-            selectedColor={selectedColor}
-            onColorChange={setSelectedColor}
-            statsRange={statsRange}
-            onStatsRangeChange={setStatsRange}
-            onResetFilters={resetFilters}
-            hasActiveFilters={hasActiveFilters}
-          />
+          ) : (
+            <>
+              {/* Main Control Row */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                {/* Search Box */}
+                <div className="flex-1">
+                  <PokemonSearchBar
+                    value={searchTerm}
+                    onChange={setSearchTerm}
+                    onClear={clearSearch}
+                    placeholder="Search Pokemon by name..."
+                    totalResults={totalResults}
+                  />
+                </div>
+              </div>
+
+              {/* Filter and Sort Controls */}
+              <PokemonFilters
+                sortOption={sortOption}
+                onSortChange={setSortOption}
+                selectedTypes={selectedTypes}
+                onTypesChange={setSelectedTypes}
+                showLegendary={showLegendary}
+                onLegendaryChange={setShowLegendary}
+                showMythical={showMythical}
+                onMythicalChange={setShowMythical}
+                selectedHabitat={selectedHabitat}
+                onHabitatChange={setSelectedHabitat}
+                selectedColor={selectedColor}
+                onColorChange={setSelectedColor}
+                statsRange={statsRange}
+                onStatsRangeChange={setStatsRange}
+                onResetFilters={resetFilters}
+                hasActiveFilters={hasActiveFilters}
+              />
+            </>
+          )}
         </div>
       )}
 
@@ -831,21 +890,21 @@ export default function Pokedex() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-3 md:gap-4">
           <PokemonSkeleton count={20} />
         </div>
-      ) : pokemon.length === 0 ? (
+      ) : (useAISearch ? aiFilteredPokemon.length === 0 : pokemon.length === 0) ? (
         <div className="text-center py-8">
           <div className="text-lg mb-2">😔</div>
           <div className="text-sm" style={{ color: 'var(--text-muted)' }}>
-            No Pokemon found with current filters
+            {useAISearch ? 'No Pokemon found with AI search' : 'No Pokemon found with current filters'}
           </div>
         </div>
       ) : (
         <div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-3 md:gap-4">
-            {pokemon.map((p, index) => renderPokemonCard(p, index))}
+            {(useAISearch ? aiFilteredPokemon : pokemon).map((p, index) => renderPokemonCard(p, index))}
           </div>
           
-          {/* Load More Button */}
-          {hasMorePages && (
+          {/* Load More Button - only show in classic mode */}
+          {!useAISearch && hasMorePages && (
             <div className="text-center py-6">
               <button
                 onClick={loadMorePokemon}
@@ -857,11 +916,11 @@ export default function Pokedex() {
               </button>
             </div>
           )}
-          
+
           {/* Pokemon count indicator */}
           <div className="text-center py-4">
             <div className="text-sm" style={{ color: 'var(--text-muted)' }}>
-              Showing {pokemon.length} of {totalResults} Pokemon
+              Showing {useAISearch ? aiFilteredPokemon.length : pokemon.length} {useAISearch ? 'results' : `of ${totalResults} Pokemon`}
               {hasMorePages && (
                 <div className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
                   📱 Loading {itemsPerLoad} at a time for better performance
