@@ -4,6 +4,7 @@ import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import QuizCard from '@/components/QuizCard'
 import { pokemonMetadataService } from '@/lib/pokemon-metadata'
+import { generateConfusingAnswers } from '@/lib/pokemon-similarity'
 import { Pokemon, GenerationNumber, QuizQuestion } from '@/types/pokemon'
 
 // Fisher-Yates shuffle for better randomization
@@ -96,11 +97,28 @@ export default function QuizPage({ params }: QuizPageProps) {
 
       for (let i = 0; i < questionsCount; i++) {
         const correctPokemon = shuffledPokemon[i]
-        const wrongOptions = shuffleArray(
-          allPokemon.filter(p => p.id !== correctPokemon.id)
-        ).slice(0, 3)
-        
-        const options = shuffleArray([correctPokemon, ...wrongOptions])
+
+        // Use AI-powered similarity to generate confusing answers
+        const confusingAnswerIds = generateConfusingAnswers(
+          correctPokemon.id,
+          4, // Total options = 4
+          generation || undefined // Exclude same generation if specified
+        )
+
+        // Map IDs back to Pokemon objects
+        const wrongOptions = confusingAnswerIds
+          .map(id => allPokemon.find(p => p.id === id))
+          .filter((p): p is Pokemon => p !== undefined)
+
+        // If we don't have enough similar Pokemon, fall back to random selection
+        if (wrongOptions.length < 3) {
+          const randomWrongOptions = shuffleArray(
+            allPokemon.filter(p => p.id !== correctPokemon.id && !wrongOptions.some(wo => wo.id === p.id))
+          ).slice(0, 3 - wrongOptions.length)
+          wrongOptions.push(...randomWrongOptions)
+        }
+
+        const options = shuffleArray([correctPokemon, ...wrongOptions.slice(0, 3)])
 
         quizQuestions.push({
           correctPokemon,

@@ -422,11 +422,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
           <button
             onClick={() => {
               const generation = searchParams.get('gen')
-              if (generation) {
-                router.push(`/?section=pokedex&gen=${generation}`)
-              } else {
-                router.back()
-              }
+              router.push(`/?section=pokedex${generation ? `&gen=${generation}` : ''}`)
             }}
             className="modern-button text-xs px-3 py-2"
           >

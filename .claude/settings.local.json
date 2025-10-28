@@ -33,7 +33,8 @@
       "mcp__playwright__browser_resize",
       "Bash(cat:*)",
       "mcp__playwright__browser_wait_for",
-      "mcp__playwright__browser_console_messages"
+      "mcp__playwright__browser_console_messages",
+      "Bash(npm ls:*)"
     ],
     "deny": [],
     "ask": []
