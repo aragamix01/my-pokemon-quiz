@@ -1,19 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter, Kanit } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-})
-
-const kanit = Kanit({
-  subsets: ['latin', 'thai'],
-  weight: ['300', '400', '500', '600', '700'],
-  display: 'swap',
-  variable: '--font-kanit',
-})
+// Using system fonts to avoid Google Fonts fetching during build
+// This allows builds to succeed in restricted network environments
+const fontVariables = '--font-inter --font-kanit'
 
 export const metadata: Metadata = {
   title: 'Pokemon toolkit',
@@ -27,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`pixel-text ${inter.variable} ${kanit.variable}`}>
+      <body className="pixel-text">
         <div className="min-h-screen" style={{
           background: `
             radial-gradient(circle at 25% 25%, #1e1e3f 0%, transparent 50%),

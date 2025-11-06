@@ -3,8 +3,10 @@
  * Fast and accurate semantic search
  */
 
-import { pipeline, FeatureExtractionPipeline } from '@xenova/transformers';
 import type { PokemonMetadata } from '@/types/pokemon-metadata';
+
+// Dynamic import to avoid build issues with sharp
+type FeatureExtractionPipeline = any;
 
 // Singleton model instance
 let embeddingModel: FeatureExtractionPipeline | null = null;
@@ -49,6 +51,8 @@ async function getEmbeddingModel(): Promise<FeatureExtractionPipeline> {
 
   isLoading = true;
   try {
+    // Dynamic import to avoid SSR issues with sharp
+    const { pipeline } = await import('@xenova/transformers');
     embeddingModel = await pipeline(
       'feature-extraction',
       'Xenova/all-MiniLM-L6-v2',
