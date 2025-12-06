@@ -89,7 +89,7 @@ const STRATEGIES = {
     maxId: 1025,
     includeShiny: true,
     includeForms: false,
-    includeVariants: true
+    includeVariants: false
   },
   'forms-only': {
     name: 'Variant Forms Only',
@@ -356,23 +356,35 @@ const processTypes = async () => {
 
 const processItems = async () => {
   console.log('🎒 Processing evolution item sprites...')
-  
+
   const itemsDir = path.join(OUTPUT_DIR, 'items')
   ensureDirectory(itemsDir)
-  
+
   let successful = 0
   let failed = 0
-  
-  // Common evolution items used in Pokemon
-  const evolutionItems = [
-    'fire-stone', 'water-stone', 'thunder-stone', 'leaf-stone', 'moon-stone', 'sun-stone',
-    'shiny-stone', 'dusk-stone', 'dawn-stone', 'ice-stone',
-    'kings-rock', 'dragon-scale', 'upgrade', 'metal-coat', 'dubious-disc', 'protector',
-    'electirizer', 'magmarizer', 'razor-claw', 'razor-fang', 'prism-scale', 'whipped-dream',
-    'sachet', 'reaper-cloth', 'deep-sea-tooth', 'deep-sea-scale', 'oval-stone',
-    'linking-cord', 'black-augurite', 'peat-block', 'auspicious-armor', 'malicious-armor',
-    'masterpiece-teacup', 'unremarkable-teacup'
-  ]
+
+  // Load evolution items from JSON database to ensure consistency
+  let evolutionItems = []
+  try {
+    const evolutionItemsPath = path.join(__dirname, '..', 'src', 'data', 'evolution-items.json')
+    const evolutionItemsData = JSON.parse(fs.readFileSync(evolutionItemsPath, 'utf8'))
+    evolutionItems = Object.keys(evolutionItemsData.items)
+    console.log(`  📦 Loaded ${evolutionItems.length} evolution items from database`)
+  } catch (error) {
+    console.warn('  ⚠️  Failed to load evolution-items.json, using fallback list')
+    // Fallback to complete evolution items list if JSON fails to load
+    evolutionItems = [
+      'fire-stone', 'water-stone', 'thunder-stone', 'leaf-stone', 'moon-stone', 'sun-stone',
+      'shiny-stone', 'dusk-stone', 'dawn-stone', 'ice-stone', 'kings-rock', 'metal-coat',
+      'dragon-scale', 'protector', 'electirizer', 'magmarizer', 'dubious-disc', 'reaper-cloth',
+      'razor-claw', 'razor-fang', 'prism-scale', 'whipped-dream', 'sachet', 'oval-stone',
+      'deep-sea-tooth', 'deep-sea-scale', 'linking-cord', 'sweet-apple', 'tart-apple',
+      'cracked-pot', 'chipped-pot', 'galarica-cuff', 'galarica-wreath', 'strawberry-sweet',
+      'love-sweet', 'berry-sweet', 'clover-sweet', 'flower-sweet', 'star-sweet', 'ribbon-sweet',
+      'gimmighoul-coin', 'black-augurite', 'peat-block', 'auspicious-armor', 'malicious-armor',
+      'scroll-of-darkness', 'scroll-of-waters', 'masterpiece-teacup', 'unremarkable-teacup'
+    ]
+  }
   
   for (const item of evolutionItems) {
     const itemPath = path.join(itemsDir, `${item}.webp`)

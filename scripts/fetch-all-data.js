@@ -13,14 +13,13 @@ const DATABASES = {
   metadata: 'fetch-pokemon-metadata.js',
   types: 'fetch-types.js',
   moves: 'fetch-moves-json.js',
-  abilities: 'fetch-abilities-json.js', 
-  items: 'fetch-items-json.js',
+  abilities: 'fetch-abilities-json.js',
   'evolution-items': 'fetch-evolution-items.js',
-  
-  // Legacy TypeScript databases (deprecated)
-  'moves-legacy': 'fetch-moves.js',
-  'abilities-legacy': 'fetch-abilities.js',
-  'items-legacy': 'fetch-items.js'
+
+  // Legacy TypeScript databases (deprecated - NOT USED)
+  // 'moves-legacy': 'fetch-moves.js',
+  // 'abilities-legacy': 'fetch-abilities.js',
+  // 'items-legacy': 'fetch-items.js'
 }
 
 async function runScript(scriptName, databaseName) {

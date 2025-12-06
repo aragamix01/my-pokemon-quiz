@@ -34,7 +34,15 @@
       "Bash(cat:*)",
       "mcp__playwright__browser_wait_for",
       "mcp__playwright__browser_console_messages",
-      "Bash(npm ls:*)"
+      "Bash(npm ls:*)",
+      "mcp__playwright__browser_type",
+      "mcp__playwright__browser_press_key",
+      "mcp__playwright__browser_take_screenshot",
+      "Bash(timeout 60s node:*)",
+      "Bash(npm update:*)",
+      "Bash(npm audit fix:*)",
+      "Bash(npm audit:*)",
+      "Bash(git rebase:*)"
     ],
     "deny": [],
     "ask": []

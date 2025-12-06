@@ -113,7 +113,8 @@ test.describe('Pokemon Detail Page Mobile UI', () => {
         // Mobile specific checks
         
         // Check that mobile card layout is used for moves
-        await expect(page.locator('.md\\:hidden')).toHaveCount({ min: 1 });
+        const mobileElements = await page.locator('.md\\:hidden').count();
+        expect(mobileElements).toBeGreaterThanOrEqual(1);
         
         // Check that tables stack properly on mobile
         const tables = page.locator('table');
