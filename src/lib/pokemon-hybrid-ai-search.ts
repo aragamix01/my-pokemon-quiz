@@ -1,10 +1,15 @@
 /**
  * Hybrid AI search using pre-computed embeddings
  * Fast and accurate semantic search
+ *
+ * IMPORTANT: This module uses @xenova/transformers which only works in browser.
+ * It must be dynamically imported on client-side only.
  */
 
-import { pipeline, FeatureExtractionPipeline } from '@xenova/transformers';
 import type { PokemonMetadata } from '@/types/pokemon-metadata';
+
+// Type imports (safe for server-side)
+type FeatureExtractionPipeline = any;
 
 // Singleton model instance
 let embeddingModel: FeatureExtractionPipeline | null = null;
@@ -35,6 +40,7 @@ async function loadPrecomputedEmbeddings(): Promise<void> {
 
 /**
  * Initialize embedding model (lazy loaded)
+ * Dynamically imports transformers library for client-side only
  */
 async function getEmbeddingModel(): Promise<FeatureExtractionPipeline> {
   if (embeddingModel) return embeddingModel;
@@ -49,6 +55,9 @@ async function getEmbeddingModel(): Promise<FeatureExtractionPipeline> {
 
   isLoading = true;
   try {
+    // Dynamic import for client-side only (prevents SSR errors)
+    const { pipeline } = await import('@xenova/transformers');
+
     embeddingModel = await pipeline(
       'feature-extraction',
       'Xenova/all-MiniLM-L6-v2',
