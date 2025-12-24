@@ -213,6 +213,9 @@ node scripts/fetch-pokemon-metadata.js      # Pokemon metadata
 node scripts/fetch-moves-json.js           # Moves database
 node scripts/fetch-abilities-json.js       # Abilities database
 node scripts/fetch-types.js                # Type effectiveness
+
+# AI Embeddings (for semantic search)
+node scripts/generate-pokemon-embeddings.js  # Generate Pokemon embeddings
 ```
 
 ## 🎯 Key Features Deep Dive

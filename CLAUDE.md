@@ -301,6 +301,16 @@ node scripts/download-and-optimize-sprites.js popular     # 80 popular Pokemon o
 node scripts/download-and-optimize-sprites.js minimal     # Gen 1 artwork only (no shiny/forms)
 node scripts/download-and-optimize-sprites.js all         # ALL Pokemon + variants (complete)
 node scripts/download-and-optimize-sprites.js forms-only  # All 277 variant forms (Mega/Alolan/Galarian/etc)
+
+# AI Embeddings Generation (for semantic search)
+node scripts/generate-pokemon-embeddings.js  # Generate Pokemon embeddings for AI search (~23MB model)
+node scripts/test-pokemon-similarity.js      # Test Pokemon similarity results (quiz testing)
+
+# ⚠️ Deprecated Scripts (Reference Only)
+# The following scripts output TypeScript format and are kept for reference:
+# - scripts/fetch-moves.js (use fetch-moves-json.js instead)
+# - scripts/fetch-abilities.js (use fetch-abilities-json.js instead)
+# - scripts/fetch-items.js (use fetch-evolution-items.js instead)
 ```
 
 ## Notes
