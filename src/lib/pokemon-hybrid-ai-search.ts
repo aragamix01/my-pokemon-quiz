@@ -56,7 +56,18 @@ async function getEmbeddingModel(): Promise<FeatureExtractionPipeline> {
   isLoading = true;
   try {
     // Dynamic import for client-side only (prevents SSR errors)
-    const { pipeline } = await import('@xenova/transformers');
+    const transformers = await import('@xenova/transformers');
+
+    // Check if import was successful
+    if (!transformers || !transformers.pipeline) {
+      throw new Error(
+        '@xenova/transformers failed to load. ' +
+        'This may be due to Next.js configuration issues. ' +
+        'Make sure webpack is configured properly in next.config.js'
+      );
+    }
+
+    const { pipeline } = transformers;
 
     embeddingModel = await pipeline(
       'feature-extraction',
@@ -64,6 +75,9 @@ async function getEmbeddingModel(): Promise<FeatureExtractionPipeline> {
       { quantized: true }
     );
     return embeddingModel;
+  } catch (error) {
+    console.error('Failed to initialize embedding model:', error);
+    throw error;
   } finally {
     isLoading = false;
   }
