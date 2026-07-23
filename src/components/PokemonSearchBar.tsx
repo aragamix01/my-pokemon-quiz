@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { MagnifyingGlass, X } from '@phosphor-icons/react'
 
 interface PokemonSearchBarProps {
   value: string
@@ -10,12 +11,12 @@ interface PokemonSearchBarProps {
   totalResults?: number
 }
 
-export default function PokemonSearchBar({ 
-  value, 
-  onChange, 
-  onClear, 
+export default function PokemonSearchBar({
+  value,
+  onChange,
+  onClear,
   placeholder = "Search Pokemon by name...",
-  totalResults 
+  totalResults
 }: PokemonSearchBarProps) {
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -36,31 +37,20 @@ export default function PokemonSearchBar({
 
   return (
     <div className="relative w-full">
-      {/* Unified Search Input */}
-      <div 
-        className={`
-          relative transition-all duration-200 w-full
-          ${isFocused 
-            ? 'shadow-lg border-blue-500/50' 
-            : 'hover:border-blue-400/50 border-gray-600/50'
-          }
-          border-2 h-12 rounded-lg
-        `}
+      <div
+        className="relative w-full transition-colors"
         style={{
-          background: 'rgba(31, 41, 55, 0.9)',
-          backdropFilter: 'blur(10px)'
+          border: `1px solid ${isFocused ? 'var(--color-accent)' : 'var(--color-neutral-700)'}`,
+          background: 'var(--color-surface)',
+          borderRadius: 'var(--radius-md)',
+          height: 44
         }}
       >
         {/* Search Icon - Left */}
         <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10">
-          <div className={`
-            text-lg transition-all duration-300 
-            ${isFocused ? 'text-blue-400' : 'text-white'}
-          `}>
-            🔍
-          </div>
+          <MagnifyingGlass size={18} color={isFocused ? 'var(--color-accent)' : 'var(--color-neutral-400)'} />
         </div>
-        
+
         {/* Input Field */}
         <input
           ref={inputRef}
@@ -70,52 +60,37 @@ export default function PokemonSearchBar({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
-          className={`
-            w-full h-full pl-12 pr-12 bg-transparent outline-none
-            text-sm sm:text-sm font-medium transition-all duration-300
-            placeholder:text-gray-400 text-white
-          `}
-          style={{ 
-            color: '#ffffff',
+          className="w-full h-full pl-11 pr-11 bg-transparent outline-none text-sm font-medium"
+          style={{
+            color: 'var(--color-text)',
             border: 'none',
             fontSize: '16px' // Prevents zoom on iOS
           }}
           autoComplete="off"
           spellCheck={false}
         />
-        
+
         {/* Clear Button */}
         {value && (
           <button
             onClick={onClear}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 p-2 sm:p-1 rounded-md transition-all duration-200 hover:bg-red-500/20 text-white hover:text-red-400"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1.5 rounded-md transition-colors"
+            style={{ color: 'var(--color-neutral-400)' }}
             title="Clear search (Esc)"
           >
-            <svg className="w-4 h-4 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <X size={16} />
           </button>
         )}
       </div>
-      
+
       {/* Compact Results Status */}
       {totalResults !== undefined && value && (
         <div className="mt-2 px-1">
-          <div className={`
-            text-xs transition-all duration-300 flex items-center gap-1
-            ${totalResults === 0 ? 'text-orange-400' : 'text-green-400'}
-          `}>
-            {totalResults === 0 ? (
-              <>
-                <span>⚠️</span>
-                <span>No Pokemon found</span>
-              </>
-            ) : (
-              <>
-                <span>✨</span>
-                <span>{totalResults.toLocaleString()} Pokemon found</span>
-              </>
-            )}
+          <div
+            className="text-xs flex items-center gap-1.5"
+            style={{ color: totalResults === 0 ? 'var(--error-gradient)' : 'var(--color-accent-300)' }}
+          >
+            <span>{totalResults === 0 ? 'No Pokemon found' : `${totalResults.toLocaleString()} Pokemon found`}</span>
           </div>
         </div>
       )}

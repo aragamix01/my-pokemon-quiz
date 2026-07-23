@@ -5,13 +5,18 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import { Pokemon, PokemonSpecies, EvolutionChain, EvolutionChainLink, GenerationNumber } from '@/types/pokemon'
 import { pokemonAPI } from '@/lib/pokemon-api'
-import { getTypeIcon, extractPokemonTypes } from '@/lib/type-effectiveness'
+import { extractPokemonTypes } from '@/lib/type-effectiveness'
 import { getMoveData, getMoveTypeColor, hasMoveData } from '@/lib/moves-utils'
 import { getAbility } from '@/lib/abilities-utils'
 import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import PokemonImage from '@/components/PokemonImage'
 import PokemonStatsChart from '@/components/PokemonStatsChart'
 import PokemonTypeEffectiveness from '@/components/PokemonTypeEffectiveness'
+import { TypePill } from '@/components/ui/TypePill'
+import { Button } from '@/components/ui/Button'
+import { ProgressBar } from '@/components/ui/ProgressBar'
+import { cn } from '@/lib/cn'
+import { CaretLeft, CaretRight, Sparkle, SpeakerHigh, CaretDown, CaretUp } from '@phosphor-icons/react'
 
 interface PokemonData {
   pokemon: Pokemon
@@ -136,18 +141,6 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
     ).join(' ')
   }
 
-  const getGrowthRateColor = (growthRate: string) => {
-    const colors: { [key: string]: string } = {
-      'slow': '#e74c3c',
-      'medium-slow': '#e67e22', 
-      'medium': '#f39c12',
-      'medium-fast': '#27ae60',
-      'fast': '#2ecc71',
-      'erratic': '#9b59b6',
-      'fluctuating': '#3498db'
-    }
-    return colors[growthRate] || '#95a5a6'
-  }
 
   const getAllForms = () => {
     if (!data?.allForms || data.allForms.length === 0) return []
@@ -328,127 +321,66 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Floating Navigation Buttons - Always show for debugging */}
-      {(previousPokemon || nextPokemon) && (
-        <>
-          {/* Previous Button */}
-          {previousPokemon && (
-            <button
-              onClick={() => navigateToPokemon(previousPokemon.id)}
-              className="fixed left-4 top-1/2 transform -translate-y-1/2 z-50 rounded-full shadow-lg hover:scale-110 transition-transform"
-              title={`Previous: ${previousPokemon.name} #${previousPokemon.id.toString().padStart(3, '0')}`}
-              style={{ 
-                background: '#16213e', 
-                border: '3px solid #e94560',
-                color: 'white',
-                width: '60px',
-                height: '60px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '0'
-              }}
-            >
-              <span style={{ 
-                fontSize: '32px',
-                fontWeight: 'bold',
-                lineHeight: '0.8',
-                marginTop: '-1px'
-              }}>‹</span>
-            </button>
-          )}
-          
-          {/* Next Button */}
-          {nextPokemon && (
-            <button
-              onClick={() => navigateToPokemon(nextPokemon.id)}
-              className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 rounded-full shadow-lg hover:scale-110 transition-transform"
-              title={`Next: ${nextPokemon.name} #${nextPokemon.id.toString().padStart(3, '0')}`}
-              style={{ 
-                background: '#16213e', 
-                border: '3px solid #e94560',
-                color: 'white',
-                width: '60px',
-                height: '60px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '0'
-              }}
-            >
-              <span style={{ 
-                fontSize: '32px',
-                fontWeight: 'bold',
-                lineHeight: '0.8',
-                marginTop: '-1px'
-              }}>›</span>
-            </button>
-          )}
-        </>
+    <div className="min-h-screen relative">
+      {/* Floating Navigation Buttons */}
+      {previousPokemon && (
+        <Button
+          variant="icon"
+          onClick={() => navigateToPokemon(previousPokemon.id)}
+          title={`Previous: ${previousPokemon.name} #${previousPokemon.id.toString().padStart(3, '0')}`}
+          style={{ position: 'fixed', left: '16px', top: '50%', transform: 'translateY(-50%)', zIndex: 50, width: 52, height: 52 }}
+        >
+          <CaretLeft size={22} />
+        </Button>
       )}
 
-      {/* Animated background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="floating-pokeball" style={{
-          position: 'absolute',
-          top: '10%',
-          left: '5%',
-          animation: 'float 6s ease-in-out infinite'
-        }}>⚪</div>
-        <div className="floating-pokeball" style={{
-          position: 'absolute',
-          top: '20%',
-          right: '10%',
-          animation: 'float 8s ease-in-out infinite 2s'
-        }}>🔴</div>
-        <div className="floating-pokeball" style={{
-          position: 'absolute',
-          bottom: '15%',
-          left: '15%',
-          animation: 'float 7s ease-in-out infinite 4s'
-        }}>🟡</div>
-        <div className="floating-pokeball" style={{
-          position: 'absolute',
-          bottom: '25%',
-          right: '5%',
-          animation: 'float 9s ease-in-out infinite 1s'
-        }}>🔵</div>
-      </div>
+      {nextPokemon && (
+        <Button
+          variant="icon"
+          onClick={() => navigateToPokemon(nextPokemon.id)}
+          title={`Next: ${nextPokemon.name} #${nextPokemon.id.toString().padStart(3, '0')}`}
+          style={{ position: 'fixed', right: '16px', top: '50%', transform: 'translateY(-50%)', zIndex: 50, width: 52, height: 52 }}
+        >
+          <CaretRight size={22} />
+        </Button>
+      )}
 
       <div className="relative z-10 max-w-6xl mx-auto p-4">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
-          <button
+          <Button
+            variant="ghost"
             onClick={() => {
               const generation = searchParams.get('gen')
               router.push(`/?section=pokedex${generation ? `&gen=${generation}` : ''}`)
             }}
-            className="modern-button text-xs px-3 py-2"
           >
             ← Back
-          </button>
-          <h1 className="text-lg font-bold gradient-text">Pokemon Details</h1>
+          </Button>
+          <h1
+            className="text-lg"
+            style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}
+          >
+            Pokemon Details
+          </h1>
           <div className="w-16"></div>
         </div>
 
         {loading ? (
           /* Skeleton Loading */
-          <div className="modern-card">
-            <div className="space-y-4">
-              <div className="animate-pulse">
-                <div className="h-8 bg-gray-300 rounded mb-4"></div>
-                <div className="h-64 bg-gray-300 rounded mb-4"></div>
-                <div className="space-y-2">
-                  <div className="h-4 bg-gray-300 rounded"></div>
-                  <div className="h-4 bg-gray-300 rounded w-3/4"></div>
-                  <div className="h-4 bg-gray-300 rounded w-1/2"></div>
-                </div>
+          <div className="card">
+            <div className="space-y-4 animate-pulse">
+              <div className="h-8 rounded mb-4" style={{ background: 'var(--color-neutral-800)' }}></div>
+              <div className="h-64 rounded mb-4" style={{ background: 'var(--color-neutral-800)' }}></div>
+              <div className="space-y-2">
+                <div className="h-4 rounded" style={{ background: 'var(--color-neutral-800)' }}></div>
+                <div className="h-4 rounded w-3/4" style={{ background: 'var(--color-neutral-800)' }}></div>
+                <div className="h-4 rounded w-1/2" style={{ background: 'var(--color-neutral-800)' }}></div>
               </div>
             </div>
           </div>
         ) : data ? (
-          <div className="modern-card p-4" style={{ opacity: 1, transform: 'none' }}>
+          <div className="card p-4">
             <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
               {/* Left Side - Sprite, Types, Controls */}
               <div className="flex-shrink-0 lg:w-48 w-full">
@@ -465,50 +397,43 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                 
                 {/* Types under sprite */}
                 <div className="text-center mb-4">
-                  <div className="flex gap-2 justify-center">
+                  <div className="flex gap-2 justify-center flex-wrap">
                     {getCurrentForm().types.map((typeInfo, index) => (
-                      <Image
-                        key={index}
-                        src={getTypeIcon(typeInfo.type.name as any)}
-                        alt={typeInfo.type.name}
-                        width={70}
-                        height={70}
-                        className="object-contain"
-                        draggable={false}
-                        title={typeInfo.type.name}
-                      />
+                      <TypePill key={index} type={typeInfo.type.name as any} />
                     ))}
                   </div>
                 </div>
 
                 {/* Shiny and Cries buttons */}
                 <div className="flex gap-2 justify-center mb-4">
-                  <button
+                  <Button
+                    variant={showShiny ? 'primary' : 'secondary'}
                     onClick={() => setShowShiny(!showShiny)}
-                    className={`modern-button text-xs px-3 py-2 ${showShiny ? 'bg-yellow-500' : ''}`}
                     disabled={!getAllForms()[selectedForm]?.shiny}
                   >
-                    ✨ {showShiny ? 'Normal' : 'Shiny'}
-                  </button>
-                  <button
+                    <Sparkle size={14} weight={showShiny ? 'fill' : 'regular'} />
+                    {showShiny ? 'Normal' : 'Shiny'}
+                  </Button>
+                  <Button
+                    variant={audioPlaying ? 'primary' : 'secondary'}
                     onClick={playPokemonCry}
-                    className={`modern-button text-xs px-3 py-2 ${audioPlaying ? 'bg-blue-500' : ''}`}
                     disabled={!getCurrentForm()?.cries?.latest || audioPlaying}
                   >
-                    🔊 Cry
-                  </button>
+                    <SpeakerHigh size={14} />
+                    Cry
+                  </Button>
                 </div>
 
                 {/* Forms Variety Selections */}
                 {getAllForms().length > 1 && (
                   <div className="mb-4">
-                    <h4 className="text-sm font-bold mb-2 text-center" style={{ color: 'var(--text-primary)' }}>Forms</h4>
+                    <h4 className="text-sm font-medium mb-2 text-center" style={{ color: 'var(--color-text)' }}>Forms</h4>
                     <div className="grid grid-cols-2 lg:grid-cols-1 gap-1">
                       {getAllForms().map((form, index) => (
                         <button
                           key={index}
                           onClick={() => setSelectedForm(index)}
-                          className={`text-xs px-3 py-2 rounded text-center lg:text-left ${selectedForm === index ? 'bg-blue-600' : 'bg-gray-600'}`}
+                          className={cn('nx-tab justify-center lg:justify-start text-xs', selectedForm === index && 'nx-tab-active')}
                         >
                           {form.name}
                         </button>
@@ -576,7 +501,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                     </div>
                   </div>
                   {getFlavorText() && (
-                    <div className="border-t border-gray-600 pt-3">
+                    <div className="pt-3" style={{ borderTop: '1px solid var(--color-neutral-800)' }}>
                       <h4 className="text-xs font-semibold mb-1" style={{ color: 'var(--text-secondary)' }}>Description:</h4>
                       <p className="text-xs leading-tight" style={{ color: 'var(--text-primary)' }}>
                         {getFlavorText()}
@@ -586,7 +511,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                 </div>
 
                 {/* Separator Line */}
-                <hr className="border-gray-600 my-4" />
+                <div className="hr" />
 
                 {/* Abilities and Species Info Row */}
                 <div className="grid md:grid-cols-2 gap-4 mb-4">
@@ -599,41 +524,39 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                         const isExpanded = expandedAbility === abilityInfo.ability.name
                         
                         return (
-                          <div key={index} className="border border-gray-600 rounded-lg overflow-hidden">
+                          <div key={index} className="rounded-md overflow-hidden" style={{ border: '1px solid var(--color-neutral-800)' }}>
                             {/* Ability Header */}
                             <button
                               onClick={() => setExpandedAbility(isExpanded ? null : abilityInfo.ability.name)}
-                              className="w-full flex items-center justify-between p-3 hover:bg-gray-700 transition-colors"
-                              style={{ backgroundColor: isExpanded ? 'var(--bg-secondary)' : 'transparent' }}
+                              className="w-full flex items-center justify-between p-3 transition-colors"
+                              style={{ backgroundColor: isExpanded ? 'var(--color-neutral-900)' : 'transparent' }}
                             >
                               <div className="flex items-center gap-3">
                                 <span className="capitalize text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
                                   {abilityData?.displayName || abilityInfo.ability.name.replace('-', ' ')}
                                 </span>
                                 {abilityInfo.is_hidden && (
-                                  <span className="text-xs px-2 py-1 bg-purple-600 text-white rounded">Hidden</span>
+                                  <span className="tag tag-accent">Hidden</span>
                                 )}
                               </div>
                               <div className="flex items-center gap-2">
                                 {abilityData && (
-                                  <span className="text-xs px-2 py-1 bg-blue-600 text-white rounded">
+                                  <span className="tag tag-neutral">
                                     Gen {abilityData.generation?.replace('generation-', '').toUpperCase() || '?'}
                                   </span>
                                 )}
-                                <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                                  {isExpanded ? '▼' : '▶'}
-                                </span>
+                                {isExpanded ? <CaretUp size={14} color="var(--color-neutral-400)" /> : <CaretDown size={14} color="var(--color-neutral-400)" />}
                               </div>
                             </button>
-                            
+
                             {/* Expanded Content */}
                             {isExpanded && abilityData && (
-                              <div className="p-3 pt-0 border-t border-gray-600">
+                              <div className="p-3 pt-0" style={{ borderTop: '1px solid var(--color-neutral-800)' }}>
                                 {/* Short Effect */}
                                 {abilityData.shortEffect && (
                                   <div className="mb-3">
                                     <h5 className="text-xs font-semibold mb-1" style={{ color: 'var(--text-secondary)' }}>Quick Summary:</h5>
-                                    <p className="text-sm" style={{ color: 'var(--accent-color)' }}>
+                                    <p className="text-sm" style={{ color: 'var(--color-accent-300)' }}>
                                       {abilityData.shortEffect}
                                     </p>
                                   </div>
@@ -673,7 +596,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                             
                             {/* Fallback if no ability data */}
                             {isExpanded && !abilityData && (
-                              <div className="p-3 pt-0 border-t border-gray-600">
+                              <div className="p-3 pt-0" style={{ borderTop: '1px solid var(--color-neutral-800)' }}>
                                 <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
                                   Detailed ability information not available.
                                 </p>
@@ -702,7 +625,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                 </div>
 
                 {/* Separator Line */}
-                <hr className="border-gray-600 my-4" />
+                <div className="hr" />
 
                 {/* Breeding Information Section */}
                 <div className="grid md:grid-cols-2 gap-4 mb-4">
@@ -716,15 +639,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                           <h4 className="text-xs font-semibold mb-1" style={{ color: 'var(--text-secondary)' }}>Egg Groups:</h4>
                           <div className="flex flex-wrap gap-1">
                             {getBreedingData()!.eggGroups.map((group, index) => (
-                              <span
-                                key={index}
-                                className="text-xs px-2 py-1 rounded"
-                                style={{ 
-                                  backgroundColor: '#2c3e50',
-                                  color: '#ecf0f1',
-                                  border: '1px solid #34495e'
-                                }}
-                              >
+                              <span key={index} className="tag tag-neutral">
                                 {formatEggGroup(group)}
                               </span>
                             ))}
@@ -734,13 +649,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                         {/* Growth Rate */}
                         <div className="flex justify-between items-center py-1">
                           <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Growth Rate:</span>
-                          <span 
-                            className="text-xs font-bold px-2 py-1 rounded capitalize"
-                            style={{ 
-                              backgroundColor: getGrowthRateColor(getBreedingData()!.growthRate || ''),
-                              color: 'white'
-                            }}
-                          >
+                          <span className="tag tag-accent capitalize">
                             {getBreedingData()!.growthRate?.replace('-', ' ') || 'Unknown'}
                           </span>
                         </div>
@@ -756,36 +665,26 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                   <div>
                     <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Breeding Details</h3>
                     <div className="space-y-1">
-                      <div className="flex justify-between py-1">
-                        <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Catch Difficulty:</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold">{data.species.capture_rate}/255</span>
-                          <div className="w-12 bg-gray-600 rounded-full h-1">
-                            <div 
-                              className="bg-gradient-to-r from-red-500 to-green-500 h-1 rounded-full"
-                              style={{ width: `${(data.species.capture_rate / 255) * 100}%` }}
-                            ></div>
-                          </div>
+                      <div className="flex items-center gap-3 py-1">
+                        <span className="text-xs font-semibold flex-shrink-0" style={{ color: 'var(--text-secondary)' }}>Catch Difficulty:</span>
+                        <div className="flex-1">
+                          <ProgressBar value={data.species.capture_rate} max={255} />
                         </div>
+                        <span className="text-xs font-bold flex-shrink-0">{data.species.capture_rate}/255</span>
                       </div>
-                      <div className="flex justify-between py-1">
-                        <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Friendship:</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold">{data.species.base_happiness}/255</span>
-                          <div className="w-12 bg-gray-600 rounded-full h-1">
-                            <div 
-                              className="bg-gradient-to-r from-red-500 to-green-500 h-1 rounded-full"
-                              style={{ width: `${((data.species.base_happiness || 0) / 255) * 100}%` }}
-                            ></div>
-                          </div>
+                      <div className="flex items-center gap-3 py-1">
+                        <span className="text-xs font-semibold flex-shrink-0" style={{ color: 'var(--text-secondary)' }}>Friendship:</span>
+                        <div className="flex-1">
+                          <ProgressBar value={data.species.base_happiness || 0} max={255} />
                         </div>
+                        <span className="text-xs font-bold flex-shrink-0">{data.species.base_happiness}/255</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Separator Line */}
-                <hr className="border-gray-600 my-4" />
+                <div className="hr" />
 
                 {/* Base Stats Section - Radar Chart */}
                 <div className="mb-4">
@@ -794,7 +693,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                 </div>
 
                 {/* Separator Line */}
-                <hr className="border-gray-600 my-4" />
+                <div className="hr" />
 
                 {/* Evolution Chain Section */}
                 {data.evolutionChain && (
@@ -809,7 +708,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                 )}
 
                 {/* Separator Line */}
-                <hr className="border-gray-600 my-4" />
+                <div className="hr" />
 
                 {/* Moves Section */}
                 <div>
@@ -819,23 +718,23 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                     style={{ color: 'var(--text-primary)' }}
                   >
                     <span>Moves ({getCurrentForm().moves.length})</span>
-                    <span>{movesExpanded ? '▼' : '▶'}</span>
+                    {movesExpanded ? <CaretUp size={16} color="var(--color-neutral-400)" /> : <CaretDown size={16} color="var(--color-neutral-400)" />}
                   </button>
                   {movesExpanded && (
                     <>
                       {/* Desktop Table Layout */}
-                      <div className="hidden md:block border border-gray-600 rounded-lg overflow-hidden">
+                      <div className="hidden md:block rounded-md overflow-hidden" style={{ border: '1px solid var(--color-neutral-800)' }}>
                         <div className="max-h-96 overflow-y-auto overflow-x-auto">
                           <table className="w-full text-xs min-w-full">
-                            <thead className="sticky top-0 bg-gray-800 z-10 shadow-lg">
-                              <tr className="border-b-2 border-gray-600">
-                                <th className="text-left p-3 font-semibold bg-gray-800 whitespace-nowrap min-w-32" style={{ color: 'var(--text-primary)' }}>Move</th>
-                                <th className="text-center p-3 font-semibold bg-gray-800 whitespace-nowrap min-w-20" style={{ color: 'var(--text-primary)' }}>Type</th>
-                                <th className="text-center p-3 font-semibold bg-gray-800 whitespace-nowrap min-w-24" style={{ color: 'var(--text-primary)' }}>Category</th>
-                                <th className="text-center p-3 font-semibold bg-gray-800 whitespace-nowrap min-w-16" style={{ color: 'var(--text-primary)' }}>Power</th>
-                                <th className="text-center p-3 font-semibold bg-gray-800 whitespace-nowrap min-w-12" style={{ color: 'var(--text-primary)' }}>PP</th>
-                                <th className="text-center p-3 font-semibold bg-gray-800 whitespace-nowrap min-w-16" style={{ color: 'var(--text-primary)' }}>Acc</th>
-                                <th className="text-left p-3 font-semibold bg-gray-800 min-w-48" style={{ color: 'var(--text-primary)' }}>Effect</th>
+                            <thead className="sticky top-0 z-10" style={{ background: 'var(--color-surface)' }}>
+                              <tr style={{ borderBottom: '2px solid var(--color-neutral-800)' }}>
+                                <th className="text-left p-3 font-semibold whitespace-nowrap min-w-32" style={{ color: 'var(--text-primary)' }}>Move</th>
+                                <th className="text-center p-3 font-semibold whitespace-nowrap min-w-20" style={{ color: 'var(--text-primary)' }}>Type</th>
+                                <th className="text-center p-3 font-semibold whitespace-nowrap min-w-24" style={{ color: 'var(--text-primary)' }}>Category</th>
+                                <th className="text-center p-3 font-semibold whitespace-nowrap min-w-16" style={{ color: 'var(--text-primary)' }}>Power</th>
+                                <th className="text-center p-3 font-semibold whitespace-nowrap min-w-12" style={{ color: 'var(--text-primary)' }}>PP</th>
+                                <th className="text-center p-3 font-semibold whitespace-nowrap min-w-16" style={{ color: 'var(--text-primary)' }}>Acc</th>
+                                <th className="text-left p-3 font-semibold min-w-48" style={{ color: 'var(--text-primary)' }}>Effect</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -855,7 +754,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                                 .map(({ moveName, moveData }, index) => (
                                   <tr 
                                     key={index} 
-                                    className="border-b border-gray-600 hover:bg-gray-700 transition-colors"
+                                    style={{ borderBottom: "1px solid var(--color-neutral-800)" }}
                                   >
                                     <td className="p-3 whitespace-nowrap">
                                       <div className="capitalize font-medium text-white text-sm">
@@ -935,7 +834,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                           </table>
                         </div>
                         
-                        <div className="flex justify-center items-center p-2 bg-gray-800 text-xs border-t border-gray-600">
+                        <div className="flex justify-center items-center p-2 text-xs" style={{ background: "var(--color-surface)", borderTop: "1px solid var(--color-neutral-800)" }}>
                           <div style={{ color: 'var(--text-muted)' }}>
                             All {getCurrentForm().moves.length} moves • 937 in database
                           </div>
@@ -961,7 +860,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                             .map(({ moveName, moveData }, index) => (
                               <div 
                                 key={index} 
-                                className="bg-gray-700 rounded-lg p-3 border border-gray-600"
+                                className="rounded-md p-3" style={{ background: "var(--color-surface)", border: "1px solid var(--color-neutral-800)" }}
                               >
                                 {/* Move Name and Type */}
                                 <div className="flex justify-between items-start mb-2">
@@ -1022,7 +921,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
 
                                 {/* Effect */}
                                 {moveData?.shortEffect && (
-                                  <div className="mt-2 pt-2 border-t border-gray-600">
+                                  <div className="mt-2 pt-2" style={{ borderTop: "1px solid var(--color-neutral-800)" }}>
                                     <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
                                       {moveData.shortEffect.length > 100 
                                         ? `${moveData.shortEffect.substring(0, 100)}...`
@@ -1046,7 +945,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                             ))}
                         </div>
                         
-                        <div className="flex justify-center items-center p-3 bg-gray-800 text-xs border border-gray-600 rounded-lg mt-2">
+                        <div className="flex justify-center items-center p-3 text-xs rounded-md mt-2" style={{ background: "var(--color-surface)", border: "1px solid var(--color-neutral-800)" }}>
                           <div style={{ color: 'var(--text-muted)' }}>
                             All {getCurrentForm().moves.length} moves • 937 in database
                           </div>

@@ -9,6 +9,7 @@ import {
   areEmbeddingsLoaded
 } from '@/lib/pokemon-hybrid-ai-search';
 import type { PokemonMetadata } from '@/types/pokemon-metadata';
+import { Sparkle, MagnifyingGlass, X } from '@phosphor-icons/react';
 import styles from './AISearchBar.module.css';
 
 interface AISearchBarProps {
@@ -102,9 +103,9 @@ export default function AISearchBar({
           {loadingState ? (
             <div className={styles.spinner} title="Loading..." />
           ) : isReady ? (
-            <span className={styles.aiIcon} title="AI Ready">✨</span>
+            <Sparkle size={20} weight="fill" aria-label="AI Ready" />
           ) : (
-            <span className={styles.searchIcon} title="Click to load AI">🔍</span>
+            <MagnifyingGlass size={20} aria-label="Click to load AI" />
           )}
         </div>
 
@@ -126,7 +127,7 @@ export default function AISearchBar({
             disabled={isSearching}
             title="Clear search"
           >
-            ✕
+            <X size={14} />
           </button>
         )}
 
@@ -154,7 +155,7 @@ export default function AISearchBar({
 
       {isReady && !query && !isSearching && (
         <div className={styles.hint}>
-          ✨ AI Search Ready! Try natural language:
+          AI Search Ready! Try natural language:
           <ul>
             <li>&quot;strong fire starter Pokemon&quot;</li>
             <li>&quot;fast electric types&quot;</li>

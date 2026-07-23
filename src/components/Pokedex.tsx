@@ -2,11 +2,9 @@
 
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import Image from 'next/image'
 import { Pokemon, GenerationNumber } from '@/types/pokemon'
 import { pokemonAPI } from '@/lib/pokemon-api'
 import GenerationSelector from './GenerationSelector'
-import { getTypeIcon } from '@/lib/type-effectiveness'
 import PokemonImage from './PokemonImage'
 import PokemonSkeleton from './PokemonSkeleton'
 import PokemonSearchBar from './PokemonSearchBar'
@@ -15,6 +13,9 @@ import AISearchBar from './AISearchBar'
 import { usePokemonFilter } from '@/hooks/usePokemonFilter'
 import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import type { PokemonMetadata } from '@/types/pokemon-metadata'
+import { TypePill } from '@/components/ui/TypePill'
+import { Button } from '@/components/ui/Button'
+import { Sparkle, MagnifyingGlass } from '@phosphor-icons/react'
 
 
 export default function Pokedex() {
@@ -690,22 +691,20 @@ export default function Pokedex() {
     return (
       <div
         key={pokemonData.id}
-        className="modern-card pokemon-card p-1 sm:p-3 text-center cursor-pointer relative"
-        style={{ background: 'var(--surface-bg)', transform: 'none', opacity: 1 }}
+        className="nx-pokecard p-1 sm:p-4"
         onClick={() => handlePokemonClick(pokemonData.id)}
         data-pokemon-id={pokemonData.id}
       >
-        {showShiny && hasShiny && (
-          <div className="absolute top-1 right-1 text-xs">✨</div>
+        {showShiny && (
+          <div className="text-right mb-0.5">
+            <Sparkle size={12} color={hasShiny ? 'var(--color-accent)' : 'var(--color-neutral-700)'} weight={hasShiny ? 'fill' : 'regular'} />
+          </div>
         )}
-        {showShiny && !hasShiny && (
-          <div className="absolute top-1 right-1 text-xs opacity-30">❌</div>
-        )}
-        
-        <div className="text-xs mb-1 sm:mb-2" style={{ color: 'var(--text-muted)' }}>
+
+        <div className="text-xs mb-1 sm:mb-2" style={{ color: 'var(--color-neutral-400)' }}>
           #{pokemonData.id.toString().padStart(3, '0')}
         </div>
-        
+
         <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-1 sm:mb-2 relative">
           <PokemonImage
             pokemon={pokemonData}
@@ -715,23 +714,14 @@ export default function Pokedex() {
             key={`pokemon-image-${pokemonData.id}-${showShiny}-stable`} // Stable key to prevent resets
           />
         </div>
-        
-        <div className="text-xs font-bold mb-1 sm:mb-2 capitalize" style={{ color: 'var(--text-primary)' }}>
+
+        <div className="text-xs font-medium mb-1.5 sm:mb-2 capitalize" style={{ color: 'var(--color-text)' }}>
           {pokemonData.name}
         </div>
-        
+
         <div className="flex gap-1 justify-center flex-wrap">
           {pokemonData.types.map((typeInfo, typeIndex) => (
-            <Image
-              key={typeIndex}
-              src={getTypeIcon(typeInfo.type.name as any)}
-              alt={typeInfo.type.name}
-              width={40}
-              height={40}
-              className="object-contain sm:w-14 sm:h-14"
-              title={typeInfo.type.name}
-              draggable={false}
-            />
+            <TypePill key={typeIndex} type={typeInfo.type.name as any} />
           ))}
         </div>
       </div>
@@ -751,23 +741,24 @@ export default function Pokedex() {
   return (
     <>
       {/* Floating Shiny Toggle */}
-      <button
+      <Button
+        variant={showShiny ? 'primary' : 'secondary'}
         onClick={() => setShowShiny(!showShiny)}
-        className={`floating-shiny-toggle ${showShiny ? 'active' : ''}`}
         title={showShiny ? 'Switch to Normal Pokemon' : 'Switch to Shiny Pokemon'}
+        style={{ position: 'fixed', left: '20px', bottom: '20px', zIndex: 1000, borderRadius: '50%', width: 56, height: 56, padding: 0 }}
       >
-        ✨
-      </button>
-      
-      <div className="modern-card p-1 sm:p-4">
+        <Sparkle size={22} weight={showShiny ? 'fill' : 'regular'} />
+      </Button>
+
+      <div className="card p-1 sm:p-4">
       <div className="flex justify-between items-center mb-2 sm:mb-6">
-        <button
-          onClick={() => setShowPokedex(false)}
-          className="modern-button text-xs px-3 py-2"
-        >
+        <Button variant="ghost" onClick={() => setShowPokedex(false)}>
           ← Back
-        </button>
-        <h2 className="text-lg sm:text-xl font-bold gradient-text">
+        </Button>
+        <h2
+          className="text-lg sm:text-xl"
+          style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}
+        >
           Generation {selectedGeneration}
         </h2>
         <div className="w-16"></div>
@@ -785,30 +776,34 @@ export default function Pokedex() {
         <div className="space-y-3 mb-4 sm:space-y-4 sm:mb-6">
           {/* Search Mode Toggle */}
           <div className="flex items-center justify-center gap-3 mb-4">
-            <span className={`text-sm font-bold ${!useAISearch ? 'text-accent' : 'text-gray-500'}`}>
-              🔍 Classic
+            <span
+              className="text-sm font-medium flex items-center gap-1.5"
+              style={{ color: !useAISearch ? 'var(--color-accent-300)' : 'var(--color-neutral-500)' }}
+            >
+              <MagnifyingGlass size={14} /> Classic
             </span>
             <button
               onClick={() => setUseAISearch(!useAISearch)}
-              className="relative inline-flex h-8 w-16 items-center rounded-full transition-colors duration-300"
+              className="relative inline-flex h-7 w-14 items-center rounded-full transition-colors duration-300"
               style={{
-                backgroundColor: useAISearch ? 'var(--accent-color)' : 'var(--surface-bg)',
-                border: '3px solid var(--accent-color)',
-                boxShadow: '3px 3px 0 rgba(0, 0, 0, 0.3)'
+                backgroundColor: useAISearch ? 'var(--color-accent-800)' : 'var(--color-neutral-800)',
+                border: '1px solid var(--color-accent)'
               }}
               title={useAISearch ? 'Switch to Classic Search' : 'Switch to Smart Search'}
             >
               <span
-                className="inline-block h-6 w-6 transform rounded-full transition-transform duration-300"
+                className="inline-block h-5 w-5 transform rounded-full transition-transform duration-300"
                 style={{
-                  backgroundColor: useAISearch ? 'white' : 'var(--accent-color)',
-                  transform: useAISearch ? 'translateX(32px)' : 'translateX(2px)',
-                  boxShadow: '2px 2px 0 rgba(0, 0, 0, 0.2)'
+                  backgroundColor: 'var(--color-accent)',
+                  transform: useAISearch ? 'translateX(28px)' : 'translateX(3px)',
                 }}
               />
             </button>
-            <span className={`text-sm font-bold ${useAISearch ? 'text-accent' : 'text-gray-500'}`}>
-              ✨ AI
+            <span
+              className="text-sm font-medium flex items-center gap-1.5"
+              style={{ color: useAISearch ? 'var(--color-accent-300)' : 'var(--color-neutral-500)' }}
+            >
+              <Sparkle size={14} /> AI
             </span>
           </div>
 
@@ -869,21 +864,21 @@ export default function Pokedex() {
 
       {/* Metadata unavailable warning */}
       {!isMetadataAvailable && (
-        <div className="modern-card p-4 mb-4" style={{ background: 'var(--surface-bg)', borderColor: '#fbbf24' }}>
-          <div className="text-sm" style={{ color: '#fbbf24' }}>
-            ⚠️ Search and filters require Pokemon metadata. Run: <code>node scripts/fetch-pokemon-metadata.js</code>
+        <div className="card p-4 mb-4">
+          <div className="text-sm" style={{ color: 'var(--error-gradient)' }}>
+            Search and filters require Pokemon metadata. Run: <code>node scripts/fetch-pokemon-metadata.js</code>
           </div>
         </div>
       )}
 
       {error ? (
-        <div className="text-center py-8 text-red-400">
+        <div className="text-center py-8" style={{ color: 'var(--error-gradient)' }}>
           {error}
         </div>
       ) : !isMetadataAvailable ? (
         <div className="text-center py-8">
           <div className="text-sm" style={{ color: 'var(--text-muted)' }}>
-            ⚠️ Pokemon metadata not available. Please run the metadata fetch script.
+            Pokemon metadata not available. Please run the metadata fetch script.
           </div>
         </div>
       ) : loading ? (
@@ -892,7 +887,6 @@ export default function Pokedex() {
         </div>
       ) : (useAISearch ? aiFilteredPokemon.length === 0 : pokemon.length === 0) ? (
         <div className="text-center py-8">
-          <div className="text-lg mb-2">😔</div>
           <div className="text-sm" style={{ color: 'var(--text-muted)' }}>
             {useAISearch ? 'No Pokemon found with AI search' : 'No Pokemon found with current filters'}
           </div>
@@ -906,14 +900,9 @@ export default function Pokedex() {
           {/* Load More Button - only show in classic mode */}
           {!useAISearch && hasMorePages && (
             <div className="text-center py-6">
-              <button
-                onClick={loadMorePokemon}
-                disabled={isLoadingMore}
-                className="modern-button px-6 py-3 text-sm font-semibold disabled:opacity-50"
-                style={{ minWidth: '120px' }}
-              >
+              <Button onClick={loadMorePokemon} disabled={isLoadingMore} style={{ minWidth: 120 }}>
                 {isLoadingMore ? 'Loading...' : 'Load More'}
-              </button>
+              </Button>
             </div>
           )}
 
@@ -923,7 +912,7 @@ export default function Pokedex() {
               Showing {useAISearch ? aiFilteredPokemon.length : pokemon.length} {useAISearch ? 'results' : `of ${totalResults} Pokemon`}
               {hasMorePages && (
                 <div className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
-                  📱 Loading {itemsPerLoad} at a time for better performance
+                  Loading {itemsPerLoad} at a time for better performance
                 </div>
               )}
             </div>

@@ -1,6 +1,7 @@
 'use client'
 
-import { analyzePokemonTypes, getTypeColor, PokemonTypeName, EffectivenessMultiplier } from '@/lib/type-effectiveness'
+import { analyzePokemonTypes, PokemonTypeName, EffectivenessMultiplier } from '@/lib/type-effectiveness'
+import { TypePill } from '@/components/ui/TypePill'
 
 interface PokemonTypeEffectivenessProps {
   types: PokemonTypeName[]
@@ -22,16 +23,10 @@ export default function PokemonTypeEffectiveness({ types }: PokemonTypeEffective
   }
 
   const TypeChip = ({ type, multiplier }: { type: PokemonTypeName; multiplier: EffectivenessMultiplier }) => (
-    <div
-      className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm text-white min-w-[110px]"
-      style={{
-        backgroundColor: getTypeColor(type),
-        boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
-      }}
-    >
-      <span className="capitalize">{type}</span>
+    <div className="inline-flex items-center gap-1.5">
+      <TypePill type={type} />
       {multiplier !== 0 && (
-        <span className="text-base">
+        <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
           {getMultiplierLabel(multiplier)}
         </span>
       )}

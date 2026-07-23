@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Pokemon } from '@/types/pokemon'
 import { pokemonAPI } from '@/lib/pokemon-api'
-import { getTypeIcon } from '@/lib/type-effectiveness'
+import { TypePill } from '@/components/ui/TypePill'
+import { cn } from '@/lib/cn'
 
 
 interface QuizCardProps {
@@ -79,51 +80,50 @@ export default function QuizCard({
   }
 
   return (
-    <div className="modern-card max-w-2xl mx-auto">
+    <div className="card max-w-2xl mx-auto p-8">
       <div className="text-center mb-6">
-        <p className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>
+        <p className="text-xs mb-3" style={{ color: 'var(--text-muted)' }}>
           Question {questionNumber} of {totalQuestions}
         </p>
-        <div className="w-48 h-48 mx-auto relative mb-4 flex items-center justify-center">
+        <div
+          className="w-48 h-48 mx-auto relative mb-4 flex items-center justify-center rounded-md"
+          style={{ background: 'var(--color-bg)' }}
+        >
           {!imageLoaded ? (
             <div className="modern-spinner">
               <div className="pokeball-line"></div>
               <div className="pokeball-center"></div>
             </div>
           ) : (
-            <Image
-              src={imageUrl}
-              alt={showAnswer ? correctPokemon.name : "Pokemon silhouette"}
-              fill
-              className={`object-contain ${!showAnswer ? 'brightness-0' : ''}`}
-              priority
-              draggable={false}
-            />
+            <div className={cn('relative w-full h-full', showAnswer && 'lighten')}>
+              <Image
+                src={imageUrl}
+                alt={showAnswer ? correctPokemon.name : "Pokemon silhouette"}
+                fill
+                className={`object-contain ${!showAnswer ? 'brightness-0' : ''}`}
+                priority
+                draggable={false}
+              />
+            </div>
           )}
         </div>
-        <div className="flex justify-center gap-3 mb-4">
+        <div className="flex justify-center gap-2 mb-4">
           {correctPokemon.types.map((typeInfo, index) => (
-            <Image
-              key={index}
-              src={getTypeIcon(typeInfo.type.name as any)}
-              alt={typeInfo.type.name}
-              width={64}
-              height={64}
-              className="object-contain hover:scale-110 transition-transform duration-200"
-              title={typeInfo.type.name}
-              draggable={false}
-            />
+            <TypePill key={index} type={typeInfo.type.name as any} />
           ))}
         </div>
-        <h3 className="text-lg font-bold mb-4 gradient-text">
-          Who's that Pokemon?
+        <h3
+          className="text-lg mb-2"
+          style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}
+        >
+          Who&apos;s that Pokemon?
         </h3>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-3">
         {options.map((pokemon) => {
-          let buttonClass = "modern-button text-center capitalize"
-          
+          let buttonClass = "nx-quizopt"
+
           if (showAnswer) {
             if (pokemon.id === correctPokemon.id) {
               buttonClass += " correct"
@@ -160,13 +160,13 @@ export default function QuizCard({
 
       {showAnswer && (
         <div className="mt-6 text-center">
-          <p className="text-sm font-bold" style={{ 
-            color: selectedAnswer?.id === correctPokemon.id ? '#00b894' : '#fd79a8'
+          <p className="text-sm font-semibold" style={{
+            color: selectedAnswer?.id === correctPokemon.id ? 'var(--success-gradient)' : 'var(--error-gradient)'
           }}>
             {selectedAnswer?.id === correctPokemon.id ? 'Correct!' : 'Wrong!'}
           </p>
           <p className="text-xs mt-1" style={{ color: 'var(--text-primary)' }}>
-            It's {correctPokemon.name}!
+            It&apos;s {correctPokemon.name}!
           </p>
         </div>
       )}

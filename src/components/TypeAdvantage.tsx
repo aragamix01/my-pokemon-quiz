@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
-import { TYPE_EFFECTIVENESS, getTypeIcon, PokemonTypeName } from '@/lib/type-effectiveness'
+import { TYPE_EFFECTIVENESS, PokemonTypeName } from '@/lib/type-effectiveness'
+import { TypePill } from '@/components/ui/TypePill'
+import { Button } from '@/components/ui/Button'
+import { ShieldCheck, Sword } from '@phosphor-icons/react'
 
 export default function TypeAdvantage() {
   const [showMode, setShowMode] = useState<'weakTo' | 'superEffectiveAgainst'>('weakTo')
@@ -11,36 +13,18 @@ export default function TypeAdvantage() {
   return (
     <>
       {/* Floating Toggle Button */}
-      <button
+      <Button
+        variant="icon"
         onClick={() => setShowMode(showMode === 'weakTo' ? 'superEffectiveAgainst' : 'weakTo')}
-        className={`floating-toggle ${showMode === 'superEffectiveAgainst' ? 'active' : ''}`}
         title={showMode === 'weakTo' ? 'Switch to Offensive View' : 'Switch to Defensive View'}
-        style={{
-          position: 'fixed',
-          left: '20px',
-          bottom: '20px',
-          zIndex: 1000,
-          width: '56px',
-          height: '56px',
-          borderRadius: '50%',
-          background: showMode === 'weakTo' ? 'linear-gradient(135deg, #e74c3c, #c0392b)' : 'linear-gradient(135deg, #27ae60, #229954)',
-          border: 'none',
-          color: 'white',
-          fontSize: '24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-          transition: 'all 0.3s ease'
-        }}
+        style={{ position: 'fixed', left: '20px', bottom: '20px', zIndex: 1000 }}
       >
-        {showMode === 'weakTo' ? '🛡️' : '⚔️'}
-      </button>
+        {showMode === 'weakTo' ? <ShieldCheck size={22} /> : <Sword size={22} />}
+      </Button>
 
-      <div className="modern-card">
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold gradient-text mb-2">
+      <div className="card">
+        <div className="text-center mb-4">
+          <h2 className="text-xl mb-1" style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}>
             Type {showMode === 'weakTo' ? 'Weaknesses' : 'Advantages'}
           </h2>
           <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
@@ -48,71 +32,36 @@ export default function TypeAdvantage() {
           </p>
         </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-gray-700/30">
-              <th className="text-left p-4 text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
-                Type
-              </th>
-              <th className="text-left p-4 text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
-                {showMode === 'weakTo' ? 'Weak To' : 'Super Effective Against'}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {allTypes.map((type, index) => {
-              const typeData = TYPE_EFFECTIVENESS[type]
-              const displayTypes = showMode === 'weakTo' 
-                ? typeData.damageRelations.weakTo 
-                : typeData.damageRelations.superEffectiveAgainst
+        <div className="overflow-x-auto">
+          {allTypes.map((type) => {
+            const typeData = TYPE_EFFECTIVENESS[type]
+            const displayTypes = showMode === 'weakTo'
+              ? typeData.damageRelations.weakTo
+              : typeData.damageRelations.superEffectiveAgainst
 
-              return (
-                <tr 
-                  key={type} 
-                  className={`${index % 2 === 0 ? 'bg-gray-800/20' : ''} hover:bg-gray-700/20 transition-colors`}
-                >
-                  <td className="p-4">
-                    <div className="flex items-center">
-                      <Image
-                        src={getTypeIcon(type)}
-                        alt={type}
-                        width={72}
-                        height={72}
-                        className="object-contain"
-                        draggable={false}
-                      />
-                    </div>
-                  </td>
-                  <td className="p-4">
-                    {displayTypes.length === 0 ? (
-                      <span className="text-base" style={{ color: 'var(--text-muted)' }}>
-                        {showMode === 'weakTo' ? 'No weaknesses' : '-'}
-                      </span>
-                    ) : (
-                      <div className="flex flex-wrap gap-3">
-                        {displayTypes.map((targetType) => (
-                          <Image
-                            key={targetType}
-                            src={getTypeIcon(targetType)}
-                            alt={targetType}
-                            width={72}
-                            height={72}
-                            className="object-contain hover:scale-110 transition-transform duration-200"
-                            title={showMode === 'weakTo' ? `Weak to ${targetType}` : `Super effective against ${targetType}`}
-                            draggable={false}
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
+            return (
+              <div
+                key={type}
+                className="flex items-center gap-5 py-3"
+                style={{ borderBottom: '1px solid var(--color-neutral-800)' }}
+              >
+                <div className="w-[110px] flex-shrink-0 flex justify-center">
+                  <TypePill type={type} />
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {displayTypes.length === 0 ? (
+                    <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                      {showMode === 'weakTo' ? 'No weaknesses' : '-'}
+                    </span>
+                  ) : (
+                    displayTypes.map((targetType) => <TypePill key={targetType} type={targetType} />)
+                  )}
+                </div>
+              </div>
+            )
+          })}
+        </div>
       </div>
-    </div>
     </>
   )
 }

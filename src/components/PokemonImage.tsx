@@ -17,19 +17,21 @@ interface PokemonImageProps {
   style?: React.CSSProperties
   priority?: boolean
   onError?: () => void
+  lighten?: boolean
 }
 
-export default function PokemonImage({ 
-  pokemon, 
-  shiny = false, 
-  alt, 
-  width, 
-  height, 
+export default function PokemonImage({
+  pokemon,
+  shiny = false,
+  alt,
+  width,
+  height,
   fill = false,
   className,
   style,
   priority = false,
-  onError
+  onError,
+  lighten = true
 }: PokemonImageProps) {
   // Create a stable key for this image
   const imageKey = `${pokemon.id}-${shiny ? 'shiny' : 'normal'}`
@@ -100,11 +102,13 @@ export default function PokemonImage({
   // Show error state if all fallbacks failed
   if (hasError) {
     return (
-      <div 
-        className={`flex items-center justify-center bg-gray-200 text-gray-500 text-xs ${className || ''}`}
+      <div
+        className={`flex items-center justify-center text-xs ${className || ''}`}
         style={{
           width: fill ? '100%' : width,
           height: fill ? '100%' : height,
+          background: 'var(--color-neutral-800)',
+          color: 'var(--color-neutral-500)',
           ...style
         }}
       >
@@ -112,21 +116,22 @@ export default function PokemonImage({
       </div>
     )
   }
-  
+
   return (
-    <div className="relative" style={{ width: fill ? '100%' : width, height: fill ? '100%' : height }}>
+    <div className={lighten ? 'lighten relative' : 'relative'} style={{ width: fill ? '100%' : width, height: fill ? '100%' : height }}>
       {/* Loading skeleton */}
       {isLoading && (
-        <div 
-          className={`absolute inset-0 bg-gray-600 rounded animate-pulse ${className || ''}`}
+        <div
+          className={`absolute inset-0 rounded animate-pulse ${className || ''}`}
           style={{
-            opacity: 0.3,
+            background: 'var(--color-neutral-800)',
+            opacity: 0.5,
             zIndex: 1,
             ...style
           }}
         />
       )}
-      
+
       {/* Actual image */}
       <Image
         src={currentSrc}

@@ -3,6 +3,7 @@
 import { useState, useEffect, use } from 'react'
 import { useRouter } from 'next/navigation'
 import QuizCard from '@/components/QuizCard'
+import { Button } from '@/components/ui/Button'
 import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import { generateConfusingAnswers } from '@/lib/pokemon-similarity'
 import { Pokemon, GenerationNumber, QuizQuestion } from '@/types/pokemon'
@@ -158,7 +159,10 @@ export default function QuizPage({ params }: QuizPageProps) {
     return (
       <div className="text-center">
         <div className="modern-card">
-          <h2 className="text-xl font-bold mb-4 gradient-text">
+          <h2
+            className="text-xl mb-4"
+            style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}
+          >
             Loading {generation === null ? 'All Generations' : `Gen ${generation}`} Pokemon...
           </h2>
           <div className="flex flex-col items-center space-y-4">
@@ -185,10 +189,13 @@ export default function QuizPage({ params }: QuizPageProps) {
     return (
       <div className="text-center">
         <div className="modern-card">
-          <h2 className="text-2xl font-bold mb-4 gradient-text">
+          <h2
+            className="text-2xl mb-4"
+            style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}
+          >
             Quiz Complete!
           </h2>
-          <div className="text-4xl mb-4">
+          <div className="text-4xl mb-4" style={{ color: 'var(--color-accent)' }}>
             {percentage >= 80 ? '★★★' : percentage >= 60 ? '★★☆' : '★☆☆'}
           </div>
           <p className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
@@ -198,18 +205,8 @@ export default function QuizPage({ params }: QuizPageProps) {
             {percentage}% correct
           </p>
           <div className="flex gap-4 justify-center">
-            <button
-              onClick={resetGame}
-              className="modern-button"
-            >
-              Play Again
-            </button>
-            <button
-              onClick={() => router.push('/?section=quiz')}
-              className="modern-button"
-            >
-              Menu
-            </button>
+            <Button onClick={resetGame}>Play Again</Button>
+            <Button variant="secondary" onClick={() => router.push('/?section=quiz')}>Menu</Button>
           </div>
         </div>
       </div>
@@ -220,15 +217,12 @@ export default function QuizPage({ params }: QuizPageProps) {
     return (
       <div className="text-center">
         <div className="modern-card">
-          <h2 className="text-xl font-bold" style={{ color: '#fd79a8' }}>
+          <h2 className="text-xl font-bold" style={{ color: 'var(--error-gradient)' }}>
             Failed to load questions
           </h2>
-          <button
-            onClick={() => router.push('/?section=quiz')}
-            className="pixel-button mt-4"
-          >
+          <Button onClick={() => router.push('/?section=quiz')} className="mt-4">
             Go Back
-          </button>
+          </Button>
         </div>
       </div>
     )
@@ -238,12 +232,9 @@ export default function QuizPage({ params }: QuizPageProps) {
     <div>
       <div className="text-center mb-6">
         <div className="flex justify-between items-center max-w-2xl mx-auto">
-          <button
-            onClick={() => router.push('/?section=quiz')}
-            className="modern-button text-xs px-3 py-2"
-          >
+          <Button variant="ghost" onClick={() => router.push('/?section=quiz')}>
             ← Menu
-          </button>
+          </Button>
           <div className="text-sm" style={{ color: 'var(--text-primary)' }}>
             <span className="font-bold">{generation === null ? 'All Generations' : `Gen ${generation}`}</span>
             <span className="mx-2">|</span>
