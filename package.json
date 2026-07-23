@@ -6,7 +6,12 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "data:check": "node scripts/pipeline.js check",
+    "data:refresh": "node scripts/pipeline.js data",
+    "data:sprites": "node scripts/pipeline.js sprites",
+    "data:embeddings": "node scripts/pipeline.js embeddings",
+    "data:all": "node scripts/pipeline.js all"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
