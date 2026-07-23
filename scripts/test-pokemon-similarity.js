@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Load embeddings
-const embeddingsPath = path.join(__dirname, '../src/data/pokemon-embeddings.json');
+const embeddingsPath = path.join(__dirname, '../public/data/pokemon-embeddings.json');
 const embeddingsData = JSON.parse(fs.readFileSync(embeddingsPath, 'utf-8'));
 
 // Load metadata

@@ -1,4 +1,3 @@
-import embeddingsData from '@/data/pokemon-embeddings.json'
 import { pokemonMetadataService } from './pokemon-metadata'
 
 export interface SimilarPokemon {
@@ -7,28 +6,36 @@ export interface SimilarPokemon {
   similarity: number
 }
 
-// Cache for embeddings to avoid reloading
-let embeddingsCache: Map<string, number[]> | null = null
+// Lazy-loaded, runtime-fetched embeddings (single copy served from public/data).
+// A promise cache dedupes concurrent callers and survives across quiz questions.
+let embeddingsPromise: Promise<Map<string, number[]>> | null = null
 
 /**
- * Load embeddings from the local JSON database
+ * Load embeddings from the public JSON asset (fetched once, cached).
  */
-function loadEmbeddings(): Map<string, number[]> {
-  if (embeddingsCache) {
-    return embeddingsCache
+function loadEmbeddings(): Promise<Map<string, number[]>> {
+  if (!embeddingsPromise) {
+    embeddingsPromise = fetch('/data/pokemon-embeddings.json')
+      .then(res => {
+        if (!res.ok) throw new Error(`Failed to fetch embeddings: ${res.status}`)
+        return res.json()
+      })
+      .then(data => {
+        const embeddings = new Map<string, number[]>()
+        if (data.embeddings) {
+          Object.entries(data.embeddings).forEach(([pokemonId, embedding]) => {
+            embeddings.set(pokemonId, embedding as number[])
+          })
+        }
+        return embeddings
+      })
+      .catch(err => {
+        // Reset so a later call can retry after a transient failure.
+        embeddingsPromise = null
+        throw err
+      })
   }
-
-  const embeddings = new Map<string, number[]>()
-  const data = embeddingsData as any
-
-  if (data.embeddings) {
-    Object.entries(data.embeddings).forEach(([pokemonId, embedding]) => {
-      embeddings.set(pokemonId, embedding as number[])
-    })
-  }
-
-  embeddingsCache = embeddings
-  return embeddings
+  return embeddingsPromise
 }
 
 /**
@@ -66,13 +73,13 @@ function cosineSimilarity(vectorA: number[], vectorB: number[]): number {
  * @param excludeGeneration - Optional generation to exclude from results
  * @returns Array of similar Pokemon sorted by similarity (highest first)
  */
-export function findSimilarPokemon(
+export async function findSimilarPokemon(
   targetPokemonId: number,
   limit: number = 10,
   excludeGeneration?: number
-): SimilarPokemon[] {
+): Promise<SimilarPokemon[]> {
   try {
-    const embeddings = loadEmbeddings()
+    const embeddings = await loadEmbeddings()
     const targetEmbedding = embeddings.get(String(targetPokemonId))
 
     if (!targetEmbedding) {
@@ -128,15 +135,15 @@ export function findSimilarPokemon(
  * @param excludeGeneration - Optional generation to exclude (for fairness)
  * @returns Array of Pokemon IDs for wrong answers
  */
-export function generateConfusingAnswers(
+export async function generateConfusingAnswers(
   correctPokemonId: number,
   totalOptions: number = 4,
   excludeGeneration?: number
-): number[] {
+): Promise<number[]> {
   const numWrongAnswers = totalOptions - 1
 
   // Find similar Pokemon - request more than needed to handle any filtering
-  const similarPokemon = findSimilarPokemon(
+  const similarPokemon = await findSimilarPokemon(
     correctPokemonId,
     Math.max(numWrongAnswers * 2, 20),
     excludeGeneration
@@ -157,9 +164,9 @@ export function generateConfusingAnswers(
  * Get similarity score between two Pokemon
  * Useful for displaying similarity information
  */
-export function getPokemonSimilarity(pokemonIdA: number, pokemonIdB: number): number {
+export async function getPokemonSimilarity(pokemonIdA: number, pokemonIdB: number): Promise<number> {
   try {
-    const embeddings = loadEmbeddings()
+    const embeddings = await loadEmbeddings()
     const embeddingA = embeddings.get(String(pokemonIdA))
     const embeddingB = embeddings.get(String(pokemonIdB))
 
@@ -177,9 +184,9 @@ export function getPokemonSimilarity(pokemonIdA: number, pokemonIdB: number): nu
 /**
  * Debug helper: Get detailed similarity scores for a Pokemon against others
  */
-export function debugSimilarities(
+export async function debugSimilarities(
   pokemonId: number,
   topN: number = 10
-): Array<{ id: number; name: string; similarity: number }> {
+): Promise<Array<{ id: number; name: string; similarity: number }>> {
   return findSimilarPokemon(pokemonId, topN)
 }

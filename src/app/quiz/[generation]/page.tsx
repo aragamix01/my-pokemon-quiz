@@ -39,7 +39,7 @@ export default function QuizPage({ params }: QuizPageProps) {
     generateQuestions()
   }, [generation])
 
-  const generateQuestions = () => {
+  const generateQuestions = async () => {
     setLoading(true)
     try {
       // Get metadata based on generation (null = all generations)
@@ -100,7 +100,7 @@ export default function QuizPage({ params }: QuizPageProps) {
         const correctPokemon = shuffledPokemon[i]
 
         // Use AI-powered similarity to generate confusing answers
-        const confusingAnswerIds = generateConfusingAnswers(
+        const confusingAnswerIds = await generateConfusingAnswers(
           correctPokemon.id,
           4, // Total options = 4
           generation || undefined // Exclude same generation if specified

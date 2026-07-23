@@ -8,10 +8,6 @@ const { pipeline } = require('@xenova/transformers');
 const fs = require('fs');
 const path = require('path');
 
-// Load Pokemon metadata
-const metadataPath = path.join(__dirname, '../src/data/pokemon-metadata.json');
-const pokemonList = JSON.parse(fs.readFileSync(metadataPath, 'utf-8'));
-
 /**
  * Fetch Pokemon species data from PokeAPI to get flavor text descriptions
  */
@@ -137,6 +133,11 @@ function sleep(ms) {
 
 async function generateEmbeddings() {
   console.log('🚀 Starting Pokemon embeddings generation with REAL descriptions...');
+
+  // Load Pokemon metadata (read inside the fn so requiring this module has no side effects)
+  const metadataPath = path.join(__dirname, '../src/data/pokemon-metadata.json');
+  const pokemonList = JSON.parse(fs.readFileSync(metadataPath, 'utf-8'));
+
   console.log(`📊 Total Pokemon: ${pokemonList.length}`);
   console.log('⚠️  This will take longer as we fetch real descriptions from PokeAPI');
   console.log('⏱️  Estimated time: ~10-15 minutes (rate-limited API calls)');
@@ -183,8 +184,9 @@ async function generateEmbeddings() {
 
   console.log('✅ All embeddings generated!');
 
-  // Save embeddings to file
-  const outputPath = path.join(__dirname, '../src/data/pokemon-embeddings.json');
+  // Save embeddings to the single public copy (served at /data/, fetched at runtime)
+  const outputPath = path.join(__dirname, '../public/data/pokemon-embeddings.json');
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   const output = {
     metadata: {
       model: 'Xenova/all-MiniLM-L6-v2',
@@ -204,7 +206,20 @@ async function generateEmbeddings() {
   console.log(`📦 File size: ${fileSizeMB} MB`);
 
   console.log('🎉 Done!');
+
+  return {
+    count: Object.keys(embeddings).length,
+    dimension: embeddings[pokemonList[0].id].length,
+    outputPath,
+  };
 }
 
-// Run the script
-generateEmbeddings().catch(console.error);
+module.exports = { generateEmbeddings };
+
+// Run directly: node scripts/generate-pokemon-embeddings.js
+if (require.main === module) {
+  generateEmbeddings().catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+}
