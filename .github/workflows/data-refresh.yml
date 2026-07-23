@@ -1,0 +1,99 @@
+name: Data refresh
+
+on:
+  schedule:
+    # Mondays 03:00 UTC — auto-refresh only what upstream changed.
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+    inputs:
+      target:
+        description: What to refresh
+        type: choice
+        options: [auto, all, data, sprites, embeddings]
+        default: auto
+      force:
+        description: Refresh even if upstream is unchanged
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Cache the quantized MiniLM model (~25MB) so embeddings runs skip re-download.
+      - uses: actions/cache@v4
+        with:
+          path: node_modules/@xenova/transformers/.cache
+          key: xenova-all-MiniLM-L6-v2
+
+      - name: Check upstream
+        id: check
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          RESULT=$(node scripts/pipeline.js check --json)
+          CODE=$?
+          if [ "$CODE" = "2" ]; then
+            echo "Upstream check failed"; exit 1
+          fi
+          echo "result=$RESULT" >> "$GITHUB_OUTPUT"
+          STALE=$(echo "$RESULT" | jq -r '.stale_targets | join(" ")')
+          echo "stale=$STALE" >> "$GITHUB_OUTPUT"
+
+      - name: Run pipeline
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TARGET: ${{ inputs.target || 'auto' }}
+          FORCE: ${{ inputs.force || false }}
+          STALE: ${{ steps.check.outputs.stale }}
+        run: |
+          set -e
+          if [ "$TARGET" = "auto" ]; then
+            # Scheduled or auto dispatch: refresh only stale datasets (already
+            # ordered data -> embeddings -> sprites by the check step).
+            if [ "$FORCE" = "true" ]; then
+              echo "Force on auto: running all"
+              node scripts/pipeline.js all
+            elif [ -n "$STALE" ]; then
+              for t in $STALE; do
+                echo "Refreshing stale: $t"
+                node scripts/pipeline.js "$t"
+              done
+            else
+              echo "Nothing stale — skipping."
+            fi
+          else
+            # Explicit target: run it regardless of staleness.
+            echo "Refreshing target: $TARGET"
+            node scripts/pipeline.js "$TARGET"
+          fi
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data src/types public/data public/sprites/optimized
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "chore(data): automated refresh $(date -u +%Y-%m-%d)"
+          git push

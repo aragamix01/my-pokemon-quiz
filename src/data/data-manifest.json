@@ -2,32 +2,47 @@
   "version": 1,
   "datasets": {
     "data": {
-      "upstream": { "repo": "PokeAPI/api-data", "branch": "master", "sha": null },
+      "upstream": {
+        "repo": "PokeAPI/api-data",
+        "branch": "master",
+        "sha": null
+      },
       "generated_at": null,
       "script_version": "1.0.0",
       "counts": {
-        "pokemon": 0,
-        "generations": 0,
-        "types": 0,
-        "moves": 0,
-        "abilities": 0,
-        "evolution_items": 0
+        "pokemon": 1025,
+        "generations": 9,
+        "types": 19,
+        "moves": 937,
+        "abilities": 367,
+        "evolution_items": 26
       }
     },
     "sprites": {
-      "upstream": { "repo": "PokeAPI/sprites", "branch": "master", "sha": null },
+      "upstream": {
+        "repo": "PokeAPI/sprites",
+        "branch": "master",
+        "sha": null
+      },
       "generated_at": null,
       "script_version": "1.0.0",
-      "strategies": ["all", "forms-only"],
-      "file_count": 0
+      "strategies": [
+        "all",
+        "forms-only"
+      ],
+      "file_count": 2618
     },
     "embeddings": {
-      "upstream": { "repo": "PokeAPI/api-data", "branch": "master", "sha": null },
+      "upstream": {
+        "repo": "PokeAPI/api-data",
+        "branch": "master",
+        "sha": null
+      },
       "generated_at": null,
       "script_version": "1.0.0",
       "model": "Xenova/all-MiniLM-L6-v2",
       "dimension": 384,
-      "count": 0,
+      "count": 1025,
       "output": "public/data/pokemon-embeddings.json"
     }
   }
