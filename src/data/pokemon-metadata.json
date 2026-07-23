@@ -1212,6 +1212,16 @@
         "name": "raichu-alola",
         "is_default": false,
         "id": 10100
+      },
+      {
+        "name": "raichu-mega-x",
+        "is_default": false,
+        "id": 10304
+      },
+      {
+        "name": "raichu-mega-y",
+        "is_default": false,
+        "id": 10305
       }
     ]
   },
@@ -1622,12 +1632,17 @@
       "speed": 60
     },
     "total_stats": 483,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "clefable",
         "is_default": true,
         "id": 36
+      },
+      {
+        "name": "clefable-mega",
+        "is_default": false,
+        "id": 10278
       }
     ]
   },
@@ -3101,12 +3116,17 @@
       "speed": 70
     },
     "total_stats": 490,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "victreebel",
         "is_default": true,
         "id": 71
+      },
+      {
+        "name": "victreebel-mega",
+        "is_default": false,
+        "id": 10279
       }
     ]
   },
@@ -5238,12 +5258,17 @@
       "speed": 115
     },
     "total_stats": 520,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "starmie",
         "is_default": true,
         "id": 121
+      },
+      {
+        "name": "starmie-mega",
+        "is_default": false,
+        "id": 10280
       }
     ]
   },
@@ -6452,12 +6477,17 @@
       "speed": 80
     },
     "total_stats": 600,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "dragonite",
         "is_default": true,
         "id": 149
+      },
+      {
+        "name": "dragonite-mega",
+        "is_default": false,
+        "id": 10281
       }
     ]
   },
@@ -6665,12 +6695,17 @@
       "speed": 80
     },
     "total_stats": 525,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "meganium",
         "is_default": true,
         "id": 154
+      },
+      {
+        "name": "meganium-mega",
+        "is_default": false,
+        "id": 10282
       }
     ]
   },
@@ -6913,12 +6948,17 @@
       "speed": 78
     },
     "total_stats": 530,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "feraligatr",
         "is_default": true,
         "id": 160
+      },
+      {
+        "name": "feraligatr-mega",
+        "is_default": false,
+        "id": 10283
       }
     ]
   },
@@ -9695,12 +9735,17 @@
       "speed": 70
     },
     "total_stats": 465,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "skarmory",
         "is_default": true,
         "id": 227
+      },
+      {
+        "name": "skarmory-mega",
+        "is_default": false,
+        "id": 10284
       }
     ]
   },
@@ -15147,12 +15192,17 @@
       "speed": 65
     },
     "total_stats": 455,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "chimecho",
         "is_default": true,
         "id": 358
+      },
+      {
+        "name": "chimecho-mega",
+        "is_default": false,
+        "id": 10306
       }
     ]
   },
@@ -15198,6 +15248,11 @@
         "name": "absol-mega",
         "is_default": false,
         "id": 10057
+      },
+      {
+        "name": "absol-mega-z",
+        "is_default": false,
+        "id": 10307
       }
     ]
   },
@@ -16841,12 +16896,17 @@
       "speed": 100
     },
     "total_stats": 485,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "staraptor",
         "is_default": true,
         "id": 398
+      },
+      {
+        "name": "staraptor-mega",
+        "is_default": false,
+        "id": 10308
       }
     ]
   },
@@ -18785,6 +18845,11 @@
         "name": "garchomp-mega",
         "is_default": false,
         "id": 10058
+      },
+      {
+        "name": "garchomp-mega-z",
+        "is_default": false,
+        "id": 10309
       }
     ]
   },
@@ -18912,6 +18977,11 @@
         "name": "lucario-mega",
         "is_default": false,
         "id": 10059
+      },
+      {
+        "name": "lucario-mega-z",
+        "is_default": false,
+        "id": 10310
       }
     ]
   },
@@ -20141,12 +20211,17 @@
       "speed": 110
     },
     "total_stats": 480,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "froslass",
         "is_default": true,
         "id": 478
+      },
+      {
+        "name": "froslass-mega",
+        "is_default": false,
+        "id": 10285
       }
     ]
   },
@@ -20460,12 +20535,17 @@
       "speed": 77
     },
     "total_stats": 600,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "heatran",
         "is_default": true,
         "id": 485
+      },
+      {
+        "name": "heatran-mega",
+        "is_default": false,
+        "id": 10311
       }
     ]
   },
@@ -20708,12 +20788,17 @@
       "speed": 125
     },
     "total_stats": 600,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "darkrai",
         "is_default": true,
         "id": 491
+      },
+      {
+        "name": "darkrai-mega",
+        "is_default": false,
+        "id": 10312
       }
     ]
   },
@@ -21079,12 +21164,17 @@
       "speed": 65
     },
     "total_stats": 528,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "emboar",
         "is_default": true,
         "id": 500
+      },
+      {
+        "name": "emboar-mega",
+        "is_default": false,
+        "id": 10286
       }
     ]
   },
@@ -22292,12 +22382,17 @@
       "speed": 88
     },
     "total_stats": 508,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "excadrill",
         "is_default": true,
         "id": 530
+      },
+      {
+        "name": "excadrill-mega",
+        "is_default": false,
+        "id": 10287
       }
     ]
   },
@@ -22905,12 +23000,17 @@
       "speed": 112
     },
     "total_stats": 485,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "scolipede",
         "is_default": true,
         "id": 545
+      },
+      {
+        "name": "scolipede-mega",
+        "is_default": false,
+        "id": 10288
       }
     ]
   },
@@ -23555,12 +23655,17 @@
       "speed": 58
     },
     "total_stats": 488,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "scrafty",
         "is_default": true,
         "id": 560
+      },
+      {
+        "name": "scrafty-mega",
+        "is_default": false,
+        "id": 10289
       }
     ]
   },
@@ -24847,7 +24952,7 @@
   },
   {
     "id": 592,
-    "name": "frillish",
+    "name": "frillish-male",
     "species_name": "frillish",
     "generation": 5,
     "types": [
@@ -24880,7 +24985,7 @@
     "has_variants": false,
     "variants": [
       {
-        "name": "frillish",
+        "name": "frillish-male",
         "is_default": true,
         "id": 592
       }
@@ -24888,7 +24993,7 @@
   },
   {
     "id": 593,
-    "name": "jellicent",
+    "name": "jellicent-male",
     "species_name": "jellicent",
     "generation": 5,
     "types": [
@@ -24921,7 +25026,7 @@
     "has_variants": false,
     "variants": [
       {
-        "name": "jellicent",
+        "name": "jellicent-male",
         "is_default": true,
         "id": 593
       }
@@ -25365,12 +25470,17 @@
       "speed": 50
     },
     "total_stats": 515,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "eelektross",
         "is_default": true,
         "id": 604
+      },
+      {
+        "name": "eelektross-mega",
+        "is_default": false,
+        "id": 10290
       }
     ]
   },
@@ -25568,12 +25678,17 @@
       "speed": 80
     },
     "total_stats": 520,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "chandelure",
         "is_default": true,
         "id": 609
+      },
+      {
+        "name": "chandelure-mega",
+        "is_default": false,
+        "id": 10291
       }
     ]
   },
@@ -26143,12 +26258,17 @@
       "speed": 55
     },
     "total_stats": 483,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "golurk",
         "is_default": true,
         "id": 623
+      },
+      {
+        "name": "golurk-mega",
+        "is_default": false,
+        "id": 10313
       }
     ]
   },
@@ -27367,12 +27487,17 @@
       "speed": 64
     },
     "total_stats": 530,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "chesnaught",
         "is_default": true,
         "id": 652
+      },
+      {
+        "name": "chesnaught-mega",
+        "is_default": false,
+        "id": 10292
       }
     ]
   },
@@ -27488,12 +27613,17 @@
       "speed": 104
     },
     "total_stats": 534,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "delphox",
         "is_default": true,
         "id": 655
+      },
+      {
+        "name": "delphox-mega",
+        "is_default": false,
+        "id": 10293
       }
     ]
   },
@@ -27625,6 +27755,11 @@
         "name": "greninja-ash",
         "is_default": false,
         "id": 10117
+      },
+      {
+        "name": "greninja-mega",
+        "is_default": false,
+        "id": 10294
       }
     ]
   },
@@ -27996,7 +28131,7 @@
   },
   {
     "id": 668,
-    "name": "pyroar",
+    "name": "pyroar-male",
     "species_name": "pyroar",
     "generation": 6,
     "types": [
@@ -28026,12 +28161,17 @@
       "speed": 106
     },
     "total_stats": 507,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
-        "name": "pyroar",
+        "name": "pyroar-male",
         "is_default": true,
         "id": 668
+      },
+      {
+        "name": "pyroar-mega",
+        "is_default": false,
+        "id": 10295
       }
     ]
   },
@@ -28117,6 +28257,11 @@
         "name": "floette-eternal",
         "is_default": false,
         "id": 10061
+      },
+      {
+        "name": "floette-mega",
+        "is_default": false,
+        "id": 10296
       }
     ]
   },
@@ -28445,6 +28590,16 @@
         "name": "meowstic-female",
         "is_default": false,
         "id": 10025
+      },
+      {
+        "name": "meowstic-male-mega",
+        "is_default": false,
+        "id": 10314
+      },
+      {
+        "name": "meowstic-female-mega",
+        "is_default": false,
+        "id": 10326
       }
     ]
   },
@@ -28811,12 +28966,17 @@
       "speed": 73
     },
     "total_stats": 482,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "malamar",
         "is_default": true,
         "id": 687
+      },
+      {
+        "name": "malamar-mega",
+        "is_default": false,
+        "id": 10297
       }
     ]
   },
@@ -28893,12 +29053,17 @@
       "speed": 68
     },
     "total_stats": 500,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "barbaracle",
         "is_default": true,
         "id": 689
+      },
+      {
+        "name": "barbaracle-mega",
+        "is_default": false,
+        "id": 10298
       }
     ]
   },
@@ -28977,12 +29142,17 @@
       "speed": 44
     },
     "total_stats": 494,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "dragalge",
         "is_default": true,
         "id": 691
+      },
+      {
+        "name": "dragalge-mega",
+        "is_default": false,
+        "id": 10299
       }
     ]
   },
@@ -29391,12 +29561,17 @@
       "speed": 118
     },
     "total_stats": 500,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "hawlucha",
         "is_default": true,
         "id": 701
+      },
+      {
+        "name": "hawlucha-mega",
+        "is_default": false,
+        "id": 10300
       }
     ]
   },
@@ -30161,6 +30336,11 @@
         "name": "zygarde-10",
         "is_default": false,
         "id": 10181
+      },
+      {
+        "name": "zygarde-mega",
+        "is_default": false,
+        "id": 10301
       }
     ]
   },
@@ -31077,12 +31257,17 @@
       "speed": 43
     },
     "total_stats": 478,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "crabominable",
         "is_default": true,
         "id": 740
+      },
+      {
+        "name": "crabominable-mega",
+        "is_default": false,
+        "id": 10315
       }
     ]
   },
@@ -32276,12 +32461,17 @@
       "speed": 40
     },
     "total_stats": 530,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "golisopod",
         "is_default": true,
         "id": 768
+      },
+      {
+        "name": "golisopod-mega",
+        "is_default": false,
+        "id": 10316
       }
     ]
   },
@@ -32852,12 +33042,17 @@
       "speed": 36
     },
     "total_stats": 485,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "drampa",
         "is_default": true,
         "id": 780
+      },
+      {
+        "name": "drampa-mega",
+        "is_default": false,
+        "id": 10302
       }
     ]
   },
@@ -33739,6 +33934,16 @@
         "name": "magearna-original",
         "is_default": false,
         "id": 10147
+      },
+      {
+        "name": "magearna-mega",
+        "is_default": false,
+        "id": 10317
+      },
+      {
+        "name": "magearna-original-mega",
+        "is_default": false,
+        "id": 10318
       }
     ]
   },
@@ -33977,12 +34182,17 @@
       "speed": 143
     },
     "total_stats": 600,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "zeraora",
         "is_default": true,
         "id": 807
+      },
+      {
+        "name": "zeraora-mega",
+        "is_default": false,
+        "id": 10319
       }
     ]
   },
@@ -36648,12 +36858,17 @@
       "speed": 75
     },
     "total_stats": 470,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "falinks",
         "is_default": true,
         "id": 870
+      },
+      {
+        "name": "falinks-mega",
+        "is_default": false,
+        "id": 10303
       }
     ]
   },
@@ -38961,7 +39176,7 @@
       "normal"
     ],
     "height": 3,
-    "weight": 23,
+    "weight": 28,
     "base_experience": 165,
     "habitat": null,
     "color": "white",
@@ -40103,12 +40318,17 @@
       "speed": 75
     },
     "total_stats": 486,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "scovillain",
         "is_default": true,
         "id": 952
+      },
+      {
+        "name": "scovillain-mega",
+        "is_default": false,
+        "id": 10320
       }
     ]
   },
@@ -40840,12 +41060,17 @@
       "speed": 86
     },
     "total_stats": 525,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "glimmora",
         "is_default": true,
         "id": 970
+      },
+      {
+        "name": "glimmora-mega",
+        "is_default": false,
+        "id": 10321
       }
     ]
   },
@@ -41179,6 +41404,21 @@
         "name": "tatsugiri-stretchy",
         "is_default": false,
         "id": 10259
+      },
+      {
+        "name": "tatsugiri-curly-mega",
+        "is_default": false,
+        "id": 10322
+      },
+      {
+        "name": "tatsugiri-droopy-mega",
+        "is_default": false,
+        "id": 10323
+      },
+      {
+        "name": "tatsugiri-stretchy-mega",
+        "is_default": false,
+        "id": 10324
       }
     ]
   },
@@ -42001,12 +42241,17 @@
       "speed": 87
     },
     "total_stats": 600,
-    "has_variants": false,
+    "has_variants": true,
     "variants": [
       {
         "name": "baxcalibur",
         "is_default": true,
         "id": 998
+      },
+      {
+        "name": "baxcalibur-mega",
+        "is_default": false,
+        "id": 10325
       }
     ]
   },

@@ -5,40 +5,40 @@
       "upstream": {
         "repo": "PokeAPI/api-data",
         "branch": "master",
-        "sha": null
+        "sha": "57ae60545852ea7e1abc28413fa9439250cf6425"
       },
-      "generated_at": null,
+      "generated_at": "2026-07-23T17:24:42.710Z",
       "script_version": "1.0.0",
       "counts": {
         "pokemon": 1025,
         "generations": 9,
         "types": 19,
         "moves": 937,
-        "abilities": 367,
-        "evolution_items": 26
+        "abilities": 373,
+        "evolution_items": 49
       }
     },
     "sprites": {
       "upstream": {
         "repo": "PokeAPI/sprites",
         "branch": "master",
-        "sha": null
+        "sha": "bf4c47ac82c33b330e33d98b8882d1cedb2f53e7"
       },
-      "generated_at": null,
+      "generated_at": "2026-07-23T17:30:24.383Z",
       "script_version": "1.0.0",
       "strategies": [
         "all",
         "forms-only"
       ],
-      "file_count": 2618
+      "file_count": 2620
     },
     "embeddings": {
       "upstream": {
         "repo": "PokeAPI/api-data",
         "branch": "master",
-        "sha": null
+        "sha": "57ae60545852ea7e1abc28413fa9439250cf6425"
       },
-      "generated_at": null,
+      "generated_at": "2026-07-23T17:27:10.306Z",
       "script_version": "1.0.0",
       "model": "Xenova/all-MiniLM-L6-v2",
       "dimension": 384,
