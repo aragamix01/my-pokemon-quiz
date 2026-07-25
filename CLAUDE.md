@@ -226,7 +226,7 @@ node scripts/download-and-optimize-sprites.js gen1-2      # Gen 1-2 with shiny +
 node scripts/download-and-optimize-sprites.js popular     # 80 popular Pokemon (~3MB)
 node scripts/download-and-optimize-sprites.js minimal     # Gen 1 artwork only (~1.5MB)
 node scripts/download-and-optimize-sprites.js all         # ALL Pokemon Gen 1-9 + variants (~12MB) 
-node scripts/download-and-optimize-sprites.js forms-only  # All 277 variant forms (Mega/Alolan/Galarian/etc) (~8MB)
+node scripts/download-and-optimize-sprites.js forms-only  # All variant forms upstream (Mega/Alolan/Galarian/etc) (~9MB)
 ```
 
 ### Optimized Storage Structure
@@ -300,7 +300,7 @@ node scripts/download-and-optimize-sprites.js gen1-2      # Gen 1-2 complete col
 node scripts/download-and-optimize-sprites.js popular     # 80 popular Pokemon only
 node scripts/download-and-optimize-sprites.js minimal     # Gen 1 artwork only (no shiny/forms)
 node scripts/download-and-optimize-sprites.js all         # ALL Pokemon + variants (complete)
-node scripts/download-and-optimize-sprites.js forms-only  # All 277 variant forms (Mega/Alolan/Galarian/etc)
+node scripts/download-and-optimize-sprites.js forms-only  # All variant forms upstream (Mega/Alolan/Galarian/etc)
 
 # AI Embeddings Generation (for semantic search)
 node scripts/generate-pokemon-embeddings.js  # Generate Pokemon embeddings for AI search (~23MB model)

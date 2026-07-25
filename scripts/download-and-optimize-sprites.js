@@ -25,28 +25,92 @@ const WEBP_SETTINGS = {
 // Mobile-optimized size
 const MOBILE_SIZE = { width: 300, height: 300 }
 
-// Pokemon variant forms data - Complete range of all variant forms
-// Based on PokeAPI research: All variant forms exist from ID 10001 to 10277 (277 total forms)
+// Variant form IDs (Mega, Primal, Alolan, Galarian, Hisuian, Paldean, ...) start at 10001.
+// The real list is discovered from the upstream sprites repo at runtime so newly added
+// forms are picked up automatically. These constants are only the offline fallback.
 const VARIANT_FORMS = {
-  // Complete variant form range (includes all regional forms, megas, primals, etc.)
   startId: 10001,  // First variant form (Mega Venusaur)
-  endId: 10277,    // Last variant form (as of current generation)
-  
-  // Breakdown for reference (approximate ranges):
-  // Mega/Primal forms: 10001-10090 (Gen 6 Mega Evolution + Primal Reversion)
-  // Alolan forms: 10091-10120+ (Gen 7 Regional variants)
-  // Galarian forms: 10158-10214+ (Gen 8 Regional variants)
-  // Hisuian forms: 10215-10277+ (Legends Arceus Regional variants)
-  // Note: These ranges may overlap and include other special forms
+  endId: 10326,    // Highest known variant form - fallback only, upstream is authoritative
 }
 
-// Get all variant form IDs - generates the complete range
+const FALLBACK_MAX_BASE_ID = 1025
+
+// Get all variant form IDs - fallback range used when upstream listing is unavailable
 const getAllVariantForms = () => {
   const forms = []
   for (let i = VARIANT_FORMS.startId; i <= VARIANT_FORMS.endId; i++) {
     forms.push(i)
   }
   return forms
+}
+
+// ── upstream artwork discovery ────────────────────────────────────────────
+// The contents API truncates at 1000 entries (the artwork directory holds more),
+// so walk the git tree down to the official-artwork subtree instead.
+
+const GITHUB_API = 'https://api.github.com'
+const SPRITES_REPO = 'PokeAPI/sprites'
+const ARTWORK_PATH = ['sprites', 'pokemon', 'other', 'official-artwork']
+
+const githubJson = async (url) => {
+  const headers = {
+    Accept: 'application/vnd.github+json',
+    'User-Agent': 'pokemon-toolkit-sprites',
+  }
+  if (process.env.GITHUB_TOKEN) {
+    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`
+  }
+  const res = await fetch(url, { headers })
+  if (!res.ok) throw new Error(`GitHub API ${res.status} for ${url}`)
+  return res.json()
+}
+
+let upstreamIdsCache = null
+
+/** All Pokemon artwork IDs present upstream, or null when discovery fails. */
+const fetchUpstreamArtworkIds = async () => {
+  if (upstreamIdsCache !== null) return upstreamIdsCache
+
+  try {
+    let sha = 'master'
+    for (const segment of ARTWORK_PATH) {
+      const tree = await githubJson(`${GITHUB_API}/repos/${SPRITES_REPO}/git/trees/${sha}`)
+      const node = tree.tree.find(entry => entry.path === segment && entry.type === 'tree')
+      if (!node) throw new Error(`Path segment not found: ${segment}`)
+      sha = node.sha
+    }
+
+    const artwork = await githubJson(`${GITHUB_API}/repos/${SPRITES_REPO}/git/trees/${sha}`)
+    if (artwork.truncated) throw new Error('Artwork tree truncated')
+
+    const ids = artwork.tree
+      .filter(entry => entry.type === 'blob' && /^\d+\.png$/.test(entry.path))
+      .map(entry => parseInt(entry.path, 10))
+      .sort((a, b) => a - b)
+
+    if (!ids.length) throw new Error('No artwork files found')
+
+    upstreamIdsCache = ids
+    console.log(`🌐 Upstream artwork: ${ids.length} files (${ids.filter(id => id > 10000).length} variant forms, max id ${ids[ids.length - 1]})`)
+    return ids
+  } catch (error) {
+    console.warn(`  ⚠️  Upstream sprite listing unavailable (${error.message}), using built-in ranges`)
+    upstreamIdsCache = false
+    return null
+  }
+}
+
+/** Variant form IDs from upstream, falling back to the static range. */
+const resolveVariantForms = async () => {
+  const ids = await fetchUpstreamArtworkIds()
+  return ids ? ids.filter(id => id > 10000) : getAllVariantForms()
+}
+
+/** Base Pokemon IDs from upstream, falling back to 1..FALLBACK_MAX_BASE_ID. */
+const resolveBaseIds = async () => {
+  const ids = await fetchUpstreamArtworkIds()
+  if (ids) return ids.filter(id => id <= 10000)
+  return Array.from({ length: FALLBACK_MAX_BASE_ID }, (_, i) => i + 1)
 }
 
 // Download strategies
@@ -85,16 +149,16 @@ const STRATEGIES = {
   },
   'all': {
     name: 'Complete Set',
-    description: 'All Pokemon Gen 1-9 with variants (~12MB)',
-    maxId: 1025,
+    description: 'Every base Pokemon available upstream, with shiny (~12MB)',
+    useUpstreamBase: true,
     includeShiny: true,
     includeForms: false,
     includeVariants: false
   },
   'forms-only': {
     name: 'Variant Forms Only',
-    description: 'All 277 variant forms: Mega, Alolan, Galarian, Hisuian, etc. (~8MB)',
-    pokemonIds: getAllVariantForms(),
+    description: 'Every variant form upstream: Mega, Alolan, Galarian, Hisuian, Paldean, etc. (~9MB)',
+    useUpstreamForms: true,
     includeShiny: true,
     includeForms: false,
     includeVariants: false
@@ -257,7 +321,7 @@ const processArtwork = async (pokemonIds, includeShiny) => {
 }
 
 const processVariantForms = async (includeShiny) => {
-  const variantIds = getAllVariantForms()
+  const variantIds = await resolveVariantForms()
   console.log(`🔄 Processing ${variantIds.length} variant Pokemon forms${includeShiny ? ' + shiny' : ''}...`)
   
   const formsDir = path.join(OUTPUT_DIR, 'pokemon-forms')
@@ -411,20 +475,26 @@ const processItems = async () => {
   return { successful, failed }
 }
 
-const generatePokemonIds = (strategy) => {
+const generatePokemonIds = async (strategy) => {
+  if (strategy.useUpstreamForms) return resolveVariantForms()
   if (strategy.pokemonIds) return strategy.pokemonIds
-  
-  const ids = []
-  const maxId = strategy.maxId || 151
-  for (let i = 1; i <= maxId; i++) {
-    ids.push(i)
+
+  let ids
+  if (strategy.useUpstreamBase) {
+    ids = await resolveBaseIds()
+  } else {
+    ids = []
+    const maxId = strategy.maxId || 151
+    for (let i = 1; i <= maxId; i++) {
+      ids.push(i)
+    }
   }
-  
+
   // Add variant forms if requested
   if (strategy.includeVariants) {
-    ids.push(...getAllVariantForms())
+    ids.push(...(await resolveVariantForms()))
   }
-  
+
   return ids
 }
 
@@ -477,7 +547,7 @@ const main = async () => {
       totalFailed += variantResult.failed
     } else {
       // Process regular Pokemon
-      const pokemonIds = generatePokemonIds(strategy)
+      const pokemonIds = await generatePokemonIds(strategy)
       const artworkResult = await processArtwork(pokemonIds, strategy.includeShiny)
       totalSuccessful += artworkResult.successful
       totalFailed += artworkResult.failed
