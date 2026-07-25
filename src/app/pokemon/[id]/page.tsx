@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, use } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Pokemon, PokemonSpecies, EvolutionChain, EvolutionChainLink, GenerationNumber } from '@/types/pokemon'
 import { pokemonAPI } from '@/lib/pokemon-api'
 import { extractPokemonTypes } from '@/lib/type-effectiveness'
@@ -220,6 +221,11 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
     return pokemonAPI.getPokemonImageUrl(tempPokemon, false)
   }
 
+  const getEvolutionHref = (pokemonId: number) => {
+    const generation = searchParams.get('gen')
+    return generation ? `/pokemon/${pokemonId}?gen=${generation}` : `/pokemon/${pokemonId}`
+  }
+
   const navigateToPokemon = (pokemonId: number) => {
     const generation = searchParams.get('gen')
     if (generation) {
@@ -230,45 +236,66 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
 
   const renderEvolutionChain = (chainLink: EvolutionChainLink, depth = 0) => {
     const pokemonName = chainLink.species.name
-    
+    const speciesId = parseInt(chainLink.species.url.split('/').slice(-2, -1)[0])
+    const isCurrent = speciesId === data?.species.id
+
+    const evolutionNode = (
+      <>
+        <div className="w-16 h-16 relative mb-2">
+          <Image
+            src={getEvolutionPokemonImageUrl(speciesId)}
+            alt={pokemonName}
+            fill
+            className="object-contain"
+            draggable={false}
+            onError={(e) => {
+              // Better fallback chain for evolution sprites
+              const target = e.target as HTMLImageElement
+
+              if (target.src.includes('/pokemon-artwork/')) {
+                // Try variant forms directory if artwork fails
+                target.src = `/sprites/optimized/pokemon-forms/${speciesId}.webp`
+              } else if (target.src.includes('/pokemon-forms/')) {
+                // Final fallback to placeholder
+                target.src = '/pokemon-placeholder.png'
+              } else if (target.src.includes('.webp')) {
+                // Try PNG fallback (legacy)
+                target.src = `/sprites/pokemon-artwork/${speciesId}.png`
+              } else {
+                target.src = '/pokemon-placeholder.png'
+              }
+            }}
+          />
+        </div>
+        <div className="text-sm font-bold text-center capitalize" style={{ color: 'var(--text-primary)' }}>
+          {pokemonName.replace('-', ' ')}
+        </div>
+        <div className="text-xs text-center" style={{ color: 'var(--text-secondary)' }}>
+          #{String(speciesId).padStart(3, '0')}
+        </div>
+      </>
+    )
+
     return (
       <>
-        {/* Pokemon in chain - enhanced with more info */}
-        <div className="flex flex-col items-center min-w-32">
-          <div className="w-16 h-16 relative mb-2">
-            <Image
-              src={getEvolutionPokemonImageUrl(parseInt(chainLink.species.url.split('/').slice(-2, -1)[0]))}
-              alt={pokemonName}
-              fill
-              className="object-contain"
-              draggable={false}
-              onError={(e) => {
-                // Better fallback chain for evolution sprites
-                const target = e.target as HTMLImageElement
-                const pokemonId = parseInt(chainLink.species.url.split('/').slice(-2, -1)[0])
-                
-                if (target.src.includes('/pokemon-artwork/')) {
-                  // Try variant forms directory if artwork fails
-                  target.src = `/sprites/optimized/pokemon-forms/${pokemonId}.webp`
-                } else if (target.src.includes('/pokemon-forms/')) {
-                  // Final fallback to placeholder
-                  target.src = '/pokemon-placeholder.png'
-                } else if (target.src.includes('.webp')) {
-                  // Try PNG fallback (legacy)
-                  target.src = `/sprites/pokemon-artwork/${pokemonId}.png`
-                } else {
-                  target.src = '/pokemon-placeholder.png'
-                }
-              }}
-            />
+        {/* Pokemon in chain - links to its own detail page, current one stays static */}
+        {isCurrent ? (
+          <div
+            aria-current="page"
+            className="flex flex-col items-center min-w-32 rounded-md px-2 py-2"
+            style={{ background: 'var(--color-neutral-800)', border: '1px solid var(--color-accent)' }}
+          >
+            {evolutionNode}
           </div>
-          <div className="text-sm font-bold text-center capitalize" style={{ color: 'var(--text-primary)' }}>
-            {pokemonName.replace('-', ' ')}
-          </div>
-          <div className="text-xs text-center" style={{ color: 'var(--text-secondary)' }}>
-            #{chainLink.species.url.split('/').slice(-2, -1)[0].padStart(3, '0')}
-          </div>
-        </div>
+        ) : (
+          <Link
+            href={getEvolutionHref(speciesId)}
+            aria-label={`View ${pokemonName.replace('-', ' ')} details`}
+            className="flex flex-col items-center min-w-32 rounded-md px-2 py-2 border border-transparent transition hover:scale-105 hover:bg-[var(--color-neutral-800)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+          >
+            {evolutionNode}
+          </Link>
+        )}
 
         {/* Evolution arrows and conditions */}
         {chainLink.evolves_to.map((evolution, index) => (
