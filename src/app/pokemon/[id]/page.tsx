@@ -221,6 +221,15 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
     return pokemonAPI.getPokemonImageUrl(tempPokemon, false)
   }
 
+  // Shared label/value row so every stat in the info panels lines up on the
+  // same two-column grid regardless of whether the value is text, a tag or a bar.
+  const InfoRow = ({ label, children }: { label: string; children: React.ReactNode }) => (
+    <div className="grid grid-cols-[7rem_1fr] items-center gap-3 py-1">
+      <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>{label}</span>
+      <div className="flex items-center justify-end gap-3 min-w-0">{children}</div>
+    </div>
+  )
+
   const getEvolutionHref = (pokemonId: number) => {
     const generation = searchParams.get('gen')
     return generation ? `/pokemon/${pokemonId}?gen=${generation}` : `/pokemon/${pokemonId}`
@@ -635,77 +644,50 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                     </div>
                   </div>
 
-                  {/* Species Info Section */}
-                  <div>
-                    <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Species Info</h3>
-                    <div className="space-y-1">
-                      <div className="flex justify-between py-1">
-                        <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Capture Rate:</span>
-                        <span className="text-xs font-bold">{data.species.capture_rate}</span>
-                      </div>
-                      <div className="flex justify-between py-1">
-                        <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Base Happiness:</span>
-                        <span className="text-xs font-bold">{data.species.base_happiness}</span>
+                  {/* Species & Breeding - every row shares the same label/value grid */}
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Species Info</h3>
+                      <div>
+                        <InfoRow label="Capture Rate:">
+                          <div className="flex-1">
+                            <ProgressBar value={data.species.capture_rate} max={255} />
+                          </div>
+                          <span className="text-xs font-bold tabular-nums w-14 text-right">{data.species.capture_rate}/255</span>
+                        </InfoRow>
+                        <InfoRow label="Friendship:">
+                          <div className="flex-1">
+                            <ProgressBar value={data.species.base_happiness || 0} max={255} />
+                          </div>
+                          <span className="text-xs font-bold tabular-nums w-14 text-right">{data.species.base_happiness}/255</span>
+                        </InfoRow>
                       </div>
                     </div>
-                  </div>
-                </div>
 
-                {/* Separator Line */}
-                <div className="hr" />
-
-                {/* Breeding Information Section */}
-                <div className="grid md:grid-cols-2 gap-4 mb-4">
-                  {/* Breeding Section */}
-                  <div>
-                    <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Breeding Info</h3>
-                    {getBreedingData() ? (
-                      <div className="space-y-2">
-                        {/* Egg Groups */}
+                    <div>
+                      <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Breeding Info</h3>
+                      {getBreedingData() ? (
                         <div>
-                          <h4 className="text-xs font-semibold mb-1" style={{ color: 'var(--text-secondary)' }}>Egg Groups:</h4>
-                          <div className="flex flex-wrap gap-1">
-                            {getBreedingData()!.eggGroups.map((group, index) => (
-                              <span key={index} className="tag tag-neutral">
-                                {formatEggGroup(group)}
-                              </span>
-                            ))}
-                          </div>
+                          <InfoRow label="Growth Rate:">
+                            <span className="tag tag-accent capitalize">
+                              {getBreedingData()!.growthRate?.replace('-', ' ') || 'Unknown'}
+                            </span>
+                          </InfoRow>
+                          <InfoRow label="Egg Groups:">
+                            <div className="flex flex-wrap justify-end gap-1">
+                              {getBreedingData()!.eggGroups.map((group, index) => (
+                                <span key={index} className="tag tag-neutral">
+                                  {formatEggGroup(group)}
+                                </span>
+                              ))}
+                            </div>
+                          </InfoRow>
                         </div>
-
-                        {/* Growth Rate */}
-                        <div className="flex justify-between items-center py-1">
-                          <span className="text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>Growth Rate:</span>
-                          <span className="tag tag-accent capitalize">
-                            {getBreedingData()!.growthRate?.replace('-', ' ') || 'Unknown'}
-                          </span>
-                        </div>
-                      </div>
-                    ) : (
-                      <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                        Breeding information not available
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Additional Breeding Details */}
-                  <div>
-                    <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Breeding Details</h3>
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-3 py-1">
-                        <span className="text-xs font-semibold flex-shrink-0" style={{ color: 'var(--text-secondary)' }}>Catch Difficulty:</span>
-                        <div className="flex-1">
-                          <ProgressBar value={data.species.capture_rate} max={255} />
-                        </div>
-                        <span className="text-xs font-bold flex-shrink-0">{data.species.capture_rate}/255</span>
-                      </div>
-                      <div className="flex items-center gap-3 py-1">
-                        <span className="text-xs font-semibold flex-shrink-0" style={{ color: 'var(--text-secondary)' }}>Friendship:</span>
-                        <div className="flex-1">
-                          <ProgressBar value={data.species.base_happiness || 0} max={255} />
-                        </div>
-                        <span className="text-xs font-bold flex-shrink-0">{data.species.base_happiness}/255</span>
-                      </div>
+                      ) : (
+                        <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                          Breeding information not available
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>

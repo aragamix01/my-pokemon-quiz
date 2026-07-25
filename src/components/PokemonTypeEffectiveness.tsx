@@ -22,14 +22,23 @@ export default function PokemonTypeEffectiveness({ types }: PokemonTypeEffective
     }
   }
 
-  const TypeChip = ({ type, multiplier }: { type: PokemonTypeName; multiplier: EffectivenessMultiplier }) => (
-    <div className="inline-flex items-center gap-1.5">
+  // One row per type: pill on the left, multiplier right-aligned so every
+  // multiplier in the panel lines up in a single column.
+  const TypeRow = ({ type, multiplier }: { type: PokemonTypeName; multiplier: EffectivenessMultiplier }) => (
+    <div className="flex items-center justify-between gap-2 py-0.5">
       <TypePill type={type} />
-      {multiplier !== 0 && (
-        <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
-          {getMultiplierLabel(multiplier)}
-        </span>
-      )}
+      <span className="text-xs tabular-nums flex-shrink-0" style={{ color: 'var(--text-muted)' }}>
+        {multiplier === 0 ? '0×' : getMultiplierLabel(multiplier)}
+      </span>
+    </div>
+  )
+
+  const TypeGroup = ({ title, children }: { title: string; children: React.ReactNode }) => (
+    <div>
+      <h4 className="text-xs font-semibold mb-1.5" style={{ color: 'var(--text-secondary)' }}>
+        {title}
+      </h4>
+      <div className="space-y-0.5">{children}</div>
     </div>
   )
 
@@ -37,56 +46,41 @@ export default function PokemonTypeEffectiveness({ types }: PokemonTypeEffective
     <div className="space-y-3">
       {/* Weaknesses Section */}
       {analysis.weaknesses.length > 0 && (
-        <div>
-          <h4 className="text-xs font-semibold mb-1.5" style={{ color: 'var(--text-secondary)' }}>
-            Weak To:
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            {analysis.weaknesses.map((weakness) => (
-              <TypeChip
-                key={weakness.type}
-                type={weakness.type}
-                multiplier={weakness.multiplier}
-              />
-            ))}
-          </div>
-        </div>
+        <TypeGroup title="Weak To:">
+          {analysis.weaknesses.map((weakness) => (
+            <TypeRow
+              key={weakness.type}
+              type={weakness.type}
+              multiplier={weakness.multiplier}
+            />
+          ))}
+        </TypeGroup>
       )}
 
       {/* Resistances Section */}
       {analysis.resistances.length > 0 && (
-        <div>
-          <h4 className="text-xs font-semibold mb-1.5" style={{ color: 'var(--text-secondary)' }}>
-            Resistant To:
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            {analysis.resistances.map((resistance) => (
-              <TypeChip
-                key={resistance.type}
-                type={resistance.type}
-                multiplier={resistance.multiplier}
-              />
-            ))}
-          </div>
-        </div>
+        <TypeGroup title="Resistant To:">
+          {analysis.resistances.map((resistance) => (
+            <TypeRow
+              key={resistance.type}
+              type={resistance.type}
+              multiplier={resistance.multiplier}
+            />
+          ))}
+        </TypeGroup>
       )}
 
       {/* Immunities Section */}
       {analysis.immunities.length > 0 && (
-        <div>
-          <h4 className="text-xs font-semibold mb-1.5" style={{ color: 'var(--text-secondary)' }}>
-            Immune To:
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            {analysis.immunities.map((immunity) => (
-              <TypeChip
-                key={immunity}
-                type={immunity}
-                multiplier={0}
-              />
-            ))}
-          </div>
-        </div>
+        <TypeGroup title="Immune To:">
+          {analysis.immunities.map((immunity) => (
+            <TypeRow
+              key={immunity}
+              type={immunity}
+              multiplier={0}
+            />
+          ))}
+        </TypeGroup>
       )}
 
       {/* Show message if no special effectiveness */}

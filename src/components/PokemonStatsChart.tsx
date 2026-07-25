@@ -112,6 +112,7 @@ export default function PokemonStatsChart({ stats, showTotal = true }: PokemonSt
               max={720}
               label={`Total: ${totalStats}`}
               valueLabel="/720"
+              className="mb-2.5"
             />
             <div className="text-center mt-2">
               <span className={`tag ${quality.cls}`}>{quality.label}</span>
