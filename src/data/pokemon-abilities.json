@@ -3,7 +3,7 @@
     "version": "1.0",
     "source": "PokeAPI v2",
     "description": "Complete Pokemon abilities database with all details",
-    "lastUpdated": "2026-07-23",
+    "lastUpdated": "2026-07-27",
     "totalAbilities": 373
   },
   "abilities": {
@@ -10092,7 +10092,7 @@
       "generation": "generation-iv",
       "effect": "Moves used by or against this Pokémon never miss.\n\nOne-hit KO moves are unaffected.  Moves affected by this ability can hit Pokémon during the preparation turn of moves like Dig or Fly.\n\nOverworld: If the lead Pokémon has this ability, the wild encounter rate is doubled.",
       "shortEffect": "Ensures all moves used by and against the Pokémon hit.",
-      "flavorText": "The Pokémon employs no-guard tactics to ensure incoming and outgoing attacks always land. ",
+      "flavorText": "The Pokémon employs no-guard tactics to ensure incoming and outgoing attacks always land.",
       "pokemon": [
         {
           "name": "machop",
@@ -10176,7 +10176,7 @@
       "generation": "generation-iv",
       "effect": "This Pokémon moves last within its priority bracket.\n\nMultiple Pokémon with this ability move in order of Speed amongst themselves.\n\nThe Full Incense and Lagging Tail take precedence over this ability; that is, Pokémon with these items move after Pokémon with this ability.  Pokémon with both this ability and one of these items are delayed as much as if they had only the item.\n\nThis ability works as usual during Trick Room: Pokémon with this ability will move in reverse order of Speed after Pokémon without it.",
       "shortEffect": "Makes the Pokémon move last within its move's priority bracket.",
-      "flavorText": "The Pokémon is always the last to use its moves. ",
+      "flavorText": "The Pokémon is always the last to use its moves.",
       "pokemon": [
         {
           "name": "sableye",
@@ -11910,7 +11910,7 @@
       "generation": "generation-iv",
       "effect": "If this Pokémon is holding an elemental Plate, its type and form change to match the Plate.\n\nThis Pokémon's held item, whether or not it is a Plate, cannot be taken by Covet or Thief, nor removed by Knock Off, nor traded by Switcheroo or Trick.  Covet, Thief, and Knock Off still inflict damage against this Pokémon.  Unlike with Sticky Hold, this Pokémon cannot use Fling, Switcheroo, or Trick to lose its item itself, nor gain an item through Switcheroo or Trick if it does not have one.\n\nThis ability has no effect for any Pokémon other than Arceus.  This ability cannot be traded with Skill Swap, nor copied with Role Play or Trace, nor disabled with Gastro Acid, nor changed with Worry Seed.  This Pokémon cannot use Skill Swap or Role Play to lose its ability itself.  Mold Breaker cannot ignore this ability.\n\nIf a Pokémon Transforms into an Arceus with this ability, it will Transform into Arceus's default, Normal-type form.  If the Transforming Pokémon is holding a Plate, this ability will then activate and change the Pokémon into the corresponding form.",
       "shortEffect": "Changes Arceus's type and form to match its held Plate.",
-      "flavorText": "Changes the Pokémon's type to match the plate it holds. ",
+      "flavorText": "Changes the Pokémon's type to match the plate it holds.",
       "pokemon": [
         {
           "name": "arceus",

@@ -3,7 +3,7 @@
     "version": "1.0",
     "source": "PokeAPI v2",
     "description": "Complete Pokemon moves database with all details",
-    "lastUpdated": "2026-07-23",
+    "lastUpdated": "2026-07-27",
     "totalMoves": 937
   },
   "moves": {
