@@ -5,9 +5,9 @@
       "upstream": {
         "repo": "PokeAPI/api-data",
         "branch": "master",
-        "sha": "f267a8b3a0e649d7b21ad78f510fac1b7dfb022e"
+        "sha": "e1f01bcd905f71dcc58616f6522873ce4f1334fb"
       },
-      "generated_at": "2026-07-27T06:29:05.361Z",
+      "generated_at": "2026-08-03T06:21:33.888Z",
       "script_version": "1.0.0",
       "counts": {
         "pokemon": 1025,
@@ -36,9 +36,9 @@
       "upstream": {
         "repo": "PokeAPI/api-data",
         "branch": "master",
-        "sha": "f267a8b3a0e649d7b21ad78f510fac1b7dfb022e"
+        "sha": "e1f01bcd905f71dcc58616f6522873ce4f1334fb"
       },
-      "generated_at": "2026-07-27T06:31:20.945Z",
+      "generated_at": "2026-08-03T06:23:47.346Z",
       "script_version": "1.0.0",
       "model": "Xenova/all-MiniLM-L6-v2",
       "dimension": 384,
