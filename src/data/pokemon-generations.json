@@ -1447,40 +1447,12 @@
         "name": "altaria"
       },
       {
-        "id": 340,
-        "name": "whiscash"
-      },
-      {
         "id": 342,
         "name": "crawdaunt"
       },
       {
         "id": 344,
         "name": "claydol"
-      },
-      {
-        "id": 346,
-        "name": "cradily"
-      },
-      {
-        "id": 348,
-        "name": "armaldo"
-      },
-      {
-        "id": 350,
-        "name": "milotic"
-      },
-      {
-        "id": 354,
-        "name": "banette"
-      },
-      {
-        "id": 356,
-        "name": "dusclops"
-      },
-      {
-        "id": 358,
-        "name": "chimecho"
       },
       {
         "id": 362,
@@ -1557,6 +1529,34 @@
       {
         "id": 301,
         "name": "delcatty"
+      },
+      {
+        "id": 340,
+        "name": "whiscash"
+      },
+      {
+        "id": 346,
+        "name": "cradily"
+      },
+      {
+        "id": 348,
+        "name": "armaldo"
+      },
+      {
+        "id": 350,
+        "name": "milotic"
+      },
+      {
+        "id": 354,
+        "name": "banette"
+      },
+      {
+        "id": 356,
+        "name": "dusclops"
+      },
+      {
+        "id": 358,
+        "name": "chimecho"
       },
       {
         "id": 376,
@@ -1718,78 +1718,6 @@
         "name": "prinplup"
       },
       {
-        "id": 395,
-        "name": "empoleon"
-      },
-      {
-        "id": 397,
-        "name": "staravia"
-      },
-      {
-        "id": 398,
-        "name": "staraptor"
-      },
-      {
-        "id": 400,
-        "name": "bibarel"
-      },
-      {
-        "id": 402,
-        "name": "kricketune"
-      },
-      {
-        "id": 404,
-        "name": "luxio"
-      },
-      {
-        "id": 405,
-        "name": "luxray"
-      },
-      {
-        "id": 407,
-        "name": "roserade"
-      },
-      {
-        "id": 409,
-        "name": "rampardos"
-      },
-      {
-        "id": 411,
-        "name": "bastiodon"
-      },
-      {
-        "id": 413,
-        "name": "wormadam-plant"
-      },
-      {
-        "id": 414,
-        "name": "mothim"
-      },
-      {
-        "id": 416,
-        "name": "vespiquen"
-      },
-      {
-        "id": 419,
-        "name": "floatzel"
-      },
-      {
-        "id": 421,
-        "name": "cherrim"
-      },
-      {
-        "id": 424,
-        "name": "ambipom"
-      },
-      {
-        "id": 426,
-        "name": "drifblim"
-      },
-      {
-        "id": 428,
-        "name": "lopunny"
-      },
-      {
         "id": 429,
         "name": "mismagius"
       },
@@ -1910,6 +1838,90 @@
         "name": "lumineon"
       },
       {
+        "id": 391,
+        "name": "monferno"
+      },
+      {
+        "id": 395,
+        "name": "empoleon"
+      },
+      {
+        "id": 397,
+        "name": "staravia"
+      },
+      {
+        "id": 398,
+        "name": "staraptor"
+      },
+      {
+        "id": 400,
+        "name": "bibarel"
+      },
+      {
+        "id": 402,
+        "name": "kricketune"
+      },
+      {
+        "id": 404,
+        "name": "luxio"
+      },
+      {
+        "id": 405,
+        "name": "luxray"
+      },
+      {
+        "id": 407,
+        "name": "roserade"
+      },
+      {
+        "id": 409,
+        "name": "rampardos"
+      },
+      {
+        "id": 411,
+        "name": "bastiodon"
+      },
+      {
+        "id": 413,
+        "name": "wormadam-plant"
+      },
+      {
+        "id": 414,
+        "name": "mothim"
+      },
+      {
+        "id": 416,
+        "name": "vespiquen"
+      },
+      {
+        "id": 419,
+        "name": "floatzel"
+      },
+      {
+        "id": 421,
+        "name": "cherrim"
+      },
+      {
+        "id": 423,
+        "name": "gastrodon"
+      },
+      {
+        "id": 424,
+        "name": "ambipom"
+      },
+      {
+        "id": 426,
+        "name": "drifblim"
+      },
+      {
+        "id": 428,
+        "name": "lopunny"
+      },
+      {
+        "id": 454,
+        "name": "toxicroak"
+      },
+      {
         "id": 460,
         "name": "abomasnow"
       },
@@ -1962,6 +1974,10 @@
         "name": "gliscor"
       },
       {
+        "id": 473,
+        "name": "mamoswine"
+      },
+      {
         "id": 474,
         "name": "porygon-z"
       },
@@ -1980,22 +1996,6 @@
       {
         "id": 478,
         "name": "froslass"
-      },
-      {
-        "id": 391,
-        "name": "monferno"
-      },
-      {
-        "id": 423,
-        "name": "gastrodon"
-      },
-      {
-        "id": 454,
-        "name": "toxicroak"
-      },
-      {
-        "id": 473,
-        "name": "mamoswine"
       }
     ]
   },
@@ -2073,22 +2073,6 @@
         "name": "audino"
       },
       {
-        "id": 496,
-        "name": "servine"
-      },
-      {
-        "id": 497,
-        "name": "serperior"
-      },
-      {
-        "id": 499,
-        "name": "pignite"
-      },
-      {
-        "id": 500,
-        "name": "emboar"
-      },
-      {
         "id": 502,
         "name": "dewott"
       },
@@ -2099,6 +2083,10 @@
       {
         "id": 505,
         "name": "watchog"
+      },
+      {
+        "id": 507,
+        "name": "herdier"
       },
       {
         "id": 508,
@@ -2301,20 +2289,12 @@
         "name": "litwick"
       },
       {
-        "id": 534,
-        "name": "conkeldurr"
-      },
-      {
         "id": 536,
         "name": "palpitoad"
       },
       {
         "id": 537,
         "name": "seismitoad"
-      },
-      {
-        "id": 541,
-        "name": "swadloon"
       },
       {
         "id": 542,
@@ -2355,6 +2335,10 @@
       {
         "id": 560,
         "name": "scrafty"
+      },
+      {
+        "id": 563,
+        "name": "cofagrigus"
       },
       {
         "id": 565,
@@ -2431,6 +2415,10 @@
       {
         "id": 600,
         "name": "klang"
+      },
+      {
+        "id": 601,
+        "name": "klinklang"
       },
       {
         "id": 603,
@@ -2605,20 +2593,32 @@
         "name": "volcarona"
       },
       {
-        "id": 507,
-        "name": "herdier"
+        "id": 496,
+        "name": "servine"
+      },
+      {
+        "id": 497,
+        "name": "serperior"
+      },
+      {
+        "id": 499,
+        "name": "pignite"
+      },
+      {
+        "id": 500,
+        "name": "emboar"
       },
       {
         "id": 533,
         "name": "gurdurr"
       },
       {
-        "id": 563,
-        "name": "cofagrigus"
+        "id": 534,
+        "name": "conkeldurr"
       },
       {
-        "id": 601,
-        "name": "klinklang"
+        "id": 541,
+        "name": "swadloon"
       },
       {
         "id": 609,
@@ -2888,6 +2888,10 @@
         "name": "sylveon"
       },
       {
+        "id": 705,
+        "name": "sliggoo"
+      },
+      {
         "id": 706,
         "name": "goodra"
       },
@@ -2918,10 +2922,6 @@
       {
         "id": 697,
         "name": "tyrantrum"
-      },
-      {
-        "id": 705,
-        "name": "sliggoo"
       }
     ]
   },
@@ -3025,10 +3025,6 @@
       {
         "id": 727,
         "name": "incineroar"
-      },
-      {
-        "id": 729,
-        "name": "brionne"
       },
       {
         "id": 730,
@@ -3269,6 +3265,10 @@
       {
         "id": 809,
         "name": "melmetal"
+      },
+      {
+        "id": 729,
+        "name": "brionne"
       },
       {
         "id": 763,
@@ -4121,22 +4121,6 @@
         "name": "pecharunt"
       },
       {
-        "id": 920,
-        "name": "lokix"
-      },
-      {
-        "id": 930,
-        "name": "arboliva"
-      },
-      {
-        "id": 966,
-        "name": "revavroom"
-      },
-      {
-        "id": 997,
-        "name": "arctibax"
-      },
-      {
         "id": 998,
         "name": "baxcalibur"
       },
@@ -4159,6 +4143,22 @@
       {
         "id": 1019,
         "name": "hydrapple"
+      },
+      {
+        "id": 920,
+        "name": "lokix"
+      },
+      {
+        "id": 930,
+        "name": "arboliva"
+      },
+      {
+        "id": 966,
+        "name": "revavroom"
+      },
+      {
+        "id": 997,
+        "name": "arctibax"
       }
     ]
   }

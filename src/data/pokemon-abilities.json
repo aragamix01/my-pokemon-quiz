@@ -3,7 +3,7 @@
     "version": "1.0",
     "source": "PokeAPI v2",
     "description": "Complete Pokemon abilities database with all details",
-    "lastUpdated": "2026-08-10",
+    "lastUpdated": "2026-08-17",
     "totalAbilities": 373
   },
   "abilities": {
