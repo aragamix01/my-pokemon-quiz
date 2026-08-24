@@ -22247,8 +22247,8 @@
     "base_happiness": 70,
     "growth_rate": "medium",
     "egg_groups": [
-      "ground",
-      "flying"
+      "flying",
+      "ground"
     ],
     "stats": {
       "hp": 65,
@@ -22289,8 +22289,8 @@
     "base_happiness": 70,
     "growth_rate": "medium",
     "egg_groups": [
-      "ground",
-      "flying"
+      "flying",
+      "ground"
     ],
     "stats": {
       "hp": 67,
@@ -23035,8 +23035,8 @@
     "base_happiness": 70,
     "growth_rate": "medium",
     "egg_groups": [
-      "plant",
-      "fairy"
+      "fairy",
+      "plant"
     ],
     "stats": {
       "hp": 40,
@@ -23077,8 +23077,8 @@
     "base_happiness": 70,
     "growth_rate": "medium",
     "egg_groups": [
-      "plant",
-      "fairy"
+      "fairy",
+      "plant"
     ],
     "stats": {
       "hp": 60,
@@ -26164,8 +26164,8 @@
     "base_happiness": 70,
     "growth_rate": "medium",
     "egg_groups": [
-      "dragon",
-      "monster"
+      "monster",
+      "dragon"
     ],
     "stats": {
       "hp": 77,
@@ -38654,8 +38654,8 @@
     "base_happiness": 50,
     "growth_rate": "medium-slow",
     "egg_groups": [
-      "flying",
-      "water1"
+      "water1",
+      "flying"
     ],
     "stats": {
       "hp": 55,
@@ -38695,8 +38695,8 @@
     "base_happiness": 50,
     "growth_rate": "medium-slow",
     "egg_groups": [
-      "flying",
-      "water1"
+      "water1",
+      "flying"
     ],
     "stats": {
       "hp": 70,
@@ -38737,8 +38737,8 @@
     "base_happiness": 50,
     "growth_rate": "medium-slow",
     "egg_groups": [
-      "flying",
-      "water1"
+      "water1",
+      "flying"
     ],
     "stats": {
       "hp": 85,
@@ -42145,8 +42145,8 @@
     "base_happiness": 50,
     "growth_rate": "slow",
     "egg_groups": [
-      "dragon",
-      "mineral"
+      "mineral",
+      "dragon"
     ],
     "stats": {
       "hp": 65,
@@ -42187,8 +42187,8 @@
     "base_happiness": 50,
     "growth_rate": "slow",
     "egg_groups": [
-      "dragon",
-      "mineral"
+      "mineral",
+      "dragon"
     ],
     "stats": {
       "hp": 90,
@@ -42229,8 +42229,8 @@
     "base_happiness": 50,
     "growth_rate": "slow",
     "egg_groups": [
-      "dragon",
-      "mineral"
+      "mineral",
+      "dragon"
     ],
     "stats": {
       "hp": 115,
