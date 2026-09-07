@@ -5,16 +5,16 @@
       "upstream": {
         "repo": "PokeAPI/api-data",
         "branch": "master",
-        "sha": "732c68f4a9427b479a36ec60c5df1db1299fa0ba"
+        "sha": "a128524a7a0d703919e32d63d3fe8f19ec26906f"
       },
-      "generated_at": "2026-08-31T09:21:03.701Z",
+      "generated_at": "2026-09-07T07:55:52.907Z",
       "script_version": "1.0.0",
       "counts": {
         "pokemon": 1025,
         "generations": 9,
         "types": 19,
         "moves": 937,
-        "abilities": 373,
+        "abilities": 374,
         "evolution_items": 49
       }
     },
@@ -22,9 +22,9 @@
       "upstream": {
         "repo": "PokeAPI/sprites",
         "branch": "master",
-        "sha": "c10459b9b0129eaca5c5d9b1cac65336debb1d08"
+        "sha": "6e523c72bb714306c90912647e0b2ccc4fd2fff1"
       },
-      "generated_at": "2026-08-10T04:35:11.840Z",
+      "generated_at": "2026-09-07T08:01:23.505Z",
       "script_version": "1.0.0",
       "strategies": [
         "all",
@@ -36,9 +36,9 @@
       "upstream": {
         "repo": "PokeAPI/api-data",
         "branch": "master",
-        "sha": "732c68f4a9427b479a36ec60c5df1db1299fa0ba"
+        "sha": "a128524a7a0d703919e32d63d3fe8f19ec26906f"
       },
-      "generated_at": "2026-08-31T09:23:28.130Z",
+      "generated_at": "2026-09-07T07:58:08.571Z",
       "script_version": "1.0.0",
       "model": "Xenova/all-MiniLM-L6-v2",
       "dimension": 384,

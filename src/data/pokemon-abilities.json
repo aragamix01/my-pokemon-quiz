@@ -3,8 +3,8 @@
     "version": "1.0",
     "source": "PokeAPI v2",
     "description": "Complete Pokemon abilities database with all details",
-    "lastUpdated": "2026-08-31",
-    "totalAbilities": 373
+    "lastUpdated": "2026-09-07",
+    "totalAbilities": 374
   },
   "abilities": {
     "stench": {
@@ -2875,9 +2875,14 @@
           "name": "chimecho-mega",
           "slot": 1,
           "isHidden": false
+        },
+        {
+          "name": "garchomp-mega-z",
+          "slot": 1,
+          "isHidden": false
         }
       ],
-      "pokemonCount": 44,
+      "pokemonCount": 45,
       "changes": []
     },
     "effect-spore": {
@@ -18900,9 +18905,14 @@
           "name": "samurott-hisui",
           "slot": 3,
           "isHidden": true
+        },
+        {
+          "name": "absol-mega-z",
+          "slot": 1,
+          "isHidden": false
         }
       ],
-      "pokemonCount": 4,
+      "pokemonCount": 5,
       "changes": []
     },
     "supreme-overlord": {
@@ -19321,6 +19331,25 @@
       "pokemon": [
         {
           "name": "pyroar-mega",
+          "slot": 1,
+          "isHidden": false
+        }
+      ],
+      "pokemonCount": 1,
+      "changes": []
+    },
+    "aura-guard": {
+      "id": 314,
+      "name": "aura-guard",
+      "displayName": "Aura Guard",
+      "isMainSeries": true,
+      "generation": "generation-ix",
+      "effect": "A Pokémon with Aura Guard takes half damage from moves that make contact. Moves affected by Long Reach which make contact will deal regular damage.",
+      "shortEffect": "A Pokémon with Aura Guard takes half damage from moves that make contact.",
+      "flavorText": "A Pokémon with Aura Guard takes half damage from moves that make contact. Moves affected by Long Reach which make contact will deal regular damage.",
+      "pokemon": [
+        {
+          "name": "lucario-mega-z",
           "slot": 1,
           "isHidden": false
         }
@@ -20117,10 +20146,10 @@
       "generation-vi": 27,
       "generation-vii": 42,
       "generation-viii": 34,
-      "generation-ix": 46
+      "generation-ix": 47
     },
     "hiddenAbilities": 166,
-    "mainSeries": 313,
+    "mainSeries": 314,
     "mostCommon": [
       {
         "name": "sturdy",
@@ -20140,7 +20169,7 @@
       {
         "name": "levitate",
         "displayName": "Levitate",
-        "pokemonCount": 44
+        "pokemonCount": 45
       },
       {
         "name": "keen-eye",
