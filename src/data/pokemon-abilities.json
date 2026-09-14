@@ -3,7 +3,7 @@
     "version": "1.0",
     "source": "PokeAPI v2",
     "description": "Complete Pokemon abilities database with all details",
-    "lastUpdated": "2026-09-07",
+    "lastUpdated": "2026-09-14",
     "totalAbilities": 374
   },
   "abilities": {
@@ -15911,9 +15911,14 @@
           "name": "barbaracle-mega",
           "slot": 1,
           "isHidden": false
+        },
+        {
+          "name": "golisopod-mega",
+          "slot": 1,
+          "isHidden": false
         }
       ],
-      "pokemonCount": 9,
+      "pokemonCount": 10,
       "changes": []
     },
     "pixilate": {
@@ -18282,9 +18287,14 @@
           "name": "baxcalibur",
           "slot": 1,
           "isHidden": false
+        },
+        {
+          "name": "baxcalibur-mega",
+          "slot": 1,
+          "isHidden": false
         }
       ],
-      "pokemonCount": 3,
+      "pokemonCount": 4,
       "changes": []
     },
     "anger-shell": {
