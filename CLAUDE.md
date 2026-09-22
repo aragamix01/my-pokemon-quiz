@@ -29,6 +29,11 @@ Advanced Pokemon identification quiz with flexible generation support:
 Tools for memorizing Pokemon names, reached from the home page "Learn" tab (`?section=learn`):
 - **Flashcards** (`/learn/[generation]`): Spaced repetition. Each Pokemon goes intro (see name + facts), then choose (4 look-alike options), then type (name from memory, with step-by-step hints and typo tolerance). Leitner boxes schedule reviews; box 4+ counts as mastered. Daily new-card limit (5/10/20), streak, and a collection grid (silhouettes for unseen Pokemon)
 - **Pokedle** (`/guess/[generation]`): Guess a hidden Pokemon in 8 tries; each guess compares type 1/2, generation, color, shape, height, weight (match / close / arrows). Silhouette hint after 4 guesses
+- **Name Them All** (`/name-all/[generation]`): Timed recall. Type every Pokemon name you remember (English or Japanese, exact match as you type); each fills its Pokedex slot, misses revealed at the end
+- **Memory Match** (`/memory/[generation]`): Flip-card pairs, picture ↔ English name or English ↔ Japanese name, 6 or 8 pairs, fewest moves wins
+- **Pixel Reveal** (`/reveal/[generation]`): Name a pixelated artwork (canvas, `PixelatedArt` component); each wrong guess sharpens it and lowers points (6 → 1), optional 4 choices worth 1 point
+- **Evolution Order** (`/evolution/[generation]`): Tap an evolution line into order (one random branch per family). Data from `src/data/evolution-chains.json` (`scripts/fetch-evolution-chains.js`, part of `pipeline.js data`), read via `src/lib/evolution-chains.ts`
+- **Game helpers**: `src/lib/game-utils.ts` (scope from route param, shuffle, clock, best scores in localStorage `pokemon-games-best-v1`)
 - **Both names**: Learn mode and Pokedle show English + Japanese romaji ("Charmander" / "Hitokage", from `name_ja_roma` in metadata, PokeAPI language `ja-roma`) and accept either when typing
 - **Libraries**: `src/lib/learn-progress.ts` (SRS state in localStorage `pokemon-learn-v1`), `src/lib/pokedle.ts` (clue comparison, stats in `pokemon-guess-v1`), `src/lib/pokemon-names.ts` (display names like "Mr. Mime", fuzzy name matching)
 
@@ -194,6 +199,7 @@ All databases now follow a consistent JSON-first structure:
 - **Moves Database**: `pokemon-moves.json` - All 937 moves with complete data (804KB)
 - **Abilities Database**: `pokemon-abilities.json` - All 367 abilities with details (322KB)
 - **Evolution Items**: `evolution-items.json` - Focused 48 evolution items database
+- **Evolution Chains**: `evolution-chains.json` - All 540 evolution chains as species-ID trees (36KB)
 - **Type Effectiveness**: `pokemon-type-effectiveness.json` - Complete type matchup matrix
 
 #### Utility Services (`src/lib/`)

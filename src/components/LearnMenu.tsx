@@ -8,9 +8,42 @@ import { ProgressBar } from '@/components/ui/ProgressBar'
 import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import { LearnState, loadLearnState, scopeStats } from '@/lib/learn-progress'
 import { GenerationNumber } from '@/types/pokemon'
-import { Cards, MagnifyingGlass } from '@phosphor-icons/react'
+import { Cards, MagnifyingGlass, Keyboard, SquaresFour, ImageSquare, TreeStructure } from '@phosphor-icons/react'
 
 const GEN_KEY = 'learn-generation'
+
+const GAMES = [
+  {
+    path: 'guess',
+    title: 'Pokedle',
+    icon: <MagnifyingGlass size={22} color="var(--color-accent)" />,
+    description: 'Guess a hidden Pokemon in 8 tries. Each guess shows which types, generation, color, shape, height and weight match the answer.',
+  },
+  {
+    path: 'name-all',
+    title: 'Name Them All',
+    icon: <Keyboard size={22} color="var(--color-accent)" />,
+    description: 'Type every Pokemon you can remember before time runs out. Each name fills its spot in the Pokedex, and the ones you missed are shown at the end.',
+  },
+  {
+    path: 'memory',
+    title: 'Memory Match',
+    icon: <SquaresFour size={22} color="var(--color-accent)" />,
+    description: 'Flip cards to find pairs: a picture with its name, or an English name with its Japanese name.',
+  },
+  {
+    path: 'reveal',
+    title: 'Pixel Reveal',
+    icon: <ImageSquare size={22} color="var(--color-accent)" />,
+    description: 'Name the Pokemon from a blocky, pixelated picture. Every wrong guess makes it sharper and worth fewer points.',
+  },
+  {
+    path: 'evolution',
+    title: 'Evolution Order',
+    icon: <TreeStructure size={22} color="var(--color-accent)" />,
+    description: 'Put an evolution family in order, from first form to final evolution, and learn the names together.',
+  },
+]
 
 export default function LearnMenu() {
   const router = useRouter()
@@ -74,17 +107,16 @@ export default function LearnMenu() {
           <Button block onClick={() => router.push(`/learn/${slug}`)}>Study</Button>
         </div>
 
-        <div className="card" style={{ gap: 'var(--space-4)' }}>
-          <div className="flex items-center gap-2">
-            <MagnifyingGlass size={22} color="var(--color-accent)" />
-            <h3 className="card-title">Pokedle</h3>
+        {GAMES.map(game => (
+          <div key={game.path} className="card" style={{ gap: 'var(--space-4)' }}>
+            <div className="flex items-center gap-2">
+              {game.icon}
+              <h3 className="card-title">{game.title}</h3>
+            </div>
+            <p className="card-body">{game.description}</p>
+            <Button block onClick={() => router.push(`/${game.path}/${slug}`)}>Play</Button>
           </div>
-          <p className="card-body">
-            Guess a hidden Pokemon in 8 tries. Each guess shows which types, generation, color, shape, height
-            and weight match the answer.
-          </p>
-          <Button block onClick={() => router.push(`/guess/${slug}`)}>Play</Button>
-        </div>
+        ))}
       </div>
     </div>
   )
