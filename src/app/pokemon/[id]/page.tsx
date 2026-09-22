@@ -110,7 +110,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
   }
 
   const getJapaneseName = () => {
-    return data?.species.names.find(name => name.language.name === 'roomaji')?.name || 
+    return data?.species.names.find(name => name.language.name === 'ja-roma')?.name || 
            data?.species.names.find(name => name.language.name === 'ja')?.name || ''
   }
 
