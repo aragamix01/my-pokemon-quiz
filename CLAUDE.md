@@ -25,6 +25,13 @@ Advanced Pokemon identification quiz with flexible generation support:
 - **Metadata-Powered**: Ultra-fast loading using local Pokemon database (no API calls)
 - **Cross-Generation Mode**: `/quiz/all` route for ultimate challenge with all 1000+ Pokemon
 
+## Learn Mode
+Tools for memorizing Pokemon names, reached from the home page "Learn" tab (`?section=learn`):
+- **Flashcards** (`/learn/[generation]`): Spaced repetition. Each Pokemon goes intro (see name + facts), then choose (4 look-alike options), then type (name from memory, with step-by-step hints and typo tolerance). Leitner boxes schedule reviews; box 4+ counts as mastered. Daily new-card limit (5/10/20), streak, and a collection grid (silhouettes for unseen Pokemon)
+- **Pokedle** (`/guess/[generation]`): Guess a hidden Pokemon in 8 tries; each guess compares type 1/2, generation, color, shape, height, weight (match / close / arrows). Silhouette hint after 4 guesses
+- **Both names**: Learn mode and Pokedle show English + Japanese romaji ("Charmander" / "Hitokage", from `name_ja_roma` in metadata, PokeAPI language `ja-roma`) and accept either when typing
+- **Libraries**: `src/lib/learn-progress.ts` (SRS state in localStorage `pokemon-learn-v1`), `src/lib/pokedle.ts` (clue comparison, stats in `pokemon-guess-v1`), `src/lib/pokemon-names.ts` (display names like "Mr. Mime", fuzzy name matching)
+
 ## Pokedex
 Ultra-high-performance Pokemon directory with cross-generation capabilities:
 - **Cross-Generation Search**: "All" button enables searching across all 1000+ Pokemon from Gen 1-9

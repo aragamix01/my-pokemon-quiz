@@ -3,6 +3,7 @@
     "id": 1,
     "name": "bulbasaur",
     "species_name": "bulbasaur",
+    "name_ja_roma": "Fushigidane",
     "generation": 1,
     "types": [
       "grass",
@@ -45,6 +46,7 @@
     "id": 2,
     "name": "ivysaur",
     "species_name": "ivysaur",
+    "name_ja_roma": "Fushigisou",
     "generation": 1,
     "types": [
       "grass",
@@ -87,6 +89,7 @@
     "id": 3,
     "name": "venusaur",
     "species_name": "venusaur",
+    "name_ja_roma": "Fushigibana",
     "generation": 1,
     "types": [
       "grass",
@@ -139,6 +142,7 @@
     "id": 4,
     "name": "charmander",
     "species_name": "charmander",
+    "name_ja_roma": "Hitokage",
     "generation": 1,
     "types": [
       "fire"
@@ -180,6 +184,7 @@
     "id": 5,
     "name": "charmeleon",
     "species_name": "charmeleon",
+    "name_ja_roma": "Lizardo",
     "generation": 1,
     "types": [
       "fire"
@@ -221,6 +226,7 @@
     "id": 6,
     "name": "charizard",
     "species_name": "charizard",
+    "name_ja_roma": "Lizardon",
     "generation": 1,
     "types": [
       "fire",
@@ -278,6 +284,7 @@
     "id": 7,
     "name": "squirtle",
     "species_name": "squirtle",
+    "name_ja_roma": "Zenigame",
     "generation": 1,
     "types": [
       "water"
@@ -319,6 +326,7 @@
     "id": 8,
     "name": "wartortle",
     "species_name": "wartortle",
+    "name_ja_roma": "Kameil",
     "generation": 1,
     "types": [
       "water"
@@ -360,6 +368,7 @@
     "id": 9,
     "name": "blastoise",
     "species_name": "blastoise",
+    "name_ja_roma": "Kamex",
     "generation": 1,
     "types": [
       "water"
@@ -411,6 +420,7 @@
     "id": 10,
     "name": "caterpie",
     "species_name": "caterpie",
+    "name_ja_roma": "Caterpie",
     "generation": 1,
     "types": [
       "bug"
@@ -451,6 +461,7 @@
     "id": 11,
     "name": "metapod",
     "species_name": "metapod",
+    "name_ja_roma": "Transel",
     "generation": 1,
     "types": [
       "bug"
@@ -491,6 +502,7 @@
     "id": 12,
     "name": "butterfree",
     "species_name": "butterfree",
+    "name_ja_roma": "Butterfree",
     "generation": 1,
     "types": [
       "bug",
@@ -537,6 +549,7 @@
     "id": 13,
     "name": "weedle",
     "species_name": "weedle",
+    "name_ja_roma": "Beedle",
     "generation": 1,
     "types": [
       "bug",
@@ -578,6 +591,7 @@
     "id": 14,
     "name": "kakuna",
     "species_name": "kakuna",
+    "name_ja_roma": "Cocoon",
     "generation": 1,
     "types": [
       "bug",
@@ -619,6 +633,7 @@
     "id": 15,
     "name": "beedrill",
     "species_name": "beedrill",
+    "name_ja_roma": "Spear",
     "generation": 1,
     "types": [
       "bug",
@@ -665,6 +680,7 @@
     "id": 16,
     "name": "pidgey",
     "species_name": "pidgey",
+    "name_ja_roma": "Poppo",
     "generation": 1,
     "types": [
       "normal",
@@ -706,6 +722,7 @@
     "id": 17,
     "name": "pidgeotto",
     "species_name": "pidgeotto",
+    "name_ja_roma": "Pigeon",
     "generation": 1,
     "types": [
       "normal",
@@ -747,6 +764,7 @@
     "id": 18,
     "name": "pidgeot",
     "species_name": "pidgeot",
+    "name_ja_roma": "Pigeot",
     "generation": 1,
     "types": [
       "normal",
@@ -793,6 +811,7 @@
     "id": 19,
     "name": "rattata",
     "species_name": "rattata",
+    "name_ja_roma": "Koratta",
     "generation": 1,
     "types": [
       "normal"
@@ -838,6 +857,7 @@
     "id": 20,
     "name": "raticate",
     "species_name": "raticate",
+    "name_ja_roma": "Ratta",
     "generation": 1,
     "types": [
       "normal"
@@ -888,6 +908,7 @@
     "id": 21,
     "name": "spearow",
     "species_name": "spearow",
+    "name_ja_roma": "Onisuzume",
     "generation": 1,
     "types": [
       "normal",
@@ -929,6 +950,7 @@
     "id": 22,
     "name": "fearow",
     "species_name": "fearow",
+    "name_ja_roma": "Onidrill",
     "generation": 1,
     "types": [
       "normal",
@@ -970,6 +992,7 @@
     "id": 23,
     "name": "ekans",
     "species_name": "ekans",
+    "name_ja_roma": "Arbo",
     "generation": 1,
     "types": [
       "poison"
@@ -1011,6 +1034,7 @@
     "id": 24,
     "name": "arbok",
     "species_name": "arbok",
+    "name_ja_roma": "Arbok",
     "generation": 1,
     "types": [
       "poison"
@@ -1052,6 +1076,7 @@
     "id": 25,
     "name": "pikachu",
     "species_name": "pikachu",
+    "name_ja_roma": "Pikachu",
     "generation": 1,
     "types": [
       "electric"
@@ -1173,6 +1198,7 @@
     "id": 26,
     "name": "raichu",
     "species_name": "raichu",
+    "name_ja_roma": "Raichu",
     "generation": 1,
     "types": [
       "electric"
@@ -1229,6 +1255,7 @@
     "id": 27,
     "name": "sandshrew",
     "species_name": "sandshrew",
+    "name_ja_roma": "Sand",
     "generation": 1,
     "types": [
       "ground"
@@ -1274,6 +1301,7 @@
     "id": 28,
     "name": "sandslash",
     "species_name": "sandslash",
+    "name_ja_roma": "Sandpan",
     "generation": 1,
     "types": [
       "ground"
@@ -1319,6 +1347,7 @@
     "id": 29,
     "name": "nidoran-f",
     "species_name": "nidoran-f",
+    "name_ja_roma": "Nidoran♀",
     "generation": 1,
     "types": [
       "poison"
@@ -1360,6 +1389,7 @@
     "id": 30,
     "name": "nidorina",
     "species_name": "nidorina",
+    "name_ja_roma": "Nidorina",
     "generation": 1,
     "types": [
       "poison"
@@ -1400,6 +1430,7 @@
     "id": 31,
     "name": "nidoqueen",
     "species_name": "nidoqueen",
+    "name_ja_roma": "Nidoqueen",
     "generation": 1,
     "types": [
       "poison",
@@ -1441,6 +1472,7 @@
     "id": 32,
     "name": "nidoran-m",
     "species_name": "nidoran-m",
+    "name_ja_roma": "Nidoran♂",
     "generation": 1,
     "types": [
       "poison"
@@ -1482,6 +1514,7 @@
     "id": 33,
     "name": "nidorino",
     "species_name": "nidorino",
+    "name_ja_roma": "Nidorino",
     "generation": 1,
     "types": [
       "poison"
@@ -1523,6 +1556,7 @@
     "id": 34,
     "name": "nidoking",
     "species_name": "nidoking",
+    "name_ja_roma": "Nidoking",
     "generation": 1,
     "types": [
       "poison",
@@ -1565,6 +1599,7 @@
     "id": 35,
     "name": "clefairy",
     "species_name": "clefairy",
+    "name_ja_roma": "Pippi",
     "generation": 1,
     "types": [
       "fairy"
@@ -1605,6 +1640,7 @@
     "id": 36,
     "name": "clefable",
     "species_name": "clefable",
+    "name_ja_roma": "Pixy",
     "generation": 1,
     "types": [
       "fairy"
@@ -1650,6 +1686,7 @@
     "id": 37,
     "name": "vulpix",
     "species_name": "vulpix",
+    "name_ja_roma": "Rokon",
     "generation": 1,
     "types": [
       "fire"
@@ -1695,6 +1732,7 @@
     "id": 38,
     "name": "ninetales",
     "species_name": "ninetales",
+    "name_ja_roma": "Kyukon",
     "generation": 1,
     "types": [
       "fire"
@@ -1740,6 +1778,7 @@
     "id": 39,
     "name": "jigglypuff",
     "species_name": "jigglypuff",
+    "name_ja_roma": "Purin",
     "generation": 1,
     "types": [
       "normal",
@@ -1781,6 +1820,7 @@
     "id": 40,
     "name": "wigglytuff",
     "species_name": "wigglytuff",
+    "name_ja_roma": "Pukurin",
     "generation": 1,
     "types": [
       "normal",
@@ -1822,6 +1862,7 @@
     "id": 41,
     "name": "zubat",
     "species_name": "zubat",
+    "name_ja_roma": "Zubat",
     "generation": 1,
     "types": [
       "poison",
@@ -1863,6 +1904,7 @@
     "id": 42,
     "name": "golbat",
     "species_name": "golbat",
+    "name_ja_roma": "Golbat",
     "generation": 1,
     "types": [
       "poison",
@@ -1904,6 +1946,7 @@
     "id": 43,
     "name": "oddish",
     "species_name": "oddish",
+    "name_ja_roma": "Nazonokusa",
     "generation": 1,
     "types": [
       "grass",
@@ -1945,6 +1988,7 @@
     "id": 44,
     "name": "gloom",
     "species_name": "gloom",
+    "name_ja_roma": "Kusaihana",
     "generation": 1,
     "types": [
       "grass",
@@ -1986,6 +2030,7 @@
     "id": 45,
     "name": "vileplume",
     "species_name": "vileplume",
+    "name_ja_roma": "Ruffresia",
     "generation": 1,
     "types": [
       "grass",
@@ -2027,6 +2072,7 @@
     "id": 46,
     "name": "paras",
     "species_name": "paras",
+    "name_ja_roma": "Paras",
     "generation": 1,
     "types": [
       "bug",
@@ -2069,6 +2115,7 @@
     "id": 47,
     "name": "parasect",
     "species_name": "parasect",
+    "name_ja_roma": "Parasect",
     "generation": 1,
     "types": [
       "bug",
@@ -2111,6 +2158,7 @@
     "id": 48,
     "name": "venonat",
     "species_name": "venonat",
+    "name_ja_roma": "Kongpang",
     "generation": 1,
     "types": [
       "bug",
@@ -2152,6 +2200,7 @@
     "id": 49,
     "name": "venomoth",
     "species_name": "venomoth",
+    "name_ja_roma": "Morphon",
     "generation": 1,
     "types": [
       "bug",
@@ -2193,6 +2242,7 @@
     "id": 50,
     "name": "diglett",
     "species_name": "diglett",
+    "name_ja_roma": "Digda",
     "generation": 1,
     "types": [
       "ground"
@@ -2238,6 +2288,7 @@
     "id": 51,
     "name": "dugtrio",
     "species_name": "dugtrio",
+    "name_ja_roma": "Dugtrio",
     "generation": 1,
     "types": [
       "ground"
@@ -2283,6 +2334,7 @@
     "id": 52,
     "name": "meowth",
     "species_name": "meowth",
+    "name_ja_roma": "Nyarth",
     "generation": 1,
     "types": [
       "normal"
@@ -2338,6 +2390,7 @@
     "id": 53,
     "name": "persian",
     "species_name": "persian",
+    "name_ja_roma": "Persian",
     "generation": 1,
     "types": [
       "normal"
@@ -2383,6 +2436,7 @@
     "id": 54,
     "name": "psyduck",
     "species_name": "psyduck",
+    "name_ja_roma": "Koduck",
     "generation": 1,
     "types": [
       "water"
@@ -2424,6 +2478,7 @@
     "id": 55,
     "name": "golduck",
     "species_name": "golduck",
+    "name_ja_roma": "Golduck",
     "generation": 1,
     "types": [
       "water"
@@ -2465,6 +2520,7 @@
     "id": 56,
     "name": "mankey",
     "species_name": "mankey",
+    "name_ja_roma": "Mankey",
     "generation": 1,
     "types": [
       "fighting"
@@ -2505,6 +2561,7 @@
     "id": 57,
     "name": "primeape",
     "species_name": "primeape",
+    "name_ja_roma": "Okorizaru",
     "generation": 1,
     "types": [
       "fighting"
@@ -2545,6 +2602,7 @@
     "id": 58,
     "name": "growlithe",
     "species_name": "growlithe",
+    "name_ja_roma": "Gardie",
     "generation": 1,
     "types": [
       "fire"
@@ -2590,6 +2648,7 @@
     "id": 59,
     "name": "arcanine",
     "species_name": "arcanine",
+    "name_ja_roma": "Windie",
     "generation": 1,
     "types": [
       "fire"
@@ -2635,6 +2694,7 @@
     "id": 60,
     "name": "poliwag",
     "species_name": "poliwag",
+    "name_ja_roma": "Nyoromo",
     "generation": 1,
     "types": [
       "water"
@@ -2675,6 +2735,7 @@
     "id": 61,
     "name": "poliwhirl",
     "species_name": "poliwhirl",
+    "name_ja_roma": "Nyorozo",
     "generation": 1,
     "types": [
       "water"
@@ -2715,6 +2776,7 @@
     "id": 62,
     "name": "poliwrath",
     "species_name": "poliwrath",
+    "name_ja_roma": "Nyorobon",
     "generation": 1,
     "types": [
       "water",
@@ -2756,6 +2818,7 @@
     "id": 63,
     "name": "abra",
     "species_name": "abra",
+    "name_ja_roma": "Casey",
     "generation": 1,
     "types": [
       "psychic"
@@ -2796,6 +2859,7 @@
     "id": 64,
     "name": "kadabra",
     "species_name": "kadabra",
+    "name_ja_roma": "Yungerer",
     "generation": 1,
     "types": [
       "psychic"
@@ -2836,6 +2900,7 @@
     "id": 65,
     "name": "alakazam",
     "species_name": "alakazam",
+    "name_ja_roma": "Foodin",
     "generation": 1,
     "types": [
       "psychic"
@@ -2881,6 +2946,7 @@
     "id": 66,
     "name": "machop",
     "species_name": "machop",
+    "name_ja_roma": "Wanriky",
     "generation": 1,
     "types": [
       "fighting"
@@ -2921,6 +2987,7 @@
     "id": 67,
     "name": "machoke",
     "species_name": "machoke",
+    "name_ja_roma": "Goriky",
     "generation": 1,
     "types": [
       "fighting"
@@ -2961,6 +3028,7 @@
     "id": 68,
     "name": "machamp",
     "species_name": "machamp",
+    "name_ja_roma": "Kairiky",
     "generation": 1,
     "types": [
       "fighting"
@@ -3006,6 +3074,7 @@
     "id": 69,
     "name": "bellsprout",
     "species_name": "bellsprout",
+    "name_ja_roma": "Madatsubomi",
     "generation": 1,
     "types": [
       "grass",
@@ -3047,6 +3116,7 @@
     "id": 70,
     "name": "weepinbell",
     "species_name": "weepinbell",
+    "name_ja_roma": "Utsudon",
     "generation": 1,
     "types": [
       "grass",
@@ -3088,6 +3158,7 @@
     "id": 71,
     "name": "victreebel",
     "species_name": "victreebel",
+    "name_ja_roma": "Utsubot",
     "generation": 1,
     "types": [
       "grass",
@@ -3134,6 +3205,7 @@
     "id": 72,
     "name": "tentacool",
     "species_name": "tentacool",
+    "name_ja_roma": "Menokurage",
     "generation": 1,
     "types": [
       "water",
@@ -3175,6 +3247,7 @@
     "id": 73,
     "name": "tentacruel",
     "species_name": "tentacruel",
+    "name_ja_roma": "Dokukurage",
     "generation": 1,
     "types": [
       "water",
@@ -3216,6 +3289,7 @@
     "id": 74,
     "name": "geodude",
     "species_name": "geodude",
+    "name_ja_roma": "Isitsubute",
     "generation": 1,
     "types": [
       "rock",
@@ -3262,6 +3336,7 @@
     "id": 75,
     "name": "graveler",
     "species_name": "graveler",
+    "name_ja_roma": "Golone",
     "generation": 1,
     "types": [
       "rock",
@@ -3308,6 +3383,7 @@
     "id": 76,
     "name": "golem",
     "species_name": "golem",
+    "name_ja_roma": "Golonya",
     "generation": 1,
     "types": [
       "rock",
@@ -3354,6 +3430,7 @@
     "id": 77,
     "name": "ponyta",
     "species_name": "ponyta",
+    "name_ja_roma": "Ponyta",
     "generation": 1,
     "types": [
       "fire"
@@ -3399,6 +3476,7 @@
     "id": 78,
     "name": "rapidash",
     "species_name": "rapidash",
+    "name_ja_roma": "Gallop",
     "generation": 1,
     "types": [
       "fire"
@@ -3444,6 +3522,7 @@
     "id": 79,
     "name": "slowpoke",
     "species_name": "slowpoke",
+    "name_ja_roma": "Yadon",
     "generation": 1,
     "types": [
       "water",
@@ -3491,6 +3570,7 @@
     "id": 80,
     "name": "slowbro",
     "species_name": "slowbro",
+    "name_ja_roma": "Yadoran",
     "generation": 1,
     "types": [
       "water",
@@ -3543,6 +3623,7 @@
     "id": 81,
     "name": "magnemite",
     "species_name": "magnemite",
+    "name_ja_roma": "Coil",
     "generation": 1,
     "types": [
       "electric",
@@ -3584,6 +3665,7 @@
     "id": 82,
     "name": "magneton",
     "species_name": "magneton",
+    "name_ja_roma": "Rarecoil",
     "generation": 1,
     "types": [
       "electric",
@@ -3625,6 +3707,7 @@
     "id": 83,
     "name": "farfetchd",
     "species_name": "farfetchd",
+    "name_ja_roma": "Kamonegi",
     "generation": 1,
     "types": [
       "normal",
@@ -3672,6 +3755,7 @@
     "id": 84,
     "name": "doduo",
     "species_name": "doduo",
+    "name_ja_roma": "Dodo",
     "generation": 1,
     "types": [
       "normal",
@@ -3713,6 +3797,7 @@
     "id": 85,
     "name": "dodrio",
     "species_name": "dodrio",
+    "name_ja_roma": "Dodorio",
     "generation": 1,
     "types": [
       "normal",
@@ -3754,6 +3839,7 @@
     "id": 86,
     "name": "seel",
     "species_name": "seel",
+    "name_ja_roma": "Pawou",
     "generation": 1,
     "types": [
       "water"
@@ -3795,6 +3881,7 @@
     "id": 87,
     "name": "dewgong",
     "species_name": "dewgong",
+    "name_ja_roma": "Jugon",
     "generation": 1,
     "types": [
       "water",
@@ -3837,6 +3924,7 @@
     "id": 88,
     "name": "grimer",
     "species_name": "grimer",
+    "name_ja_roma": "Betbeter",
     "generation": 1,
     "types": [
       "poison"
@@ -3882,6 +3970,7 @@
     "id": 89,
     "name": "muk",
     "species_name": "muk",
+    "name_ja_roma": "Betbeton",
     "generation": 1,
     "types": [
       "poison"
@@ -3927,6 +4016,7 @@
     "id": 90,
     "name": "shellder",
     "species_name": "shellder",
+    "name_ja_roma": "Shellder",
     "generation": 1,
     "types": [
       "water"
@@ -3967,6 +4057,7 @@
     "id": 91,
     "name": "cloyster",
     "species_name": "cloyster",
+    "name_ja_roma": "Parshen",
     "generation": 1,
     "types": [
       "water",
@@ -4008,6 +4099,7 @@
     "id": 92,
     "name": "gastly",
     "species_name": "gastly",
+    "name_ja_roma": "Ghos",
     "generation": 1,
     "types": [
       "ghost",
@@ -4049,6 +4141,7 @@
     "id": 93,
     "name": "haunter",
     "species_name": "haunter",
+    "name_ja_roma": "Ghost",
     "generation": 1,
     "types": [
       "ghost",
@@ -4090,6 +4183,7 @@
     "id": 94,
     "name": "gengar",
     "species_name": "gengar",
+    "name_ja_roma": "Gangar",
     "generation": 1,
     "types": [
       "ghost",
@@ -4141,6 +4235,7 @@
     "id": 95,
     "name": "onix",
     "species_name": "onix",
+    "name_ja_roma": "Iwark",
     "generation": 1,
     "types": [
       "rock",
@@ -4182,6 +4277,7 @@
     "id": 96,
     "name": "drowzee",
     "species_name": "drowzee",
+    "name_ja_roma": "Sleepe",
     "generation": 1,
     "types": [
       "psychic"
@@ -4222,6 +4318,7 @@
     "id": 97,
     "name": "hypno",
     "species_name": "hypno",
+    "name_ja_roma": "Sleeper",
     "generation": 1,
     "types": [
       "psychic"
@@ -4262,6 +4359,7 @@
     "id": 98,
     "name": "krabby",
     "species_name": "krabby",
+    "name_ja_roma": "Crab",
     "generation": 1,
     "types": [
       "water"
@@ -4302,6 +4400,7 @@
     "id": 99,
     "name": "kingler",
     "species_name": "kingler",
+    "name_ja_roma": "Kingler",
     "generation": 1,
     "types": [
       "water"
@@ -4347,6 +4446,7 @@
     "id": 100,
     "name": "voltorb",
     "species_name": "voltorb",
+    "name_ja_roma": "Biriridama",
     "generation": 1,
     "types": [
       "electric"
@@ -4392,6 +4492,7 @@
     "id": 101,
     "name": "electrode",
     "species_name": "electrode",
+    "name_ja_roma": "Marumine",
     "generation": 1,
     "types": [
       "electric"
@@ -4437,6 +4538,7 @@
     "id": 102,
     "name": "exeggcute",
     "species_name": "exeggcute",
+    "name_ja_roma": "Tamatama",
     "generation": 1,
     "types": [
       "grass",
@@ -4478,6 +4580,7 @@
     "id": 103,
     "name": "exeggutor",
     "species_name": "exeggutor",
+    "name_ja_roma": "Nassy",
     "generation": 1,
     "types": [
       "grass",
@@ -4524,6 +4627,7 @@
     "id": 104,
     "name": "cubone",
     "species_name": "cubone",
+    "name_ja_roma": "Karakara",
     "generation": 1,
     "types": [
       "ground"
@@ -4564,6 +4668,7 @@
     "id": 105,
     "name": "marowak",
     "species_name": "marowak",
+    "name_ja_roma": "Garagara",
     "generation": 1,
     "types": [
       "ground"
@@ -4614,6 +4719,7 @@
     "id": 106,
     "name": "hitmonlee",
     "species_name": "hitmonlee",
+    "name_ja_roma": "Sawamular",
     "generation": 1,
     "types": [
       "fighting"
@@ -4654,6 +4760,7 @@
     "id": 107,
     "name": "hitmonchan",
     "species_name": "hitmonchan",
+    "name_ja_roma": "Ebiwalar",
     "generation": 1,
     "types": [
       "fighting"
@@ -4694,6 +4801,7 @@
     "id": 108,
     "name": "lickitung",
     "species_name": "lickitung",
+    "name_ja_roma": "Beroringa",
     "generation": 1,
     "types": [
       "normal"
@@ -4734,6 +4842,7 @@
     "id": 109,
     "name": "koffing",
     "species_name": "koffing",
+    "name_ja_roma": "Dogars",
     "generation": 1,
     "types": [
       "poison"
@@ -4774,6 +4883,7 @@
     "id": 110,
     "name": "weezing",
     "species_name": "weezing",
+    "name_ja_roma": "Matadogas",
     "generation": 1,
     "types": [
       "poison"
@@ -4819,6 +4929,7 @@
     "id": 111,
     "name": "rhyhorn",
     "species_name": "rhyhorn",
+    "name_ja_roma": "Sihorn",
     "generation": 1,
     "types": [
       "ground",
@@ -4861,6 +4972,7 @@
     "id": 112,
     "name": "rhydon",
     "species_name": "rhydon",
+    "name_ja_roma": "Sidon",
     "generation": 1,
     "types": [
       "ground",
@@ -4903,6 +5015,7 @@
     "id": 113,
     "name": "chansey",
     "species_name": "chansey",
+    "name_ja_roma": "Lucky",
     "generation": 1,
     "types": [
       "normal"
@@ -4943,6 +5056,7 @@
     "id": 114,
     "name": "tangela",
     "species_name": "tangela",
+    "name_ja_roma": "Monjara",
     "generation": 1,
     "types": [
       "grass"
@@ -4983,6 +5097,7 @@
     "id": 115,
     "name": "kangaskhan",
     "species_name": "kangaskhan",
+    "name_ja_roma": "Garura",
     "generation": 1,
     "types": [
       "normal"
@@ -5028,6 +5143,7 @@
     "id": 116,
     "name": "horsea",
     "species_name": "horsea",
+    "name_ja_roma": "Tattu",
     "generation": 1,
     "types": [
       "water"
@@ -5069,6 +5185,7 @@
     "id": 117,
     "name": "seadra",
     "species_name": "seadra",
+    "name_ja_roma": "Seadra",
     "generation": 1,
     "types": [
       "water"
@@ -5110,6 +5227,7 @@
     "id": 118,
     "name": "goldeen",
     "species_name": "goldeen",
+    "name_ja_roma": "Tosakinto",
     "generation": 1,
     "types": [
       "water"
@@ -5150,6 +5268,7 @@
     "id": 119,
     "name": "seaking",
     "species_name": "seaking",
+    "name_ja_roma": "Azumao",
     "generation": 1,
     "types": [
       "water"
@@ -5190,6 +5309,7 @@
     "id": 120,
     "name": "staryu",
     "species_name": "staryu",
+    "name_ja_roma": "Hitodeman",
     "generation": 1,
     "types": [
       "water"
@@ -5230,6 +5350,7 @@
     "id": 121,
     "name": "starmie",
     "species_name": "starmie",
+    "name_ja_roma": "Starmie",
     "generation": 1,
     "types": [
       "water",
@@ -5276,6 +5397,7 @@
     "id": 122,
     "name": "mr-mime",
     "species_name": "mr-mime",
+    "name_ja_roma": "Barrierd",
     "generation": 1,
     "types": [
       "psychic",
@@ -5322,6 +5444,7 @@
     "id": 123,
     "name": "scyther",
     "species_name": "scyther",
+    "name_ja_roma": "Strike",
     "generation": 1,
     "types": [
       "bug",
@@ -5363,6 +5486,7 @@
     "id": 124,
     "name": "jynx",
     "species_name": "jynx",
+    "name_ja_roma": "Rougela",
     "generation": 1,
     "types": [
       "ice",
@@ -5404,6 +5528,7 @@
     "id": 125,
     "name": "electabuzz",
     "species_name": "electabuzz",
+    "name_ja_roma": "Eleboo",
     "generation": 1,
     "types": [
       "electric"
@@ -5444,6 +5569,7 @@
     "id": 126,
     "name": "magmar",
     "species_name": "magmar",
+    "name_ja_roma": "Boober",
     "generation": 1,
     "types": [
       "fire"
@@ -5484,6 +5610,7 @@
     "id": 127,
     "name": "pinsir",
     "species_name": "pinsir",
+    "name_ja_roma": "Kailios",
     "generation": 1,
     "types": [
       "bug"
@@ -5529,6 +5656,7 @@
     "id": 128,
     "name": "tauros",
     "species_name": "tauros",
+    "name_ja_roma": "Kentauros",
     "generation": 1,
     "types": [
       "normal"
@@ -5584,6 +5712,7 @@
     "id": 129,
     "name": "magikarp",
     "species_name": "magikarp",
+    "name_ja_roma": "Koiking",
     "generation": 1,
     "types": [
       "water"
@@ -5625,6 +5754,7 @@
     "id": 130,
     "name": "gyarados",
     "species_name": "gyarados",
+    "name_ja_roma": "Gyarados",
     "generation": 1,
     "types": [
       "water",
@@ -5672,6 +5802,7 @@
     "id": 131,
     "name": "lapras",
     "species_name": "lapras",
+    "name_ja_roma": "Laplace",
     "generation": 1,
     "types": [
       "water",
@@ -5719,6 +5850,7 @@
     "id": 132,
     "name": "ditto",
     "species_name": "ditto",
+    "name_ja_roma": "Metamon",
     "generation": 1,
     "types": [
       "normal"
@@ -5759,6 +5891,7 @@
     "id": 133,
     "name": "eevee",
     "species_name": "eevee",
+    "name_ja_roma": "Eievui",
     "generation": 1,
     "types": [
       "normal"
@@ -5809,6 +5942,7 @@
     "id": 134,
     "name": "vaporeon",
     "species_name": "vaporeon",
+    "name_ja_roma": "Showers",
     "generation": 1,
     "types": [
       "water"
@@ -5849,6 +5983,7 @@
     "id": 135,
     "name": "jolteon",
     "species_name": "jolteon",
+    "name_ja_roma": "Thunders",
     "generation": 1,
     "types": [
       "electric"
@@ -5889,6 +6024,7 @@
     "id": 136,
     "name": "flareon",
     "species_name": "flareon",
+    "name_ja_roma": "Booster",
     "generation": 1,
     "types": [
       "fire"
@@ -5929,6 +6065,7 @@
     "id": 137,
     "name": "porygon",
     "species_name": "porygon",
+    "name_ja_roma": "Porygon",
     "generation": 1,
     "types": [
       "normal"
@@ -5969,6 +6106,7 @@
     "id": 138,
     "name": "omanyte",
     "species_name": "omanyte",
+    "name_ja_roma": "Omnite",
     "generation": 1,
     "types": [
       "rock",
@@ -6011,6 +6149,7 @@
     "id": 139,
     "name": "omastar",
     "species_name": "omastar",
+    "name_ja_roma": "Omstar",
     "generation": 1,
     "types": [
       "rock",
@@ -6053,6 +6192,7 @@
     "id": 140,
     "name": "kabuto",
     "species_name": "kabuto",
+    "name_ja_roma": "Kabuto",
     "generation": 1,
     "types": [
       "rock",
@@ -6095,6 +6235,7 @@
     "id": 141,
     "name": "kabutops",
     "species_name": "kabutops",
+    "name_ja_roma": "Kabutops",
     "generation": 1,
     "types": [
       "rock",
@@ -6137,6 +6278,7 @@
     "id": 142,
     "name": "aerodactyl",
     "species_name": "aerodactyl",
+    "name_ja_roma": "Ptera",
     "generation": 1,
     "types": [
       "rock",
@@ -6183,6 +6325,7 @@
     "id": 143,
     "name": "snorlax",
     "species_name": "snorlax",
+    "name_ja_roma": "Kabigon",
     "generation": 1,
     "types": [
       "normal"
@@ -6228,6 +6371,7 @@
     "id": 144,
     "name": "articuno",
     "species_name": "articuno",
+    "name_ja_roma": "Freezer",
     "generation": 1,
     "types": [
       "ice",
@@ -6274,6 +6418,7 @@
     "id": 145,
     "name": "zapdos",
     "species_name": "zapdos",
+    "name_ja_roma": "Thunder",
     "generation": 1,
     "types": [
       "electric",
@@ -6320,6 +6465,7 @@
     "id": 146,
     "name": "moltres",
     "species_name": "moltres",
+    "name_ja_roma": "Fire",
     "generation": 1,
     "types": [
       "fire",
@@ -6366,6 +6512,7 @@
     "id": 147,
     "name": "dratini",
     "species_name": "dratini",
+    "name_ja_roma": "Miniryu",
     "generation": 1,
     "types": [
       "dragon"
@@ -6407,6 +6554,7 @@
     "id": 148,
     "name": "dragonair",
     "species_name": "dragonair",
+    "name_ja_roma": "Hakuryu",
     "generation": 1,
     "types": [
       "dragon"
@@ -6448,6 +6596,7 @@
     "id": 149,
     "name": "dragonite",
     "species_name": "dragonite",
+    "name_ja_roma": "Kairyu",
     "generation": 1,
     "types": [
       "dragon",
@@ -6495,6 +6644,7 @@
     "id": 150,
     "name": "mewtwo",
     "species_name": "mewtwo",
+    "name_ja_roma": "Mewtwo",
     "generation": 1,
     "types": [
       "psychic"
@@ -6545,6 +6695,7 @@
     "id": 151,
     "name": "mew",
     "species_name": "mew",
+    "name_ja_roma": "Mew",
     "generation": 1,
     "types": [
       "psychic"
@@ -6585,6 +6736,7 @@
     "id": 152,
     "name": "chikorita",
     "species_name": "chikorita",
+    "name_ja_roma": "Chicorita",
     "generation": 2,
     "types": [
       "grass"
@@ -6626,6 +6778,7 @@
     "id": 153,
     "name": "bayleef",
     "species_name": "bayleef",
+    "name_ja_roma": "Bayleaf",
     "generation": 2,
     "types": [
       "grass"
@@ -6667,6 +6820,7 @@
     "id": 154,
     "name": "meganium",
     "species_name": "meganium",
+    "name_ja_roma": "Meganium",
     "generation": 2,
     "types": [
       "grass"
@@ -6713,6 +6867,7 @@
     "id": 155,
     "name": "cyndaquil",
     "species_name": "cyndaquil",
+    "name_ja_roma": "Hinoarashi",
     "generation": 2,
     "types": [
       "fire"
@@ -6753,6 +6908,7 @@
     "id": 156,
     "name": "quilava",
     "species_name": "quilava",
+    "name_ja_roma": "Magmarashi",
     "generation": 2,
     "types": [
       "fire"
@@ -6793,6 +6949,7 @@
     "id": 157,
     "name": "typhlosion",
     "species_name": "typhlosion",
+    "name_ja_roma": "Bakphoon",
     "generation": 2,
     "types": [
       "fire"
@@ -6838,6 +6995,7 @@
     "id": 158,
     "name": "totodile",
     "species_name": "totodile",
+    "name_ja_roma": "Waninoko",
     "generation": 2,
     "types": [
       "water"
@@ -6879,6 +7037,7 @@
     "id": 159,
     "name": "croconaw",
     "species_name": "croconaw",
+    "name_ja_roma": "Alligates",
     "generation": 2,
     "types": [
       "water"
@@ -6920,6 +7079,7 @@
     "id": 160,
     "name": "feraligatr",
     "species_name": "feraligatr",
+    "name_ja_roma": "Ordile",
     "generation": 2,
     "types": [
       "water"
@@ -6966,6 +7126,7 @@
     "id": 161,
     "name": "sentret",
     "species_name": "sentret",
+    "name_ja_roma": "Otachi",
     "generation": 2,
     "types": [
       "normal"
@@ -7006,6 +7167,7 @@
     "id": 162,
     "name": "furret",
     "species_name": "furret",
+    "name_ja_roma": "Ootachi",
     "generation": 2,
     "types": [
       "normal"
@@ -7046,6 +7208,7 @@
     "id": 163,
     "name": "hoothoot",
     "species_name": "hoothoot",
+    "name_ja_roma": "Hoho",
     "generation": 2,
     "types": [
       "normal",
@@ -7087,6 +7250,7 @@
     "id": 164,
     "name": "noctowl",
     "species_name": "noctowl",
+    "name_ja_roma": "Yorunozuku",
     "generation": 2,
     "types": [
       "normal",
@@ -7128,6 +7292,7 @@
     "id": 165,
     "name": "ledyba",
     "species_name": "ledyba",
+    "name_ja_roma": "Rediba",
     "generation": 2,
     "types": [
       "bug",
@@ -7169,6 +7334,7 @@
     "id": 166,
     "name": "ledian",
     "species_name": "ledian",
+    "name_ja_roma": "Redian",
     "generation": 2,
     "types": [
       "bug",
@@ -7210,6 +7376,7 @@
     "id": 167,
     "name": "spinarak",
     "species_name": "spinarak",
+    "name_ja_roma": "Itomaru",
     "generation": 2,
     "types": [
       "bug",
@@ -7251,6 +7418,7 @@
     "id": 168,
     "name": "ariados",
     "species_name": "ariados",
+    "name_ja_roma": "Ariados",
     "generation": 2,
     "types": [
       "bug",
@@ -7292,6 +7460,7 @@
     "id": 169,
     "name": "crobat",
     "species_name": "crobat",
+    "name_ja_roma": "Crobat",
     "generation": 2,
     "types": [
       "poison",
@@ -7333,6 +7502,7 @@
     "id": 170,
     "name": "chinchou",
     "species_name": "chinchou",
+    "name_ja_roma": "Chonchie",
     "generation": 2,
     "types": [
       "water",
@@ -7374,6 +7544,7 @@
     "id": 171,
     "name": "lanturn",
     "species_name": "lanturn",
+    "name_ja_roma": "Lantern",
     "generation": 2,
     "types": [
       "water",
@@ -7415,6 +7586,7 @@
     "id": 172,
     "name": "pichu",
     "species_name": "pichu",
+    "name_ja_roma": "Pichu",
     "generation": 2,
     "types": [
       "electric"
@@ -7455,6 +7627,7 @@
     "id": 173,
     "name": "cleffa",
     "species_name": "cleffa",
+    "name_ja_roma": "Py",
     "generation": 2,
     "types": [
       "fairy"
@@ -7495,6 +7668,7 @@
     "id": 174,
     "name": "igglybuff",
     "species_name": "igglybuff",
+    "name_ja_roma": "Pupurin",
     "generation": 2,
     "types": [
       "normal",
@@ -7536,6 +7710,7 @@
     "id": 175,
     "name": "togepi",
     "species_name": "togepi",
+    "name_ja_roma": "Togepy",
     "generation": 2,
     "types": [
       "fairy"
@@ -7576,6 +7751,7 @@
     "id": 176,
     "name": "togetic",
     "species_name": "togetic",
+    "name_ja_roma": "Togechick",
     "generation": 2,
     "types": [
       "fairy",
@@ -7618,6 +7794,7 @@
     "id": 177,
     "name": "natu",
     "species_name": "natu",
+    "name_ja_roma": "Naty",
     "generation": 2,
     "types": [
       "psychic",
@@ -7659,6 +7836,7 @@
     "id": 178,
     "name": "xatu",
     "species_name": "xatu",
+    "name_ja_roma": "Natio",
     "generation": 2,
     "types": [
       "psychic",
@@ -7700,6 +7878,7 @@
     "id": 179,
     "name": "mareep",
     "species_name": "mareep",
+    "name_ja_roma": "Merriep",
     "generation": 2,
     "types": [
       "electric"
@@ -7741,6 +7920,7 @@
     "id": 180,
     "name": "flaaffy",
     "species_name": "flaaffy",
+    "name_ja_roma": "Mokoko",
     "generation": 2,
     "types": [
       "electric"
@@ -7782,6 +7962,7 @@
     "id": 181,
     "name": "ampharos",
     "species_name": "ampharos",
+    "name_ja_roma": "Denryu",
     "generation": 2,
     "types": [
       "electric"
@@ -7828,6 +8009,7 @@
     "id": 182,
     "name": "bellossom",
     "species_name": "bellossom",
+    "name_ja_roma": "Kireihana",
     "generation": 2,
     "types": [
       "grass"
@@ -7868,6 +8050,7 @@
     "id": 183,
     "name": "marill",
     "species_name": "marill",
+    "name_ja_roma": "Maril",
     "generation": 2,
     "types": [
       "water",
@@ -7910,6 +8093,7 @@
     "id": 184,
     "name": "azumarill",
     "species_name": "azumarill",
+    "name_ja_roma": "Marilli",
     "generation": 2,
     "types": [
       "water",
@@ -7952,6 +8136,7 @@
     "id": 185,
     "name": "sudowoodo",
     "species_name": "sudowoodo",
+    "name_ja_roma": "Usokkie",
     "generation": 2,
     "types": [
       "rock"
@@ -7992,6 +8177,7 @@
     "id": 186,
     "name": "politoed",
     "species_name": "politoed",
+    "name_ja_roma": "Nyorotono",
     "generation": 2,
     "types": [
       "water"
@@ -8032,6 +8218,7 @@
     "id": 187,
     "name": "hoppip",
     "species_name": "hoppip",
+    "name_ja_roma": "Hanecco",
     "generation": 2,
     "types": [
       "grass",
@@ -8074,6 +8261,7 @@
     "id": 188,
     "name": "skiploom",
     "species_name": "skiploom",
+    "name_ja_roma": "Popocco",
     "generation": 2,
     "types": [
       "grass",
@@ -8116,6 +8304,7 @@
     "id": 189,
     "name": "jumpluff",
     "species_name": "jumpluff",
+    "name_ja_roma": "Watacco",
     "generation": 2,
     "types": [
       "grass",
@@ -8158,6 +8347,7 @@
     "id": 190,
     "name": "aipom",
     "species_name": "aipom",
+    "name_ja_roma": "Eipam",
     "generation": 2,
     "types": [
       "normal"
@@ -8198,6 +8388,7 @@
     "id": 191,
     "name": "sunkern",
     "species_name": "sunkern",
+    "name_ja_roma": "Himanuts",
     "generation": 2,
     "types": [
       "grass"
@@ -8238,6 +8429,7 @@
     "id": 192,
     "name": "sunflora",
     "species_name": "sunflora",
+    "name_ja_roma": "Kimawari",
     "generation": 2,
     "types": [
       "grass"
@@ -8278,6 +8470,7 @@
     "id": 193,
     "name": "yanma",
     "species_name": "yanma",
+    "name_ja_roma": "Yanyanma",
     "generation": 2,
     "types": [
       "bug",
@@ -8319,6 +8512,7 @@
     "id": 194,
     "name": "wooper",
     "species_name": "wooper",
+    "name_ja_roma": "Upah",
     "generation": 2,
     "types": [
       "water",
@@ -8366,6 +8560,7 @@
     "id": 195,
     "name": "quagsire",
     "species_name": "quagsire",
+    "name_ja_roma": "Nuoh",
     "generation": 2,
     "types": [
       "water",
@@ -8408,6 +8603,7 @@
     "id": 196,
     "name": "espeon",
     "species_name": "espeon",
+    "name_ja_roma": "Eifie",
     "generation": 2,
     "types": [
       "psychic"
@@ -8448,6 +8644,7 @@
     "id": 197,
     "name": "umbreon",
     "species_name": "umbreon",
+    "name_ja_roma": "Bracky",
     "generation": 2,
     "types": [
       "dark"
@@ -8488,6 +8685,7 @@
     "id": 198,
     "name": "murkrow",
     "species_name": "murkrow",
+    "name_ja_roma": "Yamikarasu",
     "generation": 2,
     "types": [
       "dark",
@@ -8529,6 +8727,7 @@
     "id": 199,
     "name": "slowking",
     "species_name": "slowking",
+    "name_ja_roma": "Yadoking",
     "generation": 2,
     "types": [
       "water",
@@ -8576,6 +8775,7 @@
     "id": 200,
     "name": "misdreavus",
     "species_name": "misdreavus",
+    "name_ja_roma": "Muma",
     "generation": 2,
     "types": [
       "ghost"
@@ -8616,6 +8816,7 @@
     "id": 201,
     "name": "unown",
     "species_name": "unown",
+    "name_ja_roma": "Unknown",
     "generation": 2,
     "types": [
       "psychic"
@@ -8656,6 +8857,7 @@
     "id": 202,
     "name": "wobbuffet",
     "species_name": "wobbuffet",
+    "name_ja_roma": "Sonans",
     "generation": 2,
     "types": [
       "psychic"
@@ -8696,6 +8898,7 @@
     "id": 203,
     "name": "girafarig",
     "species_name": "girafarig",
+    "name_ja_roma": "Kirinriki",
     "generation": 2,
     "types": [
       "normal",
@@ -8737,6 +8940,7 @@
     "id": 204,
     "name": "pineco",
     "species_name": "pineco",
+    "name_ja_roma": "Kunugidama",
     "generation": 2,
     "types": [
       "bug"
@@ -8777,6 +8981,7 @@
     "id": 205,
     "name": "forretress",
     "species_name": "forretress",
+    "name_ja_roma": "Foretos",
     "generation": 2,
     "types": [
       "bug",
@@ -8818,6 +9023,7 @@
     "id": 206,
     "name": "dunsparce",
     "species_name": "dunsparce",
+    "name_ja_roma": "Nokocchi",
     "generation": 2,
     "types": [
       "normal"
@@ -8858,6 +9064,7 @@
     "id": 207,
     "name": "gligar",
     "species_name": "gligar",
+    "name_ja_roma": "Gliger",
     "generation": 2,
     "types": [
       "ground",
@@ -8899,6 +9106,7 @@
     "id": 208,
     "name": "steelix",
     "species_name": "steelix",
+    "name_ja_roma": "Haganeil",
     "generation": 2,
     "types": [
       "steel",
@@ -8945,6 +9153,7 @@
     "id": 209,
     "name": "snubbull",
     "species_name": "snubbull",
+    "name_ja_roma": "Bulu",
     "generation": 2,
     "types": [
       "fairy"
@@ -8986,6 +9195,7 @@
     "id": 210,
     "name": "granbull",
     "species_name": "granbull",
+    "name_ja_roma": "Granbulu",
     "generation": 2,
     "types": [
       "fairy"
@@ -9027,6 +9237,7 @@
     "id": 211,
     "name": "qwilfish",
     "species_name": "qwilfish",
+    "name_ja_roma": "Harysen",
     "generation": 2,
     "types": [
       "water",
@@ -9073,6 +9284,7 @@
     "id": 212,
     "name": "scizor",
     "species_name": "scizor",
+    "name_ja_roma": "Hassam",
     "generation": 2,
     "types": [
       "bug",
@@ -9119,6 +9331,7 @@
     "id": 213,
     "name": "shuckle",
     "species_name": "shuckle",
+    "name_ja_roma": "Tsubotsubo",
     "generation": 2,
     "types": [
       "bug",
@@ -9160,6 +9373,7 @@
     "id": 214,
     "name": "heracross",
     "species_name": "heracross",
+    "name_ja_roma": "Heracros",
     "generation": 2,
     "types": [
       "bug",
@@ -9206,6 +9420,7 @@
     "id": 215,
     "name": "sneasel",
     "species_name": "sneasel",
+    "name_ja_roma": "Nyula",
     "generation": 2,
     "types": [
       "dark",
@@ -9252,6 +9467,7 @@
     "id": 216,
     "name": "teddiursa",
     "species_name": "teddiursa",
+    "name_ja_roma": "Himeguma",
     "generation": 2,
     "types": [
       "normal"
@@ -9292,6 +9508,7 @@
     "id": 217,
     "name": "ursaring",
     "species_name": "ursaring",
+    "name_ja_roma": "Ringuma",
     "generation": 2,
     "types": [
       "normal"
@@ -9332,6 +9549,7 @@
     "id": 218,
     "name": "slugma",
     "species_name": "slugma",
+    "name_ja_roma": "Magmag",
     "generation": 2,
     "types": [
       "fire"
@@ -9372,6 +9590,7 @@
     "id": 219,
     "name": "magcargo",
     "species_name": "magcargo",
+    "name_ja_roma": "Magcargot",
     "generation": 2,
     "types": [
       "fire",
@@ -9413,6 +9632,7 @@
     "id": 220,
     "name": "swinub",
     "species_name": "swinub",
+    "name_ja_roma": "Urimoo",
     "generation": 2,
     "types": [
       "ice",
@@ -9454,6 +9674,7 @@
     "id": 221,
     "name": "piloswine",
     "species_name": "piloswine",
+    "name_ja_roma": "Inomoo",
     "generation": 2,
     "types": [
       "ice",
@@ -9495,6 +9716,7 @@
     "id": 222,
     "name": "corsola",
     "species_name": "corsola",
+    "name_ja_roma": "Sunnygo",
     "generation": 2,
     "types": [
       "water",
@@ -9542,6 +9764,7 @@
     "id": 223,
     "name": "remoraid",
     "species_name": "remoraid",
+    "name_ja_roma": "Teppouo",
     "generation": 2,
     "types": [
       "water"
@@ -9583,6 +9806,7 @@
     "id": 224,
     "name": "octillery",
     "species_name": "octillery",
+    "name_ja_roma": "Okutank",
     "generation": 2,
     "types": [
       "water"
@@ -9624,6 +9848,7 @@
     "id": 225,
     "name": "delibird",
     "species_name": "delibird",
+    "name_ja_roma": "Delibird",
     "generation": 2,
     "types": [
       "ice",
@@ -9666,6 +9891,7 @@
     "id": 226,
     "name": "mantine",
     "species_name": "mantine",
+    "name_ja_roma": "Mantain",
     "generation": 2,
     "types": [
       "water",
@@ -9707,6 +9933,7 @@
     "id": 227,
     "name": "skarmory",
     "species_name": "skarmory",
+    "name_ja_roma": "Airmd",
     "generation": 2,
     "types": [
       "steel",
@@ -9753,6 +9980,7 @@
     "id": 228,
     "name": "houndour",
     "species_name": "houndour",
+    "name_ja_roma": "Delvil",
     "generation": 2,
     "types": [
       "dark",
@@ -9794,6 +10022,7 @@
     "id": 229,
     "name": "houndoom",
     "species_name": "houndoom",
+    "name_ja_roma": "Hellgar",
     "generation": 2,
     "types": [
       "dark",
@@ -9840,6 +10069,7 @@
     "id": 230,
     "name": "kingdra",
     "species_name": "kingdra",
+    "name_ja_roma": "Kingdra",
     "generation": 2,
     "types": [
       "water",
@@ -9882,6 +10112,7 @@
     "id": 231,
     "name": "phanpy",
     "species_name": "phanpy",
+    "name_ja_roma": "Gomazou",
     "generation": 2,
     "types": [
       "ground"
@@ -9922,6 +10153,7 @@
     "id": 232,
     "name": "donphan",
     "species_name": "donphan",
+    "name_ja_roma": "Donfan",
     "generation": 2,
     "types": [
       "ground"
@@ -9962,6 +10194,7 @@
     "id": 233,
     "name": "porygon2",
     "species_name": "porygon2",
+    "name_ja_roma": "Porygon2",
     "generation": 2,
     "types": [
       "normal"
@@ -10002,6 +10235,7 @@
     "id": 234,
     "name": "stantler",
     "species_name": "stantler",
+    "name_ja_roma": "Odoshishi",
     "generation": 2,
     "types": [
       "normal"
@@ -10042,6 +10276,7 @@
     "id": 235,
     "name": "smeargle",
     "species_name": "smeargle",
+    "name_ja_roma": "Doble",
     "generation": 2,
     "types": [
       "normal"
@@ -10082,6 +10317,7 @@
     "id": 236,
     "name": "tyrogue",
     "species_name": "tyrogue",
+    "name_ja_roma": "Balkie",
     "generation": 2,
     "types": [
       "fighting"
@@ -10122,6 +10358,7 @@
     "id": 237,
     "name": "hitmontop",
     "species_name": "hitmontop",
+    "name_ja_roma": "Kapoerer",
     "generation": 2,
     "types": [
       "fighting"
@@ -10162,6 +10399,7 @@
     "id": 238,
     "name": "smoochum",
     "species_name": "smoochum",
+    "name_ja_roma": "Muchul",
     "generation": 2,
     "types": [
       "ice",
@@ -10203,6 +10441,7 @@
     "id": 239,
     "name": "elekid",
     "species_name": "elekid",
+    "name_ja_roma": "Elekid",
     "generation": 2,
     "types": [
       "electric"
@@ -10243,6 +10482,7 @@
     "id": 240,
     "name": "magby",
     "species_name": "magby",
+    "name_ja_roma": "Buby",
     "generation": 2,
     "types": [
       "fire"
@@ -10283,6 +10523,7 @@
     "id": 241,
     "name": "miltank",
     "species_name": "miltank",
+    "name_ja_roma": "Miltank",
     "generation": 2,
     "types": [
       "normal"
@@ -10323,6 +10564,7 @@
     "id": 242,
     "name": "blissey",
     "species_name": "blissey",
+    "name_ja_roma": "Happinas",
     "generation": 2,
     "types": [
       "normal"
@@ -10363,6 +10605,7 @@
     "id": 243,
     "name": "raikou",
     "species_name": "raikou",
+    "name_ja_roma": "Raikou",
     "generation": 2,
     "types": [
       "electric"
@@ -10403,6 +10646,7 @@
     "id": 244,
     "name": "entei",
     "species_name": "entei",
+    "name_ja_roma": "Entei",
     "generation": 2,
     "types": [
       "fire"
@@ -10443,6 +10687,7 @@
     "id": 245,
     "name": "suicune",
     "species_name": "suicune",
+    "name_ja_roma": "Suicune",
     "generation": 2,
     "types": [
       "water"
@@ -10483,6 +10728,7 @@
     "id": 246,
     "name": "larvitar",
     "species_name": "larvitar",
+    "name_ja_roma": "Yogiras",
     "generation": 2,
     "types": [
       "rock",
@@ -10524,6 +10770,7 @@
     "id": 247,
     "name": "pupitar",
     "species_name": "pupitar",
+    "name_ja_roma": "Sanagiras",
     "generation": 2,
     "types": [
       "rock",
@@ -10565,6 +10812,7 @@
     "id": 248,
     "name": "tyranitar",
     "species_name": "tyranitar",
+    "name_ja_roma": "Bangiras",
     "generation": 2,
     "types": [
       "rock",
@@ -10611,6 +10859,7 @@
     "id": 249,
     "name": "lugia",
     "species_name": "lugia",
+    "name_ja_roma": "Lugia",
     "generation": 2,
     "types": [
       "psychic",
@@ -10652,6 +10901,7 @@
     "id": 250,
     "name": "ho-oh",
     "species_name": "ho-oh",
+    "name_ja_roma": "Houou",
     "generation": 2,
     "types": [
       "fire",
@@ -10693,6 +10943,7 @@
     "id": 251,
     "name": "celebi",
     "species_name": "celebi",
+    "name_ja_roma": "Celebi",
     "generation": 2,
     "types": [
       "psychic",
@@ -10734,6 +10985,7 @@
     "id": 252,
     "name": "treecko",
     "species_name": "treecko",
+    "name_ja_roma": "Kimori",
     "generation": 3,
     "types": [
       "grass"
@@ -10775,6 +11027,7 @@
     "id": 253,
     "name": "grovyle",
     "species_name": "grovyle",
+    "name_ja_roma": "Juptile",
     "generation": 3,
     "types": [
       "grass"
@@ -10816,6 +11069,7 @@
     "id": 254,
     "name": "sceptile",
     "species_name": "sceptile",
+    "name_ja_roma": "Jukain",
     "generation": 3,
     "types": [
       "grass"
@@ -10862,6 +11116,7 @@
     "id": 255,
     "name": "torchic",
     "species_name": "torchic",
+    "name_ja_roma": "Achamo",
     "generation": 3,
     "types": [
       "fire"
@@ -10902,6 +11157,7 @@
     "id": 256,
     "name": "combusken",
     "species_name": "combusken",
+    "name_ja_roma": "Wakasyamo",
     "generation": 3,
     "types": [
       "fire",
@@ -10943,6 +11199,7 @@
     "id": 257,
     "name": "blaziken",
     "species_name": "blaziken",
+    "name_ja_roma": "Bursyamo",
     "generation": 3,
     "types": [
       "fire",
@@ -10989,6 +11246,7 @@
     "id": 258,
     "name": "mudkip",
     "species_name": "mudkip",
+    "name_ja_roma": "Mizugorou",
     "generation": 3,
     "types": [
       "water"
@@ -11030,6 +11288,7 @@
     "id": 259,
     "name": "marshtomp",
     "species_name": "marshtomp",
+    "name_ja_roma": "Numacraw",
     "generation": 3,
     "types": [
       "water",
@@ -11072,6 +11331,7 @@
     "id": 260,
     "name": "swampert",
     "species_name": "swampert",
+    "name_ja_roma": "Laglarge",
     "generation": 3,
     "types": [
       "water",
@@ -11119,6 +11379,7 @@
     "id": 261,
     "name": "poochyena",
     "species_name": "poochyena",
+    "name_ja_roma": "Pochiena",
     "generation": 3,
     "types": [
       "dark"
@@ -11159,6 +11420,7 @@
     "id": 262,
     "name": "mightyena",
     "species_name": "mightyena",
+    "name_ja_roma": "Graena",
     "generation": 3,
     "types": [
       "dark"
@@ -11199,6 +11461,7 @@
     "id": 263,
     "name": "zigzagoon",
     "species_name": "zigzagoon",
+    "name_ja_roma": "Jiguzaguma",
     "generation": 3,
     "types": [
       "normal"
@@ -11244,6 +11507,7 @@
     "id": 264,
     "name": "linoone",
     "species_name": "linoone",
+    "name_ja_roma": "Massuguma",
     "generation": 3,
     "types": [
       "normal"
@@ -11289,6 +11553,7 @@
     "id": 265,
     "name": "wurmple",
     "species_name": "wurmple",
+    "name_ja_roma": "Kemusso",
     "generation": 3,
     "types": [
       "bug"
@@ -11329,6 +11594,7 @@
     "id": 266,
     "name": "silcoon",
     "species_name": "silcoon",
+    "name_ja_roma": "Karasalis",
     "generation": 3,
     "types": [
       "bug"
@@ -11369,6 +11635,7 @@
     "id": 267,
     "name": "beautifly",
     "species_name": "beautifly",
+    "name_ja_roma": "Agehunt",
     "generation": 3,
     "types": [
       "bug",
@@ -11410,6 +11677,7 @@
     "id": 268,
     "name": "cascoon",
     "species_name": "cascoon",
+    "name_ja_roma": "Mayuld",
     "generation": 3,
     "types": [
       "bug"
@@ -11450,6 +11718,7 @@
     "id": 269,
     "name": "dustox",
     "species_name": "dustox",
+    "name_ja_roma": "Dokucale",
     "generation": 3,
     "types": [
       "bug",
@@ -11491,6 +11760,7 @@
     "id": 270,
     "name": "lotad",
     "species_name": "lotad",
+    "name_ja_roma": "Hassboh",
     "generation": 3,
     "types": [
       "water",
@@ -11533,6 +11803,7 @@
     "id": 271,
     "name": "lombre",
     "species_name": "lombre",
+    "name_ja_roma": "Hasubrero",
     "generation": 3,
     "types": [
       "water",
@@ -11575,6 +11846,7 @@
     "id": 272,
     "name": "ludicolo",
     "species_name": "ludicolo",
+    "name_ja_roma": "Runpappa",
     "generation": 3,
     "types": [
       "water",
@@ -11617,6 +11889,7 @@
     "id": 273,
     "name": "seedot",
     "species_name": "seedot",
+    "name_ja_roma": "Taneboh",
     "generation": 3,
     "types": [
       "grass"
@@ -11658,6 +11931,7 @@
     "id": 274,
     "name": "nuzleaf",
     "species_name": "nuzleaf",
+    "name_ja_roma": "Konohana",
     "generation": 3,
     "types": [
       "grass",
@@ -11700,6 +11974,7 @@
     "id": 275,
     "name": "shiftry",
     "species_name": "shiftry",
+    "name_ja_roma": "Dirteng",
     "generation": 3,
     "types": [
       "grass",
@@ -11742,6 +12017,7 @@
     "id": 276,
     "name": "taillow",
     "species_name": "taillow",
+    "name_ja_roma": "Subame",
     "generation": 3,
     "types": [
       "normal",
@@ -11783,6 +12059,7 @@
     "id": 277,
     "name": "swellow",
     "species_name": "swellow",
+    "name_ja_roma": "Ohsubame",
     "generation": 3,
     "types": [
       "normal",
@@ -11824,6 +12101,7 @@
     "id": 278,
     "name": "wingull",
     "species_name": "wingull",
+    "name_ja_roma": "Camome",
     "generation": 3,
     "types": [
       "water",
@@ -11866,6 +12144,7 @@
     "id": 279,
     "name": "pelipper",
     "species_name": "pelipper",
+    "name_ja_roma": "Pelipper",
     "generation": 3,
     "types": [
       "water",
@@ -11908,6 +12187,7 @@
     "id": 280,
     "name": "ralts",
     "species_name": "ralts",
+    "name_ja_roma": "Ralts",
     "generation": 3,
     "types": [
       "psychic",
@@ -11950,6 +12230,7 @@
     "id": 281,
     "name": "kirlia",
     "species_name": "kirlia",
+    "name_ja_roma": "Kirlia",
     "generation": 3,
     "types": [
       "psychic",
@@ -11992,6 +12273,7 @@
     "id": 282,
     "name": "gardevoir",
     "species_name": "gardevoir",
+    "name_ja_roma": "Sirnight",
     "generation": 3,
     "types": [
       "psychic",
@@ -12039,6 +12321,7 @@
     "id": 283,
     "name": "surskit",
     "species_name": "surskit",
+    "name_ja_roma": "Ametama",
     "generation": 3,
     "types": [
       "bug",
@@ -12081,6 +12364,7 @@
     "id": 284,
     "name": "masquerain",
     "species_name": "masquerain",
+    "name_ja_roma": "Amemoth",
     "generation": 3,
     "types": [
       "bug",
@@ -12123,6 +12407,7 @@
     "id": 285,
     "name": "shroomish",
     "species_name": "shroomish",
+    "name_ja_roma": "Kinococo",
     "generation": 3,
     "types": [
       "grass"
@@ -12164,6 +12449,7 @@
     "id": 286,
     "name": "breloom",
     "species_name": "breloom",
+    "name_ja_roma": "Kinogassa",
     "generation": 3,
     "types": [
       "grass",
@@ -12206,6 +12492,7 @@
     "id": 287,
     "name": "slakoth",
     "species_name": "slakoth",
+    "name_ja_roma": "Namakero",
     "generation": 3,
     "types": [
       "normal"
@@ -12246,6 +12533,7 @@
     "id": 288,
     "name": "vigoroth",
     "species_name": "vigoroth",
+    "name_ja_roma": "Yarukimono",
     "generation": 3,
     "types": [
       "normal"
@@ -12286,6 +12574,7 @@
     "id": 289,
     "name": "slaking",
     "species_name": "slaking",
+    "name_ja_roma": "Kekking",
     "generation": 3,
     "types": [
       "normal"
@@ -12326,6 +12615,7 @@
     "id": 290,
     "name": "nincada",
     "species_name": "nincada",
+    "name_ja_roma": "Tutinin",
     "generation": 3,
     "types": [
       "bug",
@@ -12367,6 +12657,7 @@
     "id": 291,
     "name": "ninjask",
     "species_name": "ninjask",
+    "name_ja_roma": "Tekkanin",
     "generation": 3,
     "types": [
       "bug",
@@ -12408,6 +12699,7 @@
     "id": 292,
     "name": "shedinja",
     "species_name": "shedinja",
+    "name_ja_roma": "Nukenin",
     "generation": 3,
     "types": [
       "bug",
@@ -12449,6 +12741,7 @@
     "id": 293,
     "name": "whismur",
     "species_name": "whismur",
+    "name_ja_roma": "Gonyonyo",
     "generation": 3,
     "types": [
       "normal"
@@ -12490,6 +12783,7 @@
     "id": 294,
     "name": "loudred",
     "species_name": "loudred",
+    "name_ja_roma": "Dogohmb",
     "generation": 3,
     "types": [
       "normal"
@@ -12531,6 +12825,7 @@
     "id": 295,
     "name": "exploud",
     "species_name": "exploud",
+    "name_ja_roma": "Bakuong",
     "generation": 3,
     "types": [
       "normal"
@@ -12572,6 +12867,7 @@
     "id": 296,
     "name": "makuhita",
     "species_name": "makuhita",
+    "name_ja_roma": "Makunoshita",
     "generation": 3,
     "types": [
       "fighting"
@@ -12612,6 +12908,7 @@
     "id": 297,
     "name": "hariyama",
     "species_name": "hariyama",
+    "name_ja_roma": "Hariteyama",
     "generation": 3,
     "types": [
       "fighting"
@@ -12652,6 +12949,7 @@
     "id": 298,
     "name": "azurill",
     "species_name": "azurill",
+    "name_ja_roma": "Ruriri",
     "generation": 3,
     "types": [
       "normal",
@@ -12693,6 +12991,7 @@
     "id": 299,
     "name": "nosepass",
     "species_name": "nosepass",
+    "name_ja_roma": "Nosepass",
     "generation": 3,
     "types": [
       "rock"
@@ -12733,6 +13032,7 @@
     "id": 300,
     "name": "skitty",
     "species_name": "skitty",
+    "name_ja_roma": "Eneco",
     "generation": 3,
     "types": [
       "normal"
@@ -12774,6 +13074,7 @@
     "id": 301,
     "name": "delcatty",
     "species_name": "delcatty",
+    "name_ja_roma": "Enekororo",
     "generation": 3,
     "types": [
       "normal"
@@ -12815,6 +13116,7 @@
     "id": 302,
     "name": "sableye",
     "species_name": "sableye",
+    "name_ja_roma": "Yamirami",
     "generation": 3,
     "types": [
       "dark",
@@ -12861,6 +13163,7 @@
     "id": 303,
     "name": "mawile",
     "species_name": "mawile",
+    "name_ja_roma": "Kucheat",
     "generation": 3,
     "types": [
       "steel",
@@ -12908,6 +13211,7 @@
     "id": 304,
     "name": "aron",
     "species_name": "aron",
+    "name_ja_roma": "Cokodora",
     "generation": 3,
     "types": [
       "steel",
@@ -12949,6 +13253,7 @@
     "id": 305,
     "name": "lairon",
     "species_name": "lairon",
+    "name_ja_roma": "Kodora",
     "generation": 3,
     "types": [
       "steel",
@@ -12990,6 +13295,7 @@
     "id": 306,
     "name": "aggron",
     "species_name": "aggron",
+    "name_ja_roma": "Bossgodora",
     "generation": 3,
     "types": [
       "steel",
@@ -13036,6 +13342,7 @@
     "id": 307,
     "name": "meditite",
     "species_name": "meditite",
+    "name_ja_roma": "Asanan",
     "generation": 3,
     "types": [
       "fighting",
@@ -13077,6 +13384,7 @@
     "id": 308,
     "name": "medicham",
     "species_name": "medicham",
+    "name_ja_roma": "Charem",
     "generation": 3,
     "types": [
       "fighting",
@@ -13123,6 +13431,7 @@
     "id": 309,
     "name": "electrike",
     "species_name": "electrike",
+    "name_ja_roma": "Rakurai",
     "generation": 3,
     "types": [
       "electric"
@@ -13163,6 +13472,7 @@
     "id": 310,
     "name": "manectric",
     "species_name": "manectric",
+    "name_ja_roma": "Livolt",
     "generation": 3,
     "types": [
       "electric"
@@ -13208,6 +13518,7 @@
     "id": 311,
     "name": "plusle",
     "species_name": "plusle",
+    "name_ja_roma": "Prasle",
     "generation": 3,
     "types": [
       "electric"
@@ -13248,6 +13559,7 @@
     "id": 312,
     "name": "minun",
     "species_name": "minun",
+    "name_ja_roma": "Minun",
     "generation": 3,
     "types": [
       "electric"
@@ -13288,6 +13600,7 @@
     "id": 313,
     "name": "volbeat",
     "species_name": "volbeat",
+    "name_ja_roma": "Barubeat",
     "generation": 3,
     "types": [
       "bug"
@@ -13329,6 +13642,7 @@
     "id": 314,
     "name": "illumise",
     "species_name": "illumise",
+    "name_ja_roma": "Illumise",
     "generation": 3,
     "types": [
       "bug"
@@ -13370,6 +13684,7 @@
     "id": 315,
     "name": "roselia",
     "species_name": "roselia",
+    "name_ja_roma": "Roselia",
     "generation": 3,
     "types": [
       "grass",
@@ -13412,6 +13727,7 @@
     "id": 316,
     "name": "gulpin",
     "species_name": "gulpin",
+    "name_ja_roma": "Gokulin",
     "generation": 3,
     "types": [
       "poison"
@@ -13452,6 +13768,7 @@
     "id": 317,
     "name": "swalot",
     "species_name": "swalot",
+    "name_ja_roma": "Marunoom",
     "generation": 3,
     "types": [
       "poison"
@@ -13492,6 +13809,7 @@
     "id": 318,
     "name": "carvanha",
     "species_name": "carvanha",
+    "name_ja_roma": "Kibanha",
     "generation": 3,
     "types": [
       "water",
@@ -13533,6 +13851,7 @@
     "id": 319,
     "name": "sharpedo",
     "species_name": "sharpedo",
+    "name_ja_roma": "Samehader",
     "generation": 3,
     "types": [
       "water",
@@ -13579,6 +13898,7 @@
     "id": 320,
     "name": "wailmer",
     "species_name": "wailmer",
+    "name_ja_roma": "Hoeruko",
     "generation": 3,
     "types": [
       "water"
@@ -13620,6 +13940,7 @@
     "id": 321,
     "name": "wailord",
     "species_name": "wailord",
+    "name_ja_roma": "Whaloh",
     "generation": 3,
     "types": [
       "water"
@@ -13661,6 +13982,7 @@
     "id": 322,
     "name": "numel",
     "species_name": "numel",
+    "name_ja_roma": "Donmel",
     "generation": 3,
     "types": [
       "fire",
@@ -13702,6 +14024,7 @@
     "id": 323,
     "name": "camerupt",
     "species_name": "camerupt",
+    "name_ja_roma": "Bakuuda",
     "generation": 3,
     "types": [
       "fire",
@@ -13748,6 +14071,7 @@
     "id": 324,
     "name": "torkoal",
     "species_name": "torkoal",
+    "name_ja_roma": "Cotoise",
     "generation": 3,
     "types": [
       "fire"
@@ -13788,6 +14112,7 @@
     "id": 325,
     "name": "spoink",
     "species_name": "spoink",
+    "name_ja_roma": "Baneboo",
     "generation": 3,
     "types": [
       "psychic"
@@ -13828,6 +14153,7 @@
     "id": 326,
     "name": "grumpig",
     "species_name": "grumpig",
+    "name_ja_roma": "Boopig",
     "generation": 3,
     "types": [
       "psychic"
@@ -13868,6 +14194,7 @@
     "id": 327,
     "name": "spinda",
     "species_name": "spinda",
+    "name_ja_roma": "Patcheel",
     "generation": 3,
     "types": [
       "normal"
@@ -13909,6 +14236,7 @@
     "id": 328,
     "name": "trapinch",
     "species_name": "trapinch",
+    "name_ja_roma": "Nuckrar",
     "generation": 3,
     "types": [
       "ground"
@@ -13950,6 +14278,7 @@
     "id": 329,
     "name": "vibrava",
     "species_name": "vibrava",
+    "name_ja_roma": "Vibrava",
     "generation": 3,
     "types": [
       "ground",
@@ -13992,6 +14321,7 @@
     "id": 330,
     "name": "flygon",
     "species_name": "flygon",
+    "name_ja_roma": "Flygon",
     "generation": 3,
     "types": [
       "ground",
@@ -14034,6 +14364,7 @@
     "id": 331,
     "name": "cacnea",
     "species_name": "cacnea",
+    "name_ja_roma": "Sabonea",
     "generation": 3,
     "types": [
       "grass"
@@ -14075,6 +14406,7 @@
     "id": 332,
     "name": "cacturne",
     "species_name": "cacturne",
+    "name_ja_roma": "Noctus",
     "generation": 3,
     "types": [
       "grass",
@@ -14117,6 +14449,7 @@
     "id": 333,
     "name": "swablu",
     "species_name": "swablu",
+    "name_ja_roma": "Tyltto",
     "generation": 3,
     "types": [
       "normal",
@@ -14159,6 +14492,7 @@
     "id": 334,
     "name": "altaria",
     "species_name": "altaria",
+    "name_ja_roma": "Tyltalis",
     "generation": 3,
     "types": [
       "dragon",
@@ -14206,6 +14540,7 @@
     "id": 335,
     "name": "zangoose",
     "species_name": "zangoose",
+    "name_ja_roma": "Zangoose",
     "generation": 3,
     "types": [
       "normal"
@@ -14246,6 +14581,7 @@
     "id": 336,
     "name": "seviper",
     "species_name": "seviper",
+    "name_ja_roma": "Habunake",
     "generation": 3,
     "types": [
       "poison"
@@ -14287,6 +14623,7 @@
     "id": 337,
     "name": "lunatone",
     "species_name": "lunatone",
+    "name_ja_roma": "Lunatone",
     "generation": 3,
     "types": [
       "rock",
@@ -14328,6 +14665,7 @@
     "id": 338,
     "name": "solrock",
     "species_name": "solrock",
+    "name_ja_roma": "Solrock",
     "generation": 3,
     "types": [
       "rock",
@@ -14369,6 +14707,7 @@
     "id": 339,
     "name": "barboach",
     "species_name": "barboach",
+    "name_ja_roma": "Dojoach",
     "generation": 3,
     "types": [
       "water",
@@ -14410,6 +14749,7 @@
     "id": 340,
     "name": "whiscash",
     "species_name": "whiscash",
+    "name_ja_roma": "Namazun",
     "generation": 3,
     "types": [
       "water",
@@ -14451,6 +14791,7 @@
     "id": 341,
     "name": "corphish",
     "species_name": "corphish",
+    "name_ja_roma": "Heigani",
     "generation": 3,
     "types": [
       "water"
@@ -14492,6 +14833,7 @@
     "id": 342,
     "name": "crawdaunt",
     "species_name": "crawdaunt",
+    "name_ja_roma": "Shizariger",
     "generation": 3,
     "types": [
       "water",
@@ -14534,6 +14876,7 @@
     "id": 343,
     "name": "baltoy",
     "species_name": "baltoy",
+    "name_ja_roma": "Yajilon",
     "generation": 3,
     "types": [
       "ground",
@@ -14575,6 +14918,7 @@
     "id": 344,
     "name": "claydol",
     "species_name": "claydol",
+    "name_ja_roma": "Nendoll",
     "generation": 3,
     "types": [
       "ground",
@@ -14616,6 +14960,7 @@
     "id": 345,
     "name": "lileep",
     "species_name": "lileep",
+    "name_ja_roma": "Lilyla",
     "generation": 3,
     "types": [
       "rock",
@@ -14657,6 +15002,7 @@
     "id": 346,
     "name": "cradily",
     "species_name": "cradily",
+    "name_ja_roma": "Yuradle",
     "generation": 3,
     "types": [
       "rock",
@@ -14698,6 +15044,7 @@
     "id": 347,
     "name": "anorith",
     "species_name": "anorith",
+    "name_ja_roma": "Anopth",
     "generation": 3,
     "types": [
       "rock",
@@ -14739,6 +15086,7 @@
     "id": 348,
     "name": "armaldo",
     "species_name": "armaldo",
+    "name_ja_roma": "Armaldo",
     "generation": 3,
     "types": [
       "rock",
@@ -14780,6 +15128,7 @@
     "id": 349,
     "name": "feebas",
     "species_name": "feebas",
+    "name_ja_roma": "Hinbass",
     "generation": 3,
     "types": [
       "water"
@@ -14821,6 +15170,7 @@
     "id": 350,
     "name": "milotic",
     "species_name": "milotic",
+    "name_ja_roma": "Milokaross",
     "generation": 3,
     "types": [
       "water"
@@ -14862,6 +15212,7 @@
     "id": 351,
     "name": "castform",
     "species_name": "castform",
+    "name_ja_roma": "Powalen",
     "generation": 3,
     "types": [
       "normal"
@@ -14918,6 +15269,7 @@
     "id": 352,
     "name": "kecleon",
     "species_name": "kecleon",
+    "name_ja_roma": "Kakureon",
     "generation": 3,
     "types": [
       "normal"
@@ -14958,6 +15310,7 @@
     "id": 353,
     "name": "shuppet",
     "species_name": "shuppet",
+    "name_ja_roma": "Kagebouzu",
     "generation": 3,
     "types": [
       "ghost"
@@ -14998,6 +15351,7 @@
     "id": 354,
     "name": "banette",
     "species_name": "banette",
+    "name_ja_roma": "Juppeta",
     "generation": 3,
     "types": [
       "ghost"
@@ -15043,6 +15397,7 @@
     "id": 355,
     "name": "duskull",
     "species_name": "duskull",
+    "name_ja_roma": "Yomawaru",
     "generation": 3,
     "types": [
       "ghost"
@@ -15083,6 +15438,7 @@
     "id": 356,
     "name": "dusclops",
     "species_name": "dusclops",
+    "name_ja_roma": "Samayouru",
     "generation": 3,
     "types": [
       "ghost"
@@ -15123,6 +15479,7 @@
     "id": 357,
     "name": "tropius",
     "species_name": "tropius",
+    "name_ja_roma": "Tropius",
     "generation": 3,
     "types": [
       "grass",
@@ -15165,6 +15522,7 @@
     "id": 358,
     "name": "chimecho",
     "species_name": "chimecho",
+    "name_ja_roma": "Chirean",
     "generation": 3,
     "types": [
       "psychic"
@@ -15210,6 +15568,7 @@
     "id": 359,
     "name": "absol",
     "species_name": "absol",
+    "name_ja_roma": "Absol",
     "generation": 3,
     "types": [
       "dark"
@@ -15260,6 +15619,7 @@
     "id": 360,
     "name": "wynaut",
     "species_name": "wynaut",
+    "name_ja_roma": "Sohnano",
     "generation": 3,
     "types": [
       "psychic"
@@ -15300,6 +15660,7 @@
     "id": 361,
     "name": "snorunt",
     "species_name": "snorunt",
+    "name_ja_roma": "Yukiwarashi",
     "generation": 3,
     "types": [
       "ice"
@@ -15341,6 +15702,7 @@
     "id": 362,
     "name": "glalie",
     "species_name": "glalie",
+    "name_ja_roma": "Onigohri",
     "generation": 3,
     "types": [
       "ice"
@@ -15387,6 +15749,7 @@
     "id": 363,
     "name": "spheal",
     "species_name": "spheal",
+    "name_ja_roma": "Tamazarashi",
     "generation": 3,
     "types": [
       "ice",
@@ -15429,6 +15792,7 @@
     "id": 364,
     "name": "sealeo",
     "species_name": "sealeo",
+    "name_ja_roma": "Todoggler",
     "generation": 3,
     "types": [
       "ice",
@@ -15471,6 +15835,7 @@
     "id": 365,
     "name": "walrein",
     "species_name": "walrein",
+    "name_ja_roma": "Todoseruga",
     "generation": 3,
     "types": [
       "ice",
@@ -15513,6 +15878,7 @@
     "id": 366,
     "name": "clamperl",
     "species_name": "clamperl",
+    "name_ja_roma": "Pearlulu",
     "generation": 3,
     "types": [
       "water"
@@ -15553,6 +15919,7 @@
     "id": 367,
     "name": "huntail",
     "species_name": "huntail",
+    "name_ja_roma": "Huntail",
     "generation": 3,
     "types": [
       "water"
@@ -15593,6 +15960,7 @@
     "id": 368,
     "name": "gorebyss",
     "species_name": "gorebyss",
+    "name_ja_roma": "Sakurabyss",
     "generation": 3,
     "types": [
       "water"
@@ -15633,6 +16001,7 @@
     "id": 369,
     "name": "relicanth",
     "species_name": "relicanth",
+    "name_ja_roma": "Glanth",
     "generation": 3,
     "types": [
       "water",
@@ -15675,6 +16044,7 @@
     "id": 370,
     "name": "luvdisc",
     "species_name": "luvdisc",
+    "name_ja_roma": "Lovecus",
     "generation": 3,
     "types": [
       "water"
@@ -15715,6 +16085,7 @@
     "id": 371,
     "name": "bagon",
     "species_name": "bagon",
+    "name_ja_roma": "Tatsubay",
     "generation": 3,
     "types": [
       "dragon"
@@ -15755,6 +16126,7 @@
     "id": 372,
     "name": "shelgon",
     "species_name": "shelgon",
+    "name_ja_roma": "Komoruu",
     "generation": 3,
     "types": [
       "dragon"
@@ -15795,6 +16167,7 @@
     "id": 373,
     "name": "salamence",
     "species_name": "salamence",
+    "name_ja_roma": "Bohmander",
     "generation": 3,
     "types": [
       "dragon",
@@ -15841,6 +16214,7 @@
     "id": 374,
     "name": "beldum",
     "species_name": "beldum",
+    "name_ja_roma": "Dumbber",
     "generation": 3,
     "types": [
       "steel",
@@ -15882,6 +16256,7 @@
     "id": 375,
     "name": "metang",
     "species_name": "metang",
+    "name_ja_roma": "Metang",
     "generation": 3,
     "types": [
       "steel",
@@ -15923,6 +16298,7 @@
     "id": 376,
     "name": "metagross",
     "species_name": "metagross",
+    "name_ja_roma": "Metagross",
     "generation": 3,
     "types": [
       "steel",
@@ -15969,6 +16345,7 @@
     "id": 377,
     "name": "regirock",
     "species_name": "regirock",
+    "name_ja_roma": "Regirock",
     "generation": 3,
     "types": [
       "rock"
@@ -16009,6 +16386,7 @@
     "id": 378,
     "name": "regice",
     "species_name": "regice",
+    "name_ja_roma": "Regice",
     "generation": 3,
     "types": [
       "ice"
@@ -16049,6 +16427,7 @@
     "id": 379,
     "name": "registeel",
     "species_name": "registeel",
+    "name_ja_roma": "Registeel",
     "generation": 3,
     "types": [
       "steel"
@@ -16089,6 +16468,7 @@
     "id": 380,
     "name": "latias",
     "species_name": "latias",
+    "name_ja_roma": "Latias",
     "generation": 3,
     "types": [
       "dragon",
@@ -16135,6 +16515,7 @@
     "id": 381,
     "name": "latios",
     "species_name": "latios",
+    "name_ja_roma": "Latios",
     "generation": 3,
     "types": [
       "dragon",
@@ -16181,6 +16562,7 @@
     "id": 382,
     "name": "kyogre",
     "species_name": "kyogre",
+    "name_ja_roma": "Kyogre",
     "generation": 3,
     "types": [
       "water"
@@ -16226,6 +16608,7 @@
     "id": 383,
     "name": "groudon",
     "species_name": "groudon",
+    "name_ja_roma": "Groudon",
     "generation": 3,
     "types": [
       "ground"
@@ -16271,6 +16654,7 @@
     "id": 384,
     "name": "rayquaza",
     "species_name": "rayquaza",
+    "name_ja_roma": "Rayquaza",
     "generation": 3,
     "types": [
       "dragon",
@@ -16317,6 +16701,7 @@
     "id": 385,
     "name": "jirachi",
     "species_name": "jirachi",
+    "name_ja_roma": "Jirachi",
     "generation": 3,
     "types": [
       "steel",
@@ -16358,6 +16743,7 @@
     "id": 386,
     "name": "deoxys-normal",
     "species_name": "deoxys",
+    "name_ja_roma": "Deoxys",
     "generation": 3,
     "types": [
       "psychic"
@@ -16413,6 +16799,7 @@
     "id": 387,
     "name": "turtwig",
     "species_name": "turtwig",
+    "name_ja_roma": "Naetle",
     "generation": 4,
     "types": [
       "grass"
@@ -16454,6 +16841,7 @@
     "id": 388,
     "name": "grotle",
     "species_name": "grotle",
+    "name_ja_roma": "Hayashigame",
     "generation": 4,
     "types": [
       "grass"
@@ -16495,6 +16883,7 @@
     "id": 389,
     "name": "torterra",
     "species_name": "torterra",
+    "name_ja_roma": "Dodaitose",
     "generation": 4,
     "types": [
       "grass",
@@ -16537,6 +16926,7 @@
     "id": 390,
     "name": "chimchar",
     "species_name": "chimchar",
+    "name_ja_roma": "Hikozaru",
     "generation": 4,
     "types": [
       "fire"
@@ -16578,6 +16968,7 @@
     "id": 391,
     "name": "monferno",
     "species_name": "monferno",
+    "name_ja_roma": "Moukazaru",
     "generation": 4,
     "types": [
       "fire",
@@ -16620,6 +17011,7 @@
     "id": 392,
     "name": "infernape",
     "species_name": "infernape",
+    "name_ja_roma": "Goukazaru",
     "generation": 4,
     "types": [
       "fire",
@@ -16662,6 +17054,7 @@
     "id": 393,
     "name": "piplup",
     "species_name": "piplup",
+    "name_ja_roma": "Pochama",
     "generation": 4,
     "types": [
       "water"
@@ -16703,6 +17096,7 @@
     "id": 394,
     "name": "prinplup",
     "species_name": "prinplup",
+    "name_ja_roma": "Pottaishi",
     "generation": 4,
     "types": [
       "water"
@@ -16744,6 +17138,7 @@
     "id": 395,
     "name": "empoleon",
     "species_name": "empoleon",
+    "name_ja_roma": "Emperte",
     "generation": 4,
     "types": [
       "water",
@@ -16786,6 +17181,7 @@
     "id": 396,
     "name": "starly",
     "species_name": "starly",
+    "name_ja_roma": "Mukkuru",
     "generation": 4,
     "types": [
       "normal",
@@ -16827,6 +17223,7 @@
     "id": 397,
     "name": "staravia",
     "species_name": "staravia",
+    "name_ja_roma": "Mukubird",
     "generation": 4,
     "types": [
       "normal",
@@ -16868,6 +17265,7 @@
     "id": 398,
     "name": "staraptor",
     "species_name": "staraptor",
+    "name_ja_roma": "Mukuhawk",
     "generation": 4,
     "types": [
       "normal",
@@ -16914,6 +17312,7 @@
     "id": 399,
     "name": "bidoof",
     "species_name": "bidoof",
+    "name_ja_roma": "Bippa",
     "generation": 4,
     "types": [
       "normal"
@@ -16955,6 +17354,7 @@
     "id": 400,
     "name": "bibarel",
     "species_name": "bibarel",
+    "name_ja_roma": "Beadaru",
     "generation": 4,
     "types": [
       "normal",
@@ -16997,6 +17397,7 @@
     "id": 401,
     "name": "kricketot",
     "species_name": "kricketot",
+    "name_ja_roma": "Korobohshi",
     "generation": 4,
     "types": [
       "bug"
@@ -17037,6 +17438,7 @@
     "id": 402,
     "name": "kricketune",
     "species_name": "kricketune",
+    "name_ja_roma": "Korotock",
     "generation": 4,
     "types": [
       "bug"
@@ -17077,6 +17479,7 @@
     "id": 403,
     "name": "shinx",
     "species_name": "shinx",
+    "name_ja_roma": "Kolink",
     "generation": 4,
     "types": [
       "electric"
@@ -17117,6 +17520,7 @@
     "id": 404,
     "name": "luxio",
     "species_name": "luxio",
+    "name_ja_roma": "Luxio",
     "generation": 4,
     "types": [
       "electric"
@@ -17157,6 +17561,7 @@
     "id": 405,
     "name": "luxray",
     "species_name": "luxray",
+    "name_ja_roma": "Rentorar",
     "generation": 4,
     "types": [
       "electric"
@@ -17197,6 +17602,7 @@
     "id": 406,
     "name": "budew",
     "species_name": "budew",
+    "name_ja_roma": "Subomie",
     "generation": 4,
     "types": [
       "grass",
@@ -17238,6 +17644,7 @@
     "id": 407,
     "name": "roserade",
     "species_name": "roserade",
+    "name_ja_roma": "Roserade",
     "generation": 4,
     "types": [
       "grass",
@@ -17280,6 +17687,7 @@
     "id": 408,
     "name": "cranidos",
     "species_name": "cranidos",
+    "name_ja_roma": "Zugaidos",
     "generation": 4,
     "types": [
       "rock"
@@ -17320,6 +17728,7 @@
     "id": 409,
     "name": "rampardos",
     "species_name": "rampardos",
+    "name_ja_roma": "Rampald",
     "generation": 4,
     "types": [
       "rock"
@@ -17360,6 +17769,7 @@
     "id": 410,
     "name": "shieldon",
     "species_name": "shieldon",
+    "name_ja_roma": "Tatetops",
     "generation": 4,
     "types": [
       "rock",
@@ -17401,6 +17811,7 @@
     "id": 411,
     "name": "bastiodon",
     "species_name": "bastiodon",
+    "name_ja_roma": "Torideps",
     "generation": 4,
     "types": [
       "rock",
@@ -17442,6 +17853,7 @@
     "id": 412,
     "name": "burmy",
     "species_name": "burmy",
+    "name_ja_roma": "Minomucchi",
     "generation": 4,
     "types": [
       "bug"
@@ -17482,6 +17894,7 @@
     "id": 413,
     "name": "wormadam-plant",
     "species_name": "wormadam",
+    "name_ja_roma": "Minomadam",
     "generation": 4,
     "types": [
       "bug",
@@ -17533,6 +17946,7 @@
     "id": 414,
     "name": "mothim",
     "species_name": "mothim",
+    "name_ja_roma": "Gamale",
     "generation": 4,
     "types": [
       "bug",
@@ -17574,6 +17988,7 @@
     "id": 415,
     "name": "combee",
     "species_name": "combee",
+    "name_ja_roma": "Mitsuhoney",
     "generation": 4,
     "types": [
       "bug",
@@ -17615,6 +18030,7 @@
     "id": 416,
     "name": "vespiquen",
     "species_name": "vespiquen",
+    "name_ja_roma": "Beequen",
     "generation": 4,
     "types": [
       "bug",
@@ -17656,6 +18072,7 @@
     "id": 417,
     "name": "pachirisu",
     "species_name": "pachirisu",
+    "name_ja_roma": "Pachirisu",
     "generation": 4,
     "types": [
       "electric"
@@ -17697,6 +18114,7 @@
     "id": 418,
     "name": "buizel",
     "species_name": "buizel",
+    "name_ja_roma": "Buoysel",
     "generation": 4,
     "types": [
       "water"
@@ -17738,6 +18156,7 @@
     "id": 419,
     "name": "floatzel",
     "species_name": "floatzel",
+    "name_ja_roma": "Floazel",
     "generation": 4,
     "types": [
       "water"
@@ -17779,6 +18198,7 @@
     "id": 420,
     "name": "cherubi",
     "species_name": "cherubi",
+    "name_ja_roma": "Cherinbo",
     "generation": 4,
     "types": [
       "grass"
@@ -17820,6 +18240,7 @@
     "id": 421,
     "name": "cherrim",
     "species_name": "cherrim",
+    "name_ja_roma": "Cherrim",
     "generation": 4,
     "types": [
       "grass"
@@ -17861,6 +18282,7 @@
     "id": 422,
     "name": "shellos",
     "species_name": "shellos",
+    "name_ja_roma": "Karanakushi",
     "generation": 4,
     "types": [
       "water"
@@ -17902,6 +18324,7 @@
     "id": 423,
     "name": "gastrodon",
     "species_name": "gastrodon",
+    "name_ja_roma": "Tritodon",
     "generation": 4,
     "types": [
       "water",
@@ -17944,6 +18367,7 @@
     "id": 424,
     "name": "ambipom",
     "species_name": "ambipom",
+    "name_ja_roma": "Eteboth",
     "generation": 4,
     "types": [
       "normal"
@@ -17984,6 +18408,7 @@
     "id": 425,
     "name": "drifloon",
     "species_name": "drifloon",
+    "name_ja_roma": "Fuwante",
     "generation": 4,
     "types": [
       "ghost",
@@ -18025,6 +18450,7 @@
     "id": 426,
     "name": "drifblim",
     "species_name": "drifblim",
+    "name_ja_roma": "Fuwaride",
     "generation": 4,
     "types": [
       "ghost",
@@ -18066,6 +18492,7 @@
     "id": 427,
     "name": "buneary",
     "species_name": "buneary",
+    "name_ja_roma": "Mimirol",
     "generation": 4,
     "types": [
       "normal"
@@ -18107,6 +18534,7 @@
     "id": 428,
     "name": "lopunny",
     "species_name": "lopunny",
+    "name_ja_roma": "Mimilop",
     "generation": 4,
     "types": [
       "normal"
@@ -18153,6 +18581,7 @@
     "id": 429,
     "name": "mismagius",
     "species_name": "mismagius",
+    "name_ja_roma": "Mumargi",
     "generation": 4,
     "types": [
       "ghost"
@@ -18193,6 +18622,7 @@
     "id": 430,
     "name": "honchkrow",
     "species_name": "honchkrow",
+    "name_ja_roma": "Dongkarasu",
     "generation": 4,
     "types": [
       "dark",
@@ -18234,6 +18664,7 @@
     "id": 431,
     "name": "glameow",
     "species_name": "glameow",
+    "name_ja_roma": "Nyarmar",
     "generation": 4,
     "types": [
       "normal"
@@ -18274,6 +18705,7 @@
     "id": 432,
     "name": "purugly",
     "species_name": "purugly",
+    "name_ja_roma": "Bunyatto",
     "generation": 4,
     "types": [
       "normal"
@@ -18314,6 +18746,7 @@
     "id": 433,
     "name": "chingling",
     "species_name": "chingling",
+    "name_ja_roma": "Lisyan",
     "generation": 4,
     "types": [
       "psychic"
@@ -18354,6 +18787,7 @@
     "id": 434,
     "name": "stunky",
     "species_name": "stunky",
+    "name_ja_roma": "Skunpuu",
     "generation": 4,
     "types": [
       "poison",
@@ -18395,6 +18829,7 @@
     "id": 435,
     "name": "skuntank",
     "species_name": "skuntank",
+    "name_ja_roma": "Skutank",
     "generation": 4,
     "types": [
       "poison",
@@ -18436,6 +18871,7 @@
     "id": 436,
     "name": "bronzor",
     "species_name": "bronzor",
+    "name_ja_roma": "Dohmirror",
     "generation": 4,
     "types": [
       "steel",
@@ -18477,6 +18913,7 @@
     "id": 437,
     "name": "bronzong",
     "species_name": "bronzong",
+    "name_ja_roma": "Dohtakun",
     "generation": 4,
     "types": [
       "steel",
@@ -18518,6 +18955,7 @@
     "id": 438,
     "name": "bonsly",
     "species_name": "bonsly",
+    "name_ja_roma": "Usohachi",
     "generation": 4,
     "types": [
       "rock"
@@ -18558,6 +18996,7 @@
     "id": 439,
     "name": "mime-jr",
     "species_name": "mime-jr",
+    "name_ja_roma": "Manene",
     "generation": 4,
     "types": [
       "psychic",
@@ -18599,6 +19038,7 @@
     "id": 440,
     "name": "happiny",
     "species_name": "happiny",
+    "name_ja_roma": "Pinpuku",
     "generation": 4,
     "types": [
       "normal"
@@ -18639,6 +19079,7 @@
     "id": 441,
     "name": "chatot",
     "species_name": "chatot",
+    "name_ja_roma": "Perap",
     "generation": 4,
     "types": [
       "normal",
@@ -18680,6 +19121,7 @@
     "id": 442,
     "name": "spiritomb",
     "species_name": "spiritomb",
+    "name_ja_roma": "Mikaruge",
     "generation": 4,
     "types": [
       "ghost",
@@ -18721,6 +19163,7 @@
     "id": 443,
     "name": "gible",
     "species_name": "gible",
+    "name_ja_roma": "Fukamaru",
     "generation": 4,
     "types": [
       "dragon",
@@ -18763,6 +19206,7 @@
     "id": 444,
     "name": "gabite",
     "species_name": "gabite",
+    "name_ja_roma": "Gabite",
     "generation": 4,
     "types": [
       "dragon",
@@ -18805,6 +19249,7 @@
     "id": 445,
     "name": "garchomp",
     "species_name": "garchomp",
+    "name_ja_roma": "Gaburias",
     "generation": 4,
     "types": [
       "dragon",
@@ -18857,6 +19302,7 @@
     "id": 446,
     "name": "munchlax",
     "species_name": "munchlax",
+    "name_ja_roma": "Gonbe",
     "generation": 4,
     "types": [
       "normal"
@@ -18897,6 +19343,7 @@
     "id": 447,
     "name": "riolu",
     "species_name": "riolu",
+    "name_ja_roma": "Riolu",
     "generation": 4,
     "types": [
       "fighting"
@@ -18937,6 +19384,7 @@
     "id": 448,
     "name": "lucario",
     "species_name": "lucario",
+    "name_ja_roma": "Lucario",
     "generation": 4,
     "types": [
       "fighting",
@@ -18989,6 +19437,7 @@
     "id": 449,
     "name": "hippopotas",
     "species_name": "hippopotas",
+    "name_ja_roma": "Hippopotas",
     "generation": 4,
     "types": [
       "ground"
@@ -19029,6 +19478,7 @@
     "id": 450,
     "name": "hippowdon",
     "species_name": "hippowdon",
+    "name_ja_roma": "Kabaldon",
     "generation": 4,
     "types": [
       "ground"
@@ -19069,6 +19519,7 @@
     "id": 451,
     "name": "skorupi",
     "species_name": "skorupi",
+    "name_ja_roma": "Scorupi",
     "generation": 4,
     "types": [
       "poison",
@@ -19111,6 +19562,7 @@
     "id": 452,
     "name": "drapion",
     "species_name": "drapion",
+    "name_ja_roma": "Dorapion",
     "generation": 4,
     "types": [
       "poison",
@@ -19153,6 +19605,7 @@
     "id": 453,
     "name": "croagunk",
     "species_name": "croagunk",
+    "name_ja_roma": "Gureggru",
     "generation": 4,
     "types": [
       "poison",
@@ -19194,6 +19647,7 @@
     "id": 454,
     "name": "toxicroak",
     "species_name": "toxicroak",
+    "name_ja_roma": "Dokurog",
     "generation": 4,
     "types": [
       "poison",
@@ -19235,6 +19689,7 @@
     "id": 455,
     "name": "carnivine",
     "species_name": "carnivine",
+    "name_ja_roma": "Muskippa",
     "generation": 4,
     "types": [
       "grass"
@@ -19275,6 +19730,7 @@
     "id": 456,
     "name": "finneon",
     "species_name": "finneon",
+    "name_ja_roma": "Keikouo",
     "generation": 4,
     "types": [
       "water"
@@ -19315,6 +19771,7 @@
     "id": 457,
     "name": "lumineon",
     "species_name": "lumineon",
+    "name_ja_roma": "Neolant",
     "generation": 4,
     "types": [
       "water"
@@ -19355,6 +19812,7 @@
     "id": 458,
     "name": "mantyke",
     "species_name": "mantyke",
+    "name_ja_roma": "Tamanta",
     "generation": 4,
     "types": [
       "water",
@@ -19396,6 +19854,7 @@
     "id": 459,
     "name": "snover",
     "species_name": "snover",
+    "name_ja_roma": "Yukikaburi",
     "generation": 4,
     "types": [
       "grass",
@@ -19438,6 +19897,7 @@
     "id": 460,
     "name": "abomasnow",
     "species_name": "abomasnow",
+    "name_ja_roma": "Yukinooh",
     "generation": 4,
     "types": [
       "grass",
@@ -19485,6 +19945,7 @@
     "id": 461,
     "name": "weavile",
     "species_name": "weavile",
+    "name_ja_roma": "Manyula",
     "generation": 4,
     "types": [
       "dark",
@@ -19526,6 +19987,7 @@
     "id": 462,
     "name": "magnezone",
     "species_name": "magnezone",
+    "name_ja_roma": "Jibacoil",
     "generation": 4,
     "types": [
       "electric",
@@ -19567,6 +20029,7 @@
     "id": 463,
     "name": "lickilicky",
     "species_name": "lickilicky",
+    "name_ja_roma": "Berobelt",
     "generation": 4,
     "types": [
       "normal"
@@ -19607,6 +20070,7 @@
     "id": 464,
     "name": "rhyperior",
     "species_name": "rhyperior",
+    "name_ja_roma": "Dosidon",
     "generation": 4,
     "types": [
       "ground",
@@ -19649,6 +20113,7 @@
     "id": 465,
     "name": "tangrowth",
     "species_name": "tangrowth",
+    "name_ja_roma": "Mojumbo",
     "generation": 4,
     "types": [
       "grass"
@@ -19689,6 +20154,7 @@
     "id": 466,
     "name": "electivire",
     "species_name": "electivire",
+    "name_ja_roma": "Elekible",
     "generation": 4,
     "types": [
       "electric"
@@ -19729,6 +20195,7 @@
     "id": 467,
     "name": "magmortar",
     "species_name": "magmortar",
+    "name_ja_roma": "Booburn",
     "generation": 4,
     "types": [
       "fire"
@@ -19769,6 +20236,7 @@
     "id": 468,
     "name": "togekiss",
     "species_name": "togekiss",
+    "name_ja_roma": "Togekiss",
     "generation": 4,
     "types": [
       "fairy",
@@ -19811,6 +20279,7 @@
     "id": 469,
     "name": "yanmega",
     "species_name": "yanmega",
+    "name_ja_roma": "Megayanma",
     "generation": 4,
     "types": [
       "bug",
@@ -19852,6 +20321,7 @@
     "id": 470,
     "name": "leafeon",
     "species_name": "leafeon",
+    "name_ja_roma": "Leafia",
     "generation": 4,
     "types": [
       "grass"
@@ -19892,6 +20362,7 @@
     "id": 471,
     "name": "glaceon",
     "species_name": "glaceon",
+    "name_ja_roma": "Glacia",
     "generation": 4,
     "types": [
       "ice"
@@ -19932,6 +20403,7 @@
     "id": 472,
     "name": "gliscor",
     "species_name": "gliscor",
+    "name_ja_roma": "Glion",
     "generation": 4,
     "types": [
       "ground",
@@ -19973,6 +20445,7 @@
     "id": 473,
     "name": "mamoswine",
     "species_name": "mamoswine",
+    "name_ja_roma": "Mammoo",
     "generation": 4,
     "types": [
       "ice",
@@ -20014,6 +20487,7 @@
     "id": 474,
     "name": "porygon-z",
     "species_name": "porygon-z",
+    "name_ja_roma": "Porygon-Z",
     "generation": 4,
     "types": [
       "normal"
@@ -20054,6 +20528,7 @@
     "id": 475,
     "name": "gallade",
     "species_name": "gallade",
+    "name_ja_roma": "Erureido",
     "generation": 4,
     "types": [
       "psychic",
@@ -20101,6 +20576,7 @@
     "id": 476,
     "name": "probopass",
     "species_name": "probopass",
+    "name_ja_roma": "Dainose",
     "generation": 4,
     "types": [
       "rock",
@@ -20142,6 +20618,7 @@
     "id": 477,
     "name": "dusknoir",
     "species_name": "dusknoir",
+    "name_ja_roma": "Yonoir",
     "generation": 4,
     "types": [
       "ghost"
@@ -20182,6 +20659,7 @@
     "id": 478,
     "name": "froslass",
     "species_name": "froslass",
+    "name_ja_roma": "Yukimenoko",
     "generation": 4,
     "types": [
       "ice",
@@ -20229,6 +20707,7 @@
     "id": 479,
     "name": "rotom",
     "species_name": "rotom",
+    "name_ja_roma": "Rotom",
     "generation": 4,
     "types": [
       "electric",
@@ -20295,6 +20774,7 @@
     "id": 480,
     "name": "uxie",
     "species_name": "uxie",
+    "name_ja_roma": "Yuxie",
     "generation": 4,
     "types": [
       "psychic"
@@ -20335,6 +20815,7 @@
     "id": 481,
     "name": "mesprit",
     "species_name": "mesprit",
+    "name_ja_roma": "Emrit",
     "generation": 4,
     "types": [
       "psychic"
@@ -20375,6 +20856,7 @@
     "id": 482,
     "name": "azelf",
     "species_name": "azelf",
+    "name_ja_roma": "Agnome",
     "generation": 4,
     "types": [
       "psychic"
@@ -20415,6 +20897,7 @@
     "id": 483,
     "name": "dialga",
     "species_name": "dialga",
+    "name_ja_roma": "Dialga",
     "generation": 4,
     "types": [
       "steel",
@@ -20461,6 +20944,7 @@
     "id": 484,
     "name": "palkia",
     "species_name": "palkia",
+    "name_ja_roma": "Palkia",
     "generation": 4,
     "types": [
       "water",
@@ -20507,6 +20991,7 @@
     "id": 485,
     "name": "heatran",
     "species_name": "heatran",
+    "name_ja_roma": "Heatran",
     "generation": 4,
     "types": [
       "fire",
@@ -20553,6 +21038,7 @@
     "id": 486,
     "name": "regigigas",
     "species_name": "regigigas",
+    "name_ja_roma": "Regigigas",
     "generation": 4,
     "types": [
       "normal"
@@ -20593,6 +21079,7 @@
     "id": 487,
     "name": "giratina-altered",
     "species_name": "giratina",
+    "name_ja_roma": "Giratina",
     "generation": 4,
     "types": [
       "ghost",
@@ -20639,6 +21126,7 @@
     "id": 488,
     "name": "cresselia",
     "species_name": "cresselia",
+    "name_ja_roma": "Cresselia",
     "generation": 4,
     "types": [
       "psychic"
@@ -20679,6 +21167,7 @@
     "id": 489,
     "name": "phione",
     "species_name": "phione",
+    "name_ja_roma": "Phione",
     "generation": 4,
     "types": [
       "water"
@@ -20720,6 +21209,7 @@
     "id": 490,
     "name": "manaphy",
     "species_name": "manaphy",
+    "name_ja_roma": "Manaphy",
     "generation": 4,
     "types": [
       "water"
@@ -20761,6 +21251,7 @@
     "id": 491,
     "name": "darkrai",
     "species_name": "darkrai",
+    "name_ja_roma": "Darkrai",
     "generation": 4,
     "types": [
       "dark"
@@ -20806,6 +21297,7 @@
     "id": 492,
     "name": "shaymin-land",
     "species_name": "shaymin",
+    "name_ja_roma": "Shaymin",
     "generation": 4,
     "types": [
       "grass"
@@ -20851,6 +21343,7 @@
     "id": 493,
     "name": "arceus",
     "species_name": "arceus",
+    "name_ja_roma": "Arceus",
     "generation": 4,
     "types": [
       "normal"
@@ -20891,6 +21384,7 @@
     "id": 494,
     "name": "victini",
     "species_name": "victini",
+    "name_ja_roma": "Victini",
     "generation": 5,
     "types": [
       "psychic",
@@ -20932,6 +21426,7 @@
     "id": 495,
     "name": "snivy",
     "species_name": "snivy",
+    "name_ja_roma": "Tsutarja",
     "generation": 5,
     "types": [
       "grass"
@@ -20973,6 +21468,7 @@
     "id": 496,
     "name": "servine",
     "species_name": "servine",
+    "name_ja_roma": "Janovy",
     "generation": 5,
     "types": [
       "grass"
@@ -21014,6 +21510,7 @@
     "id": 497,
     "name": "serperior",
     "species_name": "serperior",
+    "name_ja_roma": "Jalorda",
     "generation": 5,
     "types": [
       "grass"
@@ -21055,6 +21552,7 @@
     "id": 498,
     "name": "tepig",
     "species_name": "tepig",
+    "name_ja_roma": "Pokabu",
     "generation": 5,
     "types": [
       "fire"
@@ -21095,6 +21593,7 @@
     "id": 499,
     "name": "pignite",
     "species_name": "pignite",
+    "name_ja_roma": "Chaoboo",
     "generation": 5,
     "types": [
       "fire",
@@ -21136,6 +21635,7 @@
     "id": 500,
     "name": "emboar",
     "species_name": "emboar",
+    "name_ja_roma": "Enbuoh",
     "generation": 5,
     "types": [
       "fire",
@@ -21182,6 +21682,7 @@
     "id": 501,
     "name": "oshawott",
     "species_name": "oshawott",
+    "name_ja_roma": "Mijumaru",
     "generation": 5,
     "types": [
       "water"
@@ -21222,6 +21723,7 @@
     "id": 502,
     "name": "dewott",
     "species_name": "dewott",
+    "name_ja_roma": "Futachimaru",
     "generation": 5,
     "types": [
       "water"
@@ -21262,6 +21764,7 @@
     "id": 503,
     "name": "samurott",
     "species_name": "samurott",
+    "name_ja_roma": "Daikenki",
     "generation": 5,
     "types": [
       "water"
@@ -21307,6 +21810,7 @@
     "id": 504,
     "name": "patrat",
     "species_name": "patrat",
+    "name_ja_roma": "Minezumi",
     "generation": 5,
     "types": [
       "normal"
@@ -21347,6 +21851,7 @@
     "id": 505,
     "name": "watchog",
     "species_name": "watchog",
+    "name_ja_roma": "Miruhog",
     "generation": 5,
     "types": [
       "normal"
@@ -21387,6 +21892,7 @@
     "id": 506,
     "name": "lillipup",
     "species_name": "lillipup",
+    "name_ja_roma": "Yorterrie",
     "generation": 5,
     "types": [
       "normal"
@@ -21427,6 +21933,7 @@
     "id": 507,
     "name": "herdier",
     "species_name": "herdier",
+    "name_ja_roma": "Herderrie",
     "generation": 5,
     "types": [
       "normal"
@@ -21467,6 +21974,7 @@
     "id": 508,
     "name": "stoutland",
     "species_name": "stoutland",
+    "name_ja_roma": "Mooland",
     "generation": 5,
     "types": [
       "normal"
@@ -21507,6 +22015,7 @@
     "id": 509,
     "name": "purrloin",
     "species_name": "purrloin",
+    "name_ja_roma": "Choroneko",
     "generation": 5,
     "types": [
       "dark"
@@ -21547,6 +22056,7 @@
     "id": 510,
     "name": "liepard",
     "species_name": "liepard",
+    "name_ja_roma": "Lepardas",
     "generation": 5,
     "types": [
       "dark"
@@ -21587,6 +22097,7 @@
     "id": 511,
     "name": "pansage",
     "species_name": "pansage",
+    "name_ja_roma": "Yanappu",
     "generation": 5,
     "types": [
       "grass"
@@ -21627,6 +22138,7 @@
     "id": 512,
     "name": "simisage",
     "species_name": "simisage",
+    "name_ja_roma": "Yanakkie",
     "generation": 5,
     "types": [
       "grass"
@@ -21667,6 +22179,7 @@
     "id": 513,
     "name": "pansear",
     "species_name": "pansear",
+    "name_ja_roma": "Baoppu",
     "generation": 5,
     "types": [
       "fire"
@@ -21707,6 +22220,7 @@
     "id": 514,
     "name": "simisear",
     "species_name": "simisear",
+    "name_ja_roma": "Baokkie",
     "generation": 5,
     "types": [
       "fire"
@@ -21747,6 +22261,7 @@
     "id": 515,
     "name": "panpour",
     "species_name": "panpour",
+    "name_ja_roma": "Hiyappu",
     "generation": 5,
     "types": [
       "water"
@@ -21787,6 +22302,7 @@
     "id": 516,
     "name": "simipour",
     "species_name": "simipour",
+    "name_ja_roma": "Hiyakkie",
     "generation": 5,
     "types": [
       "water"
@@ -21827,6 +22343,7 @@
     "id": 517,
     "name": "munna",
     "species_name": "munna",
+    "name_ja_roma": "Munna",
     "generation": 5,
     "types": [
       "psychic"
@@ -21867,6 +22384,7 @@
     "id": 518,
     "name": "musharna",
     "species_name": "musharna",
+    "name_ja_roma": "Musharna",
     "generation": 5,
     "types": [
       "psychic"
@@ -21907,6 +22425,7 @@
     "id": 519,
     "name": "pidove",
     "species_name": "pidove",
+    "name_ja_roma": "Mamepato",
     "generation": 5,
     "types": [
       "normal",
@@ -21948,6 +22467,7 @@
     "id": 520,
     "name": "tranquill",
     "species_name": "tranquill",
+    "name_ja_roma": "Hatoboh",
     "generation": 5,
     "types": [
       "normal",
@@ -21989,6 +22509,7 @@
     "id": 521,
     "name": "unfezant",
     "species_name": "unfezant",
+    "name_ja_roma": "Kenhallow",
     "generation": 5,
     "types": [
       "normal",
@@ -22030,6 +22551,7 @@
     "id": 522,
     "name": "blitzle",
     "species_name": "blitzle",
+    "name_ja_roma": "Shimama",
     "generation": 5,
     "types": [
       "electric"
@@ -22070,6 +22592,7 @@
     "id": 523,
     "name": "zebstrika",
     "species_name": "zebstrika",
+    "name_ja_roma": "Zebraika",
     "generation": 5,
     "types": [
       "electric"
@@ -22110,6 +22633,7 @@
     "id": 524,
     "name": "roggenrola",
     "species_name": "roggenrola",
+    "name_ja_roma": "Dangoro",
     "generation": 5,
     "types": [
       "rock"
@@ -22150,6 +22674,7 @@
     "id": 525,
     "name": "boldore",
     "species_name": "boldore",
+    "name_ja_roma": "Gantle",
     "generation": 5,
     "types": [
       "rock"
@@ -22190,6 +22715,7 @@
     "id": 526,
     "name": "gigalith",
     "species_name": "gigalith",
+    "name_ja_roma": "Gigaiath",
     "generation": 5,
     "types": [
       "rock"
@@ -22230,6 +22756,7 @@
     "id": 527,
     "name": "woobat",
     "species_name": "woobat",
+    "name_ja_roma": "Koromori",
     "generation": 5,
     "types": [
       "psychic",
@@ -22272,6 +22799,7 @@
     "id": 528,
     "name": "swoobat",
     "species_name": "swoobat",
+    "name_ja_roma": "Kokoromori",
     "generation": 5,
     "types": [
       "psychic",
@@ -22314,6 +22842,7 @@
     "id": 529,
     "name": "drilbur",
     "species_name": "drilbur",
+    "name_ja_roma": "Mogurew",
     "generation": 5,
     "types": [
       "ground"
@@ -22354,6 +22883,7 @@
     "id": 530,
     "name": "excadrill",
     "species_name": "excadrill",
+    "name_ja_roma": "Doryuzu",
     "generation": 5,
     "types": [
       "ground",
@@ -22400,6 +22930,7 @@
     "id": 531,
     "name": "audino",
     "species_name": "audino",
+    "name_ja_roma": "Tabunne",
     "generation": 5,
     "types": [
       "normal"
@@ -22445,6 +22976,7 @@
     "id": 532,
     "name": "timburr",
     "species_name": "timburr",
+    "name_ja_roma": "Dokkorer",
     "generation": 5,
     "types": [
       "fighting"
@@ -22485,6 +23017,7 @@
     "id": 533,
     "name": "gurdurr",
     "species_name": "gurdurr",
+    "name_ja_roma": "Dotekkotsu",
     "generation": 5,
     "types": [
       "fighting"
@@ -22525,6 +23058,7 @@
     "id": 534,
     "name": "conkeldurr",
     "species_name": "conkeldurr",
+    "name_ja_roma": "Roubushin",
     "generation": 5,
     "types": [
       "fighting"
@@ -22565,6 +23099,7 @@
     "id": 535,
     "name": "tympole",
     "species_name": "tympole",
+    "name_ja_roma": "Otamaro",
     "generation": 5,
     "types": [
       "water"
@@ -22605,6 +23140,7 @@
     "id": 536,
     "name": "palpitoad",
     "species_name": "palpitoad",
+    "name_ja_roma": "Gamagaru",
     "generation": 5,
     "types": [
       "water",
@@ -22646,6 +23182,7 @@
     "id": 537,
     "name": "seismitoad",
     "species_name": "seismitoad",
+    "name_ja_roma": "Gamageroge",
     "generation": 5,
     "types": [
       "water",
@@ -22687,6 +23224,7 @@
     "id": 538,
     "name": "throh",
     "species_name": "throh",
+    "name_ja_roma": "Nageki",
     "generation": 5,
     "types": [
       "fighting"
@@ -22727,6 +23265,7 @@
     "id": 539,
     "name": "sawk",
     "species_name": "sawk",
+    "name_ja_roma": "Dageki",
     "generation": 5,
     "types": [
       "fighting"
@@ -22767,6 +23306,7 @@
     "id": 540,
     "name": "sewaddle",
     "species_name": "sewaddle",
+    "name_ja_roma": "Kurumiru",
     "generation": 5,
     "types": [
       "bug",
@@ -22808,6 +23348,7 @@
     "id": 541,
     "name": "swadloon",
     "species_name": "swadloon",
+    "name_ja_roma": "Kurumayu",
     "generation": 5,
     "types": [
       "bug",
@@ -22849,6 +23390,7 @@
     "id": 542,
     "name": "leavanny",
     "species_name": "leavanny",
+    "name_ja_roma": "Hahakomori",
     "generation": 5,
     "types": [
       "bug",
@@ -22890,6 +23432,7 @@
     "id": 543,
     "name": "venipede",
     "species_name": "venipede",
+    "name_ja_roma": "Fushide",
     "generation": 5,
     "types": [
       "bug",
@@ -22931,6 +23474,7 @@
     "id": 544,
     "name": "whirlipede",
     "species_name": "whirlipede",
+    "name_ja_roma": "Wheega",
     "generation": 5,
     "types": [
       "bug",
@@ -22972,6 +23516,7 @@
     "id": 545,
     "name": "scolipede",
     "species_name": "scolipede",
+    "name_ja_roma": "Pendror",
     "generation": 5,
     "types": [
       "bug",
@@ -23018,6 +23563,7 @@
     "id": 546,
     "name": "cottonee",
     "species_name": "cottonee",
+    "name_ja_roma": "Monmen",
     "generation": 5,
     "types": [
       "grass",
@@ -23060,6 +23606,7 @@
     "id": 547,
     "name": "whimsicott",
     "species_name": "whimsicott",
+    "name_ja_roma": "Elfuun",
     "generation": 5,
     "types": [
       "grass",
@@ -23102,6 +23649,7 @@
     "id": 548,
     "name": "petilil",
     "species_name": "petilil",
+    "name_ja_roma": "Churine",
     "generation": 5,
     "types": [
       "grass"
@@ -23142,6 +23690,7 @@
     "id": 549,
     "name": "lilligant",
     "species_name": "lilligant",
+    "name_ja_roma": "Dredear",
     "generation": 5,
     "types": [
       "grass"
@@ -23187,6 +23736,7 @@
     "id": 550,
     "name": "basculin-red-striped",
     "species_name": "basculin",
+    "name_ja_roma": "Bassrao",
     "generation": 5,
     "types": [
       "water"
@@ -23237,6 +23787,7 @@
     "id": 551,
     "name": "sandile",
     "species_name": "sandile",
+    "name_ja_roma": "Meguroco",
     "generation": 5,
     "types": [
       "ground",
@@ -23278,6 +23829,7 @@
     "id": 552,
     "name": "krokorok",
     "species_name": "krokorok",
+    "name_ja_roma": "Waruvile",
     "generation": 5,
     "types": [
       "ground",
@@ -23319,6 +23871,7 @@
     "id": 553,
     "name": "krookodile",
     "species_name": "krookodile",
+    "name_ja_roma": "Waruvial",
     "generation": 5,
     "types": [
       "ground",
@@ -23360,6 +23913,7 @@
     "id": 554,
     "name": "darumaka",
     "species_name": "darumaka",
+    "name_ja_roma": "Darumakka",
     "generation": 5,
     "types": [
       "fire"
@@ -23405,6 +23959,7 @@
     "id": 555,
     "name": "darmanitan-standard",
     "species_name": "darmanitan",
+    "name_ja_roma": "Hihidaruma",
     "generation": 5,
     "types": [
       "fire"
@@ -23460,6 +24015,7 @@
     "id": 556,
     "name": "maractus",
     "species_name": "maractus",
+    "name_ja_roma": "Maracacchi",
     "generation": 5,
     "types": [
       "grass"
@@ -23500,6 +24056,7 @@
     "id": 557,
     "name": "dwebble",
     "species_name": "dwebble",
+    "name_ja_roma": "Ishizumai",
     "generation": 5,
     "types": [
       "bug",
@@ -23542,6 +24099,7 @@
     "id": 558,
     "name": "crustle",
     "species_name": "crustle",
+    "name_ja_roma": "Iwapalace",
     "generation": 5,
     "types": [
       "bug",
@@ -23584,6 +24142,7 @@
     "id": 559,
     "name": "scraggy",
     "species_name": "scraggy",
+    "name_ja_roma": "Zuruggu",
     "generation": 5,
     "types": [
       "dark",
@@ -23626,6 +24185,7 @@
     "id": 560,
     "name": "scrafty",
     "species_name": "scrafty",
+    "name_ja_roma": "Zuruzukin",
     "generation": 5,
     "types": [
       "dark",
@@ -23673,6 +24233,7 @@
     "id": 561,
     "name": "sigilyph",
     "species_name": "sigilyph",
+    "name_ja_roma": "Symboler",
     "generation": 5,
     "types": [
       "psychic",
@@ -23714,6 +24275,7 @@
     "id": 562,
     "name": "yamask",
     "species_name": "yamask",
+    "name_ja_roma": "Desumasu",
     "generation": 5,
     "types": [
       "ghost"
@@ -23760,6 +24322,7 @@
     "id": 563,
     "name": "cofagrigus",
     "species_name": "cofagrigus",
+    "name_ja_roma": "Desukarn",
     "generation": 5,
     "types": [
       "ghost"
@@ -23801,6 +24364,7 @@
     "id": 564,
     "name": "tirtouga",
     "species_name": "tirtouga",
+    "name_ja_roma": "Protoga",
     "generation": 5,
     "types": [
       "water",
@@ -23843,6 +24407,7 @@
     "id": 565,
     "name": "carracosta",
     "species_name": "carracosta",
+    "name_ja_roma": "Abagoura",
     "generation": 5,
     "types": [
       "water",
@@ -23885,6 +24450,7 @@
     "id": 566,
     "name": "archen",
     "species_name": "archen",
+    "name_ja_roma": "Archen",
     "generation": 5,
     "types": [
       "rock",
@@ -23927,6 +24493,7 @@
     "id": 567,
     "name": "archeops",
     "species_name": "archeops",
+    "name_ja_roma": "Archeos",
     "generation": 5,
     "types": [
       "rock",
@@ -23969,6 +24536,7 @@
     "id": 568,
     "name": "trubbish",
     "species_name": "trubbish",
+    "name_ja_roma": "Yabukuron",
     "generation": 5,
     "types": [
       "poison"
@@ -24009,6 +24577,7 @@
     "id": 569,
     "name": "garbodor",
     "species_name": "garbodor",
+    "name_ja_roma": "Dustdas",
     "generation": 5,
     "types": [
       "poison"
@@ -24054,6 +24623,7 @@
     "id": 570,
     "name": "zorua",
     "species_name": "zorua",
+    "name_ja_roma": "Zorua",
     "generation": 5,
     "types": [
       "dark"
@@ -24099,6 +24669,7 @@
     "id": 571,
     "name": "zoroark",
     "species_name": "zoroark",
+    "name_ja_roma": "Zoroark",
     "generation": 5,
     "types": [
       "dark"
@@ -24144,6 +24715,7 @@
     "id": 572,
     "name": "minccino",
     "species_name": "minccino",
+    "name_ja_roma": "Chillarmy",
     "generation": 5,
     "types": [
       "normal"
@@ -24184,6 +24756,7 @@
     "id": 573,
     "name": "cinccino",
     "species_name": "cinccino",
+    "name_ja_roma": "Chillaccino",
     "generation": 5,
     "types": [
       "normal"
@@ -24224,6 +24797,7 @@
     "id": 574,
     "name": "gothita",
     "species_name": "gothita",
+    "name_ja_roma": "Gothimu",
     "generation": 5,
     "types": [
       "psychic"
@@ -24264,6 +24838,7 @@
     "id": 575,
     "name": "gothorita",
     "species_name": "gothorita",
+    "name_ja_roma": "Gothimiru",
     "generation": 5,
     "types": [
       "psychic"
@@ -24304,6 +24879,7 @@
     "id": 576,
     "name": "gothitelle",
     "species_name": "gothitelle",
+    "name_ja_roma": "Gothiruselle",
     "generation": 5,
     "types": [
       "psychic"
@@ -24344,6 +24920,7 @@
     "id": 577,
     "name": "solosis",
     "species_name": "solosis",
+    "name_ja_roma": "Uniran",
     "generation": 5,
     "types": [
       "psychic"
@@ -24384,6 +24961,7 @@
     "id": 578,
     "name": "duosion",
     "species_name": "duosion",
+    "name_ja_roma": "Doublan",
     "generation": 5,
     "types": [
       "psychic"
@@ -24424,6 +25002,7 @@
     "id": 579,
     "name": "reuniclus",
     "species_name": "reuniclus",
+    "name_ja_roma": "Lanculus",
     "generation": 5,
     "types": [
       "psychic"
@@ -24464,6 +25043,7 @@
     "id": 580,
     "name": "ducklett",
     "species_name": "ducklett",
+    "name_ja_roma": "Koaruhie",
     "generation": 5,
     "types": [
       "water",
@@ -24506,6 +25086,7 @@
     "id": 581,
     "name": "swanna",
     "species_name": "swanna",
+    "name_ja_roma": "Swanna",
     "generation": 5,
     "types": [
       "water",
@@ -24548,6 +25129,7 @@
     "id": 582,
     "name": "vanillite",
     "species_name": "vanillite",
+    "name_ja_roma": "Vanipeti",
     "generation": 5,
     "types": [
       "ice"
@@ -24588,6 +25170,7 @@
     "id": 583,
     "name": "vanillish",
     "species_name": "vanillish",
+    "name_ja_roma": "Vanirich",
     "generation": 5,
     "types": [
       "ice"
@@ -24628,6 +25211,7 @@
     "id": 584,
     "name": "vanilluxe",
     "species_name": "vanilluxe",
+    "name_ja_roma": "Baivanilla",
     "generation": 5,
     "types": [
       "ice"
@@ -24668,6 +25252,7 @@
     "id": 585,
     "name": "deerling",
     "species_name": "deerling",
+    "name_ja_roma": "Shikijika",
     "generation": 5,
     "types": [
       "normal",
@@ -24709,6 +25294,7 @@
     "id": 586,
     "name": "sawsbuck",
     "species_name": "sawsbuck",
+    "name_ja_roma": "Mebukijika",
     "generation": 5,
     "types": [
       "normal",
@@ -24750,6 +25336,7 @@
     "id": 587,
     "name": "emolga",
     "species_name": "emolga",
+    "name_ja_roma": "Emolga",
     "generation": 5,
     "types": [
       "electric",
@@ -24791,6 +25378,7 @@
     "id": 588,
     "name": "karrablast",
     "species_name": "karrablast",
+    "name_ja_roma": "Kaburumo",
     "generation": 5,
     "types": [
       "bug"
@@ -24831,6 +25419,7 @@
     "id": 589,
     "name": "escavalier",
     "species_name": "escavalier",
+    "name_ja_roma": "Chevargo",
     "generation": 5,
     "types": [
       "bug",
@@ -24872,6 +25461,7 @@
     "id": 590,
     "name": "foongus",
     "species_name": "foongus",
+    "name_ja_roma": "Tamagetake",
     "generation": 5,
     "types": [
       "grass",
@@ -24913,6 +25503,7 @@
     "id": 591,
     "name": "amoonguss",
     "species_name": "amoonguss",
+    "name_ja_roma": "Morobareru",
     "generation": 5,
     "types": [
       "grass",
@@ -24954,6 +25545,7 @@
     "id": 592,
     "name": "frillish-male",
     "species_name": "frillish",
+    "name_ja_roma": "Pururill",
     "generation": 5,
     "types": [
       "water",
@@ -24995,6 +25587,7 @@
     "id": 593,
     "name": "jellicent-male",
     "species_name": "jellicent",
+    "name_ja_roma": "Burungel",
     "generation": 5,
     "types": [
       "water",
@@ -25036,6 +25629,7 @@
     "id": 594,
     "name": "alomomola",
     "species_name": "alomomola",
+    "name_ja_roma": "Mamanbou",
     "generation": 5,
     "types": [
       "water"
@@ -25077,6 +25671,7 @@
     "id": 595,
     "name": "joltik",
     "species_name": "joltik",
+    "name_ja_roma": "Bachuru",
     "generation": 5,
     "types": [
       "bug",
@@ -25118,6 +25713,7 @@
     "id": 596,
     "name": "galvantula",
     "species_name": "galvantula",
+    "name_ja_roma": "Dentula",
     "generation": 5,
     "types": [
       "bug",
@@ -25159,6 +25755,7 @@
     "id": 597,
     "name": "ferroseed",
     "species_name": "ferroseed",
+    "name_ja_roma": "Tesseed",
     "generation": 5,
     "types": [
       "grass",
@@ -25201,6 +25798,7 @@
     "id": 598,
     "name": "ferrothorn",
     "species_name": "ferrothorn",
+    "name_ja_roma": "Nutrey",
     "generation": 5,
     "types": [
       "grass",
@@ -25243,6 +25841,7 @@
     "id": 599,
     "name": "klink",
     "species_name": "klink",
+    "name_ja_roma": "Giaru",
     "generation": 5,
     "types": [
       "steel"
@@ -25283,6 +25882,7 @@
     "id": 600,
     "name": "klang",
     "species_name": "klang",
+    "name_ja_roma": "Gigiaru",
     "generation": 5,
     "types": [
       "steel"
@@ -25323,6 +25923,7 @@
     "id": 601,
     "name": "klinklang",
     "species_name": "klinklang",
+    "name_ja_roma": "Gigigiaru",
     "generation": 5,
     "types": [
       "steel"
@@ -25363,6 +25964,7 @@
     "id": 602,
     "name": "tynamo",
     "species_name": "tynamo",
+    "name_ja_roma": "Shibishirasu",
     "generation": 5,
     "types": [
       "electric"
@@ -25403,6 +26005,7 @@
     "id": 603,
     "name": "eelektrik",
     "species_name": "eelektrik",
+    "name_ja_roma": "Shibibeel",
     "generation": 5,
     "types": [
       "electric"
@@ -25443,6 +26046,7 @@
     "id": 604,
     "name": "eelektross",
     "species_name": "eelektross",
+    "name_ja_roma": "Shibirudon",
     "generation": 5,
     "types": [
       "electric"
@@ -25488,6 +26092,7 @@
     "id": 605,
     "name": "elgyem",
     "species_name": "elgyem",
+    "name_ja_roma": "Ligray",
     "generation": 5,
     "types": [
       "psychic"
@@ -25528,6 +26133,7 @@
     "id": 606,
     "name": "beheeyem",
     "species_name": "beheeyem",
+    "name_ja_roma": "Ohbem",
     "generation": 5,
     "types": [
       "psychic"
@@ -25568,6 +26174,7 @@
     "id": 607,
     "name": "litwick",
     "species_name": "litwick",
+    "name_ja_roma": "Hitomoshi",
     "generation": 5,
     "types": [
       "ghost",
@@ -25609,6 +26216,7 @@
     "id": 608,
     "name": "lampent",
     "species_name": "lampent",
+    "name_ja_roma": "Lampler",
     "generation": 5,
     "types": [
       "ghost",
@@ -25650,6 +26258,7 @@
     "id": 609,
     "name": "chandelure",
     "species_name": "chandelure",
+    "name_ja_roma": "Chandela",
     "generation": 5,
     "types": [
       "ghost",
@@ -25696,6 +26305,7 @@
     "id": 610,
     "name": "axew",
     "species_name": "axew",
+    "name_ja_roma": "Kibago",
     "generation": 5,
     "types": [
       "dragon"
@@ -25737,6 +26347,7 @@
     "id": 611,
     "name": "fraxure",
     "species_name": "fraxure",
+    "name_ja_roma": "Onondo",
     "generation": 5,
     "types": [
       "dragon"
@@ -25778,6 +26389,7 @@
     "id": 612,
     "name": "haxorus",
     "species_name": "haxorus",
+    "name_ja_roma": "Ononokus",
     "generation": 5,
     "types": [
       "dragon"
@@ -25819,6 +26431,7 @@
     "id": 613,
     "name": "cubchoo",
     "species_name": "cubchoo",
+    "name_ja_roma": "Kumasyun",
     "generation": 5,
     "types": [
       "ice"
@@ -25859,6 +26472,7 @@
     "id": 614,
     "name": "beartic",
     "species_name": "beartic",
+    "name_ja_roma": "Tunbear",
     "generation": 5,
     "types": [
       "ice"
@@ -25899,6 +26513,7 @@
     "id": 615,
     "name": "cryogonal",
     "species_name": "cryogonal",
+    "name_ja_roma": "Freegeo",
     "generation": 5,
     "types": [
       "ice"
@@ -25939,6 +26554,7 @@
     "id": 616,
     "name": "shelmet",
     "species_name": "shelmet",
+    "name_ja_roma": "Chobomaki",
     "generation": 5,
     "types": [
       "bug"
@@ -25979,6 +26595,7 @@
     "id": 617,
     "name": "accelgor",
     "species_name": "accelgor",
+    "name_ja_roma": "Agilder",
     "generation": 5,
     "types": [
       "bug"
@@ -26019,6 +26636,7 @@
     "id": 618,
     "name": "stunfisk",
     "species_name": "stunfisk",
+    "name_ja_roma": "Maggyo",
     "generation": 5,
     "types": [
       "ground",
@@ -26066,6 +26684,7 @@
     "id": 619,
     "name": "mienfoo",
     "species_name": "mienfoo",
+    "name_ja_roma": "Kojofu",
     "generation": 5,
     "types": [
       "fighting"
@@ -26107,6 +26726,7 @@
     "id": 620,
     "name": "mienshao",
     "species_name": "mienshao",
+    "name_ja_roma": "Kojondo",
     "generation": 5,
     "types": [
       "fighting"
@@ -26148,6 +26768,7 @@
     "id": 621,
     "name": "druddigon",
     "species_name": "druddigon",
+    "name_ja_roma": "Crimgan",
     "generation": 5,
     "types": [
       "dragon"
@@ -26189,6 +26810,7 @@
     "id": 622,
     "name": "golett",
     "species_name": "golett",
+    "name_ja_roma": "Gobit",
     "generation": 5,
     "types": [
       "ground",
@@ -26230,6 +26852,7 @@
     "id": 623,
     "name": "golurk",
     "species_name": "golurk",
+    "name_ja_roma": "Goloog",
     "generation": 5,
     "types": [
       "ground",
@@ -26276,6 +26899,7 @@
     "id": 624,
     "name": "pawniard",
     "species_name": "pawniard",
+    "name_ja_roma": "Komatana",
     "generation": 5,
     "types": [
       "dark",
@@ -26317,6 +26941,7 @@
     "id": 625,
     "name": "bisharp",
     "species_name": "bisharp",
+    "name_ja_roma": "Kirikizan",
     "generation": 5,
     "types": [
       "dark",
@@ -26358,6 +26983,7 @@
     "id": 626,
     "name": "bouffalant",
     "species_name": "bouffalant",
+    "name_ja_roma": "Buffron",
     "generation": 5,
     "types": [
       "normal"
@@ -26398,6 +27024,7 @@
     "id": 627,
     "name": "rufflet",
     "species_name": "rufflet",
+    "name_ja_roma": "Washibon",
     "generation": 5,
     "types": [
       "normal",
@@ -26439,6 +27066,7 @@
     "id": 628,
     "name": "braviary",
     "species_name": "braviary",
+    "name_ja_roma": "Warrgle",
     "generation": 5,
     "types": [
       "normal",
@@ -26485,6 +27113,7 @@
     "id": 629,
     "name": "vullaby",
     "species_name": "vullaby",
+    "name_ja_roma": "Valchai",
     "generation": 5,
     "types": [
       "dark",
@@ -26526,6 +27155,7 @@
     "id": 630,
     "name": "mandibuzz",
     "species_name": "mandibuzz",
+    "name_ja_roma": "Vulgina",
     "generation": 5,
     "types": [
       "dark",
@@ -26567,6 +27197,7 @@
     "id": 631,
     "name": "heatmor",
     "species_name": "heatmor",
+    "name_ja_roma": "Kuitaran",
     "generation": 5,
     "types": [
       "fire"
@@ -26607,6 +27238,7 @@
     "id": 632,
     "name": "durant",
     "species_name": "durant",
+    "name_ja_roma": "Aiant",
     "generation": 5,
     "types": [
       "bug",
@@ -26648,6 +27280,7 @@
     "id": 633,
     "name": "deino",
     "species_name": "deino",
+    "name_ja_roma": "Monozu",
     "generation": 5,
     "types": [
       "dark",
@@ -26689,6 +27322,7 @@
     "id": 634,
     "name": "zweilous",
     "species_name": "zweilous",
+    "name_ja_roma": "Dihead",
     "generation": 5,
     "types": [
       "dark",
@@ -26730,6 +27364,7 @@
     "id": 635,
     "name": "hydreigon",
     "species_name": "hydreigon",
+    "name_ja_roma": "Sazandora",
     "generation": 5,
     "types": [
       "dark",
@@ -26771,6 +27406,7 @@
     "id": 636,
     "name": "larvesta",
     "species_name": "larvesta",
+    "name_ja_roma": "Merlarva",
     "generation": 5,
     "types": [
       "bug",
@@ -26812,6 +27448,7 @@
     "id": 637,
     "name": "volcarona",
     "species_name": "volcarona",
+    "name_ja_roma": "Ulgamoth",
     "generation": 5,
     "types": [
       "bug",
@@ -26853,6 +27490,7 @@
     "id": 638,
     "name": "cobalion",
     "species_name": "cobalion",
+    "name_ja_roma": "Cobalon",
     "generation": 5,
     "types": [
       "steel",
@@ -26894,6 +27532,7 @@
     "id": 639,
     "name": "terrakion",
     "species_name": "terrakion",
+    "name_ja_roma": "Terrakion",
     "generation": 5,
     "types": [
       "rock",
@@ -26935,6 +27574,7 @@
     "id": 640,
     "name": "virizion",
     "species_name": "virizion",
+    "name_ja_roma": "Virizion",
     "generation": 5,
     "types": [
       "grass",
@@ -26976,6 +27616,7 @@
     "id": 641,
     "name": "tornadus-incarnate",
     "species_name": "tornadus",
+    "name_ja_roma": "Tornelos",
     "generation": 5,
     "types": [
       "flying"
@@ -27021,6 +27662,7 @@
     "id": 642,
     "name": "thundurus-incarnate",
     "species_name": "thundurus",
+    "name_ja_roma": "Voltolos",
     "generation": 5,
     "types": [
       "electric",
@@ -27067,6 +27709,7 @@
     "id": 643,
     "name": "reshiram",
     "species_name": "reshiram",
+    "name_ja_roma": "Reshiram",
     "generation": 5,
     "types": [
       "dragon",
@@ -27108,6 +27751,7 @@
     "id": 644,
     "name": "zekrom",
     "species_name": "zekrom",
+    "name_ja_roma": "Zekrom",
     "generation": 5,
     "types": [
       "dragon",
@@ -27149,6 +27793,7 @@
     "id": 645,
     "name": "landorus-incarnate",
     "species_name": "landorus",
+    "name_ja_roma": "Landlos",
     "generation": 5,
     "types": [
       "ground",
@@ -27195,6 +27840,7 @@
     "id": 646,
     "name": "kyurem",
     "species_name": "kyurem",
+    "name_ja_roma": "Kyurem",
     "generation": 5,
     "types": [
       "dragon",
@@ -27246,6 +27892,7 @@
     "id": 647,
     "name": "keldeo-ordinary",
     "species_name": "keldeo",
+    "name_ja_roma": "Keldeo",
     "generation": 5,
     "types": [
       "water",
@@ -27292,6 +27939,7 @@
     "id": 648,
     "name": "meloetta-aria",
     "species_name": "meloetta",
+    "name_ja_roma": "Meloetta",
     "generation": 5,
     "types": [
       "normal",
@@ -27338,6 +27986,7 @@
     "id": 649,
     "name": "genesect",
     "species_name": "genesect",
+    "name_ja_roma": "Genesect",
     "generation": 5,
     "types": [
       "bug",
@@ -27379,6 +28028,7 @@
     "id": 650,
     "name": "chespin",
     "species_name": "chespin",
+    "name_ja_roma": "Harimaron",
     "generation": 6,
     "types": [
       "grass"
@@ -27419,6 +28069,7 @@
     "id": 651,
     "name": "quilladin",
     "species_name": "quilladin",
+    "name_ja_roma": "Hariborg",
     "generation": 6,
     "types": [
       "grass"
@@ -27459,6 +28110,7 @@
     "id": 652,
     "name": "chesnaught",
     "species_name": "chesnaught",
+    "name_ja_roma": "Brigarron",
     "generation": 6,
     "types": [
       "grass",
@@ -27505,6 +28157,7 @@
     "id": 653,
     "name": "fennekin",
     "species_name": "fennekin",
+    "name_ja_roma": "Fokko",
     "generation": 6,
     "types": [
       "fire"
@@ -27545,6 +28198,7 @@
     "id": 654,
     "name": "braixen",
     "species_name": "braixen",
+    "name_ja_roma": "Tairenar",
     "generation": 6,
     "types": [
       "fire"
@@ -27585,6 +28239,7 @@
     "id": 655,
     "name": "delphox",
     "species_name": "delphox",
+    "name_ja_roma": "Mahoxy",
     "generation": 6,
     "types": [
       "fire",
@@ -27631,6 +28286,7 @@
     "id": 656,
     "name": "froakie",
     "species_name": "froakie",
+    "name_ja_roma": "Keromatsu",
     "generation": 6,
     "types": [
       "water"
@@ -27671,6 +28327,7 @@
     "id": 657,
     "name": "frogadier",
     "species_name": "frogadier",
+    "name_ja_roma": "Gekogashira",
     "generation": 6,
     "types": [
       "water"
@@ -27711,6 +28368,7 @@
     "id": 658,
     "name": "greninja",
     "species_name": "greninja",
+    "name_ja_roma": "Gekkouga",
     "generation": 6,
     "types": [
       "water",
@@ -27767,6 +28425,7 @@
     "id": 659,
     "name": "bunnelby",
     "species_name": "bunnelby",
+    "name_ja_roma": "Horubee",
     "generation": 6,
     "types": [
       "normal"
@@ -27807,6 +28466,7 @@
     "id": 660,
     "name": "diggersby",
     "species_name": "diggersby",
+    "name_ja_roma": "Horudo",
     "generation": 6,
     "types": [
       "normal",
@@ -27848,6 +28508,7 @@
     "id": 661,
     "name": "fletchling",
     "species_name": "fletchling",
+    "name_ja_roma": "Yayakoma",
     "generation": 6,
     "types": [
       "normal",
@@ -27889,6 +28550,7 @@
     "id": 662,
     "name": "fletchinder",
     "species_name": "fletchinder",
+    "name_ja_roma": "Hinoyakoma",
     "generation": 6,
     "types": [
       "fire",
@@ -27930,6 +28592,7 @@
     "id": 663,
     "name": "talonflame",
     "species_name": "talonflame",
+    "name_ja_roma": "Fiarrow",
     "generation": 6,
     "types": [
       "fire",
@@ -27971,6 +28634,7 @@
     "id": 664,
     "name": "scatterbug",
     "species_name": "scatterbug",
+    "name_ja_roma": "Kofukimushi",
     "generation": 6,
     "types": [
       "bug"
@@ -28011,6 +28675,7 @@
     "id": 665,
     "name": "spewpa",
     "species_name": "spewpa",
+    "name_ja_roma": "Kofuurai",
     "generation": 6,
     "types": [
       "bug"
@@ -28051,6 +28716,7 @@
     "id": 666,
     "name": "vivillon",
     "species_name": "vivillon",
+    "name_ja_roma": "Viviyon",
     "generation": 6,
     "types": [
       "bug",
@@ -28092,6 +28758,7 @@
     "id": 667,
     "name": "litleo",
     "species_name": "litleo",
+    "name_ja_roma": "Shishiko",
     "generation": 6,
     "types": [
       "fire",
@@ -28133,6 +28800,7 @@
     "id": 668,
     "name": "pyroar-male",
     "species_name": "pyroar",
+    "name_ja_roma": "Kaenjishi",
     "generation": 6,
     "types": [
       "fire",
@@ -28179,6 +28847,7 @@
     "id": 669,
     "name": "flabebe",
     "species_name": "flabebe",
+    "name_ja_roma": "Flabebe",
     "generation": 6,
     "types": [
       "fairy"
@@ -28219,6 +28888,7 @@
     "id": 670,
     "name": "floette",
     "species_name": "floette",
+    "name_ja_roma": "Floette",
     "generation": 6,
     "types": [
       "fairy"
@@ -28269,6 +28939,7 @@
     "id": 671,
     "name": "florges",
     "species_name": "florges",
+    "name_ja_roma": "Florges",
     "generation": 6,
     "types": [
       "fairy"
@@ -28309,6 +28980,7 @@
     "id": 672,
     "name": "skiddo",
     "species_name": "skiddo",
+    "name_ja_roma": "Meecle",
     "generation": 6,
     "types": [
       "grass"
@@ -28349,6 +29021,7 @@
     "id": 673,
     "name": "gogoat",
     "species_name": "gogoat",
+    "name_ja_roma": "Gogoat",
     "generation": 6,
     "types": [
       "grass"
@@ -28389,6 +29062,7 @@
     "id": 674,
     "name": "pancham",
     "species_name": "pancham",
+    "name_ja_roma": "Yancham",
     "generation": 6,
     "types": [
       "fighting"
@@ -28430,6 +29104,7 @@
     "id": 675,
     "name": "pangoro",
     "species_name": "pangoro",
+    "name_ja_roma": "Goronda",
     "generation": 6,
     "types": [
       "fighting",
@@ -28472,6 +29147,7 @@
     "id": 676,
     "name": "furfrou",
     "species_name": "furfrou",
+    "name_ja_roma": "Trimmien",
     "generation": 6,
     "types": [
       "normal"
@@ -28512,6 +29188,7 @@
     "id": 677,
     "name": "espurr",
     "species_name": "espurr",
+    "name_ja_roma": "Nyasper",
     "generation": 6,
     "types": [
       "psychic"
@@ -28552,6 +29229,7 @@
     "id": 678,
     "name": "meowstic-male",
     "species_name": "meowstic",
+    "name_ja_roma": "Nyaonix",
     "generation": 6,
     "types": [
       "psychic"
@@ -28607,6 +29285,7 @@
     "id": 679,
     "name": "honedge",
     "species_name": "honedge",
+    "name_ja_roma": "Hitotsuki",
     "generation": 6,
     "types": [
       "steel",
@@ -28648,6 +29327,7 @@
     "id": 680,
     "name": "doublade",
     "species_name": "doublade",
+    "name_ja_roma": "Nidangill",
     "generation": 6,
     "types": [
       "steel",
@@ -28689,6 +29369,7 @@
     "id": 681,
     "name": "aegislash-shield",
     "species_name": "aegislash",
+    "name_ja_roma": "Gillgard",
     "generation": 6,
     "types": [
       "steel",
@@ -28735,6 +29416,7 @@
     "id": 682,
     "name": "spritzee",
     "species_name": "spritzee",
+    "name_ja_roma": "Shushupu",
     "generation": 6,
     "types": [
       "fairy"
@@ -28775,6 +29457,7 @@
     "id": 683,
     "name": "aromatisse",
     "species_name": "aromatisse",
+    "name_ja_roma": "Frefuwan",
     "generation": 6,
     "types": [
       "fairy"
@@ -28815,6 +29498,7 @@
     "id": 684,
     "name": "swirlix",
     "species_name": "swirlix",
+    "name_ja_roma": "Peroppafu",
     "generation": 6,
     "types": [
       "fairy"
@@ -28855,6 +29539,7 @@
     "id": 685,
     "name": "slurpuff",
     "species_name": "slurpuff",
+    "name_ja_roma": "Peroream",
     "generation": 6,
     "types": [
       "fairy"
@@ -28895,6 +29580,7 @@
     "id": 686,
     "name": "inkay",
     "species_name": "inkay",
+    "name_ja_roma": "Maaiika",
     "generation": 6,
     "types": [
       "dark",
@@ -28937,6 +29623,7 @@
     "id": 687,
     "name": "malamar",
     "species_name": "malamar",
+    "name_ja_roma": "Calamanero",
     "generation": 6,
     "types": [
       "dark",
@@ -28984,6 +29671,7 @@
     "id": 688,
     "name": "binacle",
     "species_name": "binacle",
+    "name_ja_roma": "Kametete",
     "generation": 6,
     "types": [
       "rock",
@@ -29025,6 +29713,7 @@
     "id": 689,
     "name": "barbaracle",
     "species_name": "barbaracle",
+    "name_ja_roma": "Gamenodes",
     "generation": 6,
     "types": [
       "rock",
@@ -29071,6 +29760,7 @@
     "id": 690,
     "name": "skrelp",
     "species_name": "skrelp",
+    "name_ja_roma": "Kuzumo",
     "generation": 6,
     "types": [
       "poison",
@@ -29113,6 +29803,7 @@
     "id": 691,
     "name": "dragalge",
     "species_name": "dragalge",
+    "name_ja_roma": "Dramidoro",
     "generation": 6,
     "types": [
       "poison",
@@ -29160,6 +29851,7 @@
     "id": 692,
     "name": "clauncher",
     "species_name": "clauncher",
+    "name_ja_roma": "Udeppou",
     "generation": 6,
     "types": [
       "water"
@@ -29201,6 +29893,7 @@
     "id": 693,
     "name": "clawitzer",
     "species_name": "clawitzer",
+    "name_ja_roma": "Bloster",
     "generation": 6,
     "types": [
       "water"
@@ -29242,6 +29935,7 @@
     "id": 694,
     "name": "helioptile",
     "species_name": "helioptile",
+    "name_ja_roma": "Erikiteru",
     "generation": 6,
     "types": [
       "electric",
@@ -29284,6 +29978,7 @@
     "id": 695,
     "name": "heliolisk",
     "species_name": "heliolisk",
+    "name_ja_roma": "Elezard",
     "generation": 6,
     "types": [
       "electric",
@@ -29326,6 +30021,7 @@
     "id": 696,
     "name": "tyrunt",
     "species_name": "tyrunt",
+    "name_ja_roma": "Chigoras",
     "generation": 6,
     "types": [
       "rock",
@@ -29368,6 +30064,7 @@
     "id": 697,
     "name": "tyrantrum",
     "species_name": "tyrantrum",
+    "name_ja_roma": "Gachigoras",
     "generation": 6,
     "types": [
       "rock",
@@ -29410,6 +30107,7 @@
     "id": 698,
     "name": "amaura",
     "species_name": "amaura",
+    "name_ja_roma": "Amarus",
     "generation": 6,
     "types": [
       "rock",
@@ -29451,6 +30149,7 @@
     "id": 699,
     "name": "aurorus",
     "species_name": "aurorus",
+    "name_ja_roma": "Amaruruga",
     "generation": 6,
     "types": [
       "rock",
@@ -29492,6 +30191,7 @@
     "id": 700,
     "name": "sylveon",
     "species_name": "sylveon",
+    "name_ja_roma": "Nymphia",
     "generation": 6,
     "types": [
       "fairy"
@@ -29532,6 +30232,7 @@
     "id": 701,
     "name": "hawlucha",
     "species_name": "hawlucha",
+    "name_ja_roma": "Luchabull",
     "generation": 6,
     "types": [
       "fighting",
@@ -29579,6 +30280,7 @@
     "id": 702,
     "name": "dedenne",
     "species_name": "dedenne",
+    "name_ja_roma": "Dedenne",
     "generation": 6,
     "types": [
       "electric",
@@ -29621,6 +30323,7 @@
     "id": 703,
     "name": "carbink",
     "species_name": "carbink",
+    "name_ja_roma": "Melecie",
     "generation": 6,
     "types": [
       "rock",
@@ -29663,6 +30366,7 @@
     "id": 704,
     "name": "goomy",
     "species_name": "goomy",
+    "name_ja_roma": "Numera",
     "generation": 6,
     "types": [
       "dragon"
@@ -29703,6 +30407,7 @@
     "id": 705,
     "name": "sliggoo",
     "species_name": "sliggoo",
+    "name_ja_roma": "Numeil",
     "generation": 6,
     "types": [
       "dragon"
@@ -29748,6 +30453,7 @@
     "id": 706,
     "name": "goodra",
     "species_name": "goodra",
+    "name_ja_roma": "Numelgon",
     "generation": 6,
     "types": [
       "dragon"
@@ -29793,6 +30499,7 @@
     "id": 707,
     "name": "klefki",
     "species_name": "klefki",
+    "name_ja_roma": "Cleffy",
     "generation": 6,
     "types": [
       "steel",
@@ -29834,6 +30541,7 @@
     "id": 708,
     "name": "phantump",
     "species_name": "phantump",
+    "name_ja_roma": "Bokurei",
     "generation": 6,
     "types": [
       "ghost",
@@ -29876,6 +30584,7 @@
     "id": 709,
     "name": "trevenant",
     "species_name": "trevenant",
+    "name_ja_roma": "Ohrot",
     "generation": 6,
     "types": [
       "ghost",
@@ -29918,6 +30627,7 @@
     "id": 710,
     "name": "pumpkaboo-average",
     "species_name": "pumpkaboo",
+    "name_ja_roma": "Bakeccha",
     "generation": 6,
     "types": [
       "ghost",
@@ -29974,6 +30684,7 @@
     "id": 711,
     "name": "gourgeist-average",
     "species_name": "gourgeist",
+    "name_ja_roma": "Pumpjin",
     "generation": 6,
     "types": [
       "ghost",
@@ -30030,6 +30741,7 @@
     "id": 712,
     "name": "bergmite",
     "species_name": "bergmite",
+    "name_ja_roma": "Kachikohru",
     "generation": 6,
     "types": [
       "ice"
@@ -30071,6 +30783,7 @@
     "id": 713,
     "name": "avalugg",
     "species_name": "avalugg",
+    "name_ja_roma": "Crebase",
     "generation": 6,
     "types": [
       "ice"
@@ -30117,6 +30830,7 @@
     "id": 714,
     "name": "noibat",
     "species_name": "noibat",
+    "name_ja_roma": "Onbat",
     "generation": 6,
     "types": [
       "flying",
@@ -30159,6 +30873,7 @@
     "id": 715,
     "name": "noivern",
     "species_name": "noivern",
+    "name_ja_roma": "Onvern",
     "generation": 6,
     "types": [
       "flying",
@@ -30201,6 +30916,7 @@
     "id": 716,
     "name": "xerneas",
     "species_name": "xerneas",
+    "name_ja_roma": "Xerneas",
     "generation": 6,
     "types": [
       "fairy"
@@ -30241,6 +30957,7 @@
     "id": 717,
     "name": "yveltal",
     "species_name": "yveltal",
+    "name_ja_roma": "Yveltal",
     "generation": 6,
     "types": [
       "dark",
@@ -30282,6 +30999,7 @@
     "id": 718,
     "name": "zygarde-50",
     "species_name": "zygarde",
+    "name_ja_roma": "Zygarde",
     "generation": 6,
     "types": [
       "dragon",
@@ -30348,6 +31066,7 @@
     "id": 719,
     "name": "diancie",
     "species_name": "diancie",
+    "name_ja_roma": "Diancie",
     "generation": 6,
     "types": [
       "rock",
@@ -30394,6 +31113,7 @@
     "id": 720,
     "name": "hoopa",
     "species_name": "hoopa",
+    "name_ja_roma": "Hoopa",
     "generation": 6,
     "types": [
       "psychic",
@@ -30440,6 +31160,7 @@
     "id": 721,
     "name": "volcanion",
     "species_name": "volcanion",
+    "name_ja_roma": "Volcanion",
     "generation": 6,
     "types": [
       "fire",
@@ -30481,6 +31202,7 @@
     "id": 722,
     "name": "rowlet",
     "species_name": "rowlet",
+    "name_ja_roma": "Mokuroh",
     "generation": 7,
     "types": [
       "grass",
@@ -30522,6 +31244,7 @@
     "id": 723,
     "name": "dartrix",
     "species_name": "dartrix",
+    "name_ja_roma": "Fukuthrow",
     "generation": 7,
     "types": [
       "grass",
@@ -30563,6 +31286,7 @@
     "id": 724,
     "name": "decidueye",
     "species_name": "decidueye",
+    "name_ja_roma": "Junaiper",
     "generation": 7,
     "types": [
       "grass",
@@ -30609,6 +31333,7 @@
     "id": 725,
     "name": "litten",
     "species_name": "litten",
+    "name_ja_roma": "Nyabby",
     "generation": 7,
     "types": [
       "fire"
@@ -30649,6 +31374,7 @@
     "id": 726,
     "name": "torracat",
     "species_name": "torracat",
+    "name_ja_roma": "Nyaheat",
     "generation": 7,
     "types": [
       "fire"
@@ -30689,6 +31415,7 @@
     "id": 727,
     "name": "incineroar",
     "species_name": "incineroar",
+    "name_ja_roma": "Gaogaen",
     "generation": 7,
     "types": [
       "fire",
@@ -30730,6 +31457,7 @@
     "id": 728,
     "name": "popplio",
     "species_name": "popplio",
+    "name_ja_roma": "Ashimari",
     "generation": 7,
     "types": [
       "water"
@@ -30771,6 +31499,7 @@
     "id": 729,
     "name": "brionne",
     "species_name": "brionne",
+    "name_ja_roma": "Osyamari",
     "generation": 7,
     "types": [
       "water"
@@ -30812,6 +31541,7 @@
     "id": 730,
     "name": "primarina",
     "species_name": "primarina",
+    "name_ja_roma": "Ashirene",
     "generation": 7,
     "types": [
       "water",
@@ -30854,6 +31584,7 @@
     "id": 731,
     "name": "pikipek",
     "species_name": "pikipek",
+    "name_ja_roma": "Tsutsukera",
     "generation": 7,
     "types": [
       "normal",
@@ -30895,6 +31626,7 @@
     "id": 732,
     "name": "trumbeak",
     "species_name": "trumbeak",
+    "name_ja_roma": "Kerarappa",
     "generation": 7,
     "types": [
       "normal",
@@ -30936,6 +31668,7 @@
     "id": 733,
     "name": "toucannon",
     "species_name": "toucannon",
+    "name_ja_roma": "Dodekabashi",
     "generation": 7,
     "types": [
       "normal",
@@ -30977,6 +31710,7 @@
     "id": 734,
     "name": "yungoos",
     "species_name": "yungoos",
+    "name_ja_roma": "Youngoose",
     "generation": 7,
     "types": [
       "normal"
@@ -31017,6 +31751,7 @@
     "id": 735,
     "name": "gumshoos",
     "species_name": "gumshoos",
+    "name_ja_roma": "Dekagoose",
     "generation": 7,
     "types": [
       "normal"
@@ -31062,6 +31797,7 @@
     "id": 736,
     "name": "grubbin",
     "species_name": "grubbin",
+    "name_ja_roma": "Agojimushi",
     "generation": 7,
     "types": [
       "bug"
@@ -31102,6 +31838,7 @@
     "id": 737,
     "name": "charjabug",
     "species_name": "charjabug",
+    "name_ja_roma": "Dendimushi",
     "generation": 7,
     "types": [
       "bug",
@@ -31143,6 +31880,7 @@
     "id": 738,
     "name": "vikavolt",
     "species_name": "vikavolt",
+    "name_ja_roma": "Kuwagannon",
     "generation": 7,
     "types": [
       "bug",
@@ -31189,6 +31927,7 @@
     "id": 739,
     "name": "crabrawler",
     "species_name": "crabrawler",
+    "name_ja_roma": "Makenkani",
     "generation": 7,
     "types": [
       "fighting"
@@ -31229,6 +31968,7 @@
     "id": 740,
     "name": "crabominable",
     "species_name": "crabominable",
+    "name_ja_roma": "Kekenkani",
     "generation": 7,
     "types": [
       "fighting",
@@ -31275,6 +32015,7 @@
     "id": 741,
     "name": "oricorio-baile",
     "species_name": "oricorio",
+    "name_ja_roma": "Odoridori",
     "generation": 7,
     "types": [
       "fire",
@@ -31331,6 +32072,7 @@
     "id": 742,
     "name": "cutiefly",
     "species_name": "cutiefly",
+    "name_ja_roma": "Abuly",
     "generation": 7,
     "types": [
       "bug",
@@ -31373,6 +32115,7 @@
     "id": 743,
     "name": "ribombee",
     "species_name": "ribombee",
+    "name_ja_roma": "Aburibbon",
     "generation": 7,
     "types": [
       "bug",
@@ -31420,6 +32163,7 @@
     "id": 744,
     "name": "rockruff",
     "species_name": "rockruff",
+    "name_ja_roma": "Iwanko",
     "generation": 7,
     "types": [
       "rock"
@@ -31465,6 +32209,7 @@
     "id": 745,
     "name": "lycanroc-midday",
     "species_name": "lycanroc",
+    "name_ja_roma": "Lugarugan",
     "generation": 7,
     "types": [
       "rock"
@@ -31515,6 +32260,7 @@
     "id": 746,
     "name": "wishiwashi-solo",
     "species_name": "wishiwashi",
+    "name_ja_roma": "Yowashi",
     "generation": 7,
     "types": [
       "water"
@@ -31560,6 +32306,7 @@
     "id": 747,
     "name": "mareanie",
     "species_name": "mareanie",
+    "name_ja_roma": "Hidoide",
     "generation": 7,
     "types": [
       "poison",
@@ -31601,6 +32348,7 @@
     "id": 748,
     "name": "toxapex",
     "species_name": "toxapex",
+    "name_ja_roma": "Dohidoide",
     "generation": 7,
     "types": [
       "poison",
@@ -31642,6 +32390,7 @@
     "id": 749,
     "name": "mudbray",
     "species_name": "mudbray",
+    "name_ja_roma": "Dorobanko",
     "generation": 7,
     "types": [
       "ground"
@@ -31682,6 +32431,7 @@
     "id": 750,
     "name": "mudsdale",
     "species_name": "mudsdale",
+    "name_ja_roma": "Banbadoro",
     "generation": 7,
     "types": [
       "ground"
@@ -31722,6 +32472,7 @@
     "id": 751,
     "name": "dewpider",
     "species_name": "dewpider",
+    "name_ja_roma": "Shizukumo",
     "generation": 7,
     "types": [
       "water",
@@ -31764,6 +32515,7 @@
     "id": 752,
     "name": "araquanid",
     "species_name": "araquanid",
+    "name_ja_roma": "Onishizukumo",
     "generation": 7,
     "types": [
       "water",
@@ -31811,6 +32563,7 @@
     "id": 753,
     "name": "fomantis",
     "species_name": "fomantis",
+    "name_ja_roma": "Karikiri",
     "generation": 7,
     "types": [
       "grass"
@@ -31851,6 +32604,7 @@
     "id": 754,
     "name": "lurantis",
     "species_name": "lurantis",
+    "name_ja_roma": "Lalantes",
     "generation": 7,
     "types": [
       "grass"
@@ -31896,6 +32650,7 @@
     "id": 755,
     "name": "morelull",
     "species_name": "morelull",
+    "name_ja_roma": "Nemasyu",
     "generation": 7,
     "types": [
       "grass",
@@ -31937,6 +32692,7 @@
     "id": 756,
     "name": "shiinotic",
     "species_name": "shiinotic",
+    "name_ja_roma": "Mashade",
     "generation": 7,
     "types": [
       "grass",
@@ -31978,6 +32734,7 @@
     "id": 757,
     "name": "salandit",
     "species_name": "salandit",
+    "name_ja_roma": "Yatoumori",
     "generation": 7,
     "types": [
       "poison",
@@ -32020,6 +32777,7 @@
     "id": 758,
     "name": "salazzle",
     "species_name": "salazzle",
+    "name_ja_roma": "Ennewt",
     "generation": 7,
     "types": [
       "poison",
@@ -32067,6 +32825,7 @@
     "id": 759,
     "name": "stufful",
     "species_name": "stufful",
+    "name_ja_roma": "Nuikoguma",
     "generation": 7,
     "types": [
       "normal",
@@ -32108,6 +32867,7 @@
     "id": 760,
     "name": "bewear",
     "species_name": "bewear",
+    "name_ja_roma": "Kiteruguma",
     "generation": 7,
     "types": [
       "normal",
@@ -32149,6 +32909,7 @@
     "id": 761,
     "name": "bounsweet",
     "species_name": "bounsweet",
+    "name_ja_roma": "Amakaji",
     "generation": 7,
     "types": [
       "grass"
@@ -32189,6 +32950,7 @@
     "id": 762,
     "name": "steenee",
     "species_name": "steenee",
+    "name_ja_roma": "Amamaiko",
     "generation": 7,
     "types": [
       "grass"
@@ -32229,6 +32991,7 @@
     "id": 763,
     "name": "tsareena",
     "species_name": "tsareena",
+    "name_ja_roma": "Amajo",
     "generation": 7,
     "types": [
       "grass"
@@ -32269,6 +33032,7 @@
     "id": 764,
     "name": "comfey",
     "species_name": "comfey",
+    "name_ja_roma": "Cuwawa",
     "generation": 7,
     "types": [
       "fairy"
@@ -32309,6 +33073,7 @@
     "id": 765,
     "name": "oranguru",
     "species_name": "oranguru",
+    "name_ja_roma": "Yareyuutan",
     "generation": 7,
     "types": [
       "normal",
@@ -32350,6 +33115,7 @@
     "id": 766,
     "name": "passimian",
     "species_name": "passimian",
+    "name_ja_roma": "Nagetukesaru",
     "generation": 7,
     "types": [
       "fighting"
@@ -32390,6 +33156,7 @@
     "id": 767,
     "name": "wimpod",
     "species_name": "wimpod",
+    "name_ja_roma": "Kosokumushi",
     "generation": 7,
     "types": [
       "bug",
@@ -32432,6 +33199,7 @@
     "id": 768,
     "name": "golisopod",
     "species_name": "golisopod",
+    "name_ja_roma": "Gusokumusha",
     "generation": 7,
     "types": [
       "bug",
@@ -32479,6 +33247,7 @@
     "id": 769,
     "name": "sandygast",
     "species_name": "sandygast",
+    "name_ja_roma": "Sunaba",
     "generation": 7,
     "types": [
       "ghost",
@@ -32520,6 +33289,7 @@
     "id": 770,
     "name": "palossand",
     "species_name": "palossand",
+    "name_ja_roma": "Sirodethna",
     "generation": 7,
     "types": [
       "ghost",
@@ -32561,6 +33331,7 @@
     "id": 771,
     "name": "pyukumuku",
     "species_name": "pyukumuku",
+    "name_ja_roma": "Namakobushi",
     "generation": 7,
     "types": [
       "water"
@@ -32601,6 +33372,7 @@
     "id": 772,
     "name": "type-null",
     "species_name": "type-null",
+    "name_ja_roma": "Type:Null",
     "generation": 7,
     "types": [
       "normal"
@@ -32641,6 +33413,7 @@
     "id": 773,
     "name": "silvally",
     "species_name": "silvally",
+    "name_ja_roma": "Silvady",
     "generation": 7,
     "types": [
       "normal"
@@ -32681,6 +33454,7 @@
     "id": 774,
     "name": "minior-red-meteor",
     "species_name": "minior",
+    "name_ja_roma": "Meteno",
     "generation": 7,
     "types": [
       "rock",
@@ -32787,6 +33561,7 @@
     "id": 775,
     "name": "komala",
     "species_name": "komala",
+    "name_ja_roma": "Nekkoara",
     "generation": 7,
     "types": [
       "normal"
@@ -32827,6 +33602,7 @@
     "id": 776,
     "name": "turtonator",
     "species_name": "turtonator",
+    "name_ja_roma": "Bakugames",
     "generation": 7,
     "types": [
       "fire",
@@ -32869,6 +33645,7 @@
     "id": 777,
     "name": "togedemaru",
     "species_name": "togedemaru",
+    "name_ja_roma": "Togedemaru",
     "generation": 7,
     "types": [
       "electric",
@@ -32916,6 +33693,7 @@
     "id": 778,
     "name": "mimikyu-disguised",
     "species_name": "mimikyu",
+    "name_ja_roma": "Mimikkyu",
     "generation": 7,
     "types": [
       "ghost",
@@ -32972,6 +33750,7 @@
     "id": 779,
     "name": "bruxish",
     "species_name": "bruxish",
+    "name_ja_roma": "Hagigishiri",
     "generation": 7,
     "types": [
       "water",
@@ -33013,6 +33792,7 @@
     "id": 780,
     "name": "drampa",
     "species_name": "drampa",
+    "name_ja_roma": "Jijilong",
     "generation": 7,
     "types": [
       "normal",
@@ -33060,6 +33840,7 @@
     "id": 781,
     "name": "dhelmise",
     "species_name": "dhelmise",
+    "name_ja_roma": "Dadarin",
     "generation": 7,
     "types": [
       "ghost",
@@ -33101,6 +33882,7 @@
     "id": 782,
     "name": "jangmo-o",
     "species_name": "jangmo-o",
+    "name_ja_roma": "Jyarako",
     "generation": 7,
     "types": [
       "dragon"
@@ -33141,6 +33923,7 @@
     "id": 783,
     "name": "hakamo-o",
     "species_name": "hakamo-o",
+    "name_ja_roma": "Jyarango",
     "generation": 7,
     "types": [
       "dragon",
@@ -33182,6 +33965,7 @@
     "id": 784,
     "name": "kommo-o",
     "species_name": "kommo-o",
+    "name_ja_roma": "Jyararanga",
     "generation": 7,
     "types": [
       "dragon",
@@ -33228,6 +34012,7 @@
     "id": 785,
     "name": "tapu-koko",
     "species_name": "tapu-koko",
+    "name_ja_roma": "Kapu-Kokeko",
     "generation": 7,
     "types": [
       "electric",
@@ -33269,6 +34054,7 @@
     "id": 786,
     "name": "tapu-lele",
     "species_name": "tapu-lele",
+    "name_ja_roma": "Kapu-Tetefu",
     "generation": 7,
     "types": [
       "psychic",
@@ -33310,6 +34096,7 @@
     "id": 787,
     "name": "tapu-bulu",
     "species_name": "tapu-bulu",
+    "name_ja_roma": "Kapu-Bulul",
     "generation": 7,
     "types": [
       "grass",
@@ -33351,6 +34138,7 @@
     "id": 788,
     "name": "tapu-fini",
     "species_name": "tapu-fini",
+    "name_ja_roma": "Kapu-Rehire",
     "generation": 7,
     "types": [
       "water",
@@ -33392,6 +34180,7 @@
     "id": 789,
     "name": "cosmog",
     "species_name": "cosmog",
+    "name_ja_roma": "Cosmog",
     "generation": 7,
     "types": [
       "psychic"
@@ -33432,6 +34221,7 @@
     "id": 790,
     "name": "cosmoem",
     "species_name": "cosmoem",
+    "name_ja_roma": "Cosmovum",
     "generation": 7,
     "types": [
       "psychic"
@@ -33472,6 +34262,7 @@
     "id": 791,
     "name": "solgaleo",
     "species_name": "solgaleo",
+    "name_ja_roma": "Solgaleo",
     "generation": 7,
     "types": [
       "psychic",
@@ -33513,6 +34304,7 @@
     "id": 792,
     "name": "lunala",
     "species_name": "lunala",
+    "name_ja_roma": "Lunala",
     "generation": 7,
     "types": [
       "psychic",
@@ -33554,6 +34346,7 @@
     "id": 793,
     "name": "nihilego",
     "species_name": "nihilego",
+    "name_ja_roma": "Uturoid",
     "generation": 7,
     "types": [
       "rock",
@@ -33595,6 +34388,7 @@
     "id": 794,
     "name": "buzzwole",
     "species_name": "buzzwole",
+    "name_ja_roma": "Massivoon",
     "generation": 7,
     "types": [
       "bug",
@@ -33636,6 +34430,7 @@
     "id": 795,
     "name": "pheromosa",
     "species_name": "pheromosa",
+    "name_ja_roma": "Pheroache",
     "generation": 7,
     "types": [
       "bug",
@@ -33677,6 +34472,7 @@
     "id": 796,
     "name": "xurkitree",
     "species_name": "xurkitree",
+    "name_ja_roma": "Denjyumoku",
     "generation": 7,
     "types": [
       "electric"
@@ -33717,6 +34513,7 @@
     "id": 797,
     "name": "celesteela",
     "species_name": "celesteela",
+    "name_ja_roma": "Tekkaguya",
     "generation": 7,
     "types": [
       "steel",
@@ -33758,6 +34555,7 @@
     "id": 798,
     "name": "kartana",
     "species_name": "kartana",
+    "name_ja_roma": "Kamiturugi",
     "generation": 7,
     "types": [
       "grass",
@@ -33799,6 +34597,7 @@
     "id": 799,
     "name": "guzzlord",
     "species_name": "guzzlord",
+    "name_ja_roma": "Akuziking",
     "generation": 7,
     "types": [
       "dark",
@@ -33840,6 +34639,7 @@
     "id": 800,
     "name": "necrozma",
     "species_name": "necrozma",
+    "name_ja_roma": "Necrozma",
     "generation": 7,
     "types": [
       "psychic"
@@ -33895,6 +34695,7 @@
     "id": 801,
     "name": "magearna",
     "species_name": "magearna",
+    "name_ja_roma": "Magearna",
     "generation": 7,
     "types": [
       "steel",
@@ -33951,6 +34752,7 @@
     "id": 802,
     "name": "marshadow",
     "species_name": "marshadow",
+    "name_ja_roma": "Marshadow",
     "generation": 7,
     "types": [
       "fighting",
@@ -33992,6 +34794,7 @@
     "id": 803,
     "name": "poipole",
     "species_name": "poipole",
+    "name_ja_roma": "Bevenom",
     "generation": 7,
     "types": [
       "poison"
@@ -34032,6 +34835,7 @@
     "id": 804,
     "name": "naganadel",
     "species_name": "naganadel",
+    "name_ja_roma": "Agoyon",
     "generation": 7,
     "types": [
       "poison",
@@ -34073,6 +34877,7 @@
     "id": 805,
     "name": "stakataka",
     "species_name": "stakataka",
+    "name_ja_roma": "Tundetunde",
     "generation": 7,
     "types": [
       "rock",
@@ -34114,6 +34919,7 @@
     "id": 806,
     "name": "blacephalon",
     "species_name": "blacephalon",
+    "name_ja_roma": "Zugadoon",
     "generation": 7,
     "types": [
       "fire",
@@ -34155,6 +34961,7 @@
     "id": 807,
     "name": "zeraora",
     "species_name": "zeraora",
+    "name_ja_roma": "Zeraora",
     "generation": 7,
     "types": [
       "electric"
@@ -34200,6 +35007,7 @@
     "id": 808,
     "name": "meltan",
     "species_name": "meltan",
+    "name_ja_roma": "Meltan",
     "generation": 7,
     "types": [
       "steel"
@@ -34240,6 +35048,7 @@
     "id": 809,
     "name": "melmetal",
     "species_name": "melmetal",
+    "name_ja_roma": "Melmetal",
     "generation": 7,
     "types": [
       "steel"
@@ -34285,6 +35094,7 @@
     "id": 810,
     "name": "grookey",
     "species_name": "grookey",
+    "name_ja_roma": "Sarunori",
     "generation": 8,
     "types": [
       "grass"
@@ -34326,6 +35136,7 @@
     "id": 811,
     "name": "thwackey",
     "species_name": "thwackey",
+    "name_ja_roma": "Bachinkey",
     "generation": 8,
     "types": [
       "grass"
@@ -34367,6 +35178,7 @@
     "id": 812,
     "name": "rillaboom",
     "species_name": "rillaboom",
+    "name_ja_roma": "Gorirander",
     "generation": 8,
     "types": [
       "grass"
@@ -34413,6 +35225,7 @@
     "id": 813,
     "name": "scorbunny",
     "species_name": "scorbunny",
+    "name_ja_roma": "Hibanny",
     "generation": 8,
     "types": [
       "fire"
@@ -34454,6 +35267,7 @@
     "id": 814,
     "name": "raboot",
     "species_name": "raboot",
+    "name_ja_roma": "Rabbifuto",
     "generation": 8,
     "types": [
       "fire"
@@ -34495,6 +35309,7 @@
     "id": 815,
     "name": "cinderace",
     "species_name": "cinderace",
+    "name_ja_roma": "Aceburn",
     "generation": 8,
     "types": [
       "fire"
@@ -34541,6 +35356,7 @@
     "id": 816,
     "name": "sobble",
     "species_name": "sobble",
+    "name_ja_roma": "Messon",
     "generation": 8,
     "types": [
       "water"
@@ -34582,6 +35398,7 @@
     "id": 817,
     "name": "drizzile",
     "species_name": "drizzile",
+    "name_ja_roma": "Jimereon",
     "generation": 8,
     "types": [
       "water"
@@ -34623,6 +35440,7 @@
     "id": 818,
     "name": "inteleon",
     "species_name": "inteleon",
+    "name_ja_roma": "Intereon",
     "generation": 8,
     "types": [
       "water"
@@ -34669,6 +35487,7 @@
     "id": 819,
     "name": "skwovet",
     "species_name": "skwovet",
+    "name_ja_roma": "Hoshigarisu",
     "generation": 8,
     "types": [
       "normal"
@@ -34709,6 +35528,7 @@
     "id": 820,
     "name": "greedent",
     "species_name": "greedent",
+    "name_ja_roma": "Yokubarisu",
     "generation": 8,
     "types": [
       "normal"
@@ -34749,6 +35569,7 @@
     "id": 821,
     "name": "rookidee",
     "species_name": "rookidee",
+    "name_ja_roma": "Kokogara",
     "generation": 8,
     "types": [
       "flying"
@@ -34789,6 +35610,7 @@
     "id": 822,
     "name": "corvisquire",
     "species_name": "corvisquire",
+    "name_ja_roma": "Aogarasu",
     "generation": 8,
     "types": [
       "flying"
@@ -34829,6 +35651,7 @@
     "id": 823,
     "name": "corviknight",
     "species_name": "corviknight",
+    "name_ja_roma": "Armorga",
     "generation": 8,
     "types": [
       "flying",
@@ -34875,6 +35698,7 @@
     "id": 824,
     "name": "blipbug",
     "species_name": "blipbug",
+    "name_ja_roma": "Sacchimushi",
     "generation": 8,
     "types": [
       "bug"
@@ -34915,6 +35739,7 @@
     "id": 825,
     "name": "dottler",
     "species_name": "dottler",
+    "name_ja_roma": "Redomushi",
     "generation": 8,
     "types": [
       "bug",
@@ -34956,6 +35781,7 @@
     "id": 826,
     "name": "orbeetle",
     "species_name": "orbeetle",
+    "name_ja_roma": "Eolb",
     "generation": 8,
     "types": [
       "bug",
@@ -35002,6 +35828,7 @@
     "id": 827,
     "name": "nickit",
     "species_name": "nickit",
+    "name_ja_roma": "Kusune",
     "generation": 8,
     "types": [
       "dark"
@@ -35042,6 +35869,7 @@
     "id": 828,
     "name": "thievul",
     "species_name": "thievul",
+    "name_ja_roma": "Foxly",
     "generation": 8,
     "types": [
       "dark"
@@ -35082,6 +35910,7 @@
     "id": 829,
     "name": "gossifleur",
     "species_name": "gossifleur",
+    "name_ja_roma": "Himenka",
     "generation": 8,
     "types": [
       "grass"
@@ -35122,6 +35951,7 @@
     "id": 830,
     "name": "eldegoss",
     "species_name": "eldegoss",
+    "name_ja_roma": "Watashiraga",
     "generation": 8,
     "types": [
       "grass"
@@ -35162,6 +35992,7 @@
     "id": 831,
     "name": "wooloo",
     "species_name": "wooloo",
+    "name_ja_roma": "Wooluu",
     "generation": 8,
     "types": [
       "normal"
@@ -35202,6 +36033,7 @@
     "id": 832,
     "name": "dubwool",
     "species_name": "dubwool",
+    "name_ja_roma": "Baiwooluu",
     "generation": 8,
     "types": [
       "normal"
@@ -35242,6 +36074,7 @@
     "id": 833,
     "name": "chewtle",
     "species_name": "chewtle",
+    "name_ja_roma": "Kamukame",
     "generation": 8,
     "types": [
       "water"
@@ -35283,6 +36116,7 @@
     "id": 834,
     "name": "drednaw",
     "species_name": "drednaw",
+    "name_ja_roma": "Kajirigame",
     "generation": 8,
     "types": [
       "water",
@@ -35330,6 +36164,7 @@
     "id": 835,
     "name": "yamper",
     "species_name": "yamper",
+    "name_ja_roma": "Wanpachi",
     "generation": 8,
     "types": [
       "electric"
@@ -35370,6 +36205,7 @@
     "id": 836,
     "name": "boltund",
     "species_name": "boltund",
+    "name_ja_roma": "Pulsewan",
     "generation": 8,
     "types": [
       "electric"
@@ -35410,6 +36246,7 @@
     "id": 837,
     "name": "rolycoly",
     "species_name": "rolycoly",
+    "name_ja_roma": "Tandon",
     "generation": 8,
     "types": [
       "rock"
@@ -35450,6 +36287,7 @@
     "id": 838,
     "name": "carkol",
     "species_name": "carkol",
+    "name_ja_roma": "Toroggon",
     "generation": 8,
     "types": [
       "rock",
@@ -35491,6 +36329,7 @@
     "id": 839,
     "name": "coalossal",
     "species_name": "coalossal",
+    "name_ja_roma": "Sekitanzan",
     "generation": 8,
     "types": [
       "rock",
@@ -35537,6 +36376,7 @@
     "id": 840,
     "name": "applin",
     "species_name": "applin",
+    "name_ja_roma": "Kajicchu",
     "generation": 8,
     "types": [
       "grass",
@@ -35579,6 +36419,7 @@
     "id": 841,
     "name": "flapple",
     "species_name": "flapple",
+    "name_ja_roma": "Appryu",
     "generation": 8,
     "types": [
       "grass",
@@ -35626,6 +36467,7 @@
     "id": 842,
     "name": "appletun",
     "species_name": "appletun",
+    "name_ja_roma": "Tarupple",
     "generation": 8,
     "types": [
       "grass",
@@ -35673,6 +36515,7 @@
     "id": 843,
     "name": "silicobra",
     "species_name": "silicobra",
+    "name_ja_roma": "Sunahebi",
     "generation": 8,
     "types": [
       "ground"
@@ -35714,6 +36557,7 @@
     "id": 844,
     "name": "sandaconda",
     "species_name": "sandaconda",
+    "name_ja_roma": "Sadaija",
     "generation": 8,
     "types": [
       "ground"
@@ -35760,6 +36604,7 @@
     "id": 845,
     "name": "cramorant",
     "species_name": "cramorant",
+    "name_ja_roma": "Uu",
     "generation": 8,
     "types": [
       "flying",
@@ -35812,6 +36657,7 @@
     "id": 846,
     "name": "arrokuda",
     "species_name": "arrokuda",
+    "name_ja_roma": "Sasikamasu",
     "generation": 8,
     "types": [
       "water"
@@ -35852,6 +36698,7 @@
     "id": 847,
     "name": "barraskewda",
     "species_name": "barraskewda",
+    "name_ja_roma": "Kamasujaw",
     "generation": 8,
     "types": [
       "water"
@@ -35892,6 +36739,7 @@
     "id": 848,
     "name": "toxel",
     "species_name": "toxel",
+    "name_ja_roma": "Eleson",
     "generation": 8,
     "types": [
       "electric",
@@ -35933,6 +36781,7 @@
     "id": 849,
     "name": "toxtricity-amped",
     "species_name": "toxtricity",
+    "name_ja_roma": "Strinder",
     "generation": 8,
     "types": [
       "electric",
@@ -35989,6 +36838,7 @@
     "id": 850,
     "name": "sizzlipede",
     "species_name": "sizzlipede",
+    "name_ja_roma": "Yakude",
     "generation": 8,
     "types": [
       "fire",
@@ -36030,6 +36880,7 @@
     "id": 851,
     "name": "centiskorch",
     "species_name": "centiskorch",
+    "name_ja_roma": "Maruyakude",
     "generation": 8,
     "types": [
       "fire",
@@ -36076,6 +36927,7 @@
     "id": 852,
     "name": "clobbopus",
     "species_name": "clobbopus",
+    "name_ja_roma": "Tatakko",
     "generation": 8,
     "types": [
       "fighting"
@@ -36117,6 +36969,7 @@
     "id": 853,
     "name": "grapploct",
     "species_name": "grapploct",
+    "name_ja_roma": "Otosupus",
     "generation": 8,
     "types": [
       "fighting"
@@ -36158,6 +37011,7 @@
     "id": 854,
     "name": "sinistea",
     "species_name": "sinistea",
+    "name_ja_roma": "Yabacha",
     "generation": 8,
     "types": [
       "ghost"
@@ -36199,6 +37053,7 @@
     "id": 855,
     "name": "polteageist",
     "species_name": "polteageist",
+    "name_ja_roma": "Potdeath",
     "generation": 8,
     "types": [
       "ghost"
@@ -36240,6 +37095,7 @@
     "id": 856,
     "name": "hatenna",
     "species_name": "hatenna",
+    "name_ja_roma": "Mibrim",
     "generation": 8,
     "types": [
       "psychic"
@@ -36280,6 +37136,7 @@
     "id": 857,
     "name": "hattrem",
     "species_name": "hattrem",
+    "name_ja_roma": "Tebrim",
     "generation": 8,
     "types": [
       "psychic"
@@ -36320,6 +37177,7 @@
     "id": 858,
     "name": "hatterene",
     "species_name": "hatterene",
+    "name_ja_roma": "Brimuon",
     "generation": 8,
     "types": [
       "psychic",
@@ -36366,6 +37224,7 @@
     "id": 859,
     "name": "impidimp",
     "species_name": "impidimp",
+    "name_ja_roma": "Beroba",
     "generation": 8,
     "types": [
       "dark",
@@ -36408,6 +37267,7 @@
     "id": 860,
     "name": "morgrem",
     "species_name": "morgrem",
+    "name_ja_roma": "Gimoh",
     "generation": 8,
     "types": [
       "dark",
@@ -36450,6 +37310,7 @@
     "id": 861,
     "name": "grimmsnarl",
     "species_name": "grimmsnarl",
+    "name_ja_roma": "Ohlonge",
     "generation": 8,
     "types": [
       "dark",
@@ -36497,6 +37358,7 @@
     "id": 862,
     "name": "obstagoon",
     "species_name": "obstagoon",
+    "name_ja_roma": "Tachifusaguma",
     "generation": 8,
     "types": [
       "dark",
@@ -36538,6 +37400,7 @@
     "id": 863,
     "name": "perrserker",
     "species_name": "perrserker",
+    "name_ja_roma": "Nyaiking",
     "generation": 8,
     "types": [
       "steel"
@@ -36578,6 +37441,7 @@
     "id": 864,
     "name": "cursola",
     "species_name": "cursola",
+    "name_ja_roma": "Sunigoon",
     "generation": 8,
     "types": [
       "ghost"
@@ -36619,6 +37483,7 @@
     "id": 865,
     "name": "sirfetchd",
     "species_name": "sirfetchd",
+    "name_ja_roma": "Negigaknight",
     "generation": 8,
     "types": [
       "fighting"
@@ -36660,6 +37525,7 @@
     "id": 866,
     "name": "mr-rime",
     "species_name": "mr-rime",
+    "name_ja_roma": "Barrikohru",
     "generation": 8,
     "types": [
       "ice",
@@ -36701,6 +37567,7 @@
     "id": 867,
     "name": "runerigus",
     "species_name": "runerigus",
+    "name_ja_roma": "Deathbarn",
     "generation": 8,
     "types": [
       "ground",
@@ -36743,6 +37610,7 @@
     "id": 868,
     "name": "milcery",
     "species_name": "milcery",
+    "name_ja_roma": "Mahomil",
     "generation": 8,
     "types": [
       "fairy"
@@ -36784,6 +37652,7 @@
     "id": 869,
     "name": "alcremie",
     "species_name": "alcremie",
+    "name_ja_roma": "Mawhip",
     "generation": 8,
     "types": [
       "fairy"
@@ -36830,6 +37699,7 @@
     "id": 870,
     "name": "falinks",
     "species_name": "falinks",
+    "name_ja_roma": "Tairetsu",
     "generation": 8,
     "types": [
       "fighting"
@@ -36876,6 +37746,7 @@
     "id": 871,
     "name": "pincurchin",
     "species_name": "pincurchin",
+    "name_ja_roma": "Bachinuni",
     "generation": 8,
     "types": [
       "electric"
@@ -36917,6 +37788,7 @@
     "id": 872,
     "name": "snom",
     "species_name": "snom",
+    "name_ja_roma": "Yukihami",
     "generation": 8,
     "types": [
       "ice",
@@ -36958,6 +37830,7 @@
     "id": 873,
     "name": "frosmoth",
     "species_name": "frosmoth",
+    "name_ja_roma": "Mothnow",
     "generation": 8,
     "types": [
       "ice",
@@ -36999,6 +37872,7 @@
     "id": 874,
     "name": "stonjourner",
     "species_name": "stonjourner",
+    "name_ja_roma": "Ishihengin",
     "generation": 8,
     "types": [
       "rock"
@@ -37039,6 +37913,7 @@
     "id": 875,
     "name": "eiscue-ice",
     "species_name": "eiscue",
+    "name_ja_roma": "Korippo",
     "generation": 8,
     "types": [
       "ice"
@@ -37085,6 +37960,7 @@
     "id": 876,
     "name": "indeedee-male",
     "species_name": "indeedee",
+    "name_ja_roma": "Yessan",
     "generation": 8,
     "types": [
       "psychic",
@@ -37131,6 +38007,7 @@
     "id": 877,
     "name": "morpeko-full-belly",
     "species_name": "morpeko",
+    "name_ja_roma": "Morpeko",
     "generation": 8,
     "types": [
       "electric",
@@ -37178,6 +38055,7 @@
     "id": 878,
     "name": "cufant",
     "species_name": "cufant",
+    "name_ja_roma": "Zoudou",
     "generation": 8,
     "types": [
       "steel"
@@ -37219,6 +38097,7 @@
     "id": 879,
     "name": "copperajah",
     "species_name": "copperajah",
+    "name_ja_roma": "Daioudou",
     "generation": 8,
     "types": [
       "steel"
@@ -37265,6 +38144,7 @@
     "id": 880,
     "name": "dracozolt",
     "species_name": "dracozolt",
+    "name_ja_roma": "Patchiragon",
     "generation": 8,
     "types": [
       "electric",
@@ -37306,6 +38186,7 @@
     "id": 881,
     "name": "arctozolt",
     "species_name": "arctozolt",
+    "name_ja_roma": "Patchilldon",
     "generation": 8,
     "types": [
       "electric",
@@ -37347,6 +38228,7 @@
     "id": 882,
     "name": "dracovish",
     "species_name": "dracovish",
+    "name_ja_roma": "Uonoragon",
     "generation": 8,
     "types": [
       "water",
@@ -37388,6 +38270,7 @@
     "id": 883,
     "name": "arctovish",
     "species_name": "arctovish",
+    "name_ja_roma": "Uochilldon",
     "generation": 8,
     "types": [
       "water",
@@ -37429,6 +38312,7 @@
     "id": 884,
     "name": "duraludon",
     "species_name": "duraludon",
+    "name_ja_roma": "Duraludon",
     "generation": 8,
     "types": [
       "steel",
@@ -37476,6 +38360,7 @@
     "id": 885,
     "name": "dreepy",
     "species_name": "dreepy",
+    "name_ja_roma": "Dorameshiya",
     "generation": 8,
     "types": [
       "dragon",
@@ -37518,6 +38403,7 @@
     "id": 886,
     "name": "drakloak",
     "species_name": "drakloak",
+    "name_ja_roma": "Doronch",
     "generation": 8,
     "types": [
       "dragon",
@@ -37560,6 +38446,7 @@
     "id": 887,
     "name": "dragapult",
     "species_name": "dragapult",
+    "name_ja_roma": "Dorapult",
     "generation": 8,
     "types": [
       "dragon",
@@ -37602,6 +38489,7 @@
     "id": 888,
     "name": "zacian",
     "species_name": "zacian",
+    "name_ja_roma": "Zacian",
     "generation": 8,
     "types": [
       "fairy"
@@ -37647,6 +38535,7 @@
     "id": 889,
     "name": "zamazenta",
     "species_name": "zamazenta",
+    "name_ja_roma": "Zamazenta",
     "generation": 8,
     "types": [
       "fighting"
@@ -37692,6 +38581,7 @@
     "id": 890,
     "name": "eternatus",
     "species_name": "eternatus",
+    "name_ja_roma": "Mugendina",
     "generation": 8,
     "types": [
       "poison",
@@ -37738,6 +38628,7 @@
     "id": 891,
     "name": "kubfu",
     "species_name": "kubfu",
+    "name_ja_roma": "Dakuma",
     "generation": 8,
     "types": [
       "fighting"
@@ -37778,6 +38669,7 @@
     "id": 892,
     "name": "urshifu-single-strike",
     "species_name": "urshifu",
+    "name_ja_roma": "Wulaosu",
     "generation": 8,
     "types": [
       "fighting",
@@ -37834,6 +38726,7 @@
     "id": 893,
     "name": "zarude",
     "species_name": "zarude",
+    "name_ja_roma": "Zarude",
     "generation": 8,
     "types": [
       "dark",
@@ -37880,6 +38773,7 @@
     "id": 894,
     "name": "regieleki",
     "species_name": "regieleki",
+    "name_ja_roma": "Regieleki",
     "generation": 8,
     "types": [
       "electric"
@@ -37920,6 +38814,7 @@
     "id": 895,
     "name": "regidrago",
     "species_name": "regidrago",
+    "name_ja_roma": "Regidorago",
     "generation": 8,
     "types": [
       "dragon"
@@ -37960,6 +38855,7 @@
     "id": 896,
     "name": "glastrier",
     "species_name": "glastrier",
+    "name_ja_roma": "Blizzapos",
     "generation": 8,
     "types": [
       "ice"
@@ -38000,6 +38896,7 @@
     "id": 897,
     "name": "spectrier",
     "species_name": "spectrier",
+    "name_ja_roma": "Wraithpos",
     "generation": 8,
     "types": [
       "ghost"
@@ -38040,6 +38937,7 @@
     "id": 898,
     "name": "calyrex",
     "species_name": "calyrex",
+    "name_ja_roma": "Budrex",
     "generation": 8,
     "types": [
       "psychic",
@@ -38091,6 +38989,7 @@
     "id": 899,
     "name": "wyrdeer",
     "species_name": "wyrdeer",
+    "name_ja_roma": "Ayashishi",
     "generation": 8,
     "types": [
       "normal",
@@ -38132,6 +39031,7 @@
     "id": 900,
     "name": "kleavor",
     "species_name": "kleavor",
+    "name_ja_roma": "Basagiri",
     "generation": 8,
     "types": [
       "bug",
@@ -38173,6 +39073,7 @@
     "id": 901,
     "name": "ursaluna",
     "species_name": "ursaluna",
+    "name_ja_roma": "Gachiguma",
     "generation": 8,
     "types": [
       "ground",
@@ -38219,6 +39120,7 @@
     "id": 902,
     "name": "basculegion-male",
     "species_name": "basculegion",
+    "name_ja_roma": "Idaitou",
     "generation": 8,
     "types": [
       "water",
@@ -38265,6 +39167,7 @@
     "id": 903,
     "name": "sneasler",
     "species_name": "sneasler",
+    "name_ja_roma": "Ohnyula",
     "generation": 8,
     "types": [
       "fighting",
@@ -38306,6 +39209,7 @@
     "id": 904,
     "name": "overqwil",
     "species_name": "overqwil",
+    "name_ja_roma": "Haryman",
     "generation": 8,
     "types": [
       "dark",
@@ -38347,6 +39251,7 @@
     "id": 905,
     "name": "enamorus-incarnate",
     "species_name": "enamorus",
+    "name_ja_roma": "Lovetolos",
     "generation": 8,
     "types": [
       "fairy",
@@ -38393,6 +39298,7 @@
     "id": 906,
     "name": "sprigatito",
     "species_name": "sprigatito",
+    "name_ja_roma": "Nyahoja",
     "generation": 9,
     "types": [
       "grass"
@@ -38434,6 +39340,7 @@
     "id": 907,
     "name": "floragato",
     "species_name": "floragato",
+    "name_ja_roma": "Nyarote",
     "generation": 9,
     "types": [
       "grass"
@@ -38475,6 +39382,7 @@
     "id": 908,
     "name": "meowscarada",
     "species_name": "meowscarada",
+    "name_ja_roma": "Masquernya",
     "generation": 9,
     "types": [
       "grass",
@@ -38517,6 +39425,7 @@
     "id": 909,
     "name": "fuecoco",
     "species_name": "fuecoco",
+    "name_ja_roma": "Hogator",
     "generation": 9,
     "types": [
       "fire"
@@ -38557,6 +39466,7 @@
     "id": 910,
     "name": "crocalor",
     "species_name": "crocalor",
+    "name_ja_roma": "Achigator",
     "generation": 9,
     "types": [
       "fire"
@@ -38597,6 +39507,7 @@
     "id": 911,
     "name": "skeledirge",
     "species_name": "skeledirge",
+    "name_ja_roma": "Laudbon",
     "generation": 9,
     "types": [
       "fire",
@@ -38638,6 +39549,7 @@
     "id": 912,
     "name": "quaxly",
     "species_name": "quaxly",
+    "name_ja_roma": "Kuwassu",
     "generation": 9,
     "types": [
       "water"
@@ -38679,6 +39591,7 @@
     "id": 913,
     "name": "quaxwell",
     "species_name": "quaxwell",
+    "name_ja_roma": "Welkamo",
     "generation": 9,
     "types": [
       "water"
@@ -38720,6 +39633,7 @@
     "id": 914,
     "name": "quaquaval",
     "species_name": "quaquaval",
+    "name_ja_roma": "Wanival",
     "generation": 9,
     "types": [
       "water",
@@ -38762,6 +39676,7 @@
     "id": 915,
     "name": "lechonk",
     "species_name": "lechonk",
+    "name_ja_roma": "Gourton",
     "generation": 9,
     "types": [
       "normal"
@@ -38802,6 +39717,7 @@
     "id": 916,
     "name": "oinkologne-male",
     "species_name": "oinkologne",
+    "name_ja_roma": "Perfuton",
     "generation": 9,
     "types": [
       "normal"
@@ -38847,6 +39763,7 @@
     "id": 917,
     "name": "tarountula",
     "species_name": "tarountula",
+    "name_ja_roma": "Tamantula",
     "generation": 9,
     "types": [
       "bug"
@@ -38887,6 +39804,7 @@
     "id": 918,
     "name": "spidops",
     "species_name": "spidops",
+    "name_ja_roma": "Wanaider",
     "generation": 9,
     "types": [
       "bug"
@@ -38927,6 +39845,7 @@
     "id": 919,
     "name": "nymble",
     "species_name": "nymble",
+    "name_ja_roma": "Mamebatta",
     "generation": 9,
     "types": [
       "bug"
@@ -38967,6 +39886,7 @@
     "id": 920,
     "name": "lokix",
     "species_name": "lokix",
+    "name_ja_roma": "Exleg",
     "generation": 9,
     "types": [
       "bug",
@@ -39008,6 +39928,7 @@
     "id": 921,
     "name": "pawmi",
     "species_name": "pawmi",
+    "name_ja_roma": "Pamo",
     "generation": 9,
     "types": [
       "electric"
@@ -39048,6 +39969,7 @@
     "id": 922,
     "name": "pawmo",
     "species_name": "pawmo",
+    "name_ja_roma": "Pamot",
     "generation": 9,
     "types": [
       "electric",
@@ -39089,6 +40011,7 @@
     "id": 923,
     "name": "pawmot",
     "species_name": "pawmot",
+    "name_ja_roma": "Parmot",
     "generation": 9,
     "types": [
       "electric",
@@ -39130,6 +40053,7 @@
     "id": 924,
     "name": "tandemaus",
     "species_name": "tandemaus",
+    "name_ja_roma": "Wakkanezumi",
     "generation": 9,
     "types": [
       "normal"
@@ -39171,6 +40095,7 @@
     "id": 925,
     "name": "maushold-family-of-four",
     "species_name": "maushold",
+    "name_ja_roma": "Ikkanezumi",
     "generation": 9,
     "types": [
       "normal"
@@ -39217,6 +40142,7 @@
     "id": 926,
     "name": "fidough",
     "species_name": "fidough",
+    "name_ja_roma": "Pupimocchi",
     "generation": 9,
     "types": [
       "fairy"
@@ -39258,6 +40184,7 @@
     "id": 927,
     "name": "dachsbun",
     "species_name": "dachsbun",
+    "name_ja_roma": "Bowtzel",
     "generation": 9,
     "types": [
       "fairy"
@@ -39299,6 +40226,7 @@
     "id": 928,
     "name": "smoliv",
     "species_name": "smoliv",
+    "name_ja_roma": "Minive",
     "generation": 9,
     "types": [
       "grass",
@@ -39340,6 +40268,7 @@
     "id": 929,
     "name": "dolliv",
     "species_name": "dolliv",
+    "name_ja_roma": "Olinyo",
     "generation": 9,
     "types": [
       "grass",
@@ -39381,6 +40310,7 @@
     "id": 930,
     "name": "arboliva",
     "species_name": "arboliva",
+    "name_ja_roma": "Oliva",
     "generation": 9,
     "types": [
       "grass",
@@ -39422,6 +40352,7 @@
     "id": 931,
     "name": "squawkabilly-green-plumage",
     "species_name": "squawkabilly",
+    "name_ja_roma": "Ikirinko",
     "generation": 9,
     "types": [
       "normal",
@@ -39478,6 +40409,7 @@
     "id": 932,
     "name": "nacli",
     "species_name": "nacli",
+    "name_ja_roma": "Kojio",
     "generation": 9,
     "types": [
       "rock"
@@ -39518,6 +40450,7 @@
     "id": 933,
     "name": "naclstack",
     "species_name": "naclstack",
+    "name_ja_roma": "Jiodumu",
     "generation": 9,
     "types": [
       "rock"
@@ -39558,6 +40491,7 @@
     "id": 934,
     "name": "garganacl",
     "species_name": "garganacl",
+    "name_ja_roma": "Kyojiohn",
     "generation": 9,
     "types": [
       "rock"
@@ -39598,6 +40532,7 @@
     "id": 935,
     "name": "charcadet",
     "species_name": "charcadet",
+    "name_ja_roma": "Carbou",
     "generation": 9,
     "types": [
       "fire"
@@ -39638,6 +40573,7 @@
     "id": 936,
     "name": "armarouge",
     "species_name": "armarouge",
+    "name_ja_roma": "Gurenarma",
     "generation": 9,
     "types": [
       "fire",
@@ -39679,6 +40615,7 @@
     "id": 937,
     "name": "ceruledge",
     "species_name": "ceruledge",
+    "name_ja_roma": "Soublades",
     "generation": 9,
     "types": [
       "fire",
@@ -39720,6 +40657,7 @@
     "id": 938,
     "name": "tadbulb",
     "species_name": "tadbulb",
+    "name_ja_roma": "Zupika",
     "generation": 9,
     "types": [
       "electric"
@@ -39760,6 +40698,7 @@
     "id": 939,
     "name": "bellibolt",
     "species_name": "bellibolt",
+    "name_ja_roma": "Harabarie",
     "generation": 9,
     "types": [
       "electric"
@@ -39800,6 +40739,7 @@
     "id": 940,
     "name": "wattrel",
     "species_name": "wattrel",
+    "name_ja_roma": "Kaiden",
     "generation": 9,
     "types": [
       "electric",
@@ -39842,6 +40782,7 @@
     "id": 941,
     "name": "kilowattrel",
     "species_name": "kilowattrel",
+    "name_ja_roma": "Taikaiden",
     "generation": 9,
     "types": [
       "electric",
@@ -39884,6 +40825,7 @@
     "id": 942,
     "name": "maschiff",
     "species_name": "maschiff",
+    "name_ja_roma": "Orachifu",
     "generation": 9,
     "types": [
       "dark"
@@ -39924,6 +40866,7 @@
     "id": 943,
     "name": "mabosstiff",
     "species_name": "mabosstiff",
+    "name_ja_roma": "Mafitiff",
     "generation": 9,
     "types": [
       "dark"
@@ -39964,6 +40907,7 @@
     "id": 944,
     "name": "shroodle",
     "species_name": "shroodle",
+    "name_ja_roma": "Shirushrew",
     "generation": 9,
     "types": [
       "poison",
@@ -40005,6 +40949,7 @@
     "id": 945,
     "name": "grafaiai",
     "species_name": "grafaiai",
+    "name_ja_roma": "Taggingru",
     "generation": 9,
     "types": [
       "poison",
@@ -40046,6 +40991,7 @@
     "id": 946,
     "name": "bramblin",
     "species_name": "bramblin",
+    "name_ja_roma": "Anokusa",
     "generation": 9,
     "types": [
       "grass",
@@ -40087,6 +41033,7 @@
     "id": 947,
     "name": "brambleghast",
     "species_name": "brambleghast",
+    "name_ja_roma": "Anohoragusa",
     "generation": 9,
     "types": [
       "grass",
@@ -40128,6 +41075,7 @@
     "id": 948,
     "name": "toedscool",
     "species_name": "toedscool",
+    "name_ja_roma": "Nonokurage",
     "generation": 9,
     "types": [
       "ground",
@@ -40169,6 +41117,7 @@
     "id": 949,
     "name": "toedscruel",
     "species_name": "toedscruel",
+    "name_ja_roma": "Rikukurage",
     "generation": 9,
     "types": [
       "ground",
@@ -40210,6 +41159,7 @@
     "id": 950,
     "name": "klawf",
     "species_name": "klawf",
+    "name_ja_roma": "Gakegani",
     "generation": 9,
     "types": [
       "rock"
@@ -40250,6 +41200,7 @@
     "id": 951,
     "name": "capsakid",
     "species_name": "capsakid",
+    "name_ja_roma": "Capsaiji",
     "generation": 9,
     "types": [
       "grass"
@@ -40290,6 +41241,7 @@
     "id": 952,
     "name": "scovillain",
     "species_name": "scovillain",
+    "name_ja_roma": "Scovillain",
     "generation": 9,
     "types": [
       "grass",
@@ -40336,6 +41288,7 @@
     "id": 953,
     "name": "rellor",
     "species_name": "rellor",
+    "name_ja_roma": "Shigaroko",
     "generation": 9,
     "types": [
       "bug"
@@ -40376,6 +41329,7 @@
     "id": 954,
     "name": "rabsca",
     "species_name": "rabsca",
+    "name_ja_roma": "Beracas",
     "generation": 9,
     "types": [
       "bug",
@@ -40417,6 +41371,7 @@
     "id": 955,
     "name": "flittle",
     "species_name": "flittle",
+    "name_ja_roma": "Hirahina",
     "generation": 9,
     "types": [
       "psychic"
@@ -40457,6 +41412,7 @@
     "id": 956,
     "name": "espathra",
     "species_name": "espathra",
+    "name_ja_roma": "Cuespatra",
     "generation": 9,
     "types": [
       "psychic"
@@ -40497,6 +41453,7 @@
     "id": 957,
     "name": "tinkatink",
     "species_name": "tinkatink",
+    "name_ja_roma": "Kanuchan",
     "generation": 9,
     "types": [
       "fairy",
@@ -40538,6 +41495,7 @@
     "id": 958,
     "name": "tinkatuff",
     "species_name": "tinkatuff",
+    "name_ja_roma": "Nakanuchan",
     "generation": 9,
     "types": [
       "fairy",
@@ -40579,6 +41537,7 @@
     "id": 959,
     "name": "tinkaton",
     "species_name": "tinkaton",
+    "name_ja_roma": "Dekanuchan",
     "generation": 9,
     "types": [
       "fairy",
@@ -40620,6 +41579,7 @@
     "id": 960,
     "name": "wiglett",
     "species_name": "wiglett",
+    "name_ja_roma": "Umidigda",
     "generation": 9,
     "types": [
       "water"
@@ -40660,6 +41620,7 @@
     "id": 961,
     "name": "wugtrio",
     "species_name": "wugtrio",
+    "name_ja_roma": "Umitrio",
     "generation": 9,
     "types": [
       "water"
@@ -40700,6 +41661,7 @@
     "id": 962,
     "name": "bombirdier",
     "species_name": "bombirdier",
+    "name_ja_roma": "Otoshidori",
     "generation": 9,
     "types": [
       "flying",
@@ -40741,6 +41703,7 @@
     "id": 963,
     "name": "finizen",
     "species_name": "finizen",
+    "name_ja_roma": "Namiiruka",
     "generation": 9,
     "types": [
       "water"
@@ -40782,6 +41745,7 @@
     "id": 964,
     "name": "palafin-zero",
     "species_name": "palafin",
+    "name_ja_roma": "Irukaman",
     "generation": 9,
     "types": [
       "water"
@@ -40828,6 +41792,7 @@
     "id": 965,
     "name": "varoom",
     "species_name": "varoom",
+    "name_ja_roma": "Buroron",
     "generation": 9,
     "types": [
       "steel",
@@ -40869,6 +41834,7 @@
     "id": 966,
     "name": "revavroom",
     "species_name": "revavroom",
+    "name_ja_roma": "Burororoom",
     "generation": 9,
     "types": [
       "steel",
@@ -40910,6 +41876,7 @@
     "id": 967,
     "name": "cyclizar",
     "species_name": "cyclizar",
+    "name_ja_roma": "Mototokage",
     "generation": 9,
     "types": [
       "dragon",
@@ -40951,6 +41918,7 @@
     "id": 968,
     "name": "orthworm",
     "species_name": "orthworm",
+    "name_ja_roma": "Mimizuzu",
     "generation": 9,
     "types": [
       "steel"
@@ -40991,6 +41959,7 @@
     "id": 969,
     "name": "glimmet",
     "species_name": "glimmet",
+    "name_ja_roma": "Kirame",
     "generation": 9,
     "types": [
       "rock",
@@ -41032,6 +42001,7 @@
     "id": 970,
     "name": "glimmora",
     "species_name": "glimmora",
+    "name_ja_roma": "Kiraflor",
     "generation": 9,
     "types": [
       "rock",
@@ -41078,6 +42048,7 @@
     "id": 971,
     "name": "greavard",
     "species_name": "greavard",
+    "name_ja_roma": "Bochi",
     "generation": 9,
     "types": [
       "ghost"
@@ -41118,6 +42089,7 @@
     "id": 972,
     "name": "houndstone",
     "species_name": "houndstone",
+    "name_ja_roma": "Hakadog",
     "generation": 9,
     "types": [
       "ghost"
@@ -41158,6 +42130,7 @@
     "id": 973,
     "name": "flamigo",
     "species_name": "flamigo",
+    "name_ja_roma": "Karamingo",
     "generation": 9,
     "types": [
       "flying",
@@ -41199,6 +42172,7 @@
     "id": 974,
     "name": "cetoddle",
     "species_name": "cetoddle",
+    "name_ja_roma": "Arukujira",
     "generation": 9,
     "types": [
       "ice"
@@ -41239,6 +42213,7 @@
     "id": 975,
     "name": "cetitan",
     "species_name": "cetitan",
+    "name_ja_roma": "Hulkujira",
     "generation": 9,
     "types": [
       "ice"
@@ -41279,6 +42254,7 @@
     "id": 976,
     "name": "veluza",
     "species_name": "veluza",
+    "name_ja_roma": "Migalusa",
     "generation": 9,
     "types": [
       "water",
@@ -41320,6 +42296,7 @@
     "id": 977,
     "name": "dondozo",
     "species_name": "dondozo",
+    "name_ja_roma": "Heyrusher",
     "generation": 9,
     "types": [
       "water"
@@ -41360,6 +42337,7 @@
     "id": 978,
     "name": "tatsugiri-curly",
     "species_name": "tatsugiri",
+    "name_ja_roma": "Syaritatsu",
     "generation": 9,
     "types": [
       "dragon",
@@ -41426,6 +42404,7 @@
     "id": 979,
     "name": "annihilape",
     "species_name": "annihilape",
+    "name_ja_roma": "Konoyozaru",
     "generation": 9,
     "types": [
       "fighting",
@@ -41467,6 +42446,7 @@
     "id": 980,
     "name": "clodsire",
     "species_name": "clodsire",
+    "name_ja_roma": "Dooh",
     "generation": 9,
     "types": [
       "poison",
@@ -41509,6 +42489,7 @@
     "id": 981,
     "name": "farigiraf",
     "species_name": "farigiraf",
+    "name_ja_roma": "Rikikirin",
     "generation": 9,
     "types": [
       "normal",
@@ -41550,6 +42531,7 @@
     "id": 982,
     "name": "dudunsparce-two-segment",
     "species_name": "dudunsparce",
+    "name_ja_roma": "Nokokocchi",
     "generation": 9,
     "types": [
       "normal"
@@ -41595,6 +42577,7 @@
     "id": 983,
     "name": "kingambit",
     "species_name": "kingambit",
+    "name_ja_roma": "Dodogezan",
     "generation": 9,
     "types": [
       "dark",
@@ -41636,6 +42619,7 @@
     "id": 984,
     "name": "great-tusk",
     "species_name": "great-tusk",
+    "name_ja_roma": "Idainakiba",
     "generation": 9,
     "types": [
       "ground",
@@ -41677,6 +42661,7 @@
     "id": 985,
     "name": "scream-tail",
     "species_name": "scream-tail",
+    "name_ja_roma": "Sakebushippo",
     "generation": 9,
     "types": [
       "fairy",
@@ -41718,6 +42703,7 @@
     "id": 986,
     "name": "brute-bonnet",
     "species_name": "brute-bonnet",
+    "name_ja_roma": "Araburutake",
     "generation": 9,
     "types": [
       "grass",
@@ -41759,6 +42745,7 @@
     "id": 987,
     "name": "flutter-mane",
     "species_name": "flutter-mane",
+    "name_ja_roma": "Habatakukami",
     "generation": 9,
     "types": [
       "ghost",
@@ -41800,6 +42787,7 @@
     "id": 988,
     "name": "slither-wing",
     "species_name": "slither-wing",
+    "name_ja_roma": "Chiwohauhane",
     "generation": 9,
     "types": [
       "bug",
@@ -41841,6 +42829,7 @@
     "id": 989,
     "name": "sandy-shocks",
     "species_name": "sandy-shocks",
+    "name_ja_roma": "Sunanokegawa",
     "generation": 9,
     "types": [
       "electric",
@@ -41882,6 +42871,7 @@
     "id": 990,
     "name": "iron-treads",
     "species_name": "iron-treads",
+    "name_ja_roma": "Tetsunowadachi",
     "generation": 9,
     "types": [
       "ground",
@@ -41923,6 +42913,7 @@
     "id": 991,
     "name": "iron-bundle",
     "species_name": "iron-bundle",
+    "name_ja_roma": "Tetsunotsutsumi",
     "generation": 9,
     "types": [
       "ice",
@@ -41964,6 +42955,7 @@
     "id": 992,
     "name": "iron-hands",
     "species_name": "iron-hands",
+    "name_ja_roma": "Tetsunokaina",
     "generation": 9,
     "types": [
       "fighting",
@@ -42005,6 +42997,7 @@
     "id": 993,
     "name": "iron-jugulis",
     "species_name": "iron-jugulis",
+    "name_ja_roma": "Tetsunokoube",
     "generation": 9,
     "types": [
       "dark",
@@ -42046,6 +43039,7 @@
     "id": 994,
     "name": "iron-moth",
     "species_name": "iron-moth",
+    "name_ja_roma": "Tetsunodokuga",
     "generation": 9,
     "types": [
       "fire",
@@ -42087,6 +43081,7 @@
     "id": 995,
     "name": "iron-thorns",
     "species_name": "iron-thorns",
+    "name_ja_roma": "Tetsunoibara",
     "generation": 9,
     "types": [
       "rock",
@@ -42128,6 +43123,7 @@
     "id": 996,
     "name": "frigibax",
     "species_name": "frigibax",
+    "name_ja_roma": "Sebie",
     "generation": 9,
     "types": [
       "dragon",
@@ -42170,6 +43166,7 @@
     "id": 997,
     "name": "arctibax",
     "species_name": "arctibax",
+    "name_ja_roma": "Segohru",
     "generation": 9,
     "types": [
       "dragon",
@@ -42212,6 +43209,7 @@
     "id": 998,
     "name": "baxcalibur",
     "species_name": "baxcalibur",
+    "name_ja_roma": "Seglaive",
     "generation": 9,
     "types": [
       "dragon",
@@ -42259,6 +43257,7 @@
     "id": 999,
     "name": "gimmighoul",
     "species_name": "gimmighoul",
+    "name_ja_roma": "Collecurei",
     "generation": 9,
     "types": [
       "ghost"
@@ -42304,6 +43303,7 @@
     "id": 1000,
     "name": "gholdengo",
     "species_name": "gholdengo",
+    "name_ja_roma": "Surfugo",
     "generation": 9,
     "types": [
       "steel",
@@ -42345,6 +43345,7 @@
     "id": 1001,
     "name": "wo-chien",
     "species_name": "wo-chien",
+    "name_ja_roma": "Chionjen",
     "generation": 9,
     "types": [
       "dark",
@@ -42386,6 +43387,7 @@
     "id": 1002,
     "name": "chien-pao",
     "species_name": "chien-pao",
+    "name_ja_roma": "Paojian",
     "generation": 9,
     "types": [
       "dark",
@@ -42427,6 +43429,7 @@
     "id": 1003,
     "name": "ting-lu",
     "species_name": "ting-lu",
+    "name_ja_roma": "Dinlu",
     "generation": 9,
     "types": [
       "dark",
@@ -42468,6 +43471,7 @@
     "id": 1004,
     "name": "chi-yu",
     "species_name": "chi-yu",
+    "name_ja_roma": "Yiyui",
     "generation": 9,
     "types": [
       "dark",
@@ -42509,6 +43513,7 @@
     "id": 1005,
     "name": "roaring-moon",
     "species_name": "roaring-moon",
+    "name_ja_roma": "Todorokutsuki",
     "generation": 9,
     "types": [
       "dragon",
@@ -42550,6 +43555,7 @@
     "id": 1006,
     "name": "iron-valiant",
     "species_name": "iron-valiant",
+    "name_ja_roma": "Tetsunobujin",
     "generation": 9,
     "types": [
       "fairy",
@@ -42591,6 +43597,7 @@
     "id": 1007,
     "name": "koraidon",
     "species_name": "koraidon",
+    "name_ja_roma": "Koraidon",
     "generation": 9,
     "types": [
       "fighting",
@@ -42652,6 +43659,7 @@
     "id": 1008,
     "name": "miraidon",
     "species_name": "miraidon",
+    "name_ja_roma": "Miraidon",
     "generation": 9,
     "types": [
       "electric",
@@ -42713,6 +43721,7 @@
     "id": 1009,
     "name": "walking-wake",
     "species_name": "walking-wake",
+    "name_ja_roma": "Uneruminamo",
     "generation": 9,
     "types": [
       "water",
@@ -42754,6 +43763,7 @@
     "id": 1010,
     "name": "iron-leaves",
     "species_name": "iron-leaves",
+    "name_ja_roma": "Tetsunoisaha",
     "generation": 9,
     "types": [
       "grass",
@@ -42795,6 +43805,7 @@
     "id": 1011,
     "name": "dipplin",
     "species_name": "dipplin",
+    "name_ja_roma": "Kamicchu",
     "generation": 9,
     "types": [
       "grass",
@@ -42837,6 +43848,7 @@
     "id": 1012,
     "name": "poltchageist",
     "species_name": "poltchageist",
+    "name_ja_roma": "Chadeath",
     "generation": 9,
     "types": [
       "grass",
@@ -42879,6 +43891,7 @@
     "id": 1013,
     "name": "sinistcha",
     "species_name": "sinistcha",
+    "name_ja_roma": "Yabasocha",
     "generation": 9,
     "types": [
       "grass",
@@ -42921,6 +43934,7 @@
     "id": 1014,
     "name": "okidogi",
     "species_name": "okidogi",
+    "name_ja_roma": "Iineinu",
     "generation": 9,
     "types": [
       "poison",
@@ -42962,6 +43976,7 @@
     "id": 1015,
     "name": "munkidori",
     "species_name": "munkidori",
+    "name_ja_roma": "Mashimashira",
     "generation": 9,
     "types": [
       "poison",
@@ -43003,6 +44018,7 @@
     "id": 1016,
     "name": "fezandipiti",
     "species_name": "fezandipiti",
+    "name_ja_roma": "Kichikigisu",
     "generation": 9,
     "types": [
       "poison",
@@ -43044,6 +44060,7 @@
     "id": 1017,
     "name": "ogerpon",
     "species_name": "ogerpon",
+    "name_ja_roma": "Ogerpon",
     "generation": 9,
     "types": [
       "grass"
@@ -43099,6 +44116,7 @@
     "id": 1018,
     "name": "archaludon",
     "species_name": "archaludon",
+    "name_ja_roma": "Briduras",
     "generation": 9,
     "types": [
       "steel",
@@ -43141,6 +44159,7 @@
     "id": 1019,
     "name": "hydrapple",
     "species_name": "hydrapple",
+    "name_ja_roma": "Kamitsuorochi",
     "generation": 9,
     "types": [
       "grass",
@@ -43183,6 +44202,7 @@
     "id": 1020,
     "name": "gouging-fire",
     "species_name": "gouging-fire",
+    "name_ja_roma": "Ugatsuhomura",
     "generation": 9,
     "types": [
       "fire",
@@ -43224,6 +44244,7 @@
     "id": 1021,
     "name": "raging-bolt",
     "species_name": "raging-bolt",
+    "name_ja_roma": "Takeruraiko",
     "generation": 9,
     "types": [
       "electric",
@@ -43265,6 +44286,7 @@
     "id": 1022,
     "name": "iron-boulder",
     "species_name": "iron-boulder",
+    "name_ja_roma": "Tetsunoiwao",
     "generation": 9,
     "types": [
       "rock",
@@ -43306,6 +44328,7 @@
     "id": 1023,
     "name": "iron-crown",
     "species_name": "iron-crown",
+    "name_ja_roma": "Tetsunokashira",
     "generation": 9,
     "types": [
       "steel",
@@ -43347,6 +44370,7 @@
     "id": 1024,
     "name": "terapagos",
     "species_name": "terapagos",
+    "name_ja_roma": "Terapagos",
     "generation": 9,
     "types": [
       "normal"
@@ -43397,6 +44421,7 @@
     "id": 1025,
     "name": "pecharunt",
     "species_name": "pecharunt",
+    "name_ja_roma": "Momowarou",
     "generation": 9,
     "types": [
       "poison",

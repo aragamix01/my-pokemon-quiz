@@ -48,6 +48,7 @@ async function fetchPokemonMetadata() {
             id: pokemonData.id,
             name: pokemonData.name,
             species_name: speciesData.name,
+            name_ja_roma: speciesData.names.find(n => n.language.name === 'ja-roma')?.name || null,
             generation: genNumber,
             types: pokemonData.types.map(t => t.type.name),
             height: pokemonData.height,
@@ -134,6 +135,8 @@ export interface PokemonMetadata {
   id: number
   name: string
   species_name: string
+  // Japanese name in Latin letters ("Hitokage"), from PokeAPI language ja-roma
+  name_ja_roma: string | null
   generation: number
   types: string[]
   height: number

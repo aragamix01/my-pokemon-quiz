@@ -3,6 +3,8 @@ export interface PokemonMetadata {
   id: number
   name: string
   species_name: string
+  // Japanese name in Latin letters ("Hitokage"), from PokeAPI language ja-roma
+  name_ja_roma: string | null
   generation: number
   types: string[]
   height: number

@@ -5,30 +5,36 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Pokedex from '@/components/Pokedex'
 import GenerationSelector from '@/components/GenerationSelector'
 import TypeAdvantage from '@/components/TypeAdvantage'
+import LearnMenu from '@/components/LearnMenu'
 import { GenerationNumber } from '@/types/pokemon'
 import { Tabs, TabItem } from '@/components/ui/Tabs'
-import { DeviceMobile, Sword, Question, ShieldStar } from '@phosphor-icons/react'
+import { DeviceMobile, Sword, Question, ShieldStar, GraduationCap } from '@phosphor-icons/react'
 
 const TABS: TabItem[] = [
   { id: 'pokedex', label: 'Pokedex', icon: <DeviceMobile size={16} /> },
   { id: 'types', label: 'Type Chart', icon: <Sword size={16} /> },
   { id: 'quiz', label: "Who's that Pokemon?", icon: <Question size={16} /> },
+  { id: 'learn', label: 'Learn', icon: <GraduationCap size={16} /> },
 ]
+
+type Section = 'quiz' | 'pokedex' | 'types' | 'learn'
+const SECTIONS: Section[] = ['quiz', 'pokedex', 'types', 'learn']
+const isSection = (value: string | null): value is Section => value !== null && SECTIONS.indexOf(value as Section) !== -1
 
 function HomeContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [activeSection, setActiveSection] = useState<'quiz' | 'pokedex' | 'types'>('pokedex')
+  const [activeSection, setActiveSection] = useState<Section>('pokedex')
 
   useEffect(() => {
     const section = searchParams.get('section')
-    if (section && (section === 'quiz' || section === 'pokedex' || section === 'types')) {
-      setActiveSection(section as 'quiz' | 'pokedex' | 'types')
+    if (isSection(section)) {
+      setActiveSection(section)
     } else {
       // Check if we should restore active section from localStorage
       const savedActiveSection = sessionStorage.getItem('active-section')
-      if (savedActiveSection && (savedActiveSection === 'quiz' || savedActiveSection === 'pokedex' || savedActiveSection === 'types')) {
-        setActiveSection(savedActiveSection as 'quiz' | 'pokedex' | 'types')
+      if (isSection(savedActiveSection)) {
+        setActiveSection(savedActiveSection)
       }
     }
   }, [searchParams])
@@ -61,7 +67,7 @@ function HomeContent() {
             </h1>
           </div>
           <div className="text-sm mt-1.5" style={{ color: 'var(--text-secondary)' }}>
-            Complete Pokemon companion tools — Pokedex, type chart, and quizzes.
+            Complete Pokemon companion tools — Pokedex, type chart, quizzes, and learning games.
           </div>
         </div>
 
@@ -78,6 +84,9 @@ function HomeContent() {
 
         {/* Type Chart Section */}
         {activeSection === 'types' && <TypeAdvantage />}
+
+        {/* Learn Section */}
+        {activeSection === 'learn' && <LearnMenu />}
 
         {/* Quiz Section */}
         {activeSection === 'quiz' && (
