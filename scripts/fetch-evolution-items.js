@@ -37,10 +37,26 @@ const EVOLUTION_ITEM_NAMES = [
   'scroll-of-darkness', 'scroll-of-waters', 'leaders-crest', 'masterpiece-teacup'
 ]
 
+// PokeAPI stopped returning item `cost` (its `prices` list is empty), so keep the
+// cost from the previous database instead of silently dropping it
+function loadPreviousCosts() {
+  try {
+    const previous = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'evolution-items.json'), 'utf8'))
+    const costs = {}
+    for (const item of Object.values(previous.items || {})) {
+      if (typeof item.cost === 'number') costs[item.name] = item.cost
+    }
+    return costs
+  } catch {
+    return {}
+  }
+}
+
 async function fetchEvolutionItems() {
   console.log('🚀 Starting to fetch Pokemon evolution items from PokeAPI...')
-  
+
   try {
+    const previousCosts = loadPreviousCosts()
     const evolutionItems = {}
     let processedCount = 0
     const totalItems = EVOLUTION_ITEM_NAMES.length
@@ -65,7 +81,7 @@ async function fetchEvolutionItems() {
           id: item.id,
           name: item.name,
           displayName: item.names.find(n => n.language.name === 'en')?.name || item.name,
-          cost: item.cost,
+          cost: typeof item.cost === 'number' ? item.cost : (previousCosts[item.name] ?? 0),
           category: item.category?.name || null,
           attributes: (item.attributes || []).map(attr => attr.name),
           effect: item.effect_entries.find(e => e.language.name === 'en')?.effect || 'No effect description available',
