@@ -8,7 +8,8 @@ import { ProgressBar } from '@/components/ui/ProgressBar'
 import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import { LearnState, loadLearnState, scopeStats } from '@/lib/learn-progress'
 import { GenerationNumber } from '@/types/pokemon'
-import { Cards, MagnifyingGlass, Keyboard, SquaresFour, ImageSquare, TreeStructure } from '@phosphor-icons/react'
+import { Cards, MagnifyingGlass, Keyboard, SquaresFour, ImageSquare, TreeStructure, Sword, Ruler, CalendarCheck, Fire } from '@phosphor-icons/react'
+import { dailyStreak, getDailyResult, DAILY_PUZZLES } from '@/lib/daily'
 
 const GEN_KEY = 'learn-generation'
 
@@ -43,6 +44,20 @@ const GAMES = [
     icon: <TreeStructure size={22} color="var(--color-accent)" />,
     description: 'Put an evolution family in order, from first form to final evolution, and learn the names together.',
   },
+  {
+    path: 'type-quiz',
+    title: 'Type Quiz',
+    icon: <Sword size={22} color="var(--color-accent)" />,
+    description: 'Which attacks are super effective? What type is this Pokemon? Learn the type chart one question at a time.',
+  },
+  {
+    path: 'size',
+    title: 'Size Compare',
+    icon: <Ruler size={22} color="var(--color-accent)" />,
+    description: 'See any Pokemon next to you at real scale, from tiny Joltik to huge Wailord.',
+    // Not scoped by generation; you can search every Pokemon
+    unscoped: true,
+  },
 ]
 
 export default function LearnMenu() {
@@ -69,6 +84,15 @@ export default function LearnMenu() {
   ).map(p => p.id)
   const progress = learn ? scopeStats(learn, scopeIds) : null
 
+  // Daily status reads localStorage, so it is only known after mount
+  const [daily, setDaily] = useState<{ streak: number; done: number } | null>(null)
+  useEffect(() => {
+    setDaily({
+      streak: dailyStreak(),
+      done: DAILY_PUZZLES.filter(p => getDailyResult(p, slug)).length,
+    })
+  }, [slug])
+
   return (
     <div className="flex flex-col gap-4">
       <div className="text-center">
@@ -85,6 +109,27 @@ export default function LearnMenu() {
         selectedGeneration={generation}
         minimized
       />
+
+      <div className="card" style={{ gap: 'var(--space-4)', boxShadow: '0 0 0 1px var(--color-accent-600)' }}>
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <CalendarCheck size={22} color="var(--color-accent)" />
+            <h3 className="card-title">Daily Challenge</h3>
+          </div>
+          {daily && (
+            <span className="flex items-center gap-1 text-sm" style={{ color: 'var(--color-accent)' }}>
+              <Fire size={16} weight="fill" /> {daily.streak}
+            </span>
+          )}
+        </div>
+        <p className="card-body">
+          Today&apos;s Pokedle and Pixel Reveal: the same puzzles for everyone, one try each.
+          {daily && ` ${daily.done} of ${DAILY_PUZZLES.length} done today.`}
+        </p>
+        <Button block onClick={() => router.push(`/daily/${slug}`)}>
+          {daily && daily.done === DAILY_PUZZLES.length ? 'See today’s results' : 'Play today’s puzzles'}
+        </Button>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="card" style={{ gap: 'var(--space-4)' }}>
@@ -114,7 +159,9 @@ export default function LearnMenu() {
               <h3 className="card-title">{game.title}</h3>
             </div>
             <p className="card-body">{game.description}</p>
-            <Button block onClick={() => router.push(`/${game.path}/${slug}`)}>Play</Button>
+            <Button block onClick={() => router.push('unscoped' in game ? `/${game.path}` : `/${game.path}/${slug}`)}>
+              {'unscoped' in game ? 'Open' : 'Play'}
+            </Button>
           </div>
         ))}
       </div>
