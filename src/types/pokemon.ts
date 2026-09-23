@@ -76,6 +76,19 @@ export interface PokemonSpecies {
       name: string
       url: string
     }
+    // Game the entry comes from, e.g. "red", "sword"
+    version?: {
+      name: string
+      url: string
+    }
+  }>
+  // Category, e.g. "Flame Pokémon"
+  genera?: Array<{
+    genus: string
+    language: {
+      name: string
+      url: string
+    }
   }>
   habitat: {
     name: string

@@ -15,7 +15,9 @@ import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import type { PokemonMetadata } from '@/types/pokemon-metadata'
 import { TypePill } from '@/components/ui/TypePill'
 import { Button } from '@/components/ui/Button'
-import { Sparkle, MagnifyingGlass } from '@phosphor-icons/react'
+import { Sparkle, MagnifyingGlass, Shuffle } from '@phosphor-icons/react'
+import { japaneseName } from '@/lib/pokemon-names'
+import { LearnState, loadLearnState, isMastered } from '@/lib/learn-progress'
 
 
 export default function Pokedex() {
@@ -33,6 +35,16 @@ export default function Pokedex() {
   const scrollPositionRef = useRef<number>(0)
   const [useAISearch, setUseAISearch] = useState(false) // Toggle between classic and AI search
   const [aiFilteredPokemon, setAiFilteredPokemon] = useState<Pokemon[]>([]) // Results from AI search
+  // Flashcard progress for the badges on cards (localStorage, read after mount)
+  const [learnState, setLearnState] = useState<LearnState | null>(null)
+  useEffect(() => {
+    setLearnState(loadLearnState())
+  }, [])
+  const metadataById = useMemo(() => {
+    const map: Record<number, PokemonMetadata> = {}
+    pokemonMetadataService.getAllMetadata().forEach(m => { map[m.id] = m })
+    return map
+  }, [])
   
   // Use Pokemon filter hook for search and sort
   const {
@@ -53,6 +65,12 @@ export default function Pokedex() {
     setSelectedColor,
     statsRange,
     setStatsRange,
+    evolutionStage,
+    setEvolutionStage,
+    formKind,
+    setFormKind,
+    learnFilter,
+    setLearnFilter,
     resetFilters,
     clearSearch,
     hasActiveFilters,
@@ -257,6 +275,7 @@ export default function Pokedex() {
     const savedSelectedHabitat = sessionStorage.getItem('pokedex-selected-habitat')
     const savedSelectedColor = sessionStorage.getItem('pokedex-selected-color')
     const savedStatsRange = sessionStorage.getItem('pokedex-stats-range')
+    const savedExtraFilters = sessionStorage.getItem('pokedex-extra-filters')
     
     console.log('Component mounted, checking for saved state:', {
       hasScrollPosition: !!savedScrollPosition,
@@ -352,6 +371,17 @@ export default function Pokedex() {
           setStatsRange(statsRng)
         } catch (e) {
           console.error('Failed to parse saved stats range:', e)
+        }
+      }
+
+      if (savedExtraFilters) {
+        try {
+          const extra = JSON.parse(savedExtraFilters)
+          setEvolutionStage(extra.evolutionStage ?? null)
+          setFormKind(extra.formKind ?? null)
+          setLearnFilter(extra.learnFilter ?? null)
+        } catch (e) {
+          console.error('Failed to parse saved extra filters:', e)
         }
       }
       
@@ -532,6 +562,7 @@ export default function Pokedex() {
         sessionStorage.removeItem('pokedex-selected-habitat')
         sessionStorage.removeItem('pokedex-selected-color')
         sessionStorage.removeItem('pokedex-stats-range')
+        sessionStorage.removeItem('pokedex-extra-filters')
         
         // IMPROVED: Robust scroll restoration
         const position = parseInt(savedScrollPosition)
@@ -659,6 +690,7 @@ export default function Pokedex() {
     sessionStorage.setItem('pokedex-selected-habitat', selectedHabitat || 'null')
     sessionStorage.setItem('pokedex-selected-color', selectedColor || 'null')
     sessionStorage.setItem('pokedex-stats-range', JSON.stringify(statsRange))
+    sessionStorage.setItem('pokedex-extra-filters', JSON.stringify({ evolutionStage, formKind, learnFilter }))
     
     console.log('Storing navigation data:', {
       scrollY,
@@ -687,6 +719,10 @@ export default function Pokedex() {
     // Check if shiny sprites exist
     const shinyFallbacks = pokemonAPI.getPokemonImageFallbacks(pokemonData, true)
     const hasShiny = shinyFallbacks.some(url => !url.includes('placeholder'))
+    const meta = metadataById[pokemonData.id]
+    const jaName = meta ? japaneseName(meta) : null
+    const learnCard = learnState?.cards[pokemonData.id]
+    const mastered = isMastered(learnCard)
     
     return (
       <div
@@ -701,8 +737,16 @@ export default function Pokedex() {
           </div>
         )}
 
-        <div className="text-xs mb-1 sm:mb-2" style={{ color: 'var(--color-neutral-400)' }}>
-          #{pokemonData.id.toString().padStart(3, '0')}
+        <div className="flex justify-between items-center text-xs mb-1 sm:mb-2" style={{ color: 'var(--color-neutral-400)' }}>
+          <span>#{pokemonData.id.toString().padStart(3, '0')}</span>
+          {learnCard && (
+            <span
+              title={mastered ? 'Mastered in Flashcards' : 'Learning in Flashcards'}
+              style={{ color: mastered ? '#f5c542' : 'var(--color-accent-500)' }}
+            >
+              {mastered ? '★' : '●'}
+            </span>
+          )}
         </div>
 
         <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-1 sm:mb-2 relative">
@@ -718,6 +762,11 @@ export default function Pokedex() {
         <div className="text-xs font-medium mb-1.5 sm:mb-2 capitalize" style={{ color: 'var(--color-text)' }}>
           {pokemonData.name}
         </div>
+        {jaName && (
+          <div className="text-[10px] -mt-1 mb-1.5 sm:mb-2 truncate" style={{ color: 'var(--text-muted)' }}>
+            {jaName}
+          </div>
+        )}
 
         <div className="flex gap-1 justify-center flex-wrap">
           {pokemonData.types.map((typeInfo, typeIndex) => (
@@ -726,7 +775,7 @@ export default function Pokedex() {
         </div>
       </div>
     )
-  }, [showShiny, handlePokemonClick])
+  }, [showShiny, handlePokemonClick, metadataById, learnState])
 
   if (!showPokedex) {
     return (
@@ -759,9 +808,16 @@ export default function Pokedex() {
           className="text-lg sm:text-xl"
           style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}
         >
-          Generation {selectedGeneration}
+          {selectedGeneration === null ? 'All Generations' : `Generation ${selectedGeneration}`}
         </h2>
-        <div className="w-16"></div>
+        <Button
+          variant="ghost"
+          disabled={filteredMetadata.length === 0}
+          onClick={() => handlePokemonClick(filteredMetadata[Math.floor(Math.random() * filteredMetadata.length)].id)}
+          title="Open a random Pokemon from the current list"
+        >
+          <Shuffle size={16} /> Random
+        </Button>
       </div>
 
       <GenerationSelector
@@ -832,7 +888,7 @@ export default function Pokedex() {
                     value={searchTerm}
                     onChange={setSearchTerm}
                     onClear={clearSearch}
-                    placeholder="Search Pokemon by name..."
+                    placeholder="Search by name (English or Japanese)..."
                     totalResults={totalResults}
                   />
                 </div>
@@ -854,6 +910,12 @@ export default function Pokedex() {
                 onColorChange={setSelectedColor}
                 statsRange={statsRange}
                 onStatsRangeChange={setStatsRange}
+                evolutionStage={evolutionStage}
+                onEvolutionStageChange={setEvolutionStage}
+                formKind={formKind}
+                onFormKindChange={setFormKind}
+                learnFilter={learnFilter}
+                onLearnFilterChange={setLearnFilter}
                 onResetFilters={resetFilters}
                 hasActiveFilters={hasActiveFilters}
               />

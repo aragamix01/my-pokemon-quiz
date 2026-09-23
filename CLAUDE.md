@@ -58,9 +58,16 @@ Ultra-high-performance Pokemon directory with cross-generation capabilities:
 - **Shiny Toggle**: View shiny variants with availability indicators
 - **Responsive Design**: Adaptive grid layout (2-6 columns based on screen size)
 - **Memory Management**: Scroll position restoration and efficient state handling
+- **Japanese Name Search**: Search matches English and Japanese romaji names ("hitokage" finds Charmander); cards show the Japanese name under the English one
+- **Evolution & Form Filters**: Evolution stage (first / middle / fully evolved / does not evolve, from `getEvolutionStages()` in `src/lib/evolution-chains.ts`) and special forms (Mega / regional / Gigantamax, from metadata variants via `hasFormKind()`)
+- **Learning Progress**: Cards show ★ (mastered) or ● (learning) from Flashcards progress, with a "Learning progress" filter (not met / learning / mastered)
+- **Random Button**: Opens a random Pokemon from the current filtered list
 
 ## Pokemon Detail Pages
 Comprehensive individual Pokemon information pages featuring:
+- **Header**: Number, English name, Japanese romaji name and category ("Charizard / Lizardon · Flame Pokémon", from species `genera`)
+- **Pokedex Entries**: Every English entry by game, identical texts grouped (`src/components/PokedexEntries.tsx`), newest selected by default
+- **Stat Ranks**: Each base stat and the total compared with all Pokemon ("Speed 100 · faster than 85% of Pokemon", `src/components/StatRanks.tsx`)
 - **Complete Pokemon Data**: ID, name, height, weight, base experience, generation, habitat
 - **Visual Elements**: High-quality official artwork, shiny variants toggle, Pokemon cries audio
 - **Type Information**: Color-coded type badges with official Pokemon type styling

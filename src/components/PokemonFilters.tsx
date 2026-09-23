@@ -2,7 +2,9 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { Funnel, CaretDown, Trash, Check } from '@phosphor-icons/react'
-import { SortOption, SORT_OPTIONS, POKEMON_TYPES, POKEMON_HABITATS, POKEMON_COLORS } from '@/lib/pokemon-metadata'
+import { SortOption, SORT_OPTIONS, POKEMON_TYPES, POKEMON_HABITATS, POKEMON_COLORS, FormKind } from '@/lib/pokemon-metadata'
+import { EvolutionStage } from '@/lib/evolution-chains'
+import { LearnFilter } from '@/hooks/usePokemonFilter'
 import { PokemonTypeName } from '@/lib/type-effectiveness'
 import { TypePill } from '@/components/ui/TypePill'
 import { Button } from '@/components/ui/Button'
@@ -23,8 +25,55 @@ interface PokemonFiltersProps {
   onColorChange: (color: string | null) => void
   statsRange: { min: number; max: number }
   onStatsRangeChange: (range: { min: number; max: number }) => void
+  evolutionStage: EvolutionStage | null
+  onEvolutionStageChange: (stage: EvolutionStage | null) => void
+  formKind: FormKind | null
+  onFormKindChange: (kind: FormKind | null) => void
+  learnFilter: LearnFilter | null
+  onLearnFilterChange: (filter: LearnFilter | null) => void
   onResetFilters: () => void
   hasActiveFilters: boolean
+}
+
+const EVOLUTION_OPTIONS: Array<{ value: EvolutionStage; label: string }> = [
+  { value: 'first', label: 'First form' },
+  { value: 'middle', label: 'Middle' },
+  { value: 'final', label: 'Fully evolved' },
+  { value: 'none', label: 'Does not evolve' },
+]
+
+const FORM_OPTIONS: Array<{ value: FormKind; label: string }> = [
+  { value: 'mega', label: 'Mega' },
+  { value: 'regional', label: 'Regional form' },
+  { value: 'gmax', label: 'Gigantamax' },
+]
+
+const LEARN_OPTIONS: Array<{ value: LearnFilter; label: string }> = [
+  { value: 'new', label: 'Not met yet' },
+  { value: 'learning', label: 'Learning' },
+  { value: 'mastered', label: 'Mastered ★' },
+]
+
+/** One row of single-choice chips with an "Any" option that clears it */
+function ChipGroup<T extends string>({ title, options, value, onChange }: {
+  title: string
+  options: Array<{ value: T; label: string }>
+  value: T | null
+  onChange: (value: T | null) => void
+}) {
+  return (
+    <div className="space-y-3">
+      <h4 className="text-[11px] uppercase tracking-wide" style={{ color: 'var(--color-neutral-400)' }}>{title}</h4>
+      <div className="flex flex-wrap gap-2">
+        <button onClick={() => onChange(null)} className={cn('nx-tab', value === null && 'nx-tab-active')}>Any</button>
+        {options.map(opt => (
+          <button key={opt.value} onClick={() => onChange(value === opt.value ? null : opt.value)} className={cn('nx-tab', value === opt.value && 'nx-tab-active')}>
+            {opt.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
 }
 
 const COLOR_SWATCH: Record<string, string> = {
@@ -48,6 +97,12 @@ export default function PokemonFilters({
   onColorChange,
   statsRange,
   onStatsRangeChange,
+  evolutionStage,
+  onEvolutionStageChange,
+  formKind,
+  onFormKindChange,
+  learnFilter,
+  onLearnFilterChange,
   onResetFilters,
   hasActiveFilters
 }: PokemonFiltersProps) {
@@ -138,6 +193,9 @@ export default function PokemonFilters({
           {(statsRange.min > 0 || statsRange.max < 800) && (
             <span className="tag tag-neutral">Stats {statsRange.min}-{statsRange.max}</span>
           )}
+          {evolutionStage && <span className="tag tag-neutral">{EVOLUTION_OPTIONS.find(o => o.value === evolutionStage)?.label}</span>}
+          {formKind && <span className="tag tag-neutral">{FORM_OPTIONS.find(o => o.value === formKind)?.label}</span>}
+          {learnFilter && <span className="tag tag-accent">{LEARN_OPTIONS.find(o => o.value === learnFilter)?.label}</span>}
         </div>
       )}
 
@@ -187,6 +245,12 @@ export default function PokemonFilters({
                 Mythical
               </label>
             </div>
+
+            <div className="hr" />
+
+            <ChipGroup title="Evolution stage" options={EVOLUTION_OPTIONS} value={evolutionStage} onChange={onEvolutionStageChange} />
+            <ChipGroup title="Special forms" options={FORM_OPTIONS} value={formKind} onChange={onFormKindChange} />
+            <ChipGroup title="Learning progress (Flashcards)" options={LEARN_OPTIONS} value={learnFilter} onChange={onLearnFilterChange} />
 
             <div className="hr" />
 

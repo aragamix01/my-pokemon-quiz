@@ -13,6 +13,8 @@ import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import PokemonImage from '@/components/PokemonImage'
 import PokemonStatsChart from '@/components/PokemonStatsChart'
 import PokemonTypeEffectiveness from '@/components/PokemonTypeEffectiveness'
+import PokedexEntries from '@/components/PokedexEntries'
+import StatRanks from '@/components/StatRanks'
 import { TypePill } from '@/components/ui/TypePill'
 import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
@@ -118,8 +120,9 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
     return data?.species.names.find(name => name.language.name === 'en')?.name || data?.pokemon.name || ''
   }
 
-  const getFlavorText = () => {
-    return data?.species.flavor_text_entries.find(entry => entry.language.name === 'en')?.flavor_text.replace(/\f/g, ' ') || ''
+  // Category such as "Flame Pokémon"
+  const getGenus = () => {
+    return data?.species.genera?.find(g => g.language.name === 'en')?.genus || ''
   }
 
   const getBreedingData = () => {
@@ -393,12 +396,30 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
           >
             ← Back
           </Button>
-          <h1
-            className="text-lg"
-            style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}
-          >
-            Pokemon Details
-          </h1>
+          {data ? (
+            <div className="text-center min-w-0 px-2">
+              <div className="text-[11px]" style={{ color: 'var(--text-muted)' }}>#{String(data.species.id).padStart(4, '0')}</div>
+              <h1
+                className="text-2xl sm:text-3xl leading-tight"
+                style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, color: 'var(--color-text)' }}
+              >
+                {getEnglishName()}
+              </h1>
+              <div className="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+                {[
+                  data.species.names.find(n => n.language.name === 'ja-roma')?.name,
+                  getGenus(),
+                ].filter(Boolean).join(' · ')}
+              </div>
+            </div>
+          ) : (
+            <h1
+              className="text-lg"
+              style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}
+            >
+              Pokemon Details
+            </h1>
+          )}
           <div className="w-16"></div>
         </div>
 
@@ -536,14 +557,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                       </table>
                     </div>
                   </div>
-                  {getFlavorText() && (
-                    <div className="pt-3" style={{ borderTop: '1px solid var(--color-neutral-800)' }}>
-                      <h4 className="text-xs font-semibold mb-1" style={{ color: 'var(--text-secondary)' }}>Description:</h4>
-                      <p className="text-xs leading-tight" style={{ color: 'var(--text-primary)' }}>
-                        {getFlavorText()}
-                      </p>
-                    </div>
-                  )}
+                  <PokedexEntries key={data.species.id} species={data.species} />
                 </div>
 
                 {/* Separator Line */}
@@ -699,6 +713,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                 <div className="mb-4">
                   <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Base Stats</h3>
                   <PokemonStatsChart stats={getCurrentForm().stats} showTotal={true} />
+                  <StatRanks stats={getCurrentForm().stats} />
                 </div>
 
                 {/* Separator Line */}

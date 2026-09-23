@@ -1,4 +1,5 @@
 import { PokemonMetadata, GenerationsDatabase } from '@/types/pokemon-metadata'
+import { getEvolutionStages, EvolutionStage } from '@/lib/evolution-chains'
 
 // Import metadata databases
 let pokemonMetadata: PokemonMetadata[] = []
@@ -34,6 +35,21 @@ export interface FilterOptions {
   color?: string
   minStats?: number
   maxStats?: number
+  evolutionStage?: EvolutionStage
+  formKind?: FormKind
+}
+
+export type FormKind = 'mega' | 'regional' | 'gmax'
+
+// Variant name suffixes for each form kind (e.g. "charizard-mega-x", "vulpix-alola")
+const FORM_PATTERNS: Record<FormKind, RegExp> = {
+  mega: /-(mega|primal)(-|$)/,
+  regional: /-(alola|galar|hisui|paldea)(-|$)/,
+  gmax: /-gmax$/,
+}
+
+export function hasFormKind(pokemon: PokemonMetadata, kind: FormKind): boolean {
+  return pokemon.variants.some(v => !v.is_default && FORM_PATTERNS[kind].test(v.name))
 }
 
 // Available sort options
@@ -146,10 +162,13 @@ class PokemonMetadataService {
       results = results.filter(p => {
         const normalizedName = normalizeString(p.name)
         const normalizedSpecies = normalizeString(p.species_name)
-        
+        // Japanese romaji name, so "Hitokage" finds Charmander
+        const normalizedJapanese = p.name_ja_roma ? normalizeString(p.name_ja_roma) : ''
+
         return (
           normalizedName.includes(normalizedSearchTerm) ||
           normalizedSpecies.includes(normalizedSearchTerm) ||
+          (normalizedJapanese !== '' && normalizedJapanese.includes(normalizedSearchTerm)) ||
           p.name.toLowerCase().includes(searchTerm) ||
           p.species_name.toLowerCase().includes(searchTerm)
         )
@@ -189,6 +208,15 @@ class PokemonMetadataService {
 
     if (options.maxStats !== undefined) {
       results = results.filter(p => p.total_stats <= options.maxStats!)
+    }
+
+    if (options.evolutionStage) {
+      const stages = getEvolutionStages()
+      results = results.filter(p => (stages[p.id] ?? 'none') === options.evolutionStage)
+    }
+
+    if (options.formKind) {
+      results = results.filter(p => hasFormKind(p, options.formKind!))
     }
 
     return results
