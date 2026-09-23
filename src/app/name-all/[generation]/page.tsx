@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef, use } from 'react'
 import { useRouter } from 'next/navigation'
-import { getScope, formatClock, loadBest, saveBest } from '@/lib/game-utils'
+import { getScope, scopeNumber, formatClock, loadBest, saveBest } from '@/lib/game-utils'
 import { formatPokemonName, japaneseName, bothNames, normalizeName } from '@/lib/pokemon-names'
 import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
@@ -213,7 +213,7 @@ export default function NameAllPage({ params }: NameAllPageProps) {
                     <PokemonArt id={p.id} alt={formatPokemonName(p.species_name)} lazy className="w-full h-full" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-[10px]" style={{ color: 'var(--color-neutral-600)' }}>
-                      #{p.id}
+                      #{scopeNumber(scope, p.id)}
                     </div>
                   )}
                 </div>

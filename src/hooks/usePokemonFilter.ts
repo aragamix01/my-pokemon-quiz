@@ -22,6 +22,7 @@ interface UsePokemonFilterState {
   evolutionStage: EvolutionStage | null
   formKind: FormKind | null
   learnFilter: LearnFilter | null
+  regionalDex: string | null
   totalResults: number
 }
 
@@ -37,6 +38,7 @@ interface UsePokemonFilterActions {
   setEvolutionStage: (stage: EvolutionStage | null) => void
   setFormKind: (kind: FormKind | null) => void
   setLearnFilter: (filter: LearnFilter | null) => void
+  setRegionalDex: (name: string | null) => void
   resetFilters: () => void
   clearSearch: () => void
 }
@@ -59,6 +61,8 @@ export function usePokemonFilter(generation?: GenerationNumber | null) {
   const [evolutionStage, setEvolutionStage] = useState<EvolutionStage | null>(null)
   const [formKind, setFormKind] = useState<FormKind | null>(null)
   const [learnFilter, setLearnFilter] = useState<LearnFilter | null>(null)
+  // Game Pokedex being browsed instead of a generation. Not a filter: Reset keeps it
+  const [regionalDex, setRegionalDex] = useState<string | null>(null)
   // Flashcard progress lives in localStorage, so it is read after mount
   const [learnState, setLearnState] = useState<LearnState | null>(null)
   useEffect(() => {
@@ -88,7 +92,8 @@ export function usePokemonFilter(generation?: GenerationNumber | null) {
         minStats: statsRange.min > 0 ? statsRange.min : undefined,
         maxStats: statsRange.max < 800 ? statsRange.max : undefined,
         evolutionStage: evolutionStage ?? undefined,
-        formKind: formKind ?? undefined
+        formKind: formKind ?? undefined,
+        regionalDex: regionalDex ?? undefined
       }
 
       // Apply filters
@@ -102,7 +107,10 @@ export function usePokemonFilter(generation?: GenerationNumber | null) {
       }
       
       // Apply sorting
-      const sorted = pokemonMetadataService.sortMetadata(filtered, sortOption)
+      // In a game Pokedex the default "Pokedex Number" sort means the game's own order
+      const sorted = regionalDex && sortOption.value === DEFAULT_SORT.value
+        ? filtered
+        : pokemonMetadataService.sortMetadata(filtered, sortOption)
 
       setLoading(false)
       return sorted
@@ -124,7 +132,8 @@ export function usePokemonFilter(generation?: GenerationNumber | null) {
     evolutionStage,
     formKind,
     learnFilter,
-    learnState
+    learnState,
+    regionalDex
   ])
 
   // Reset filters
@@ -185,6 +194,7 @@ export function usePokemonFilter(generation?: GenerationNumber | null) {
     evolutionStage,
     formKind,
     learnFilter,
+    regionalDex,
     totalResults: filteredMetadata.length
   }
 
@@ -200,6 +210,7 @@ export function usePokemonFilter(generation?: GenerationNumber | null) {
     setEvolutionStage,
     setFormKind,
     setLearnFilter,
+    setRegionalDex,
     resetFilters,
     clearSearch
   }

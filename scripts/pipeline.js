@@ -9,7 +9,7 @@
  *
  * Usage:
  *   node scripts/pipeline.js check [--json]      # diff manifest vs upstream
- *   node scripts/pipeline.js data                # metadata + types + moves + abilities + evolution-items + evolution-chains
+ *   node scripts/pipeline.js data                # metadata + types + moves + abilities + evolution-items + evolution-chains + regional-pokedexes
  *   node scripts/pipeline.js sprites [strategy…] # download + optimize sprites (default: all forms-only)
  *   node scripts/pipeline.js embeddings          # regenerate AI embeddings
  *   node scripts/pipeline.js all                 # data -> embeddings -> sprites
@@ -85,6 +85,7 @@ function dataCounts() {
   const abilities = readJson('pokemon-abilities.json')
   const evolutionItems = readJson('evolution-items.json')
   const evolutionChains = readJson('evolution-chains.json')
+  const regionalPokedexes = readJson('regional-pokedexes.json')
   return {
     pokemon: Array.isArray(metadata) ? metadata.length : 0,
     generations: Object.keys(generations).length,
@@ -93,6 +94,7 @@ function dataCounts() {
     abilities: objectCount(abilities, 'abilities'),
     evolution_items: objectCount(evolutionItems, 'items'),
     evolution_chains: evolutionChains.chains.length,
+    regional_pokedexes: regionalPokedexes.pokedexes.length,
   }
 }
 
@@ -129,6 +131,7 @@ async function runData() {
   run('fetch-abilities-json.js')
   run('fetch-evolution-items.js')
   run('fetch-evolution-chains.js')
+  run('fetch-regional-pokedexes.js')
   updateDataset('data', {
     upstream: { repo: REPOS.data, branch: 'master', sha },
     generated_at: new Date().toISOString(),

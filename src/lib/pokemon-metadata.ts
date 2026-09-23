@@ -1,5 +1,6 @@
 import { PokemonMetadata, GenerationsDatabase } from '@/types/pokemon-metadata'
 import { getEvolutionStages, EvolutionStage } from '@/lib/evolution-chains'
+import { getPokedex } from '@/lib/regional-pokedexes'
 
 // Import metadata databases
 let pokemonMetadata: PokemonMetadata[] = []
@@ -37,6 +38,8 @@ export interface FilterOptions {
   maxStats?: number
   evolutionStage?: EvolutionStage
   formKind?: FormKind
+  /** Game Pokedex name ("paldea"): limits results to it, in its own order */
+  regionalDex?: string
 }
 
 export type FormKind = 'mega' | 'regional' | 'gmax'
@@ -133,8 +136,22 @@ class PokemonMetadataService {
   searchAndFilter(options: FilterOptions): PokemonMetadata[] {
     let results = [...pokemonMetadata]
 
+    // A game Pokedex replaces the starting list with its own entries and order
+    const dex = options.regionalDex ? getPokedex(options.regionalDex) : undefined
+    if (dex) {
+      const seen: Record<number, true> = {}
+      results = []
+      dex.entries.forEach(([, id]) => {
+        const meta = this.getMetadataById(id)
+        if (meta && !seen[id]) {
+          seen[id] = true
+          results.push(meta)
+        }
+      })
+    }
+
     // Filter by generation
-    if (options.generation) {
+    if (options.generation && !dex) {
       results = results.filter(p => p.generation === options.generation)
     }
 

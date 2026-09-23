@@ -17,6 +17,8 @@ import { TypePill } from '@/components/ui/TypePill'
 import { Button } from '@/components/ui/Button'
 import { Sparkle, MagnifyingGlass, Shuffle } from '@phosphor-icons/react'
 import { japaneseName } from '@/lib/pokemon-names'
+import { getPokedex, regionalNumber, pokedexOptionLabel } from '@/lib/regional-pokedexes'
+import PokedexSelect from './PokedexSelect'
 import { LearnState, loadLearnState, isMastered } from '@/lib/learn-progress'
 
 
@@ -71,6 +73,8 @@ export default function Pokedex() {
     setFormKind,
     learnFilter,
     setLearnFilter,
+    regionalDex,
+    setRegionalDex,
     resetFilters,
     clearSearch,
     hasActiveFilters,
@@ -380,6 +384,7 @@ export default function Pokedex() {
           setEvolutionStage(extra.evolutionStage ?? null)
           setFormKind(extra.formKind ?? null)
           setLearnFilter(extra.learnFilter ?? null)
+          setRegionalDex(extra.regionalDex ?? null)
         } catch (e) {
           console.error('Failed to parse saved extra filters:', e)
         }
@@ -397,7 +402,7 @@ export default function Pokedex() {
     if (loading || isLoadingMore) return // Prevent double-loading
     
     // Only reset and load from beginning if this is a fresh start or filter change
-    const shouldResetToFirstPage = currentPage === 1 || hasActiveFilters
+    const shouldResetToFirstPage = currentPage === 1 || hasActiveFilters || !!regionalDex
     
     console.log('useEffect triggered - Pokemon loading decision:', {
       shouldReset: shouldResetToFirstPage,
@@ -416,9 +421,9 @@ export default function Pokedex() {
     setIsLoadingMore(false)
     
     if (showPokedex && isMetadataAvailable) {
-      if (hasActiveFilters && filteredMetadata.length > 0) {
+      if ((hasActiveFilters || regionalDex) && filteredMetadata.length > 0) {
         loadPokemonPage(filteredMetadata, 1, false)
-      } else if (!hasActiveFilters) {
+      } else if (!hasActiveFilters && !regionalDex) {
         const generationMetadata = selectedGeneration === null 
           ? pokemonMetadataService.getAllMetadata() 
           : pokemonMetadataService.getMetadataByGeneration(selectedGeneration)
@@ -430,7 +435,7 @@ export default function Pokedex() {
     } else if (showPokedex && !isMetadataAvailable) {
       loadPokemonFromAPI()
     }
-  }, [showPokedex, isMetadataAvailable, hasActiveFilters, filteredMetadata, selectedGeneration])
+  }, [showPokedex, isMetadataAvailable, hasActiveFilters, filteredMetadata, selectedGeneration, regionalDex])
 
   // Fallback function to load Pokemon from API when metadata is not available
   const loadPokemonFromAPI = useCallback(async () => {
@@ -519,7 +524,7 @@ export default function Pokedex() {
         if (needsMorePokemon && canRestore) {
           console.log('🔄 Auto-loading missing Pokemon...')
           
-          const currentMetadata = hasActiveFilters && filteredMetadata.length > 0
+          const currentMetadata = (hasActiveFilters || regionalDex) && filteredMetadata.length > 0
             ? filteredMetadata
             : selectedGeneration === null 
               ? pokemonMetadataService.getAllMetadata() 
@@ -630,6 +635,7 @@ export default function Pokedex() {
   }, [selectedGeneration])
 
   const handleGenerationSelect = (gen: GenerationNumber | null) => {
+    setRegionalDex(null)
     setSelectedGeneration(gen)
     setPokemon([])
     setCurrentPage(1)
@@ -639,11 +645,21 @@ export default function Pokedex() {
     }
   }
 
+  // Browse a game's own Pokedex: all generations, limited to that game's list and order
+  const handleDexSelect = (name: string) => {
+    setSelectedGeneration(null)
+    setRegionalDex(name)
+    setPokemon([])
+    setCurrentPage(1)
+    pokemonCacheRef.current.clear()
+    if (!showPokedex) setShowPokedex(true)
+  }
+
   // Load More functionality with scroll preservation
   const loadMorePokemon = useCallback(() => {
     if (isLoadingMore || loading) return
     
-    const currentMetadata = hasActiveFilters && filteredMetadata.length > 0
+    const currentMetadata = (hasActiveFilters || regionalDex) && filteredMetadata.length > 0
       ? filteredMetadata
       : selectedGeneration === null 
         ? pokemonMetadataService.getAllMetadata() 
@@ -654,11 +670,11 @@ export default function Pokedex() {
     
     setIsLoadingMore(true)
     loadPokemonPage(currentMetadata, currentPage + 1, true) // true = append
-  }, [isLoadingMore, loading, hasActiveFilters, filteredMetadata, selectedGeneration, currentPage, itemsPerLoad, loadPokemonPage])
+  }, [isLoadingMore, loading, hasActiveFilters, regionalDex, filteredMetadata, selectedGeneration, currentPage, itemsPerLoad, loadPokemonPage])
 
   // Check if we can load more
   const hasMorePages = useMemo(() => {
-    const currentMetadata = hasActiveFilters && filteredMetadata.length > 0
+    const currentMetadata = (hasActiveFilters || regionalDex) && filteredMetadata.length > 0
       ? filteredMetadata
       : selectedGeneration === null 
         ? pokemonMetadataService.getAllMetadata() 
@@ -666,7 +682,7 @@ export default function Pokedex() {
     
     const totalPages = Math.ceil(currentMetadata.length / itemsPerLoad)
     return currentPage < totalPages
-  }, [hasActiveFilters, filteredMetadata, selectedGeneration, currentPage, itemsPerLoad])
+  }, [hasActiveFilters, regionalDex, filteredMetadata, selectedGeneration, currentPage, itemsPerLoad])
 
   const handlePokemonClick = (pokemonId: number) => {
     // Store scroll position and clicked Pokemon ID
@@ -690,7 +706,7 @@ export default function Pokedex() {
     sessionStorage.setItem('pokedex-selected-habitat', selectedHabitat || 'null')
     sessionStorage.setItem('pokedex-selected-color', selectedColor || 'null')
     sessionStorage.setItem('pokedex-stats-range', JSON.stringify(statsRange))
-    sessionStorage.setItem('pokedex-extra-filters', JSON.stringify({ evolutionStage, formKind, learnFilter }))
+    sessionStorage.setItem('pokedex-extra-filters', JSON.stringify({ evolutionStage, formKind, learnFilter, regionalDex }))
     
     console.log('Storing navigation data:', {
       scrollY,
@@ -701,7 +717,7 @@ export default function Pokedex() {
     })
     
     // Navigate with or without generation parameter based on selection
-    const url = selectedGeneration === null 
+    const url = selectedGeneration === null || regionalDex 
       ? `/pokemon/${pokemonId}` 
       : `/pokemon/${pokemonId}?gen=${selectedGeneration}`
     
@@ -723,6 +739,7 @@ export default function Pokedex() {
     const jaName = meta ? japaneseName(meta) : null
     const learnCard = learnState?.cards[pokemonData.id]
     const mastered = isMastered(learnCard)
+    const dexNumber = regionalDex ? regionalNumber(regionalDex, pokemonData.id) : undefined
     
     return (
       <div
@@ -738,7 +755,9 @@ export default function Pokedex() {
         )}
 
         <div className="flex justify-between items-center text-xs mb-1 sm:mb-2" style={{ color: 'var(--color-neutral-400)' }}>
-          <span>#{pokemonData.id.toString().padStart(3, '0')}</span>
+          <span title={dexNumber !== undefined ? `National #${pokemonData.id}` : undefined}>
+            #{(dexNumber ?? pokemonData.id).toString().padStart(3, '0')}
+          </span>
           {learnCard && (
             <span
               title={mastered ? 'Mastered in Flashcards' : 'Learning in Flashcards'}
@@ -775,15 +794,24 @@ export default function Pokedex() {
         </div>
       </div>
     )
-  }, [showShiny, handlePokemonClick, metadataById, learnState])
+  }, [showShiny, handlePokemonClick, metadataById, learnState, regionalDex])
 
   if (!showPokedex) {
     return (
-      <GenerationSelector
-        title="POKEDEX"
-        subtitle="Browse Pokemon by generation (ordered by Pokedex number)"
-        onGenerationSelect={handleGenerationSelect}
-      />
+      <div className="flex flex-col gap-4">
+        <GenerationSelector
+          title="POKEDEX"
+          subtitle="Browse Pokemon by generation (ordered by Pokedex number)"
+          onGenerationSelect={handleGenerationSelect}
+        />
+        <div className="card" style={{ gap: 'var(--space-3)' }}>
+          <h3 className="card-title text-center">Browse by game</h3>
+          <p className="text-sm text-center" style={{ color: 'var(--text-secondary)' }}>
+            Each game has its own Pokedex with its own numbers, including older Pokemon you can meet there.
+          </p>
+          <PokedexSelect value="" onChange={handleDexSelect} />
+        </div>
+      </div>
     )
   }
 
@@ -808,7 +836,9 @@ export default function Pokedex() {
           className="text-lg sm:text-xl"
           style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}
         >
-          {selectedGeneration === null ? 'All Generations' : `Generation ${selectedGeneration}`}
+          {regionalDex
+            ? `${getPokedex(regionalDex)?.label ?? regionalDex} Pokedex`
+            : selectedGeneration === null ? 'All Generations' : `Generation ${selectedGeneration}`}
         </h2>
         <Button
           variant="ghost"
@@ -822,10 +852,19 @@ export default function Pokedex() {
 
       <GenerationSelector
         title=""
-        onGenerationSelect={setSelectedGeneration}
-        selectedGeneration={selectedGeneration}
+        onGenerationSelect={handleGenerationSelect}
+        // Nothing highlighted while a game Pokedex is shown
+        selectedGeneration={regionalDex ? (undefined as unknown as null) : selectedGeneration}
         minimized={true}
       />
+      <div className="mb-4">
+        <PokedexSelect value={regionalDex ?? ''} onChange={handleDexSelect} />
+        {regionalDex && getPokedex(regionalDex) && (
+          <p className="text-center text-xs mt-2" style={{ color: 'var(--color-accent-400)' }}>
+            {pokedexOptionLabel(getPokedex(regionalDex)!)}: numbers and order from that game
+          </p>
+        )}
+      </div>
 
       {/* Unified Search and Controls */}
       {isMetadataAvailable && (
@@ -869,9 +908,11 @@ export default function Pokedex() {
             <div className="mb-4">
               <AISearchBar
                 pokemonList={
-                  selectedGeneration === null
-                    ? pokemonMetadataService.getAllMetadata()
-                    : pokemonMetadataService.getMetadataByGeneration(selectedGeneration)
+                  regionalDex
+                    ? pokemonMetadataService.searchAndFilter({ regionalDex })
+                    : selectedGeneration === null
+                      ? pokemonMetadataService.getAllMetadata()
+                      : pokemonMetadataService.getMetadataByGeneration(selectedGeneration)
                 }
                 onResults={handleAISearchResults}
                 placeholder="Try: 'strong fire starter' or 'fast electric types'"

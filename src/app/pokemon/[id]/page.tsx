@@ -15,6 +15,7 @@ import PokemonStatsChart from '@/components/PokemonStatsChart'
 import PokemonTypeEffectiveness from '@/components/PokemonTypeEffectiveness'
 import PokedexEntries from '@/components/PokedexEntries'
 import StatRanks from '@/components/StatRanks'
+import GamePokedexes from '@/components/GamePokedexes'
 import { TypePill } from '@/components/ui/TypePill'
 import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
@@ -730,6 +731,12 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                     </div>
                   </div>
                 )}
+
+                {/* Separator Line */}
+                <div className="hr" />
+
+                {/* Game Pokedexes Section */}
+                <GamePokedexes speciesId={data.species.id} />
 
                 {/* Separator Line */}
                 <div className="hr" />

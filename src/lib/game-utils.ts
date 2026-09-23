@@ -2,6 +2,7 @@
 
 import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import { PokemonMetadata } from '@/types/pokemon-metadata'
+import { getPokedex, DEX_SCOPE_PREFIX } from '@/lib/regional-pokedexes'
 
 export function shuffle<T>(array: T[]): T[] {
   const out = array.slice()
@@ -16,10 +17,29 @@ export interface GameScope {
   generation: number | null
   label: string
   pool: PokemonMetadata[]
+  /** Set for a game Pokedex scope: regional number of each species in the pool */
+  numbers?: Record<number, number>
 }
 
-/** Resolve a route param ("all" or "1".."9") to the Pokemon it covers */
+/**
+ * Resolve a route param to the Pokemon it covers: "all", "1".."9", or a game
+ * Pokedex like "dex-paldea" (pool in that game's order)
+ */
 export function getScope(genParam: string): GameScope {
+  if (genParam.indexOf(DEX_SCOPE_PREFIX) === 0) {
+    const dex = getPokedex(genParam.slice(DEX_SCOPE_PREFIX.length))
+    if (dex) {
+      const numbers: Record<number, number> = {}
+      const pool: PokemonMetadata[] = []
+      dex.entries.forEach(([number, id]) => {
+        const meta = pokemonMetadataService.getMetadataById(id)
+        if (!meta || numbers[id] !== undefined) return
+        numbers[id] = number
+        pool.push(meta)
+      })
+      return { generation: null, label: `${dex.label} Pokedex`, pool, numbers }
+    }
+  }
   const generation = genParam === 'all' ? null : parseInt(genParam, 10)
   return {
     generation,
@@ -28,6 +48,11 @@ export function getScope(genParam: string): GameScope {
       ? pokemonMetadataService.getAllMetadata()
       : pokemonMetadataService.getMetadataByGeneration(generation),
   }
+}
+
+/** Number to show for a Pokemon in a scope: its regional number in a game Pokedex, else national */
+export function scopeNumber(scope: GameScope, id: number): number {
+  return scope.numbers?.[id] ?? id
 }
 
 export function formatClock(ms: number): string {

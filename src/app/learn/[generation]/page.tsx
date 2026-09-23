@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import { generateConfusingAnswers } from '@/lib/pokemon-similarity'
 import { bothNames } from '@/lib/pokemon-names'
+import { getScope } from '@/lib/game-utils'
 import {
   LearnState, Grade, emptyState, loadLearnState, saveLearnState, buildQueue, introduceCard,
   gradeCard, touchStreak, scopeStats, modeForStage, isMastered, newCardsLeftToday,
@@ -42,15 +43,10 @@ interface SessionStats {
 export default function LearnPage({ params }: LearnPageProps) {
   const router = useRouter()
   const { generation: genParam } = use(params)
-  const generation = genParam === 'all' ? null : parseInt(genParam, 10)
-  const scopeLabel = generation === null ? 'All Generations' : `Gen ${generation}`
-
-  const scope = useMemo<PokemonMetadata[]>(
-    () => generation === null
-      ? pokemonMetadataService.getAllMetadata()
-      : pokemonMetadataService.getMetadataByGeneration(generation),
-    [generation]
-  )
+  // A generation, all, or a game Pokedex; new cards follow its order
+  const gameScope = useMemo(() => getScope(genParam), [genParam])
+  const scopeLabel = gameScope.label
+  const scope = gameScope.pool
   const scopeIds = useMemo(() => scope.map(p => p.id), [scope])
   const byId = useMemo(() => {
     const map: Record<number, PokemonMetadata> = {}

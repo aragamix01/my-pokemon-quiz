@@ -62,6 +62,13 @@ Ultra-high-performance Pokemon directory with cross-generation capabilities:
 - **Evolution & Form Filters**: Evolution stage (first / middle / fully evolved / does not evolve, from `getEvolutionStages()` in `src/lib/evolution-chains.ts`) and special forms (Mega / regional / Gigantamax, from metadata variants via `hasFormKind()`)
 - **Learning Progress**: Cards show ★ (mastered) or ● (learning) from Flashcards progress, with a "Learning progress" filter (not met / learning / mastered)
 - **Random Button**: Opens a random Pokemon from the current filtered list
+- **Browse by Game**: Pick a game's own Pokedex (Paldea, Galar, Kitakami, Lumiose...) instead of a generation; list uses that game's order and numbers (`regionalDex` in `usePokemonFilter`, a mode rather than a filter so Reset keeps it)
+
+## Game (Regional) Pokedexes
+- **Data**: `src/data/regional-pokedexes.json` (33 game Pokedexes with `[regionalNumber, speciesId]` entries, plus English game and version-group names), from `scripts/fetch-regional-pokedexes.js`, part of `pipeline.js data`
+- **Library**: `src/lib/regional-pokedexes.ts` (`getPokedexes`, `pokedexesForSpecies`, `numberInVersion`, `versionName`)
+- **Learn scope**: every Learn game and Flashcards accept `dex-<name>` scopes (e.g. `/learn/dex-paldea`) via `getScope()` in `src/lib/game-utils.ts`; `PokedexSelect` component picks one
+- **Detail page**: "Found in these games" section (`GamePokedexes`) and regional numbers next to each Pokedex entry
 
 ## Pokemon Detail Pages
 Comprehensive individual Pokemon information pages featuring:
@@ -211,6 +218,7 @@ All databases now follow a consistent JSON-first structure:
 - **Abilities Database**: `pokemon-abilities.json` - All 367 abilities with details (322KB)
 - **Evolution Items**: `evolution-items.json` - Focused 48 evolution items database
 - **Evolution Chains**: `evolution-chains.json` - All 540 evolution chains as species-ID trees (36KB)
+- **Regional Pokedexes**: `regional-pokedexes.json` - 33 game Pokedexes with regional numbers, plus game names (69KB)
 - **Type Effectiveness**: `pokemon-type-effectiveness.json` - Complete type matchup matrix
 
 #### Utility Services (`src/lib/`)

@@ -1,15 +1,17 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import GenerationSelector from '@/components/GenerationSelector'
 import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
-import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import { LearnState, loadLearnState, scopeStats } from '@/lib/learn-progress'
 import { GenerationNumber } from '@/types/pokemon'
 import { Cards, MagnifyingGlass, Keyboard, SquaresFour, ImageSquare, TreeStructure, Sword, Ruler, CalendarCheck, Fire } from '@phosphor-icons/react'
 import { dailyStreak, getDailyResult, DAILY_PUZZLES } from '@/lib/daily'
+import { getScope } from '@/lib/game-utils'
+import { DEX_SCOPE_PREFIX } from '@/lib/regional-pokedexes'
+import PokedexSelect from '@/components/PokedexSelect'
 
 const GEN_KEY = 'learn-generation'
 
@@ -62,26 +64,25 @@ const GAMES = [
 
 export default function LearnMenu() {
   const router = useRouter()
-  const [generation, setGeneration] = useState<GenerationNumber | null>(1)
+  // Scope slug shared by every game: "all", "1".."9", or a game Pokedex like "dex-paldea"
+  const [slug, setSlug] = useState('1')
   const [learn, setLearn] = useState<LearnState | null>(null)
 
   useEffect(() => {
     setLearn(loadLearnState())
     const saved = sessionStorage.getItem(GEN_KEY)
-    if (saved === 'all') setGeneration(null)
-    else if (saved) setGeneration(parseInt(saved, 10) as GenerationNumber)
+    if (saved) setSlug(saved)
   }, [])
 
-  const selectGeneration = (gen: GenerationNumber | null) => {
-    setGeneration(gen)
-    sessionStorage.setItem(GEN_KEY, gen === null ? 'all' : String(gen))
+  const selectSlug = (next: string) => {
+    setSlug(next)
+    sessionStorage.setItem(GEN_KEY, next)
   }
 
-  const slug = generation === null ? 'all' : String(generation)
-  const scopeIds = (generation === null
-    ? pokemonMetadataService.getAllMetadata()
-    : pokemonMetadataService.getMetadataByGeneration(generation)
-  ).map(p => p.id)
+  const isDex = slug.indexOf(DEX_SCOPE_PREFIX) === 0
+  const generation: GenerationNumber | null | undefined = isDex ? undefined : slug === 'all' ? null : (parseInt(slug, 10) as GenerationNumber)
+  const scope = useMemo(() => getScope(slug), [slug])
+  const scopeIds = scope.pool.map(p => p.id)
   const progress = learn ? scopeStats(learn, scopeIds) : null
 
   // Daily status reads localStorage, so it is only known after mount
@@ -100,15 +101,22 @@ export default function LearnMenu() {
           Learn Pokemon names
         </h2>
         <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-          Pick a generation to study. Progress is saved in this browser.
+          Pick a generation, or the Pokedex of the game you're playing. Progress is saved in this browser.
         </p>
       </div>
       <GenerationSelector
         title="Learn Pokemon names"
-        onGenerationSelect={selectGeneration}
-        selectedGeneration={generation}
+        onGenerationSelect={gen => selectSlug(gen === null ? 'all' : String(gen))}
+        // undefined highlights nothing while a game Pokedex is picked
+        selectedGeneration={generation as GenerationNumber | null}
         minimized
       />
+      <PokedexSelect value={isDex ? slug.slice(DEX_SCOPE_PREFIX.length) : ''} onChange={name => selectSlug(DEX_SCOPE_PREFIX + name)} />
+      {isDex && (
+        <p className="text-center text-sm -mt-2" style={{ color: 'var(--color-accent-400)' }}>
+          Studying the {scope.label}: {scope.pool.length} Pokemon, in the game&apos;s own order
+        </p>
+      )}
 
       <div className="card" style={{ gap: 'var(--space-4)', boxShadow: '0 0 0 1px var(--color-accent-600)' }}>
         <div className="flex items-center justify-between gap-2">
