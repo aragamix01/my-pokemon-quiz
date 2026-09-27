@@ -106,7 +106,7 @@ Comprehensive Pokemon moves system with complete database:
   - Comprehensive move metadata including generation, contest type, target info
 
 ## Type Effectiveness System
-- **Type Chart page** (`src/components/TypeAdvantage.tsx`, home "Type Chart" tab): rows in game order (Stellar left out, it is Terastal-only), mode tabs Weak to / Strong against / Resists / Immune to computed from `EFFECTIVENESS_MATRIX`, plus a Matchup checker (pick 1-2 types or search a Pokemon) in three sections: Selected, damage taken grouped by ×4 / ×2 / ×½ / ×¼ / ×0, and Pokemon with the type(s) as picture + name chips linking to their pages (40 shown, "Show all")
+- **Type Chart page** (`src/components/TypeAdvantage.tsx`, home "Type Chart" tab): rows in game order (Stellar left out, it is Terastal-only), mode tabs Weak to / Strong against / Resists / Immune to computed from `EFFECTIVENESS_MATRIX`, plus a Matchup checker (pick 1-2 types or search a Pokemon) in three sections: Selected, damage taken grouped by ×4 / ×2 / ×½ / ×¼ / ×0, and Pokemon with the type(s) as picture + name chips linking to their pages (40 shown, "Show all"). The list includes alternate forms with their own types (Zacian Crowned, Megas, regional forms; src/data/pokemon-forms.json from scripts/fetch-pokemon-forms.js, part of pipeline.js data, read via getTypeForms() in src/lib/pokemon-forms.ts); form chips link to /pokemon/<species>?form=<formId>, which opens the detail page on that form
 - **Uniform pills**: `TypePill` is fixed width (92px) by default everywhere (`fixed={false}` sizes by text); white `.nx-typecard-pill` pills are 64px (`.lg` 84px on the detail panel)
 - Complete Pokemon type effectiveness data and calculations
 - Type advantage/disadvantage system with multiplier values

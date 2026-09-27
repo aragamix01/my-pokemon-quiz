@@ -100,7 +100,8 @@ export function matchPokemonName(input: string, pokemon: NamedPokemon): { match:
 }
 
 export function artworkUrl(id: number): string {
-  return `/sprites/optimized/pokemon-artwork/${id}.webp`
+  // Alternate forms (IDs above 10000) live in their own folder
+  return id > 10000 ? `/sprites/optimized/pokemon-forms/${id}.webp` : `/sprites/optimized/pokemon-artwork/${id}.webp`
 }
 
 export function artworkFallbackUrl(id: number): string {

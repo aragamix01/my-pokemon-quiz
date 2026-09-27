@@ -9,7 +9,7 @@
  *
  * Usage:
  *   node scripts/pipeline.js check [--json]      # diff manifest vs upstream
- *   node scripts/pipeline.js data                # metadata + types + moves + abilities + evolution-items + evolution-chains + regional-pokedexes
+ *   node scripts/pipeline.js data                # metadata + types + moves + abilities + evolution-items + evolution-chains + regional-pokedexes + pokemon-forms
  *   node scripts/pipeline.js sprites [strategy…] # download + optimize sprites (default: all forms-only)
  *   node scripts/pipeline.js embeddings          # regenerate AI embeddings
  *   node scripts/pipeline.js all                 # data -> embeddings -> sprites
@@ -132,6 +132,7 @@ async function runData() {
   run('fetch-evolution-items.js')
   run('fetch-evolution-chains.js')
   run('fetch-regional-pokedexes.js')
+  run('fetch-pokemon-forms.js')
   updateDataset('data', {
     upstream: { repo: REPOS.data, branch: 'master', sha },
     generated_at: new Date().toISOString(),

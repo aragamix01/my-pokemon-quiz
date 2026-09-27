@@ -78,6 +78,9 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
       }
       
       setData({ pokemon, species, evolutionChain, allForms })
+      // ?form=<id> opens straight on that form (links from the Type Chart)
+      const formIndex = allForms.findIndex(f => String(f.id) === searchParams.get('form'))
+      setSelectedForm(formIndex > 0 ? formIndex : 0)
 
       // Load previous/next Pokemon navigation
       const generation = searchParams.get('gen')

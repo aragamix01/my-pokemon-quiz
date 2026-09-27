@@ -12,6 +12,7 @@ import PokemonArt from '@/components/learn/PokemonArt'
 import { TypePanel } from '@/components/ui/TypePanel'
 import { cn } from '@/lib/cn'
 import { X } from '@phosphor-icons/react'
+import { getTypeForms, formDisplayName } from '@/lib/pokemon-forms'
 
 // Order used in the games' type lists. Stellar is left out: it is a Terastal-only
 // attack type, not a type a Pokemon has, so it only confused the chart.
@@ -60,22 +61,33 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   )
 }
 
-/** Small picture + name chip that opens the Pokemon's page */
-function PokemonChip({ pokemon, highlight }: { pokemon: PokemonMetadata; highlight?: boolean }) {
+/** A Pokemon or one of its alternate forms (Zacian Crowned, Alolan Raichu...) */
+interface TypedEntry {
+  key: string
+  artId: number
+  speciesId: number
+  name: string
+  title: string
+  types: string[]
+  href: string
+}
+
+/** Small picture + name chip that opens the Pokemon's page (on the form, for alternate forms) */
+function PokemonChip({ entry, highlight }: { entry: TypedEntry; highlight?: boolean }) {
   return (
     <Link
-      href={`/pokemon/${pokemon.id}`}
+      href={entry.href}
       className="inline-flex items-center gap-1.5 rounded-full pr-3 max-w-full"
       style={{
         background: 'var(--color-bg)',
         border: `1px solid ${highlight ? 'var(--color-accent)' : 'var(--color-neutral-800)'}`,
       }}
-      title={bothNames(pokemon)}
+      title={entry.title}
     >
-      <TypePanel type={pokemon.types[0]} watermark={false} className="w-8 h-8 rounded-full p-0.5 flex-shrink-0">
-        <PokemonArt id={pokemon.id} alt="" lazy className="w-full h-full" />
+      <TypePanel type={entry.types[0]} watermark={false} className="w-8 h-8 rounded-full p-0.5 flex-shrink-0">
+        <PokemonArt id={entry.artId} alt="" lazy className="w-full h-full" />
       </TypePanel>
-      <span className="text-xs truncate" style={{ color: 'var(--color-text)' }}>{formatPokemonName(pokemon.species_name)}</span>
+      <span className="text-xs truncate" style={{ color: 'var(--color-text)' }}>{entry.name}</span>
     </Link>
   )
 }
@@ -83,6 +95,33 @@ function PokemonChip({ pokemon, highlight }: { pokemon: PokemonMetadata; highlig
 /** Pick one or two types (or a Pokemon) and see how much damage every attack type does, and which Pokemon have those types */
 function MatchupChecker() {
   const allPokemon = useMemo(() => pokemonMetadataService.getAllMetadata(), [])
+  // Every Pokemon plus its alternate forms, each with its own types
+  const entries = useMemo(() => {
+    const byId: Record<number, PokemonMetadata> = {}
+    allPokemon.forEach(p => { byId[p.id] = p })
+    const list: TypedEntry[] = allPokemon.map(p => ({
+      key: String(p.id),
+      artId: p.id,
+      speciesId: p.id,
+      name: formatPokemonName(p.species_name),
+      title: bothNames(p),
+      types: p.types,
+      href: `/pokemon/${p.id}`,
+    }))
+    getTypeForms(byId).forEach(form => {
+      const name = formDisplayName(form, byId[form.speciesId])
+      list.push({
+        key: `form-${form.id}`,
+        artId: form.id,
+        speciesId: form.speciesId,
+        name,
+        title: name,
+        types: form.types,
+        href: `/pokemon/${form.speciesId}?form=${form.id}`,
+      })
+    })
+    return list
+  }, [allPokemon])
   const [types, setTypes] = useState<PokemonTypeName[]>([])
   const [pokemon, setPokemon] = useState<PokemonMetadata | null>(null)
   const [showAll, setShowAll] = useState(false)
@@ -112,15 +151,16 @@ function MatchupChecker() {
     attackers: types.length ? TYPE_ORDER.filter(a => calculateDualTypeMultiplier(a, types) === g.multiplier) : [],
   }))
 
-  // One type: every Pokemon that has it (single-type ones first). Two types: Pokemon with both
+  // One type: every Pokemon and form that has it (single-type ones first). Two types: those with both.
+  // Forms sit right after their base Pokemon's national number
   const matching = useMemo(() => {
     if (types.length === 0) return []
-    const has = (p: PokemonMetadata) => types.every(t => p.types.indexOf(t) !== -1)
-    const list = allPokemon.filter(has)
+    const has = (e: TypedEntry) => types.every(t => e.types.indexOf(t) !== -1)
+    const list = entries.filter(has).sort((a, b) => a.speciesId - b.speciesId || a.artId - b.artId)
     return types.length === 1
-      ? list.filter(p => p.types.length === 1).concat(list.filter(p => p.types.length > 1))
+      ? list.filter(e => e.types.length === 1).concat(list.filter(e => e.types.length > 1))
       : list
-  }, [types, allPokemon])
+  }, [types, entries])
   const shown = showAll ? matching : matching.slice(0, POKEMON_PREVIEW)
 
   return (
@@ -196,7 +236,7 @@ function MatchupChecker() {
             ) : (
               <>
                 <div className="flex flex-wrap gap-2">
-                  {shown.map(p => <PokemonChip key={p.id} pokemon={p} highlight={pokemon?.id === p.id} />)}
+                  {shown.map(e => <PokemonChip key={e.key} entry={e} highlight={pokemon?.id === e.artId} />)}
                 </div>
                 {matching.length > POKEMON_PREVIEW && (
                   <button type="button" className="btn btn-ghost mt-2" onClick={() => setShowAll(!showAll)}>
