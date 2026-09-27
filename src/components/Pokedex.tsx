@@ -15,12 +15,16 @@ import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import type { PokemonMetadata } from '@/types/pokemon-metadata'
 import { TypePill } from '@/components/ui/TypePill'
 import { Button } from '@/components/ui/Button'
-import { Sparkle, MagnifyingGlass, Shuffle } from '@phosphor-icons/react'
+import { Sparkle, MagnifyingGlass, Shuffle, SquaresFour, Rows } from '@phosphor-icons/react'
+import { TypeIcon } from '@/components/ui/TypeIcon'
+import { PokemonTypeName } from '@/lib/type-effectiveness'
 import { japaneseName } from '@/lib/pokemon-names'
 import { getPokedex, regionalNumber, pokedexOptionLabel } from '@/lib/regional-pokedexes'
 import PokedexSelect from './PokedexSelect'
 import { LearnState, loadLearnState, isMastered } from '@/lib/learn-progress'
 
+
+const COMPACT_KEY = 'pokedex-compact-view'
 
 export default function Pokedex() {
   const router = useRouter()
@@ -42,6 +46,23 @@ export default function Pokedex() {
   useEffect(() => {
     setLearnState(loadLearnState())
   }, [])
+  // Compact list view (small row cards), remembered in this browser
+  const [compactView, setCompactView] = useState(false)
+  useEffect(() => {
+    try {
+      setCompactView(localStorage.getItem(COMPACT_KEY) === 'true')
+    } catch {
+      // keep the default card view
+    }
+  }, [])
+  const toggleCompactView = (compact: boolean) => {
+    setCompactView(compact)
+    try {
+      localStorage.setItem(COMPACT_KEY, String(compact))
+    } catch {
+      // choice lasts for this visit only
+    }
+  }
   const metadataById = useMemo(() => {
     const map: Record<number, PokemonMetadata> = {}
     pokemonMetadataService.getAllMetadata().forEach(m => { map[m.id] = m })
@@ -740,6 +761,56 @@ export default function Pokedex() {
     const learnCard = learnState?.cards[pokemonData.id]
     const mastered = isMastered(learnCard)
     const dexNumber = regionalDex ? regionalNumber(regionalDex, pokemonData.id) : undefined
+
+    if (compactView) {
+      return (
+        <div
+          key={pokemonData.id}
+          className="nx-pokerow"
+          onClick={() => handlePokemonClick(pokemonData.id)}
+          data-pokemon-id={pokemonData.id}
+        >
+          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full flex-shrink-0 relative overflow-hidden" style={{ background: 'var(--color-bg)' }}>
+            <PokemonImage
+              pokemon={pokemonData}
+              shiny={showShiny}
+              fill
+              className="object-contain p-0.5"
+              key={`pokemon-row-image-${pokemonData.id}-${showShiny}`}
+            />
+          </div>
+          <div className="flex-1 min-w-0 sm:text-center">
+            <div className="text-[11px] sm:text-sm font-medium capitalize truncate" style={{ color: 'var(--color-text)' }}>
+              {pokemonData.name}
+            </div>
+            <div className="flex items-center sm:justify-center gap-1 mt-0.5">
+              {pokemonData.types.map((typeInfo, typeIndex) => (
+                <TypeIcon key={typeIndex} type={typeInfo.type.name as PokemonTypeName} size={16} />
+              ))}
+              {/* On phones the number sits here so the name gets the full width */}
+              <span className="sm:hidden ml-auto text-[10px] tabular-nums" style={{ color: 'var(--color-neutral-400)' }}>
+                #{dexNumber ?? pokemonData.id}
+                {learnCard && <span style={{ color: mastered ? '#f5c542' : 'var(--color-accent-500)' }}> {mastered ? '★' : '●'}</span>}
+              </span>
+            </div>
+          </div>
+          <div className="hidden sm:flex flex-col items-end gap-0.5 flex-shrink-0">
+            <span
+              className="text-[10px] sm:text-[11px] tabular-nums rounded px-1.5 py-0.5"
+              style={{ background: 'var(--color-bg)', color: 'var(--color-neutral-300)' }}
+              title={dexNumber !== undefined ? `National #${pokemonData.id}` : undefined}
+            >
+              #{dexNumber ?? pokemonData.id}
+            </span>
+            {learnCard && (
+              <span className="text-[10px] leading-none" style={{ color: mastered ? '#f5c542' : 'var(--color-accent-500)' }}>
+                {mastered ? '★' : '●'}
+              </span>
+            )}
+          </div>
+        </div>
+      )
+    }
     
     return (
       <div
@@ -794,7 +865,7 @@ export default function Pokedex() {
         </div>
       </div>
     )
-  }, [showShiny, handlePokemonClick, metadataById, learnState, regionalDex])
+  }, [showShiny, handlePokemonClick, metadataById, learnState, regionalDex, compactView])
 
   if (!showPokedex) {
     return (
@@ -996,7 +1067,27 @@ export default function Pokedex() {
         </div>
       ) : (
         <div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-3 md:gap-4">
+          <div className="flex justify-end gap-1.5 mb-2">
+            <button
+              onClick={() => toggleCompactView(false)}
+              className={`nx-tab ${!compactView ? 'nx-tab-active' : ''}`}
+              title="Card view"
+              aria-pressed={!compactView}
+            >
+              <SquaresFour size={16} /> Cards
+            </button>
+            <button
+              onClick={() => toggleCompactView(true)}
+              className={`nx-tab ${compactView ? 'nx-tab-active' : ''}`}
+              title="Compact list view"
+              aria-pressed={compactView}
+            >
+              <Rows size={16} /> Compact
+            </button>
+          </div>
+          <div className={compactView
+            ? 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1.5 sm:gap-2'
+            : 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-3 md:gap-4'}>
             {(useAISearch ? aiFilteredPokemon : pokemon).map((p, index) => renderPokemonCard(p, index))}
           </div>
           
