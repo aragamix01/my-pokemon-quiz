@@ -3,6 +3,7 @@
 import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import { PokemonMetadata } from '@/types/pokemon-metadata'
 import { getPokedex, DEX_SCOPE_PREFIX } from '@/lib/regional-pokedexes'
+import { popularIds, POPULAR_SCOPE_PREFIX } from '@/lib/popular-pokemon'
 
 export function shuffle<T>(array: T[]): T[] {
   const out = array.slice()
@@ -17,13 +18,14 @@ export interface GameScope {
   generation: number | null
   label: string
   pool: PokemonMetadata[]
-  /** Set for a game Pokedex scope: regional number of each species in the pool */
+  /** Set for a game Pokedex scope (regional number) or a popular scope (rank) of each species in the pool */
   numbers?: Record<number, number>
 }
 
 /**
- * Resolve a route param to the Pokemon it covers: "all", "1".."9", or a game
- * Pokedex like "dex-paldea" (pool in that game's order)
+ * Resolve a route param to the Pokemon it covers: "all", "1".."9", a game
+ * Pokedex like "dex-paldea" (pool in that game's order), or "popular-50" / "-100" / "-200"
+ * (most popular first, numbered by rank)
  */
 export function getScope(genParam: string): GameScope {
   if (genParam.indexOf(DEX_SCOPE_PREFIX) === 0) {
@@ -39,6 +41,18 @@ export function getScope(genParam: string): GameScope {
       })
       return { generation: null, label: `${dex.label} Pokedex`, pool, numbers }
     }
+  }
+  if (genParam.indexOf(POPULAR_SCOPE_PREFIX) === 0) {
+    const count = parseInt(genParam.slice(POPULAR_SCOPE_PREFIX.length), 10)
+    const numbers: Record<number, number> = {}
+    const pool: PokemonMetadata[] = []
+    popularIds(count).forEach((id, i) => {
+      const meta = pokemonMetadataService.getMetadataById(id)
+      if (!meta) return
+      numbers[id] = i + 1
+      pool.push(meta)
+    })
+    return { generation: null, label: `Top ${count} Popular`, pool, numbers }
   }
   const generation = genParam === 'all' ? null : parseInt(genParam, 10)
   return {

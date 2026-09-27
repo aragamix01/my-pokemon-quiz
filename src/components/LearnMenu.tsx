@@ -12,6 +12,8 @@ import { dailyStreak, getDailyResult, DAILY_PUZZLES } from '@/lib/daily'
 import { getScope } from '@/lib/game-utils'
 import { DEX_SCOPE_PREFIX } from '@/lib/regional-pokedexes'
 import PokedexSelect from '@/components/PokedexSelect'
+import { POPULAR_SCOPE_PREFIX, POPULAR_TIERS } from '@/lib/popular-pokemon'
+import { cn } from '@/lib/cn'
 
 const GEN_KEY = 'learn-generation'
 
@@ -64,7 +66,7 @@ const GAMES = [
 
 export default function LearnMenu() {
   const router = useRouter()
-  // Scope slug shared by every game: "all", "1".."9", or a game Pokedex like "dex-paldea"
+  // Scope slug shared by every game: "all", "1".."9", a game Pokedex like "dex-paldea", or "popular-50"
   const [slug, setSlug] = useState('1')
   const [learn, setLearn] = useState<LearnState | null>(null)
 
@@ -80,7 +82,8 @@ export default function LearnMenu() {
   }
 
   const isDex = slug.indexOf(DEX_SCOPE_PREFIX) === 0
-  const generation: GenerationNumber | null | undefined = isDex ? undefined : slug === 'all' ? null : (parseInt(slug, 10) as GenerationNumber)
+  const isPopular = slug.indexOf(POPULAR_SCOPE_PREFIX) === 0
+  const generation: GenerationNumber | null | undefined = isDex || isPopular ? undefined : slug === 'all' ? null : (parseInt(slug, 10) as GenerationNumber)
   const scope = useMemo(() => getScope(slug), [slug])
   const scopeIds = scope.pool.map(p => p.id)
   const progress = learn ? scopeStats(learn, scopeIds) : null
@@ -101,7 +104,7 @@ export default function LearnMenu() {
           Learn Pokemon names
         </h2>
         <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-          Pick a generation, or the Pokedex of the game you're playing. Progress is saved in this browser.
+          Pick a generation, the most popular Pokemon, or the Pokedex of the game you&apos;re playing. Progress is saved in this browser.
         </p>
       </div>
       <GenerationSelector
@@ -111,10 +114,25 @@ export default function LearnMenu() {
         selectedGeneration={generation as GenerationNumber | null}
         minimized
       />
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Popular, all gens:</span>
+        {POPULAR_TIERS.map(n => (
+          <button
+            key={n}
+            type="button"
+            className={cn('nx-tab', slug === POPULAR_SCOPE_PREFIX + n && 'nx-tab-active')}
+            onClick={() => selectSlug(POPULAR_SCOPE_PREFIX + n)}
+          >
+            Top {n}
+          </button>
+        ))}
+      </div>
       <PokedexSelect value={isDex ? slug.slice(DEX_SCOPE_PREFIX.length) : ''} onChange={name => selectSlug(DEX_SCOPE_PREFIX + name)} />
-      {isDex && (
+      {(isDex || isPopular) && (
         <p className="text-center text-sm -mt-2" style={{ color: 'var(--color-accent-400)' }}>
-          Studying the {scope.label}: {scope.pool.length} Pokemon, in the game&apos;s own order
+          {isDex
+            ? <>Studying the {scope.label}: {scope.pool.length} Pokemon, in the game&apos;s own order</>
+            : <>Studying the {scope.pool.length} most popular Pokemon from every generation, most popular first</>}
         </p>
       )}
 
