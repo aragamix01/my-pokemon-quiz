@@ -540,3 +540,46 @@ body {
   border-radius: var(--radius-md); padding: 6px; text-align: center;
 }
 .flip-card-back { transform: rotateY(180deg); }
+
+/* Holographic foil card (HoloCard): tilt, rainbow sheen and glare that follow the pointer */
+.nx-holo-wrap { perspective: 800px; }
+.nx-holo {
+  --mx: 50%; --my: 50%; --rx: 0deg; --ry: 0deg; --pos: 50% 50%;
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  will-change: transform;
+  touch-action: pan-y;
+}
+.nx-holo.active { transition: transform 0.08s linear, box-shadow 0.3s ease; }
+.nx-holo-foil, .nx-holo-glare {
+  position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+}
+.nx-holo-foil {
+  background:
+    repeating-linear-gradient(115deg,
+      #ff5f6d 0%, #ffc371 6%, #f8ff6b 12%, #6bffb8 18%, #5fc8ff 24%, #b36bff 30%, #ff5f6d 36%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.12) 0 2px, transparent 2px 6px);
+  background-size: 300% 300%, 100% 100%;
+  background-position: var(--pos), 0 0;
+  mix-blend-mode: color-dodge;
+  opacity: 0.22;
+  filter: saturate(1.2);
+  animation: nx-holo-drift 7s ease-in-out infinite alternate;
+  transition: opacity 0.3s ease;
+}
+.nx-holo.active .nx-holo-foil { animation: none; opacity: 0.45; }
+.nx-holo-glare {
+  background: radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.12) 30%, transparent 60%);
+  mix-blend-mode: overlay;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.nx-holo.active .nx-holo-glare { opacity: 1; }
+@keyframes nx-holo-drift {
+  from { background-position: 0% 0%, 0 0; }
+  to { background-position: 100% 100%, 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nx-holo, .nx-holo.active { transform: none; transition: none; }
+  .nx-holo-foil { animation: none; }
+}

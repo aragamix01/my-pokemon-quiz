@@ -76,6 +76,7 @@ Ultra-high-performance Pokemon directory with cross-generation capabilities:
 
 ## Pokemon Detail Pages
 Comprehensive individual Pokemon information pages featuring:
+- **Holo Foil**: The artwork panel is a `HoloCard` (`src/components/ui/HoloCard.tsx`, `.nx-holo` in globals.css): it tilts toward the pointer or finger with a rainbow foil sheen and glare, drifts slowly when idle, and stays flat with reduced motion
 - **Type Color**: Artwork and types sit on a panel in the first type's card color with a Pokeball watermark (same palette as Pokedex cards); the number badge and the card's top edge use it too. The right column has `min-w-0` so wide rows scroll (`.nx-scroll-x`, thin dark scrollbar) instead of widening the page
 - **Header**: Number, English name, Japanese romaji name and category ("Charizard / Lizardon · Flame Pokémon", from species `genera`)
 - **Pokedex Entries**: Every English entry by game, identical texts grouped (`src/components/PokedexEntries.tsx`), newest selected by default

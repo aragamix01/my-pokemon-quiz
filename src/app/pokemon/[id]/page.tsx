@@ -16,6 +16,7 @@ import PokemonTypeEffectiveness from '@/components/PokemonTypeEffectiveness'
 import PokedexEntries from '@/components/PokedexEntries'
 import StatRanks from '@/components/StatRanks'
 import GamePokedexes from '@/components/GamePokedexes'
+import { HoloCard } from '@/components/ui/HoloCard'
 import { PokeballMark } from '@/components/ui/PokeballMark'
 import { getTypeCardColor } from '@/lib/type-card-colors'
 import { Button } from '@/components/ui/Button'
@@ -454,9 +455,9 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
             <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
               {/* Left Side - Sprite, Types, Controls */}
               <div className="flex-shrink-0 lg:w-48 w-full">
-                {/* Artwork and types on a panel in the first type's color, like the Pokedex cards */}
-                <div
-                  className="relative overflow-hidden rounded-xl mb-4 px-3 pt-3 pb-3"
+                {/* Artwork and types on a foil panel in the first type's color, like a holo trading card */}
+                <HoloCard
+                  className="rounded-xl mb-4 px-3 pt-3 pb-3"
                   style={{ background: getTypeColorForPage(), boxShadow: `0 8px 20px -8px ${getTypeColorForPage()}` }}
                 >
                   <PokeballMark
@@ -479,7 +480,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                       </span>
                     ))}
                   </div>
-                </div>
+                </HoloCard>
 
                 {/* Shiny and Cries buttons */}
                 <div className="flex gap-2 justify-center mb-4">
