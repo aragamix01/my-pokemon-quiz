@@ -1,6 +1,6 @@
 'use client'
 
-import { HTMLAttributes, useRef, PointerEvent } from 'react'
+import { HTMLAttributes, useRef, useEffect, PointerEvent } from 'react'
 import { cn } from '@/lib/cn'
 
 interface HoloCardProps extends HTMLAttributes<HTMLDivElement> {
@@ -9,22 +9,28 @@ interface HoloCardProps extends HTMLAttributes<HTMLDivElement> {
    * only moves while the pointer is over the card
    */
   still?: boolean
+  /**
+   * Milliseconds between automatic shines: while nobody touches or hovers the card,
+   * a light sweeps across it (tilt, foil, sparkles and glare) this often. Off when unset
+   */
+  autoShine?: number
 }
+
+const VARS = ['--mx', '--my', '--rx', '--ry', '--pos', '--sx', '--sy']
+const SWEEP_MS = 1400
 
 /**
  * Holographic foil like a shiny trading card: a rainbow sheen, star sparkles and a light glare
  * that follow the pointer (or finger) while the card tilts toward it. Styles: .nx-holo in globals.css
  */
-export function HoloCard({ still = false, className, children, onPointerMove, onPointerLeave, ...rest }: HoloCardProps) {
+export function HoloCard({ still = false, autoShine, className, children, onPointerMove, onPointerLeave, ...rest }: HoloCardProps) {
   const ref = useRef<HTMLDivElement>(null)
+  const touched = useRef(false)
 
-  const move = (e: PointerEvent<HTMLDivElement>) => {
-    onPointerMove?.(e)
+  /** Light the card as if the pointer were at (x, y), both 0..1 */
+  const shineAt = (x: number, y: number) => {
     const el = ref.current
     if (!el) return
-    const rect = el.getBoundingClientRect()
-    const x = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1)
-    const y = Math.min(Math.max((e.clientY - rect.top) / rect.height, 0), 1)
     el.style.setProperty('--mx', `${x * 100}%`)
     el.style.setProperty('--my', `${y * 100}%`)
     el.style.setProperty('--rx', `${(0.5 - y) * 14}deg`)
@@ -36,13 +42,55 @@ export function HoloCard({ still = false, className, children, onPointerMove, on
     el.classList.add('active')
   }
 
-  const leave = (e?: PointerEvent<HTMLDivElement>) => {
-    if (e) onPointerLeave?.(e)
+  const reset = () => {
     const el = ref.current
     if (!el) return
     el.classList.remove('active')
-    ;['--mx', '--my', '--rx', '--ry', '--pos', '--sx', '--sy'].forEach(v => el.style.removeProperty(v))
+    VARS.forEach(v => el.style.removeProperty(v))
   }
+
+  const move = (e: PointerEvent<HTMLDivElement>) => {
+    onPointerMove?.(e)
+    touched.current = true
+    const rect = e.currentTarget.getBoundingClientRect()
+    shineAt(
+      Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1),
+      Math.min(Math.max((e.clientY - rect.top) / rect.height, 0), 1),
+    )
+  }
+
+  const leave = (e?: PointerEvent<HTMLDivElement>) => {
+    if (e) onPointerLeave?.(e)
+    touched.current = false
+    reset()
+  }
+
+  // Automatic shine: a light sweeps from top left to bottom right, then the card settles
+  useEffect(() => {
+    if (!autoShine || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let frame = 0
+    const sweep = () => {
+      if (touched.current || document.hidden) return
+      const start = performance.now()
+      const step = (now: number) => {
+        if (touched.current) return
+        const t = (now - start) / SWEEP_MS
+        if (t >= 1) {
+          reset()
+          return
+        }
+        const ease = 0.5 - Math.cos(t * Math.PI) / 2
+        shineAt(0.1 + ease * 0.8, 0.2 + ease * 0.6)
+        frame = requestAnimationFrame(step)
+      }
+      frame = requestAnimationFrame(step)
+    }
+    const timer = setInterval(sweep, autoShine)
+    return () => {
+      clearInterval(timer)
+      cancelAnimationFrame(frame)
+    }
+  }, [autoShine]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div
