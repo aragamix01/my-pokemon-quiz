@@ -12,7 +12,7 @@ interface HoloCardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * Holographic foil like a shiny trading card: a rainbow sheen and a light glare
+ * Holographic foil like a shiny trading card: a rainbow sheen, star sparkles and a light glare
  * that follow the pointer (or finger) while the card tilts toward it. Styles: .nx-holo in globals.css
  */
 export function HoloCard({ still = false, className, children, onPointerMove, onPointerLeave, ...rest }: HoloCardProps) {
@@ -30,6 +30,9 @@ export function HoloCard({ still = false, className, children, onPointerMove, on
     el.style.setProperty('--rx', `${(0.5 - y) * 14}deg`)
     el.style.setProperty('--ry', `${(x - 0.5) * 18}deg`)
     el.style.setProperty('--pos', `${x * 100}% ${y * 100}%`)
+    // Sparkle layers shift against the tilt, so the stars glitter as the card moves
+    el.style.setProperty('--sx', `${(x - 0.5) * 40}px`)
+    el.style.setProperty('--sy', `${(y - 0.5) * 40}px`)
     el.classList.add('active')
   }
 
@@ -38,7 +41,7 @@ export function HoloCard({ still = false, className, children, onPointerMove, on
     const el = ref.current
     if (!el) return
     el.classList.remove('active')
-    ;['--mx', '--my', '--rx', '--ry', '--pos'].forEach(v => el.style.removeProperty(v))
+    ;['--mx', '--my', '--rx', '--ry', '--pos', '--sx', '--sy'].forEach(v => el.style.removeProperty(v))
   }
 
   return (
@@ -52,6 +55,7 @@ export function HoloCard({ still = false, className, children, onPointerMove, on
     >
       {children}
       <div className="nx-holo-foil" aria-hidden />
+      <div className="nx-holo-sparkle" aria-hidden />
       <div className="nx-holo-glare" aria-hidden />
     </div>
   )
