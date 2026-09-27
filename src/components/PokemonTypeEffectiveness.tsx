@@ -26,7 +26,7 @@ export default function PokemonTypeEffectiveness({ types }: PokemonTypeEffective
   // multiplier in the panel lines up in a single column.
   const TypeRow = ({ type, multiplier }: { type: PokemonTypeName; multiplier: EffectivenessMultiplier }) => (
     <div className="flex items-center justify-between gap-2 py-0.5">
-      <TypePill fixed type={type} />
+      <TypePill type={type} />
       <span className="text-xs tabular-nums flex-shrink-0" style={{ color: 'var(--text-muted)' }}>
         {multiplier === 0 ? '0×' : getMultiplierLabel(multiplier)}
       </span>

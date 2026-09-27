@@ -6,13 +6,13 @@ interface TypePillProps {
   className?: string
   onClick?: () => void
   selected?: boolean
-  /** Same width for every type (fits the longest name), for charts where pills line up */
+  /** Same width for every type (fits the longest name) so pills line up everywhere; pass false to size by text */
   fixed?: boolean
 }
 
 const FIXED_WIDTH = 92
 
-export function TypePill({ type, className, onClick, selected, fixed }: TypePillProps) {
+export function TypePill({ type, className, onClick, selected, fixed = true }: TypePillProps) {
   const color = getTypeColor(type)
   return (
     <span

@@ -471,7 +471,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                   </div>
                   <div className="relative flex gap-2 justify-center flex-wrap mt-2">
                     {getCurrentForm().types.map((typeInfo, index) => (
-                      <span key={index} className="nx-typecard-pill nx-typecard-text" style={{ fontSize: 11, padding: '2px 12px' }}>
+                      <span key={index} className="nx-typecard-pill lg nx-typecard-text">
                         {typeInfo.type.name}
                       </span>
                     ))}
