@@ -62,7 +62,8 @@ Ultra-high-performance Pokemon directory with cross-generation capabilities:
 - **Evolution & Form Filters**: Evolution stage (first / middle / fully evolved / does not evolve, from `getEvolutionStages()` in `src/lib/evolution-chains.ts`) and special forms (Mega / regional / Gigantamax, from metadata variants via `hasFormKind()`)
 - **Learning Progress**: Cards show ★ (mastered) or ● (learning) from Flashcards progress, with a "Learning progress" filter (not met / learning / mastered)
 - **Random Button**: Opens a random Pokemon from the current filtered list
-- **Compact View**: "Cards / Compact" toggle above the grid switches to small row cards (round sprite, name, round type icons via `src/components/ui/TypeIcon.tsx`, number; `.nx-pokerow` in globals.css), 2-4 per row, remembered in localStorage `pokedex-compact-view`
+- **Type-Colored Cards**: Cards and compact rows use the first type's soft color (`getTypeCardColor()` in `src/lib/type-card-colors.ts`, separate from the saturated badge colors), white text, a faint Pokeball watermark (`src/components/ui/PokeballMark.tsx`) and a big faded number. Card style `.nx-typecard` (name, Japanese name and type pills on the left, artwork bottom right); sprites use `lighten={false}` because the `lighten` blend mode washes them out on colored backgrounds
+- **Compact View**: "Cards / Compact" toggle above the grid switches to small type-colored row cards (round sprite, name, round type icons via `src/components/ui/TypeIcon.tsx`, number; `.nx-pokerow` in globals.css), 2-4 per row, remembered in localStorage `pokedex-compact-view`
 - **Browse by Game**: Pick a game's own Pokedex (Paldea, Galar, Kitakami, Lumiose...) instead of a generation; list uses that game's order and numbers (`regionalDex` in `usePokemonFilter`, a mode rather than a filter so Reset keeps it)
 
 ## Game (Regional) Pokedexes

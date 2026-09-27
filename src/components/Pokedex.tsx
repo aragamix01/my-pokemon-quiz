@@ -13,10 +13,11 @@ import AISearchBar from './AISearchBar'
 import { usePokemonFilter } from '@/hooks/usePokemonFilter'
 import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import type { PokemonMetadata } from '@/types/pokemon-metadata'
-import { TypePill } from '@/components/ui/TypePill'
 import { Button } from '@/components/ui/Button'
 import { Sparkle, MagnifyingGlass, Shuffle, SquaresFour, Rows } from '@phosphor-icons/react'
 import { TypeIcon } from '@/components/ui/TypeIcon'
+import { PokeballMark } from '@/components/ui/PokeballMark'
+import { getTypeCardColor } from '@/lib/type-card-colors'
 import { PokemonTypeName } from '@/lib/type-effectiveness'
 import { japaneseName } from '@/lib/pokemon-names'
 import { getPokedex, regionalNumber, pokedexOptionLabel } from '@/lib/regional-pokedexes'
@@ -762,107 +763,128 @@ export default function Pokedex() {
     const mastered = isMastered(learnCard)
     const dexNumber = regionalDex ? regionalNumber(regionalDex, pokemonData.id) : undefined
 
+    // Card color comes from the first type, like the games' Pokedex screens
+    const cardColor = getTypeCardColor(pokemonData.types[0]?.type.name ?? 'normal')
+    const numberLabel = `#${(dexNumber ?? pokemonData.id).toString().padStart(3, '0')}`
+    const numberTitle = dexNumber !== undefined ? `National #${pokemonData.id}` : undefined
+    const learnBadge = learnCard && (
+      <span
+        title={mastered ? 'Mastered in Flashcards' : 'Learning in Flashcards'}
+        style={{ color: mastered ? '#ffe066' : '#fff' }}
+      >
+        {mastered ? '★' : '●'}
+      </span>
+    )
+
     if (compactView) {
       return (
         <div
           key={pokemonData.id}
-          className="nx-pokerow"
+          className="nx-pokerow typed"
+          style={{ background: cardColor }}
           onClick={() => handlePokemonClick(pokemonData.id)}
           data-pokemon-id={pokemonData.id}
         >
-          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full flex-shrink-0 relative overflow-hidden" style={{ background: 'var(--color-bg)' }}>
+          <PokeballMark className="absolute -right-3 -bottom-4 w-16 h-16 pointer-events-none" style={{ color: 'rgba(255,255,255,0.18)' }} />
+          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full flex-shrink-0 relative overflow-hidden" style={{ background: 'rgba(255,255,255,0.25)' }}>
             <PokemonImage
               pokemon={pokemonData}
               shiny={showShiny}
               fill
+              lighten={false}
               className="object-contain p-0.5"
               key={`pokemon-row-image-${pokemonData.id}-${showShiny}`}
             />
           </div>
-          <div className="flex-1 min-w-0 sm:text-center">
-            <div className="text-[11px] sm:text-sm font-medium capitalize truncate" style={{ color: 'var(--color-text)' }}>
+          <div className="flex-1 min-w-0 sm:text-center relative">
+            <div className="nx-typecard-text text-[11px] sm:text-sm font-semibold capitalize truncate">
               {pokemonData.name}
             </div>
             <div className="flex items-center sm:justify-center gap-1 mt-0.5">
               {pokemonData.types.map((typeInfo, typeIndex) => (
-                <TypeIcon key={typeIndex} type={typeInfo.type.name as PokemonTypeName} size={16} />
+                <TypeIcon key={typeIndex} type={typeInfo.type.name as PokemonTypeName} size={16} ring />
               ))}
               {/* On phones the number sits here so the name gets the full width */}
-              <span className="sm:hidden ml-auto text-[10px] tabular-nums" style={{ color: 'var(--color-neutral-400)' }}>
-                #{dexNumber ?? pokemonData.id}
-                {learnCard && <span style={{ color: mastered ? '#f5c542' : 'var(--color-accent-500)' }}> {mastered ? '★' : '●'}</span>}
+              <span className="nx-typecard-text sm:hidden ml-auto text-[10px] tabular-nums" title={numberTitle}>
+                #{dexNumber ?? pokemonData.id} {learnBadge}
               </span>
             </div>
           </div>
-          <div className="hidden sm:flex flex-col items-end gap-0.5 flex-shrink-0">
+          <div className="hidden sm:flex flex-col items-end gap-0.5 flex-shrink-0 relative">
             <span
-              className="text-[10px] sm:text-[11px] tabular-nums rounded px-1.5 py-0.5"
-              style={{ background: 'var(--color-bg)', color: 'var(--color-neutral-300)' }}
-              title={dexNumber !== undefined ? `National #${pokemonData.id}` : undefined}
+              className="text-[11px] tabular-nums rounded px-1.5 py-0.5"
+              style={{ background: 'rgba(255,255,255,0.28)', color: '#fff' }}
+              title={numberTitle}
             >
               #{dexNumber ?? pokemonData.id}
             </span>
-            {learnCard && (
-              <span className="text-[10px] leading-none" style={{ color: mastered ? '#f5c542' : 'var(--color-accent-500)' }}>
-                {mastered ? '★' : '●'}
-              </span>
-            )}
+            {learnBadge && <span className="text-[10px] leading-none">{learnBadge}</span>}
           </div>
         </div>
       )
     }
-    
+
     return (
       <div
         key={pokemonData.id}
-        className="nx-pokecard p-1 sm:p-4"
+        className="nx-typecard"
+        style={{ background: cardColor, boxShadow: `0 6px 16px -6px ${cardColor}` }}
         onClick={() => handlePokemonClick(pokemonData.id)}
         data-pokemon-id={pokemonData.id}
       >
-        {showShiny && (
-          <div className="text-right mb-0.5">
-            <Sparkle size={12} color={hasShiny ? 'var(--color-accent)' : 'var(--color-neutral-700)'} weight={hasShiny ? 'fill' : 'regular'} />
-          </div>
-        )}
+        {/* Faint Pokeball behind the artwork */}
+        <PokeballMark
+          className="absolute -right-5 -bottom-6 w-28 h-28 sm:w-36 sm:h-36 pointer-events-none"
+          style={{ color: 'rgba(255,255,255,0.2)' }}
+        />
 
-        <div className="flex justify-between items-center text-xs mb-1 sm:mb-2" style={{ color: 'var(--color-neutral-400)' }}>
-          <span title={dexNumber !== undefined ? `National #${pokemonData.id}` : undefined}>
-            #{(dexNumber ?? pokemonData.id).toString().padStart(3, '0')}
-          </span>
-          {learnCard && (
-            <span
-              title={mastered ? 'Mastered in Flashcards' : 'Learning in Flashcards'}
-              style={{ color: mastered ? '#f5c542' : 'var(--color-accent-500)' }}
-            >
-              {mastered ? '★' : '●'}
-            </span>
+        {/* Big faded number, top right */}
+        <span
+          className="absolute top-1.5 right-2.5 sm:top-2 sm:right-3.5 text-base sm:text-2xl font-extrabold tabular-nums pointer-events-none"
+          style={{ color: 'rgba(255,255,255,0.4)' }}
+          title={numberTitle}
+        >
+          {numberLabel}
+        </span>
+
+        {/* On phones the name may run over the faded number; bigger cards keep them apart */}
+        <div className="relative sm:pr-14 min-w-0">
+          <div className="nx-typecard-text text-sm sm:text-base font-bold capitalize truncate leading-tight">
+            {pokemonData.name}
+          </div>
+          {jaName && (
+            <div className="nx-typecard-text text-[10px] sm:text-[11px] truncate" style={{ color: 'rgba(255,255,255,0.85)' }}>
+              {jaName}
+            </div>
           )}
+          <div className="flex flex-col items-start gap-1 mt-1.5">
+            {pokemonData.types.map((typeInfo, typeIndex) => (
+              <span key={typeIndex} className="nx-typecard-pill">{typeInfo.type.name}</span>
+            ))}
+          </div>
         </div>
 
-        <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-1 sm:mb-2 relative">
+        {/* Artwork, bottom right over the Pokeball */}
+        <div className="absolute right-1 bottom-1 w-[72px] h-[72px] sm:w-[104px] sm:h-[104px]">
           <PokemonImage
             pokemon={pokemonData}
             shiny={showShiny}
             fill
-            className="object-contain"
+            lighten={false}
+            className="object-contain drop-shadow-md"
             key={`pokemon-image-${pokemonData.id}-${showShiny}-stable`} // Stable key to prevent resets
           />
         </div>
 
-        <div className="text-xs font-medium mb-1.5 sm:mb-2 capitalize" style={{ color: 'var(--color-text)' }}>
-          {pokemonData.name}
-        </div>
-        {jaName && (
-          <div className="text-[10px] -mt-1 mb-1.5 sm:mb-2 truncate" style={{ color: 'var(--text-muted)' }}>
-            {jaName}
+        {/* Bottom-left badges: flashcard progress and shiny availability */}
+        {(learnBadge || showShiny) && (
+          <div className="absolute left-2.5 bottom-2 sm:left-3.5 sm:bottom-2.5 flex items-center gap-1.5 text-xs nx-typecard-text">
+            {learnBadge}
+            {showShiny && (
+              <Sparkle size={13} color="#fff" weight={hasShiny ? 'fill' : 'regular'} style={{ opacity: hasShiny ? 1 : 0.5 }} />
+            )}
           </div>
         )}
-
-        <div className="flex gap-1 justify-center flex-wrap">
-          {pokemonData.types.map((typeInfo, typeIndex) => (
-            <TypePill key={typeIndex} type={typeInfo.type.name as any} />
-          ))}
-        </div>
       </div>
     )
   }, [showShiny, handlePokemonClick, metadataById, learnState, regionalDex, compactView])
@@ -1056,7 +1078,7 @@ export default function Pokedex() {
           </div>
         </div>
       ) : loading ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-3 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
           <PokemonSkeleton count={20} />
         </div>
       ) : (useAISearch ? aiFilteredPokemon.length === 0 : pokemon.length === 0) ? (
@@ -1087,7 +1109,7 @@ export default function Pokedex() {
           </div>
           <div className={compactView
             ? 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1.5 sm:gap-2'
-            : 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-3 md:gap-4'}>
+            : 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3'}>
             {(useAISearch ? aiFilteredPokemon : pokemon).map((p, index) => renderPokemonCard(p, index))}
           </div>
           
