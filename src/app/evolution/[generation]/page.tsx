@@ -9,6 +9,7 @@ import { formatPokemonName, japaneseName } from '@/lib/pokemon-names'
 import { PokemonMetadata } from '@/types/pokemon-metadata'
 import { Button } from '@/components/ui/Button'
 import PokemonArt from '@/components/learn/PokemonArt'
+import { getTypeCardColor } from '@/lib/type-card-colors'
 import { CaretRight, CheckCircle, XCircle } from '@phosphor-icons/react'
 
 interface EvolutionPageProps {
@@ -26,8 +27,8 @@ function NameLabel({ pokemon }: { pokemon: PokemonMetadata }) {
   const ja = japaneseName(pokemon)
   return (
     <div className="text-center leading-tight">
-      <div className="text-[12px] font-semibold" style={{ color: 'var(--color-text)' }}>{formatPokemonName(pokemon.species_name)}</div>
-      {ja && <div className="text-[10px]" style={{ color: 'var(--text-muted)' }}>{ja}</div>}
+      <div className="nx-typecard-text text-[12px] font-semibold" style={{ color: '#fff' }}>{formatPokemonName(pokemon.species_name)}</div>
+      {ja && <div className="nx-typecard-text text-[10px]" style={{ color: 'rgba(255,255,255,0.85)' }}>{ja}</div>}
     </div>
   )
 }
@@ -198,9 +199,12 @@ export default function EvolutionPage({ params }: EvolutionPageProps) {
                   onClick={() => unplace(i)}
                   disabled={!p || complete}
                   className="min-w-0 rounded-md p-2 flex flex-col items-center gap-1 aspect-[3/4]"
-                  style={{ border: `1px ${p ? 'solid' : 'dashed'} ${border}`, background: 'var(--color-bg)' }}
+                  style={{
+                    border: `${p && complete ? 2 : 1}px ${p ? 'solid' : 'dashed'} ${p && !complete ? 'transparent' : border}`,
+                    background: p ? getTypeCardColor(p.types[0]) : 'var(--color-bg)',
+                  }}
                 >
-                  <span className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-muted)' }}>Stage {i + 1}</span>
+                  <span className="text-[10px] uppercase tracking-wide" style={{ color: p ? 'rgba(255,255,255,0.85)' : 'var(--text-muted)' }}>Stage {i + 1}</span>
                   {p && (
                     <>
                       <div className="w-full flex-1 min-h-0"><PokemonArt id={p.id} alt={formatPokemonName(p.species_name)} className="w-full h-full" /></div>
@@ -223,7 +227,7 @@ export default function EvolutionPage({ params }: EvolutionPageProps) {
                 type="button"
                 onClick={() => place(p)}
                 className="nx-pokecard rounded-md p-2 flex flex-col items-center gap-1 w-[30%] max-w-[140px]"
-                style={{ background: 'var(--color-surface)', border: '1px solid var(--color-neutral-700)' }}
+                style={{ background: getTypeCardColor(p.types[0]), border: '1px solid transparent' }}
               >
                 <div className="w-full aspect-square"><PokemonArt id={p.id} alt={formatPokemonName(p.species_name)} className="w-full h-full" /></div>
                 <NameLabel pokemon={p} />

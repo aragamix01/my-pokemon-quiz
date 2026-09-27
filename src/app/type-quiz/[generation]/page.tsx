@@ -9,6 +9,7 @@ import { PokemonTypeName } from '@/lib/type-effectiveness'
 import { Button } from '@/components/ui/Button'
 import { TypePill } from '@/components/ui/TypePill'
 import PokemonArt from '@/components/learn/PokemonArt'
+import { TypePanel } from '@/components/ui/TypePanel'
 import { CheckCircle, XCircle } from '@phosphor-icons/react'
 
 interface TypeQuizPageProps {
@@ -108,9 +109,10 @@ export default function TypeQuizPage({ params }: TypeQuizPageProps) {
         <div className="card-kicker self-start">Type Quiz</div>
 
         {question.pokemon && (
-          <div className="w-32 h-32 lighten">
-            <PokemonArt id={question.pokemon.id} alt={formatPokemonName(question.pokemon.species_name)} className="w-full h-full" />
-          </div>
+          // Questions are about types, so the color only appears after answering
+          <TypePanel type={question.pokemon.types[0]} revealed={picked !== null} className="w-32 h-32 p-2">
+            <PokemonArt id={question.pokemon.id} alt={formatPokemonName(question.pokemon.species_name)} className="w-full h-full drop-shadow-md" />
+          </TypePanel>
         )}
 
         {/* Attacking type -> defending types, when the question has them */}

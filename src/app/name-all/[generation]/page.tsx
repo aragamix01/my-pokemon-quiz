@@ -7,6 +7,7 @@ import { formatPokemonName, japaneseName, bothNames, normalizeName } from '@/lib
 import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import PokemonArt from '@/components/learn/PokemonArt'
+import { getTypeCardColor } from '@/lib/type-card-colors'
 import { Timer } from '@phosphor-icons/react'
 
 interface NameAllPageProps {
@@ -204,7 +205,8 @@ export default function NameAllPage({ params }: NameAllPageProps) {
                 key={p.id}
                 className="rounded-md flex flex-col items-center p-1 min-w-0"
                 style={{
-                  background: 'var(--color-bg)',
+                  // Named Pokemon light up in their type color
+                  background: isFound ? getTypeCardColor(p.types[0]) : 'var(--color-bg)',
                   border: `1px solid ${!playing ? (isFound ? 'var(--success-gradient)' : 'var(--error-gradient)') : isFound ? 'var(--color-accent-700)' : 'transparent'}`,
                 }}
               >
@@ -217,7 +219,7 @@ export default function NameAllPage({ params }: NameAllPageProps) {
                     </div>
                   )}
                 </div>
-                <div className="text-[9px] w-full text-center truncate" style={{ color: revealed ? 'var(--color-text)' : 'transparent' }}>
+                <div className="text-[9px] w-full text-center truncate" style={{ color: isFound ? '#fff' : revealed ? 'var(--color-text)' : 'transparent' }}>
                   {revealed ? formatPokemonName(p.species_name) : '-'}
                 </div>
               </div>

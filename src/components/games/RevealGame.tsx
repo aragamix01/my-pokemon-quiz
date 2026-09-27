@@ -11,6 +11,7 @@ import { PokemonMetadata } from '@/types/pokemon-metadata'
 import { Button } from '@/components/ui/Button'
 import PixelatedArt from '@/components/learn/PixelatedArt'
 import DailyFooter from './DailyFooter'
+import { TypePanel } from '@/components/ui/TypePanel'
 
 interface RevealGameProps {
   genParam: string
@@ -166,9 +167,9 @@ export default function RevealGame({ genParam, daily = false }: RevealGameProps)
         <div className="card-kicker">{daily ? 'Daily Pixel Reveal' : 'Pixel Reveal'}</div>
         {daily && (
           <>
-            <div className="rounded-md p-2" style={{ background: 'var(--color-bg)' }}>
+            <TypePanel type={target.types[0]} className="p-2">
               <PixelatedArt id={target.id} blocks={0} size={160} />
-            </div>
+            </TypePanel>
             <h2 className="text-xl" style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, color: 'var(--color-text)' }}>
               {bothNames(target)}
             </h2>
@@ -215,9 +216,10 @@ export default function RevealGame({ genParam, daily = false }: RevealGameProps)
           )}
         </div>
 
-        <div className="rounded-md p-2" style={{ background: 'var(--color-bg)' }}>
+        {/* Dark while guessing (the color would hint the type), colored once revealed */}
+        <TypePanel type={target.types[0]} revealed={revealed} className="p-2">
           <PixelatedArt id={target.id} blocks={blocks} size={220} />
-        </div>
+        </TypePanel>
 
         {/* Blur level indicator */}
         <div className="flex gap-1">

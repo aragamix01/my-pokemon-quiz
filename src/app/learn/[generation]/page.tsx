@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import LearnCard from '@/components/learn/LearnCard'
 import PokemonArt from '@/components/learn/PokemonArt'
+import { TypePanel } from '@/components/ui/TypePanel'
 import { Fire, Cards, CheckCircle } from '@phosphor-icons/react'
 
 interface LearnPageProps {
@@ -239,17 +240,15 @@ export default function LearnPage({ params }: LearnPageProps) {
             const card = learn.cards[p.id]
             const name = bothNames(p)
             return (
-              <div
-                key={p.id}
-                className="relative rounded-md aspect-square flex items-center justify-center"
-                style={{ background: 'var(--color-bg)' }}
-                title={card ? name : '???'}
-              >
-                <PokemonArt id={p.id} alt={card ? name : 'Unknown Pokemon'} silhouette={!card} lazy className="w-full h-full p-1" />
+              // Met Pokemon show their type color; unmet ones stay dark silhouettes
+              <TypePanel key={p.id} type={p.types[0]} revealed={!!card} watermark={false} className="aspect-square rounded-md">
+                <div className="w-full h-full flex items-center justify-center" title={card ? name : '???'}>
+                  <PokemonArt id={p.id} alt={card ? name : 'Unknown Pokemon'} silhouette={!card} lazy className="w-full h-full p-1" />
+                </div>
                 {isMastered(card) && (
-                  <span className="absolute top-0.5 right-1 text-[11px]" style={{ color: '#f5c542' }}>★</span>
+                  <span className="absolute top-0.5 right-1 text-[11px]" style={{ color: '#ffe066', textShadow: '0 1px 2px rgba(0,0,0,0.4)' }}>★</span>
                 )}
-              </div>
+              </TypePanel>
             )
           })}
         </div>

@@ -8,6 +8,7 @@ import { PokemonMetadata } from '@/types/pokemon-metadata'
 import { Button } from '@/components/ui/Button'
 import PokemonArt from '@/components/learn/PokemonArt'
 import PokemonPicker from '@/components/PokemonPicker'
+import { TypePanel } from '@/components/ui/TypePanel'
 import { X, Shuffle } from '@phosphor-icons/react'
 
 const MAX_PICKED = 3
@@ -149,9 +150,9 @@ export default function SizeComparePage() {
         const tallRatio = h / personM
         return (
           <div key={p.id} className="card items-center" style={{ flexDirection: 'row', gap: 'var(--space-4)', padding: 'var(--space-4)' }}>
-            <div className="w-14 h-14 flex-shrink-0">
+            <TypePanel type={p.types[0]} watermark={false} className="w-14 h-14 flex-shrink-0 rounded-full p-1">
               <PokemonArt id={p.id} alt={formatPokemonName(p.species_name)} className="w-full h-full" />
-            </div>
+            </TypePanel>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>{bothNames(p)}</div>
               <div className="text-xs" style={{ color: 'var(--text-secondary)' }}>

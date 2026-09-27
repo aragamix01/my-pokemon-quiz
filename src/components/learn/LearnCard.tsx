@@ -9,6 +9,7 @@ import { Grade, LearnMode } from '@/lib/learn-progress'
 import { TypePill } from '@/components/ui/TypePill'
 import { Button } from '@/components/ui/Button'
 import PokemonArt from './PokemonArt'
+import { TypePanel } from '@/components/ui/TypePanel'
 import { SpeakerHigh, Lightbulb } from '@phosphor-icons/react'
 
 interface LearnCardProps {
@@ -192,9 +193,10 @@ export default function LearnCard({ pokemon, mode, options, onDone }: LearnCardP
         </button>
       </div>
 
-      <div className="w-44 h-44 sm:w-52 sm:h-52 relative lighten">
-        <PokemonArt id={pokemon.id} alt={revealed ? name : 'Mystery Pokemon'} className="w-full h-full" />
-      </div>
+      {/* Type color only once the name is shown, so it doesn't hint the answer */}
+      <TypePanel type={pokemon.types[0]} revealed={revealed} className="w-44 h-44 sm:w-52 sm:h-52 p-2">
+        <PokemonArt id={pokemon.id} alt={revealed ? name : 'Mystery Pokemon'} className="w-full h-full drop-shadow-md" />
+      </TypePanel>
 
       {mode === 'intro' && (
         <>

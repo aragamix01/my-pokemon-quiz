@@ -16,6 +16,7 @@ import { PokemonTypeName, getTypeColor } from '@/lib/type-effectiveness'
 import { Button } from '@/components/ui/Button'
 import PokemonArt from '@/components/learn/PokemonArt'
 import PokemonPicker from '@/components/PokemonPicker'
+import { TypePanel } from '@/components/ui/TypePanel'
 import DailyFooter from './DailyFooter'
 import { ArrowUp, ArrowDown } from '@phosphor-icons/react'
 
@@ -148,9 +149,9 @@ export default function PokedleGame({ genParam, daily = false }: PokedleGameProp
 
         {over ? (
           <>
-            <div className="w-36 h-36 lighten">
-              <PokemonArt id={answer.id} alt={answerName} className="w-full h-full" />
-            </div>
+            <TypePanel type={answer.types[0]} className="w-36 h-36 p-2">
+              <PokemonArt id={answer.id} alt={answerName} className="w-full h-full drop-shadow-md" />
+            </TypePanel>
             <p className="text-sm font-semibold" style={{ color: won ? 'var(--success-gradient)' : 'var(--error-gradient)' }}>
               {won ? `Got it in ${guesses.length}!` : 'Out of guesses!'}
             </p>
@@ -210,9 +211,9 @@ export default function PokedleGame({ genParam, daily = false }: PokedleGameProp
       {guesses.map(g => (
         <div key={g.id} className="card" style={{ gap: 'var(--space-3)', padding: 'var(--space-4)' }}>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 flex-shrink-0">
+            <TypePanel type={g.types[0]} watermark={false} className="w-10 h-10 flex-shrink-0 rounded-full p-0.5">
               <PokemonArt id={g.id} alt={formatPokemonName(g.species_name)} className="w-full h-full" />
-            </div>
+            </TypePanel>
             <span className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>
               {bothNames(g)}
             </span>

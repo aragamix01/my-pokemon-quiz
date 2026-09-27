@@ -7,6 +7,7 @@ import { formatPokemonName, japaneseName, bothNames } from '@/lib/pokemon-names'
 import { PokemonMetadata } from '@/types/pokemon-metadata'
 import { Button } from '@/components/ui/Button'
 import PokemonArt from '@/components/learn/PokemonArt'
+import { getTypeCardColor } from '@/lib/type-card-colors'
 
 interface MemoryPageProps {
   params: Promise<{ generation: string }>
@@ -47,10 +48,10 @@ function CardFace({ card }: { card: MemoryCard }) {
   const text = card.face === 'en' ? formatPokemonName(card.pokemon.species_name) : japaneseName(card.pokemon)
   return (
     <>
-      <span className="text-[9px] uppercase tracking-wide" style={{ color: 'var(--text-muted)' }}>
+      <span className="text-[9px] uppercase tracking-wide" style={{ color: 'rgba(255,255,255,0.8)' }}>
         {card.face === 'en' ? 'English' : 'Japanese'}
       </span>
-      <span className="text-[13px] sm:text-sm font-semibold break-words leading-tight" style={{ color: 'var(--color-text)' }}>
+      <span className="nx-typecard-text text-[13px] sm:text-sm font-semibold break-words leading-tight" style={{ color: '#fff' }}>
         {text}
       </span>
     </>
@@ -184,8 +185,9 @@ export default function MemoryPage({ params }: MemoryPageProps) {
                   <div
                     className="flip-card-face flip-card-back"
                     style={{
-                      background: 'var(--color-bg)',
-                      border: `1px solid ${isMatched ? 'var(--success-gradient)' : mismatch ? 'var(--error-gradient)' : 'var(--color-neutral-600)'}`,
+                      // Face-up side in the Pokemon's type color
+                      background: getTypeCardColor(card.pokemon.types[0]),
+                      border: `2px solid ${isMatched ? 'var(--success-gradient)' : mismatch ? 'var(--error-gradient)' : 'rgba(255,255,255,0.35)'}`,
                     }}
                   >
                     <CardFace card={card} />
