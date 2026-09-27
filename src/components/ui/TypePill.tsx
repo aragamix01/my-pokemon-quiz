@@ -6,9 +6,13 @@ interface TypePillProps {
   className?: string
   onClick?: () => void
   selected?: boolean
+  /** Same width for every type (fits the longest name), for charts where pills line up */
+  fixed?: boolean
 }
 
-export function TypePill({ type, className, onClick, selected }: TypePillProps) {
+const FIXED_WIDTH = 92
+
+export function TypePill({ type, className, onClick, selected, fixed }: TypePillProps) {
   const color = getTypeColor(type)
   return (
     <span
@@ -16,12 +20,14 @@ export function TypePill({ type, className, onClick, selected }: TypePillProps) 
       className={cn(
         'inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium uppercase tracking-wide',
         onClick && 'cursor-pointer',
+        fixed && 'justify-center',
         className
       )}
       style={{
         border: `1px solid ${color}`,
         background: selected ? color : 'var(--color-neutral-900)',
         color: selected ? 'var(--color-bg)' : 'var(--color-neutral-100)',
+        width: fixed ? FIXED_WIDTH : undefined,
       }}
     >
       <span

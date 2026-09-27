@@ -89,7 +89,7 @@ function MatchupChecker() {
 
       <div className="flex flex-wrap gap-2">
         {TYPE_ORDER.map(type => (
-          <TypePill key={type} type={type} selected={types.indexOf(type) !== -1} onClick={() => toggleType(type)} />
+          <TypePill fixed key={type} type={type} selected={types.indexOf(type) !== -1} onClick={() => toggleType(type)} />
         ))}
       </div>
 
@@ -103,7 +103,7 @@ function MatchupChecker() {
             )}
             <div className="flex items-center gap-2 flex-wrap flex-1 min-w-0">
               {pokemon && <span className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>{bothNames(pokemon)}</span>}
-              {types.map(t => <TypePill key={t} type={t} />)}
+              {types.map(t => <TypePill fixed key={t} type={t} />)}
             </div>
             <button type="button" className="btn btn-ghost" onClick={clear} aria-label="Clear">
               <X size={16} /> Clear
@@ -125,7 +125,7 @@ function MatchupChecker() {
               <div className="flex flex-wrap gap-2">
                 {g.attackers.length === 0
                   ? <span className="text-sm" style={{ color: 'var(--text-muted)' }}>—</span>
-                  : g.attackers.map(a => <TypePill key={a} type={a} />)}
+                  : g.attackers.map(a => <TypePill fixed key={a} type={a} />)}
               </div>
             </div>
           ))}
@@ -170,13 +170,13 @@ export default function TypeAdvantage() {
                 style={{ borderBottom: '1px solid var(--color-neutral-800)' }}
               >
                 <div className="w-[110px] flex-shrink-0 flex justify-center">
-                  <TypePill type={type} />
+                  <TypePill fixed type={type} />
                 </div>
                 <div className="flex flex-wrap gap-2 min-w-0">
                   {list.length === 0 ? (
                     <span className="text-sm" style={{ color: 'var(--text-muted)' }}>{info.empty}</span>
                   ) : (
-                    list.map(t => <TypePill key={t} type={t} />)
+                    list.map(t => <TypePill fixed key={t} type={t} />)
                   )}
                 </div>
               </div>
