@@ -64,7 +64,7 @@ export default function PokedexEntries({ species }: PokedexEntriesProps) {
         )}
       </p>
       {entries.length > 1 && (
-        <div className="flex gap-1.5 overflow-x-auto pb-1">
+        <div className="nx-scroll-x flex gap-1.5 pb-1.5">
           {entries.map((entry, i) => (
             <button
               key={i}

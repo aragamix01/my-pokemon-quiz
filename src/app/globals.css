@@ -389,6 +389,11 @@ body {
 }
 .nx-pokerow.typed { position: relative; overflow: hidden; border-color: transparent; color: #fff; }
 .nx-pokerow.typed:hover { border-color: transparent; filter: brightness(1.05); }
+/* thin dark horizontal scrollbar for chip rows */
+.nx-scroll-x { overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--color-neutral-700) transparent; }
+.nx-scroll-x::-webkit-scrollbar { height: 6px; }
+.nx-scroll-x::-webkit-scrollbar-track { background: transparent; }
+.nx-scroll-x::-webkit-scrollbar-thumb { background: var(--color-neutral-700); border-radius: 999px; }
 
 /* — quiz options — */
 .nx-quizopt {

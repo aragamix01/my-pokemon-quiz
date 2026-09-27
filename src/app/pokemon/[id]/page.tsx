@@ -16,7 +16,8 @@ import PokemonTypeEffectiveness from '@/components/PokemonTypeEffectiveness'
 import PokedexEntries from '@/components/PokedexEntries'
 import StatRanks from '@/components/StatRanks'
 import GamePokedexes from '@/components/GamePokedexes'
-import { TypePill } from '@/components/ui/TypePill'
+import { PokeballMark } from '@/components/ui/PokeballMark'
+import { getTypeCardColor } from '@/lib/type-card-colors'
 import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { cn } from '@/lib/cn'
@@ -120,6 +121,9 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
   const getEnglishName = () => {
     return data?.species.names.find(name => name.language.name === 'en')?.name || data?.pokemon.name || ''
   }
+
+  // Card color from the current form's first type, same palette as the Pokedex cards
+  const getTypeColorForPage = () => getTypeCardColor(getCurrentForm()?.types[0]?.type.name ?? 'normal')
 
   // Category such as "Flame Pokémon"
   const getGenus = () => {
@@ -399,7 +403,12 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
           </Button>
           {data ? (
             <div className="text-center min-w-0 px-2">
-              <div className="text-[11px]" style={{ color: 'var(--text-muted)' }}>#{String(data.species.id).padStart(4, '0')}</div>
+              <span
+                className="inline-block text-[11px] font-semibold rounded-full px-2.5 py-0.5 mb-1"
+                style={{ background: getTypeColorForPage(), color: '#fff' }}
+              >
+                #{String(data.species.id).padStart(4, '0')}
+              </span>
               <h1
                 className="text-2xl sm:text-3xl leading-tight"
                 style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, color: 'var(--color-text)' }}
@@ -438,26 +447,33 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
             </div>
           </div>
         ) : data ? (
-          <div className="card p-4">
+          <div className="card p-4" style={{ boxShadow: `var(--shadow-sm), inset 0 4px 0 ${getTypeColorForPage()}` }}>
             <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
               {/* Left Side - Sprite, Types, Controls */}
               <div className="flex-shrink-0 lg:w-48 w-full">
-                {/* Pokemon Sprite */}
-                <div className="relative w-40 h-40 mx-auto mb-4">
-                  <Image
-                    src={getCurrentSprite() || '/pokemon-placeholder.png'}
-                    alt={getEnglishName()}
-                    fill
-                    className="object-contain"
-                    draggable={false}
+                {/* Artwork and types on a panel in the first type's color, like the Pokedex cards */}
+                <div
+                  className="relative overflow-hidden rounded-xl mb-4 px-3 pt-3 pb-3"
+                  style={{ background: getTypeColorForPage(), boxShadow: `0 8px 20px -8px ${getTypeColorForPage()}` }}
+                >
+                  <PokeballMark
+                    className="absolute -right-6 -bottom-8 w-40 h-40 pointer-events-none"
+                    style={{ color: 'rgba(255,255,255,0.2)' }}
                   />
-                </div>
-                
-                {/* Types under sprite */}
-                <div className="text-center mb-4">
-                  <div className="flex gap-2 justify-center flex-wrap">
+                  <div className="relative w-40 h-40 mx-auto">
+                    <Image
+                      src={getCurrentSprite() || '/pokemon-placeholder.png'}
+                      alt={getEnglishName()}
+                      fill
+                      className="object-contain drop-shadow-md"
+                      draggable={false}
+                    />
+                  </div>
+                  <div className="relative flex gap-2 justify-center flex-wrap mt-2">
                     {getCurrentForm().types.map((typeInfo, index) => (
-                      <TypePill key={index} type={typeInfo.type.name as any} />
+                      <span key={index} className="nx-typecard-pill nx-typecard-text" style={{ fontSize: 11, padding: '2px 12px' }}>
+                        {typeInfo.type.name}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -507,8 +523,8 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                 </div>
               </div>
 
-              {/* Right Side - Information */}
-              <div className="flex-1 space-y-4">
+              {/* Right Side - Information. min-w-0 lets long rows (entry games, moves) scroll or wrap instead of widening the page */}
+              <div className="flex-1 min-w-0 space-y-4">
                 {/* Basic Information Section */}
                 <div className="mb-4">
                   <h3 className="text-base font-bold mb-3" style={{ color: 'var(--text-primary)' }}>Basic Information</h3>
