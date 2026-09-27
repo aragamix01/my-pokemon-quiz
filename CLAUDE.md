@@ -106,6 +106,7 @@ Comprehensive Pokemon moves system with complete database:
   - Comprehensive move metadata including generation, contest type, target info
 
 ## Type Effectiveness System
+- **Type Chart page** (`src/components/TypeAdvantage.tsx`, home "Type Chart" tab): rows in game order (Stellar left out, it is Terastal-only), mode tabs Weak to / Strong against / Resists / Immune to computed from `EFFECTIVENESS_MATRIX`, plus a Matchup checker (pick 1-2 types or search a Pokemon) grouping attackers by ×4 / ×2 / ×½ / ×¼ / ×0
 - Complete Pokemon type effectiveness data and calculations
 - Type advantage/disadvantage system with multiplier values
 - Interactive type effectiveness display component
