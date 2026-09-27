@@ -10,8 +10,8 @@ interface HoloCardProps extends HTMLAttributes<HTMLDivElement> {
    */
   still?: boolean
   /**
-   * Milliseconds between automatic shines: while nobody touches or hovers the card,
-   * a light sweeps across it (tilt, foil, sparkles and glare) this often. Off when unset
+   * Milliseconds of rest between automatic shines (counted after each sweep ends): while
+   * nobody touches or hovers the card, a light sweeps across it (tilt, foil, sparkles and glare). Off when unset
    */
   autoShine?: number
 }
@@ -69,15 +69,18 @@ export function HoloCard({ still = false, autoShine, className, children, onPoin
   useEffect(() => {
     if (!autoShine || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let frame = 0
+    let timer = 0
+    // The pause starts after each sweep ends, so a sweep never eats into it
+    const wait = () => { timer = window.setTimeout(sweep, autoShine) }
     const sweep = () => {
-      if (touched.current || document.hidden) return
+      if (touched.current || document.hidden) return wait()
       const start = performance.now()
       const step = (now: number) => {
-        if (touched.current) return
+        if (touched.current) return wait()
         const t = (now - start) / SWEEP_MS
         if (t >= 1) {
           reset()
-          return
+          return wait()
         }
         const ease = 0.5 - Math.cos(t * Math.PI) / 2
         shineAt(0.1 + ease * 0.8, 0.2 + ease * 0.6)
@@ -85,9 +88,9 @@ export function HoloCard({ still = false, autoShine, className, children, onPoin
       }
       frame = requestAnimationFrame(step)
     }
-    const timer = setInterval(sweep, autoShine)
+    wait()
     return () => {
-      clearInterval(timer)
+      clearTimeout(timer)
       cancelAnimationFrame(frame)
     }
   }, [autoShine]) // eslint-disable-line react-hooks/exhaustive-deps

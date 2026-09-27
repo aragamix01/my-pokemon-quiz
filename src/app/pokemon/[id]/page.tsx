@@ -457,7 +457,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
               <div className="flex-shrink-0 lg:w-48 w-full">
                 {/* Artwork and types on a foil panel in the first type's color, like a holo trading card */}
                 <HoloCard
-                  autoShine={3000}
+                  autoShine={5000}
                   className="rounded-xl mb-4 px-3 pt-3 pb-3"
                   style={{ background: getTypeColorForPage(), boxShadow: `0 8px 20px -8px ${getTypeColorForPage()}` }}
                 >
