@@ -4,7 +4,8 @@ import { useState, useEffect, useCallback, use } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Pokemon, PokemonSpecies, EvolutionChain, EvolutionChainLink, GenerationNumber } from '@/types/pokemon'
+import { Pokemon, PokemonSpecies, EvolutionChain as EvolutionChainData, GenerationNumber } from '@/types/pokemon'
+import EvolutionChain from '@/components/EvolutionChain'
 import { pokemonAPI } from '@/lib/pokemon-api'
 import { extractPokemonTypes } from '@/lib/type-effectiveness'
 import { getMoveData, getMoveTypeColor, hasMoveData } from '@/lib/moves-utils'
@@ -27,7 +28,7 @@ import { CaretLeft, CaretRight, Sparkle, SpeakerHigh, CaretDown, CaretUp } from 
 interface PokemonData {
   pokemon: Pokemon
   species: PokemonSpecies
-  evolutionChain: EvolutionChain | null
+  evolutionChain: EvolutionChainData | null
   allForms: Pokemon[]
 }
 
@@ -188,51 +189,6 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
     return currentForm?.pokemon || data?.pokemon
   }
 
-  const getEvolutionTriggerIcon = (triggerName: string) => {
-    const icons: { [key: string]: string } = {
-      'level-up': '📈',
-      'use-item': '🎒',
-      'trade': '🔄',
-      'shed': '🐛',
-      'spin': '🌪️',
-      'tower-of-darkness': '🏯',
-      'tower-of-waters': '🌊'
-    }
-    return icons[triggerName] || '❓'
-  }
-
-  const formatEvolutionCondition = (details: any) => {
-    if (!details || details.length === 0) return ''
-    
-    const detail = details[0]
-    const conditions = []
-    
-    if (detail.min_level) conditions.push(`Level ${detail.min_level}`)
-    if (detail.min_happiness) conditions.push(`Happiness ${detail.min_happiness}`)
-    if (detail.time_of_day) conditions.push(`${detail.time_of_day} time`)
-    if (detail.item) conditions.push(`Use ${detail.item.name.replace('-', ' ')}`)
-    if (detail.known_move) conditions.push(`Know ${detail.known_move.name.replace('-', ' ')}`)
-    if (detail.location) conditions.push(`At ${detail.location.name.replace('-', ' ')}`)
-    
-    return conditions.join(', ')
-  }
-
-  const getItemSprite = (itemName: string) => {
-    // Use optimized local WebP items first, with API URL fallback
-    return `/sprites/optimized/items/${itemName}.webp`
-  }
-  
-  const getEvolutionPokemonImageUrl = (pokemonId: number) => {
-    // Create a temporary Pokemon-like object for image URL generation
-    const tempPokemon = {
-      id: pokemonId,
-      name: '', // We don't need name for ID-based variant form detection
-    } as Pokemon
-    
-    // Use the improved image URL logic with variant form support
-    return pokemonAPI.getPokemonImageUrl(tempPokemon, false)
-  }
-
   // Shared label/value row so every stat in the info panels lines up on the
   // same two-column grid regardless of whether the value is text, a tag or a bar.
   const InfoRow = ({ label, children }: { label: string; children: React.ReactNode }) => (
@@ -242,9 +198,14 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
     </div>
   )
 
-  const getEvolutionHref = (pokemonId: number) => {
+  // Link to another Pokemon (or one of its forms), keeping the generation for prev/next navigation
+  const evolutionHref = (speciesId: number, formId?: number) => {
+    const params = new URLSearchParams()
     const generation = searchParams.get('gen')
-    return generation ? `/pokemon/${pokemonId}?gen=${generation}` : `/pokemon/${pokemonId}`
+    if (generation) params.set('gen', generation)
+    if (formId) params.set('form', String(formId))
+    const query = params.toString()
+    return query ? `/pokemon/${speciesId}?${query}` : `/pokemon/${speciesId}`
   }
 
   const navigateToPokemon = (pokemonId: number) => {
@@ -254,119 +215,6 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
     }
   }
 
-
-  const renderEvolutionChain = (chainLink: EvolutionChainLink, depth = 0) => {
-    const pokemonName = chainLink.species.name
-    const speciesId = parseInt(chainLink.species.url.split('/').slice(-2, -1)[0])
-    const isCurrent = speciesId === data?.species.id
-
-    const evolutionNode = (
-      <>
-        <div className="w-16 h-16 relative mb-2">
-          <Image
-            src={getEvolutionPokemonImageUrl(speciesId)}
-            alt={pokemonName}
-            fill
-            className="object-contain"
-            draggable={false}
-            onError={(e) => {
-              // Better fallback chain for evolution sprites
-              const target = e.target as HTMLImageElement
-
-              if (target.src.includes('/pokemon-artwork/')) {
-                // Try variant forms directory if artwork fails
-                target.src = `/sprites/optimized/pokemon-forms/${speciesId}.webp`
-              } else if (target.src.includes('/pokemon-forms/')) {
-                // Final fallback to placeholder
-                target.src = '/pokemon-placeholder.png'
-              } else if (target.src.includes('.webp')) {
-                // Try PNG fallback (legacy)
-                target.src = `/sprites/pokemon-artwork/${speciesId}.png`
-              } else {
-                target.src = '/pokemon-placeholder.png'
-              }
-            }}
-          />
-        </div>
-        <div className="text-sm font-bold text-center capitalize" style={{ color: 'var(--text-primary)' }}>
-          {pokemonName.replace('-', ' ')}
-        </div>
-        <div className="text-xs text-center" style={{ color: 'var(--text-secondary)' }}>
-          #{String(speciesId).padStart(3, '0')}
-        </div>
-      </>
-    )
-
-    return (
-      <>
-        {/* Pokemon in chain - links to its own detail page, current one stays static */}
-        {isCurrent ? (
-          <div
-            aria-current="page"
-            className="flex flex-col items-center min-w-32 rounded-md px-2 py-2"
-            style={{ background: 'var(--color-neutral-800)', border: '1px solid var(--color-accent)' }}
-          >
-            {evolutionNode}
-          </div>
-        ) : (
-          <Link
-            href={getEvolutionHref(speciesId)}
-            aria-label={`View ${pokemonName.replace('-', ' ')} details`}
-            className="flex flex-col items-center min-w-32 rounded-md px-2 py-2 border border-transparent transition hover:scale-105 hover:bg-[var(--color-neutral-800)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
-          >
-            {evolutionNode}
-          </Link>
-        )}
-
-        {/* Evolution arrows and conditions */}
-        {chainLink.evolves_to.map((evolution, index) => (
-          <div key={index} className="flex items-center">
-            {/* Evolution condition with detailed info */}
-            <div className="flex flex-col items-center mx-3">
-              {/* Item sprite if evolution requires an item */}
-              {evolution.evolution_details[0]?.item && (
-                <div className="w-6 h-6 relative mb-1 flex items-center justify-center">
-                  <Image
-                    src={getItemSprite(evolution.evolution_details[0].item.name)}
-                    alt={evolution.evolution_details[0].item.name}
-                    fill
-                    className="object-contain"
-                    draggable={false}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement
-                      const itemName = evolution.evolution_details[0].item?.name
-                      
-                      if (target.src.includes('optimized/items') && target.src.includes('.webp')) {
-                        // Fallback to non-optimized PNG
-                        target.src = `/sprites/items/${itemName}.png`
-                      } else if (target.src.includes('/sprites/items/') && target.src.includes('.png')) {
-                        // Fallback to GitHub API URL
-                        target.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${itemName}.png`
-                      } else {
-                        // Final fallback: show gem icon
-                        const parent = target.parentElement
-                        if (parent) {
-                          parent.innerHTML = '<span class="text-sm">💎</span>'
-                        }
-                      }
-                    }}
-                  />
-                </div>
-              )}
-              
-              <div className="text-xs text-center max-w-24 break-words" style={{ color: 'var(--text-secondary)' }}>
-                {formatEvolutionCondition(evolution.evolution_details) || 'Level Up'}
-              </div>
-              <div className="text-lg mt-1" style={{ color: 'var(--text-primary)' }}>→</div>
-            </div>
-            
-            {/* Next evolution */}
-            {renderEvolutionChain(evolution, depth + 1)}
-          </div>
-        ))}
-      </>
-    )
-  }
 
   return (
     <div className="min-h-screen relative">
@@ -745,11 +593,12 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                 {data.evolutionChain && (
                   <div className="mb-4">
                     <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Evolution Chain</h3>
-                    <div className="overflow-x-auto">
-                      <div className="flex flex-wrap items-center gap-2 sm:gap-4 py-2">
-                        {renderEvolutionChain(data.evolutionChain.chain)}
-                      </div>
-                    </div>
+                    <EvolutionChain
+                      chain={data.evolutionChain.chain}
+                      currentSpeciesId={data.species.id}
+                      currentFormId={getCurrentForm()?.id}
+                      hrefFor={evolutionHref}
+                    />
                   </div>
                 )}
 

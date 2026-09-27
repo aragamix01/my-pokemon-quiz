@@ -89,7 +89,7 @@ Comprehensive individual Pokemon information pages featuring:
 - **Base Stats Display**: All 6 base stats with visual progress bars and color gradients
 - **Abilities Information**: Normal and hidden abilities with clear indicators
 - **Species Data**: Capture rate, base happiness, flavor text descriptions
-- **Evolution Chain**: Complete evolution line with conditions and requirements
+- **Evolution Chain** (`src/components/EvolutionChain.tsx`): type-colored cards (art, English + Japanese name, type pills, stage label Baby / Basic / Stage 1 / Stage 2, "You are here" on the current one). Vertical with down arrows on phones, horizontal on bigger screens; branches (Eevee, Wurmple) become a 2-column grid on phones and stacked rows on desktop. Conditions are readable pills from every PokeAPI evolution detail field (`describeEvolution`: Lv., items with sprites, friendship, time, trade, moves, location, region...); a stone method is preferred when games differ. Details with `required_pokemon_form` / `evolved_pokemon_form` become a "Regional and other form evolutions" section (Alolan Raichu, Galarian Meowth -> Perrserker, Alolan Geodude line). Single-stage Pokemon say "does not evolve"
 - **Navigation**: Floating left/right buttons for previous/next Pokemon within generation
 - **Responsive Design**: Optimized layout for both mobile and desktop viewing
 

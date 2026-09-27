@@ -169,9 +169,38 @@ export interface EvolutionDetail {
     name: string
     url: string
   } | null
+  // Extra conditions PokeAPI sends; optional because older cached data may lack them
+  gender?: number | null
+  held_item?: NamedRef | null
+  known_move_type?: NamedRef | null
+  min_beauty?: number | null
+  min_affection?: number | null
+  near_special_rock?: boolean
+  needs_multiplayer?: boolean
+  needs_overworld_rain?: boolean
+  party_species?: NamedRef | null
+  party_type?: NamedRef | null
+  relative_physical_stats?: number | null
+  trade_species?: NamedRef | null
+  turn_upside_down?: boolean
+  region?: NamedRef | null
+  /** Form that evolves, e.g. meowth-galar (default form when it is the plain species) */
+  required_pokemon_form?: NamedRef | null
+  /** Form it evolves into, e.g. raichu-alola; null for the default form */
+  evolved_pokemon_form?: NamedRef | null
+  used_move?: NamedRef | null
+  min_move_count?: number | null
+  min_steps?: number | null
+  min_damage_taken?: number | null
+}
+
+interface NamedRef {
+  name: string
+  url: string
 }
 
 export interface EvolutionChainLink {
+  is_baby?: boolean
   species: {
     name: string
     url: string

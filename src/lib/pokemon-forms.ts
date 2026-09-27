@@ -40,6 +40,14 @@ export function formDisplayName(form: PokemonForm, base: PokemonMetadata): strin
   return `${species} (${formatPokemonName(suffix)})`
 }
 
+const BY_NAME: Record<string, PokemonForm> = {}
+FORMS.forEach(form => { BY_NAME[form.name] = form })
+
+/** Alternate form by its PokeAPI name, like "raichu-alola" */
+export function getFormByName(name: string): PokemonForm | undefined {
+  return BY_NAME[name]
+}
+
 /** Alternate forms that differ in type from their species, plus Mega, Primal and regional forms */
 export function getTypeForms(byId: Record<number, PokemonMetadata>): PokemonForm[] {
   return FORMS.filter(form => {
