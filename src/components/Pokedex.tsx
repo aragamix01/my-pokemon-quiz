@@ -16,6 +16,7 @@ import type { PokemonMetadata } from '@/types/pokemon-metadata'
 import { Button } from '@/components/ui/Button'
 import { Sparkle, MagnifyingGlass, Shuffle, SquaresFour, Rows } from '@phosphor-icons/react'
 import { TypeIcon } from '@/components/ui/TypeIcon'
+import { HoloCard } from '@/components/ui/HoloCard'
 import { PokeballMark } from '@/components/ui/PokeballMark'
 import { getTypeCardColor } from '@/lib/type-card-colors'
 import { PokemonTypeName } from '@/lib/type-effectiveness'
@@ -778,7 +779,8 @@ export default function Pokedex() {
 
     if (compactView) {
       return (
-        <div
+        <HoloCard
+          still
           key={pokemonData.id}
           className="nx-pokerow typed"
           style={{ background: cardColor }}
@@ -820,12 +822,13 @@ export default function Pokedex() {
             </span>
             {learnBadge && <span className="text-[10px] leading-none">{learnBadge}</span>}
           </div>
-        </div>
+        </HoloCard>
       )
     }
 
     return (
-      <div
+      <HoloCard
+        still
         key={pokemonData.id}
         className="nx-typecard"
         style={{ background: cardColor, boxShadow: `0 6px 16px -6px ${cardColor}` }}
@@ -885,7 +888,7 @@ export default function Pokedex() {
             )}
           </div>
         )}
-      </div>
+      </HoloCard>
     )
   }, [showShiny, handlePokemonClick, metadataById, learnState, regionalDex, compactView])
 

@@ -542,10 +542,9 @@ body {
 .flip-card-back { transform: rotateY(180deg); }
 
 /* Holographic foil card (HoloCard): tilt, rainbow sheen and glare that follow the pointer */
-.nx-holo-wrap { perspective: 800px; }
 .nx-holo {
   --mx: 50%; --my: 50%; --rx: 0deg; --ry: 0deg; --pos: 50% 50%;
-  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transform: perspective(800px) rotateX(var(--rx)) rotateY(var(--ry));
   transition: transform 0.5s ease, box-shadow 0.5s ease;
   will-change: transform;
   touch-action: pan-y;
@@ -568,6 +567,10 @@ body {
   transition: opacity 0.3s ease;
 }
 .nx-holo.active .nx-holo-foil { animation: none; opacity: 0.45; }
+.nx-holo.still .nx-holo-foil { animation: none; opacity: 0.12; }
+/* Pokedex cards keep their hover lift on top of the tilt */
+.nx-typecard.nx-holo:hover { transform: perspective(800px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-2px); }
+.nx-pokerow.nx-holo:hover { transform: perspective(800px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-1px); }
 .nx-holo-glare {
   background: radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.12) 30%, transparent 60%);
   mix-blend-mode: overlay;
@@ -580,6 +583,6 @@ body {
   to { background-position: 100% 100%, 0 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .nx-holo, .nx-holo.active { transform: none; transition: none; }
+  .nx-holo, .nx-holo.active, .nx-typecard.nx-holo:hover, .nx-pokerow.nx-holo:hover { transform: none; transition: none; }
   .nx-holo-foil { animation: none; }
 }

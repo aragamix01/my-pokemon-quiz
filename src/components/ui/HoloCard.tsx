@@ -1,23 +1,25 @@
 'use client'
 
-import { ReactNode, CSSProperties, useRef, PointerEvent } from 'react'
+import { HTMLAttributes, useRef, PointerEvent } from 'react'
 import { cn } from '@/lib/cn'
 
-interface HoloCardProps {
-  className?: string
-  style?: CSSProperties
-  children?: ReactNode
+interface HoloCardProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * true skips the slow idle drift, for grids with many cards; the foil then
+   * only moves while the pointer is over the card
+   */
+  still?: boolean
 }
 
 /**
  * Holographic foil like a shiny trading card: a rainbow sheen and a light glare
- * that follow the pointer (or finger) while the card tilts toward it. When no
- * pointer is over it the foil drifts slowly on its own. Styles: .nx-holo in globals.css
+ * that follow the pointer (or finger) while the card tilts toward it. Styles: .nx-holo in globals.css
  */
-export function HoloCard({ className, style, children }: HoloCardProps) {
+export function HoloCard({ still = false, className, children, onPointerMove, onPointerLeave, ...rest }: HoloCardProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   const move = (e: PointerEvent<HTMLDivElement>) => {
+    onPointerMove?.(e)
     const el = ref.current
     if (!el) return
     const rect = el.getBoundingClientRect()
@@ -31,7 +33,8 @@ export function HoloCard({ className, style, children }: HoloCardProps) {
     el.classList.add('active')
   }
 
-  const leave = () => {
+  const leave = (e?: PointerEvent<HTMLDivElement>) => {
+    if (e) onPointerLeave?.(e)
     const el = ref.current
     if (!el) return
     el.classList.remove('active')
@@ -39,19 +42,17 @@ export function HoloCard({ className, style, children }: HoloCardProps) {
   }
 
   return (
-    <div className="nx-holo-wrap">
-      <div
-        ref={ref}
-        className={cn('nx-holo relative overflow-hidden', className)}
-        style={style}
-        onPointerMove={move}
-        onPointerLeave={leave}
-        onPointerCancel={leave}
-      >
-        {children}
-        <div className="nx-holo-foil" aria-hidden />
-        <div className="nx-holo-glare" aria-hidden />
-      </div>
+    <div
+      ref={ref}
+      className={cn('nx-holo relative overflow-hidden', still && 'still', className)}
+      onPointerMove={move}
+      onPointerLeave={leave}
+      onPointerCancel={() => leave()}
+      {...rest}
+    >
+      {children}
+      <div className="nx-holo-foil" aria-hidden />
+      <div className="nx-holo-glare" aria-hidden />
     </div>
   )
 }

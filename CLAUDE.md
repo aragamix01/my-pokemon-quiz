@@ -65,6 +65,7 @@ Ultra-high-performance Pokemon directory with cross-generation capabilities:
 - **Learning Progress**: Cards show ★ (mastered) or ● (learning) from Flashcards progress, with a "Learning progress" filter (not met / learning / mastered)
 - **Random Button**: Opens a random Pokemon from the current filtered list
 - **Type-Colored Cards**: Cards and compact rows use the first type's soft color (`getTypeCardColor()` in `src/lib/type-card-colors.ts`, separate from the saturated badge colors), white text, a faint Pokeball watermark (`src/components/ui/PokeballMark.tsx`) and a big faded number. Card style `.nx-typecard` (name, Japanese name and type pills on the left, artwork bottom right); sprites use `lighten={false}` because the `lighten` blend mode washes them out on colored backgrounds
+- **Holo Foil Cards**: Cards and compact rows are `HoloCard`s with `still` (foil and glare follow the pointer with a small tilt; no idle drift animation, so large grids stay cheap)
 - **Compact View**: "Cards / Compact" toggle above the grid switches to small type-colored row cards (round sprite, name, round type icons via `src/components/ui/TypeIcon.tsx`, number; `.nx-pokerow` in globals.css), 2-4 per row, remembered in localStorage `pokedex-compact-view`
 - **Browse by Game**: Pick a game's own Pokedex (Paldea, Galar, Kitakami, Lumiose...) instead of a generation; list uses that game's order and numbers (`regionalDex` in `usePokemonFilter`, a mode rather than a filter so Reset keeps it)
 
@@ -76,7 +77,7 @@ Ultra-high-performance Pokemon directory with cross-generation capabilities:
 
 ## Pokemon Detail Pages
 Comprehensive individual Pokemon information pages featuring:
-- **Holo Foil**: The artwork panel is a `HoloCard` (`src/components/ui/HoloCard.tsx`, `.nx-holo` in globals.css): it tilts toward the pointer or finger with a rainbow foil sheen and glare, drifts slowly when idle, and stays flat with reduced motion
+- **Holo Foil**: The artwork panel is a `HoloCard` (`src/components/ui/HoloCard.tsx`, `.nx-holo` in globals.css): it tilts toward the pointer or finger with a rainbow foil sheen and glare, drifts slowly when idle (`still` turns the drift off), and stays flat with reduced motion
 - **Type Color**: Artwork and types sit on a panel in the first type's card color with a Pokeball watermark (same palette as Pokedex cards); the number badge and the card's top edge use it too. The right column has `min-w-0` so wide rows scroll (`.nx-scroll-x`, thin dark scrollbar) instead of widening the page
 - **Header**: Number, English name, Japanese romaji name and category ("Charizard / Lizardon · Flame Pokémon", from species `genera`)
 - **Pokedex Entries**: Every English entry by game, identical texts grouped (`src/components/PokedexEntries.tsx`), newest selected by default
