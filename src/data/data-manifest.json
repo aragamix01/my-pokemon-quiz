@@ -5,9 +5,9 @@
       "upstream": {
         "repo": "PokeAPI/api-data",
         "branch": "master",
-        "sha": "e845bb4f69a652cd80fef614b26320036f6287b4"
+        "sha": "02a8d9dd1b1a4e102b8b32d786d17017e8c9769a"
       },
-      "generated_at": "2026-09-21T08:35:10.073Z",
+      "generated_at": "2026-09-28T09:21:31.841Z",
       "script_version": "1.0.0",
       "counts": {
         "pokemon": 1025,
@@ -15,30 +15,32 @@
         "types": 19,
         "moves": 937,
         "abilities": 374,
-        "evolution_items": 49
+        "evolution_items": 49,
+        "evolution_chains": 540,
+        "regional_pokedexes": 33
       }
     },
     "sprites": {
       "upstream": {
         "repo": "PokeAPI/sprites",
         "branch": "master",
-        "sha": "0b133a62e914976d3d7ea33aaa1ac676ca248c30"
+        "sha": "fb3512817b9c3f46952b3f89e82645e77bdcaf49"
       },
-      "generated_at": "2026-09-21T08:40:40.373Z",
+      "generated_at": "2026-09-28T09:27:47.334Z",
       "script_version": "1.0.0",
       "strategies": [
         "all",
         "forms-only"
       ],
-      "file_count": 2712
+      "file_count": 2732
     },
     "embeddings": {
       "upstream": {
         "repo": "PokeAPI/api-data",
         "branch": "master",
-        "sha": "e845bb4f69a652cd80fef614b26320036f6287b4"
+        "sha": "02a8d9dd1b1a4e102b8b32d786d17017e8c9769a"
       },
-      "generated_at": "2026-09-21T08:37:25.586Z",
+      "generated_at": "2026-09-28T09:23:47.192Z",
       "script_version": "1.0.0",
       "model": "Xenova/all-MiniLM-L6-v2",
       "dimension": 384,
