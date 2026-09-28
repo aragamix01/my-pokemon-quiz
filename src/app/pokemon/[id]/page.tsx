@@ -45,6 +45,10 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
   const [movesExpanded, setMovesExpanded] = useState(false)
   const [expandedAbility, setExpandedAbility] = useState<string | null>(null)
   const [audioPlaying, setAudioPlaying] = useState(false)
+  // The cry button also plays the Showdown animated sprite in the card, for the cry plus a short tail
+  const [cryAnimating, setCryAnimating] = useState(false)
+  const cryAnimTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  useEffect(() => () => { if (cryAnimTimer.current) clearTimeout(cryAnimTimer.current) }, [])
   const [selectedForm, setSelectedForm] = useState(0)
   const [previousPokemon, setPreviousPokemon] = useState<{ id: number; name: string } | null>(null)
   const [nextPokemon, setNextPokemon] = useState<{ id: number; name: string } | null>(null)
@@ -122,10 +126,21 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
     const currentForm = getCurrentForm()
     if (currentForm?.cries?.latest) {
       setAudioPlaying(true)
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (!reducedMotion) {
+        if (cryAnimTimer.current) clearTimeout(cryAnimTimer.current)
+        setCryAnimating(true)
+      }
+      // Keep the animation a moment after the cry (cries are ~1 s, the loops about 2 s)
+      const stop = () => {
+        setAudioPlaying(false)
+        if (cryAnimTimer.current) clearTimeout(cryAnimTimer.current)
+        cryAnimTimer.current = setTimeout(() => setCryAnimating(false), 1800)
+      }
       const audio = new Audio(currentForm.cries.latest)
-      audio.onended = () => setAudioPlaying(false)
-      audio.onerror = () => setAudioPlaying(false)
-      audio.play().catch(() => setAudioPlaying(false))
+      audio.onended = stop
+      audio.onerror = stop
+      audio.play().catch(stop)
     }
   }
 
@@ -187,6 +202,8 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
         // 475px official artwork: the local WebP copies are 300px, too soft for the big card on retina screens
         normalHiRes: form.sprites.other?.['official-artwork']?.front_default || null,
         shinyHiRes: form.sprites.other?.['official-artwork']?.front_shiny || null,
+        normalAnimated: showdownOf(form)?.front_default || null,
+        shinyAnimated: showdownOf(form)?.front_shiny || null,
       }
     })
   }
@@ -201,6 +218,12 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
     const forms = getAllForms()
     const currentForm = forms[selectedForm] || forms[0]
     return (showShiny ? currentForm?.shinyHiRes : currentForm?.normalHiRes) || null
+  }
+
+  const getCurrentAnimated = () => {
+    const forms = getAllForms()
+    const currentForm = forms[selectedForm] || forms[0]
+    return (showShiny ? currentForm?.shinyAnimated : currentForm?.normalAnimated) || null
   }
 
   const getCurrentForm = () => {
@@ -427,6 +450,8 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                     key={getCurrentSprite()}
                     src={getCurrentSprite() || '/pokemon-placeholder.png'}
                     hiRes={getCurrentHiRes()}
+                    animated={getCurrentAnimated()}
+                    playing={cryAnimating}
                     alt={getEnglishName()}
                   />
                 </div>
@@ -926,11 +951,24 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
 
 // The local 300px WebP shows at once; the sharper official artwork fades in over it once loaded
 // (and is simply skipped if GitHub fails), so the page never waits on the network
-function HiResArt({ src, hiRes, alt }: { src: string; hiRes: string | null; alt: string }) {
+// Showdown sprites (animated GIFs of the game models) are not in the pokedex-promise-v2 types
+function showdownOf(form: Pokemon) {
+  const other = form.sprites.other as { showdown?: { front_default?: string | null; front_shiny?: string | null } } | undefined
+  return other?.showdown
+}
+
+// While `playing`, the animated sprite replaces the still art (only once it has loaded; a failed GIF keeps the still)
+function HiResArt({ src, hiRes, animated, playing, alt }: {
+  src: string; hiRes: string | null; animated: string | null; playing: boolean; alt: string
+}) {
   const [ready, setReady] = useState(false)
   const [failed, setFailed] = useState(false)
+  const [gifSize, setGifSize] = useState<number | null>(null)
+  const [gifFailed, setGifFailed] = useState(false)
+  const showGif = playing && !!animated && !gifFailed && gifSize != null
   return (
     <>
+      <div className="absolute inset-0" style={{ opacity: showGif ? 0 : 1, transform: showGif ? 'scale(.92)' : 'none', transition: 'opacity .2s ease, transform .2s ease' }}>
       <Image
         src={src}
         alt={hiRes && ready ? '' : alt}
@@ -951,6 +989,29 @@ function HiResArt({ src, hiRes, alt }: { src: string; hiRes: string | null; alt:
           decoding="async"
           onLoad={() => setReady(true)}
           onError={() => setFailed(true)}
+        />
+      )}
+      </div>
+      {/* Mounted on the first cry so the GIF only downloads when asked for; it restarts on every play */}
+      {animated && !gifFailed && (playing || gifSize != null) && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          key={playing ? 'on' : 'off'}
+          src={animated}
+          alt=""
+          aria-hidden
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 drop-shadow-xl pointer-events-none"
+          style={{
+            // Showdown sprites are ~60-150 px: draw them 2.2x with crisp pixels, never wider than the card art
+            width: gifSize ? Math.min(gifSize * 2.2, 288) : undefined,
+            maxWidth: '100%',
+            imageRendering: 'pixelated',
+            opacity: showGif ? 1 : 0,
+            transition: 'opacity .2s ease',
+          }}
+          draggable={false}
+          onLoad={e => setGifSize(e.currentTarget.naturalWidth)}
+          onError={() => setGifFailed(true)}
         />
       )}
     </>
