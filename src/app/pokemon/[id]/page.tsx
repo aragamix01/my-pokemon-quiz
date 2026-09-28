@@ -982,8 +982,6 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
   )
 }
 
-// The local 300px WebP shows at once; the sharper official artwork fades in over it once loaded
-// (and is simply skipped if GitHub fails), so the page never waits on the network
 // Showdown sprites (animated GIFs of the game models) are not in the pokedex-promise-v2 types
 function showdownOf(form: Pokemon) {
   const other = form.sprites.other as { showdown?: { front_default?: string | null; front_shiny?: string | null } } | undefined
@@ -991,35 +989,42 @@ function showdownOf(form: Pokemon) {
 }
 
 // The local 300px WebP shows at once; the sharper official artwork fades in over it once loaded
-// (and is simply skipped if GitHub fails), so the page never waits on the network
+// (and is simply skipped if GitHub fails), so the page never waits on the network.
+// Only the top image fades: the local one stays fully opaque underneath until the fade ends, so the art never
+// dips to half transparency mid-swap (a two-way cross-fade blinks). One drop shadow on the wrapper, not per image
 function HiResArt({ src, hiRes, alt }: { src: string; hiRes: string | null; alt: string }) {
   const [ready, setReady] = useState(false)
+  const [swapped, setSwapped] = useState(false)
   const [failed, setFailed] = useState(false)
+  const showHiRes = !!hiRes && !failed
   return (
-    <>
-      <Image
-        src={src}
-        alt={hiRes && ready ? '' : alt}
-        fill
-        className="object-contain drop-shadow-xl"
-        style={{ opacity: hiRes && ready ? 0 : 1, transition: 'opacity .25s ease' }}
-        draggable={false}
-        priority
-      />
-      {hiRes && !failed && (
+    <div className="absolute inset-0 drop-shadow-xl">
+      {!swapped && (
+        <Image
+          src={src}
+          alt={showHiRes && ready ? '' : alt}
+          fill
+          className="object-contain"
+          draggable={false}
+          priority
+        />
+      )}
+      {showHiRes && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={hiRes}
           alt={ready ? alt : ''}
-          className="absolute inset-0 w-full h-full object-contain drop-shadow-xl"
-          style={{ opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }}
+          className="absolute inset-0 w-full h-full object-contain"
+          style={{ opacity: ready ? 1 : 0, transition: 'opacity .35s ease' }}
           draggable={false}
           decoding="async"
-          onLoad={() => setReady(true)}
+          // decode() first, so the fade starts on a fully painted frame instead of a half-decoded one
+          onLoad={e => { e.currentTarget.decode().catch(() => undefined).then(() => setReady(true)) }}
+          onTransitionEnd={() => { if (ready) setSwapped(true) }}
           onError={() => setFailed(true)}
         />
       )}
-    </>
+    </div>
   )
 }
 
