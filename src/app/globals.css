@@ -779,6 +779,14 @@ h1, h2, h3 { font-family: var(--font-heading); }
   to { box-shadow: 0 0 18px -8px color-mix(in srgb, var(--glow, #fff) 42%, transparent); }
 }
 
+/* Holo switch off (header button, <html data-foil="off">): plain cards, no foil, tilt, glow or auto-shine */
+[data-foil="off"] .nx-holo-foil, [data-foil="off"] .nx-holo-fx,
+[data-foil="off"] .nx-holo-sparkle, [data-foil="off"] .nx-holo-glare { display: none; }
+[data-foil="off"] .nx-holo, [data-foil="off"] .nx-holo.active,
+[data-foil="off"] .nx-typecard.nx-holo:hover, [data-foil="off"] .nx-pokerow.nx-holo:hover { transform: none; }
+[data-foil="off"] .nx-holo.glow.active { box-shadow: none; }
+[data-foil="off"] .nx-holo.glow-idle:not(.active) { animation: none; }
+
 @media (prefers-reduced-motion: reduce) {
   .nx-holo, .nx-holo.active, .nx-typecard.nx-holo:hover, .nx-pokerow.nx-holo:hover { transform: none; transition: none; }
   .nx-holo-foil, .nx-holo.active .nx-holo-sparkle, .nx-holo.glow-idle:not(.active) { animation: none; }

@@ -3,8 +3,8 @@
 import { Suspense, useEffect, useRef, useState, FormEvent } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { Moon, Sun, SquaresFour, GameController, MagnifyingGlass, X } from '@phosphor-icons/react'
-import { useTheme } from '@/lib/theme'
+import { Moon, Sun, SquaresFour, GameController, MagnifyingGlass, X, Rainbow } from '@phosphor-icons/react'
+import { useTheme, useFoil } from '@/lib/theme'
 import { cn } from '@/lib/cn'
 
 type NavId = 'pokedex' | 'types' | 'learn'
@@ -58,6 +58,23 @@ function ThemeToggle() {
       title={dark ? 'Light theme' : 'Dark theme'}
     >
       {dark ? <Sun size={20} weight="bold" /> : <Moon size={20} weight="bold" />}
+    </button>
+  )
+}
+
+/** Turns the holo foil (and the detail card's auto-shine) on or off everywhere */
+function FoilToggle() {
+  const [on, setFoil] = useFoil()
+  return (
+    <button
+      type="button"
+      className={cn('dex-iconbtn', !on && 'opacity-60')}
+      onClick={() => setFoil(!on)}
+      aria-pressed={on}
+      aria-label={on ? 'Turn holo foil off' : 'Turn holo foil on'}
+      title={on ? 'Holo foil on' : 'Holo foil off'}
+    >
+      <Rainbow size={20} weight={on ? 'fill' : 'bold'} />
     </button>
   )
 }
@@ -203,6 +220,7 @@ export default function AppHeader() {
           <Nav />
           <div className="hidden xl:block w-[260px]"><HeaderSearch /></div>
         </Suspense>
+        <FoilToggle />
         <ThemeToggle />
       </div>
       <Suspense fallback={null}>

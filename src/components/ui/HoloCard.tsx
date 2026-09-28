@@ -2,6 +2,7 @@
 
 import { CSSProperties, HTMLAttributes, useRef, useEffect, PointerEvent } from 'react'
 import { cn } from '@/lib/cn'
+import { foilEnabled } from '@/lib/theme'
 
 /** Foil finishes (styles .fx-* in globals.css). "cosmos" is the original rainbow sheen with stars */
 export const FOIL_FINISHES = ['cosmos', 'glitter', 'sunburst', 'shatter', 'etched', 'bubbles', 'ripple', 'frame'] as const
@@ -65,7 +66,7 @@ export function HoloCard({
   /** Light the card as if the pointer were at (x, y), both 0..1 */
   const shineAt = (x: number, y: number) => {
     const el = ref.current
-    if (!el) return
+    if (!el || !foilEnabled()) return
     el.style.setProperty('--mx', `${x * 100}%`)
     el.style.setProperty('--my', `${y * 100}%`)
     el.style.setProperty('--rx', `${(0.5 - y) * 14}deg`)
@@ -111,7 +112,7 @@ export function HoloCard({
     // The pause starts after each sweep ends, so a sweep never eats into it
     const wait = () => { timer = window.setTimeout(sweep, autoShine) }
     const sweep = () => {
-      if (touched.current || document.hidden) return wait()
+      if (touched.current || document.hidden || !foilEnabled()) return wait()
       const start = performance.now()
       const step = (now: number) => {
         if (touched.current) return wait()
