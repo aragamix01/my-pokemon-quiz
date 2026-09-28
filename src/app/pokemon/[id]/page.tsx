@@ -26,7 +26,7 @@ import { cn } from '@/lib/cn'
 import { markViewed } from '@/lib/recently-viewed'
 import { formatPokemonName } from '@/lib/pokemon-names'
 import PokemonArt from '@/components/learn/PokemonArt'
-import { CaretLeft, CaretRight, Sparkle, SpeakerHigh, CaretDown, CaretUp } from '@phosphor-icons/react'
+import { CaretLeft, CaretRight, Sparkle, SpeakerHigh, CaretDown, CaretUp, Play, Stop } from '@phosphor-icons/react'
 
 interface PokemonData {
   pokemon: Pokemon
@@ -45,10 +45,14 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
   const [movesExpanded, setMovesExpanded] = useState(false)
   const [expandedAbility, setExpandedAbility] = useState<string | null>(null)
   const [audioPlaying, setAudioPlaying] = useState(false)
-  // The cry button also plays the Showdown animated sprite in the card, for the cry plus a short tail
-  const [cryAnimating, setCryAnimating] = useState(false)
-  const cryAnimTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  useEffect(() => () => { if (cryAnimTimer.current) clearTimeout(cryAnimTimer.current) }, [])
+  // Battle stage: the play button shrinks the artwork back and shows the Showdown animated sprite
+  // at its own size on a platform (never stretched over the sharp artwork), then returns by itself
+  const [stage, setStage] = useState<'off' | 'loading' | 'on'>('off')
+  const [stageFailed, setStageFailed] = useState<string | null>(null)
+  const stageTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  useEffect(() => () => { if (stageTimer.current) clearTimeout(stageTimer.current) }, [])
+  // A new Pokemon starts with its artwork, not a stage left over from the previous one
+  useEffect(() => { setStage('off') }, [resolvedParams.id])
   const [selectedForm, setSelectedForm] = useState(0)
   const [previousPokemon, setPreviousPokemon] = useState<{ id: number; name: string } | null>(null)
   const [nextPokemon, setNextPokemon] = useState<{ id: number; name: string } | null>(null)
@@ -126,21 +130,10 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
     const currentForm = getCurrentForm()
     if (currentForm?.cries?.latest) {
       setAudioPlaying(true)
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      if (!reducedMotion) {
-        if (cryAnimTimer.current) clearTimeout(cryAnimTimer.current)
-        setCryAnimating(true)
-      }
-      // Keep the animation a moment after the cry (cries are ~1 s, the loops about 2 s)
-      const stop = () => {
-        setAudioPlaying(false)
-        if (cryAnimTimer.current) clearTimeout(cryAnimTimer.current)
-        cryAnimTimer.current = setTimeout(() => setCryAnimating(false), 1800)
-      }
       const audio = new Audio(currentForm.cries.latest)
-      audio.onended = stop
-      audio.onerror = stop
-      audio.play().catch(stop)
+      audio.onended = () => setAudioPlaying(false)
+      audio.onerror = () => setAudioPlaying(false)
+      audio.play().catch(() => setAudioPlaying(false))
     }
   }
 
@@ -224,6 +217,20 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
     const forms = getAllForms()
     const currentForm = forms[selectedForm] || forms[0]
     return (showShiny ? currentForm?.shinyAnimated : currentForm?.normalAnimated) || null
+  }
+
+  const endStage = () => {
+    if (stageTimer.current) clearTimeout(stageTimer.current)
+    setStage('off')
+  }
+  const toggleStage = () => {
+    if (stage !== 'off') return endStage()
+    setStage('loading')
+  }
+  const onStageReady = () => {
+    setStage(current => (current === 'loading' ? 'on' : current))
+    if (stageTimer.current) clearTimeout(stageTimer.current)
+    stageTimer.current = setTimeout(() => setStage('off'), 6000)
   }
 
   const getCurrentForm = () => {
@@ -409,8 +416,8 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                   style={{ color: 'rgba(255,255,255,0.2)' }}
                 />
                 <span
-                  className="absolute left-5 bottom-3 font-number font-bold text-6xl sm:text-7xl leading-none pointer-events-none"
-                  style={{ color: 'rgba(255,255,255,0.26)' }}
+                  className="absolute left-5 bottom-3 font-number font-bold text-6xl sm:text-7xl leading-none pointer-events-none transition-opacity duration-300"
+                  style={{ color: 'rgba(255,255,255,0.26)', opacity: stage === 'on' ? 0 : 1 }}
                   aria-hidden
                 >
                   {String(data.species.id).padStart(3, '0')}
@@ -446,15 +453,41 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                   </button>
                 </div>
                 <div className="absolute left-1/2 top-[53%] -translate-x-1/2 -translate-y-1/2 w-56 h-56 sm:w-72 sm:h-72">
-                  <HiResArt
-                    key={getCurrentSprite()}
-                    src={getCurrentSprite() || '/pokemon-placeholder.png'}
-                    hiRes={getCurrentHiRes()}
-                    animated={getCurrentAnimated()}
-                    playing={cryAnimating}
-                    alt={getEnglishName()}
-                  />
+                  <div
+                    className="absolute inset-0 transition-[transform,opacity] duration-500 ease-out motion-reduce:transition-none"
+                    style={stage === 'on' ? { transform: 'translateY(-30%) scale(0.58)', opacity: 0.45 } : undefined}
+                  >
+                    <HiResArt
+                      key={getCurrentSprite()}
+                      src={getCurrentSprite() || '/pokemon-placeholder.png'}
+                      hiRes={getCurrentHiRes()}
+                      alt={getEnglishName()}
+                    />
+                  </div>
                 </div>
+                {/* Bottom corner, not the top row: a 4th button there overflows the card on phones */}
+                {getCurrentAnimated() && stageFailed !== getCurrentAnimated() && (
+                  <button
+                    type="button"
+                    className="dex-iconbtn absolute right-4 bottom-4 z-[2]"
+                    onClick={toggleStage}
+                    aria-pressed={stage !== 'off'}
+                    aria-label={stage !== 'off' ? 'Stop animation' : 'Play animation'}
+                    title={stage !== 'off' ? 'Stop animation' : 'Play animation'}
+                    style={stage !== 'off' ? { background: '#fff', color: getTypeColorForPage() } : undefined}
+                  >
+                    {stage !== 'off' ? <Stop size={20} weight="fill" /> : <Play size={20} weight="bold" />}
+                  </button>
+                )}
+                {stage !== 'off' && getCurrentAnimated() && (
+                  <BattleStage
+                    key={getCurrentAnimated()!}
+                    src={getCurrentAnimated()!}
+                    visible={stage === 'on'}
+                    onReady={onStageReady}
+                    onFail={() => { setStageFailed(getCurrentAnimated()); endStage() }}
+                  />
+                )}
               </HoloCard>
 
               {/* Forms */}
@@ -957,18 +990,13 @@ function showdownOf(form: Pokemon) {
   return other?.showdown
 }
 
-// While `playing`, the animated sprite replaces the still art (only once it has loaded; a failed GIF keeps the still)
-function HiResArt({ src, hiRes, animated, playing, alt }: {
-  src: string; hiRes: string | null; animated: string | null; playing: boolean; alt: string
-}) {
+// The local 300px WebP shows at once; the sharper official artwork fades in over it once loaded
+// (and is simply skipped if GitHub fails), so the page never waits on the network
+function HiResArt({ src, hiRes, alt }: { src: string; hiRes: string | null; alt: string }) {
   const [ready, setReady] = useState(false)
   const [failed, setFailed] = useState(false)
-  const [gifSize, setGifSize] = useState<number | null>(null)
-  const [gifFailed, setGifFailed] = useState(false)
-  const showGif = playing && !!animated && !gifFailed && gifSize != null
   return (
     <>
-      <div className="absolute inset-0" style={{ opacity: showGif ? 0 : 1, transform: showGif ? 'scale(.92)' : 'none', transition: 'opacity .2s ease, transform .2s ease' }}>
       <Image
         src={src}
         alt={hiRes && ready ? '' : alt}
@@ -991,29 +1019,39 @@ function HiResArt({ src, hiRes, animated, playing, alt }: {
           onError={() => setFailed(true)}
         />
       )}
-      </div>
-      {/* Mounted on the first cry so the GIF only downloads when asked for; it restarts on every play */}
-      {animated && !gifFailed && (playing || gifSize != null) && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          key={playing ? 'on' : 'off'}
-          src={animated}
-          alt=""
-          aria-hidden
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 drop-shadow-xl pointer-events-none"
-          style={{
-            // Showdown sprites are ~60-150 px: draw them 2.2x with crisp pixels, never wider than the card art
-            width: gifSize ? Math.min(gifSize * 2.2, 288) : undefined,
-            maxWidth: '100%',
-            imageRendering: 'pixelated',
-            opacity: showGif ? 1 : 0,
-            transition: 'opacity .2s ease',
-          }}
-          draggable={false}
-          onLoad={e => setGifSize(e.currentTarget.naturalWidth)}
-          onError={() => setGifFailed(true)}
-        />
-      )}
     </>
+  )
+}
+
+// Battle platform at the bottom of the card with the animated sprite at its own size (1x, never stretched).
+// Mounted only while the stage is asked for, so the GIF downloads on the first tap
+function BattleStage({ src, visible, onReady, onFail }: {
+  src: string; visible: boolean; onReady: () => void; onFail: () => void
+}) {
+  return (
+    <div
+      className="absolute inset-x-0 bottom-0 h-[46%] pointer-events-none transition-opacity duration-300 motion-reduce:transition-none"
+      style={{ opacity: visible ? 1 : 0 }}
+      aria-hidden
+    >
+      <div
+        className="absolute left-1/2 bottom-[14%] -translate-x-1/2 w-[78%] h-[26%] rounded-[50%]"
+        style={{
+          background: 'radial-gradient(closest-side, rgba(255,255,255,0.42), rgba(255,255,255,0.18) 70%, rgba(255,255,255,0))',
+          boxShadow: 'inset 0 -6px 14px rgba(0,0,0,0.12)',
+        }}
+      />
+      <div className="absolute left-1/2 bottom-[21%] -translate-x-1/2 w-[34%] h-[7%] rounded-[50%]" style={{ background: 'rgba(0,0,0,0.22)' }} />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt=""
+        className="absolute left-1/2 bottom-[24%] -translate-x-1/2 max-w-none"
+        style={{ filter: 'drop-shadow(0 6px 8px rgba(0,0,0,0.25))' }}
+        draggable={false}
+        onLoad={onReady}
+        onError={onFail}
+      />
+    </div>
   )
 }
