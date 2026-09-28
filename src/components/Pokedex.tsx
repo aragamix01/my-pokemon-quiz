@@ -372,10 +372,7 @@ export default function Pokedex() {
       // Restore ALL filter states
       console.log('🔍 Restoring filter states...')
       
-      if (savedSearchTerm) {
-        console.log('Restoring search term:', savedSearchTerm)
-        setSearchTerm(savedSearchTerm)
-      }
+      // The search term is not restored here: it lives in the URL (?q=), which the header search owns
       
       if (savedSelectedTypes) {
         try {
@@ -955,6 +952,7 @@ export default function Pokedex() {
   }
 
   const clearHeaderSearch = () => {
+    clearSearch()
     const params = new URLSearchParams(searchParams.toString())
     params.delete('q')
     router.replace(`/?${params.toString()}`, { scroll: false })

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, use } from 'react'
+import { useState, useEffect, useCallback, useRef, use } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -225,22 +225,47 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
   }
 
 
-  // Section tabs follow the scroll: the last section whose top passed the tab bar is highlighted
+  // Section tabs follow the scroll: the last section whose top passed the tab bar is highlighted.
+  // At the very bottom the short last sections can never reach the top, so the lowest visible one wins.
+  // A tab click highlights its section right away and holds it while the page scrolls there
   const [activeSection, setActiveSection] = useState('about')
+  const clickedSection = useRef<{ id: string; until: number } | null>(null)
   useEffect(() => {
     if (!data) return
-    const onScroll = () => {
-      let current = 'about'
-      for (const s of DETAIL_SECTIONS) {
-        const el = document.getElementById(s.id)
-        if (el && el.getBoundingClientRect().top < 160) current = s.id
+    // Six rect reads per scroll event are cheap, so no frame throttling
+    const update = () => {
+      const held = clickedSection.current
+      if (held && performance.now() < held.until) return setActiveSection(held.id)
+      clickedSection.current = null
+      const tops = DETAIL_SECTIONS
+        .map(s => ({ id: s.id, el: document.getElementById(s.id) }))
+        .filter((s): s is { id: string; el: HTMLElement } => !!s.el)
+        .map(s => ({ id: s.id, top: s.el.getBoundingClientRect().top }))
+      if (tops.length === 0) return
+      let current = tops[0].id
+      tops.forEach(t => { if (t.top < 160) current = t.id })
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4
+      if (atBottom) {
+        const visible = tops.filter(t => t.top < window.innerHeight - 80)
+        if (visible.length) current = visible[visible.length - 1].id
       }
       setActiveSection(current)
     }
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    const onScroll = () => update()
+    update()
+    // capture: also catches scrolling inside any container, not only the window
+    document.addEventListener('scroll', onScroll, { passive: true, capture: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      document.removeEventListener('scroll', onScroll, { capture: true })
+      window.removeEventListener('resize', onScroll)
+    }
   }, [data]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const jumpToSection = (id: string) => {
+    clickedSection.current = { id, until: performance.now() + 900 }
+    setActiveSection(id)
+  }
 
   const DETAIL_SECTIONS = [
     { id: 'about', label: 'About' },
@@ -420,6 +445,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                     key={s.id}
                     href={`#${s.id}`}
                     className={cn(activeSection === s.id && 'on')}
+                    onClick={() => jumpToSection(s.id)}
                     aria-current={activeSection === s.id ? 'location' : undefined}
                   >
                     {s.label}
