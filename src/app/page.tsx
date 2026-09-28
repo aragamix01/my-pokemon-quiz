@@ -7,98 +7,77 @@ import GenerationSelector from '@/components/GenerationSelector'
 import TypeAdvantage from '@/components/TypeAdvantage'
 import LearnMenu from '@/components/LearnMenu'
 import { GenerationNumber } from '@/types/pokemon'
-import { Tabs, TabItem } from '@/components/ui/Tabs'
-import { DeviceMobile, Sword, Question, ShieldStar, GraduationCap } from '@phosphor-icons/react'
 
-const TABS: TabItem[] = [
-  { id: 'pokedex', label: 'Pokedex', icon: <DeviceMobile size={16} /> },
-  { id: 'types', label: 'Type Chart', icon: <Sword size={16} /> },
-  { id: 'quiz', label: "Who's that Pokemon?", icon: <Question size={16} /> },
-  { id: 'learn', label: 'Learn', icon: <GraduationCap size={16} /> },
-]
-
-type Section = 'quiz' | 'pokedex' | 'types' | 'learn'
-const SECTIONS: Section[] = ['quiz', 'pokedex', 'types', 'learn']
+// Sections are picked from the header nav (?section=...). "quiz" is an old link, now part of Play & Learn
+type Section = 'pokedex' | 'types' | 'learn'
+const SECTIONS: Section[] = ['pokedex', 'types', 'learn']
 const isSection = (value: string | null): value is Section => value !== null && SECTIONS.indexOf(value as Section) !== -1
 
 function HomeContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [activeSection, setActiveSection] = useState<Section>('pokedex')
+  // Read the section on first render too, so a ?section=types link never flashes the Pokedex first
+  const [activeSection, setActiveSection] = useState<Section>(() => {
+    const section = searchParams.get('section')
+    return section === 'quiz' ? 'learn' : isSection(section) ? section : 'pokedex'
+  })
 
   useEffect(() => {
     const section = searchParams.get('section')
-    if (isSection(section)) {
+    if (section === 'quiz') {
+      setActiveSection('learn')
+    } else if (isSection(section)) {
       setActiveSection(section)
     } else {
-      // Check if we should restore active section from localStorage
-      const savedActiveSection = sessionStorage.getItem('active-section')
-      if (isSection(savedActiveSection)) {
-        setActiveSection(savedActiveSection)
+      // Plain "/": go back to the section used last in this tab, and put it in the URL so the header matches
+      const saved = sessionStorage.getItem('active-section')
+      if (isSection(saved) && saved !== 'pokedex') {
+        router.replace(`/?section=${saved}`)
       }
     }
-  }, [searchParams])
+  }, [searchParams, router])
 
-  // Save active section when it changes
   useEffect(() => {
     sessionStorage.setItem('active-section', activeSection)
   }, [activeSection])
 
   const startQuiz = (generation: GenerationNumber | null) => {
-    if (generation === null) {
-      router.push('/quiz/all')
-    } else {
-      router.push(`/quiz/${generation}`)
-    }
+    router.push(generation === null ? '/quiz/all' : `/quiz/${generation}`)
   }
 
   return (
-    <div className="min-h-screen relative">
-      <div className="relative z-10 max-w-6xl mx-auto p-2 sm:p-4">
-        {/* Header */}
-        <div className="mb-4 sm:mb-6">
-          <div className="flex items-center gap-2.5">
-            <ShieldStar size={24} color="var(--color-accent)" />
-            <h1
-              className="text-2xl md:text-3xl"
-              style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}
-            >
-              Pokemon Toolkit
-            </h1>
-          </div>
-          <div className="text-sm mt-1.5" style={{ color: 'var(--text-secondary)' }}>
-            Complete Pokemon companion tools — Pokedex, type chart, quizzes, and learning games.
-          </div>
-        </div>
+    <div className="max-w-6xl mx-auto">
+      {activeSection === 'pokedex' && <Pokedex />}
 
-        {/* Navigation */}
-        <Tabs
-          items={TABS}
-          activeId={activeSection}
-          onChange={(id) => setActiveSection(id as typeof activeSection)}
-          className="mb-4 sm:mb-6"
-        />
+      {activeSection === 'types' && (
+        <>
+          <SectionTitle title="Type Chart" subtitle="Attacking type on the left, defending type on top." />
+          <TypeAdvantage />
+        </>
+      )}
 
-        {/* Pokedex Section */}
-        {activeSection === 'pokedex' && <Pokedex />}
-
-        {/* Type Chart Section */}
-        {activeSection === 'types' && <TypeAdvantage />}
-
-        {/* Learn Section */}
-        {activeSection === 'learn' && <LearnMenu />}
-
-        {/* Quiz Section */}
-        {activeSection === 'quiz' && (
-          <div className="quiz-selection-area">
+      {activeSection === 'learn' && (
+        <>
+          <SectionTitle title="Play & Learn" subtitle="Quizzes and games to learn every name." />
+          <div className="quiz-selection-area mb-6">
             <GenerationSelector
-              title="Choose Your Region"
-              subtitle="💡 Identify Pokemon silhouettes • 10 questions per quiz • Score tracking"
+              title="Who's that Pokémon?"
+              subtitle="Name the silhouette · 10 questions per quiz"
               onGenerationSelect={startQuiz}
             />
           </div>
-        )}
-      </div>
+          <LearnMenu />
+        </>
+      )}
+    </div>
+  )
+}
+
+function SectionTitle({ title, subtitle }: { title: string; subtitle: string }) {
+  return (
+    <div className="mb-5">
+      <h1 className="font-display text-3xl sm:text-4xl font-bold leading-tight" style={{ color: 'var(--color-text)' }}>{title}</h1>
+      <p className="text-sm sm:text-base mt-1" style={{ color: 'var(--text-secondary)' }}>{subtitle}</p>
     </div>
   )
 }

@@ -781,6 +781,10 @@ export default function Pokedex() {
       return (
         <HoloCard
           still
+          finish="random"
+          seed={pokemonData.id}
+          glow
+          glowColor={cardColor}
           key={pokemonData.id}
           className="nx-pokerow typed"
           style={{ background: cardColor }}
@@ -829,9 +833,13 @@ export default function Pokedex() {
     return (
       <HoloCard
         still
+        finish="random"
+        seed={pokemonData.id}
+        glow
+        glowColor={cardColor}
         key={pokemonData.id}
         className="nx-typecard"
-        style={{ background: cardColor, boxShadow: `0 6px 16px -6px ${cardColor}` }}
+        style={{ background: cardColor }}
         onClick={() => handlePokemonClick(pokemonData.id)}
         data-pokemon-id={pokemonData.id}
       >

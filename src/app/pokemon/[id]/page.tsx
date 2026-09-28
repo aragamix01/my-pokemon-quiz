@@ -306,8 +306,12 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                 {/* Artwork and types on a foil panel in the first type's color, like a holo trading card */}
                 <HoloCard
                   autoShine={5000}
+                  finish="random"
+                  seed={data.species.id}
+                  glow="idle"
+                  glowColor={getTypeColorForPage()}
                   className="rounded-xl mb-4 px-3 pt-3 pb-3"
-                  style={{ background: getTypeColorForPage(), boxShadow: `0 8px 20px -8px ${getTypeColorForPage()}` }}
+                  style={{ background: getTypeColorForPage() }}
                 >
                   <PokeballMark
                     className="absolute -right-6 -bottom-8 w-40 h-40 pointer-events-none"
@@ -658,7 +662,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                                     style={{ borderBottom: "1px solid var(--color-neutral-800)" }}
                                   >
                                     <td className="p-3 whitespace-nowrap">
-                                      <div className="capitalize font-medium text-white text-sm">
+                                      <div className="capitalize font-medium text-[color:var(--color-text)] text-sm">
                                         {moveName.replace('-', ' ')}
                                       </div>
                                     </td>
@@ -691,21 +695,21 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                                     </td>
                                     <td className="p-3 text-center font-mono">
                                       {moveData?.power ? (
-                                        <span className="font-semibold text-white text-sm">{moveData.power}</span>
+                                        <span className="font-semibold text-[color:var(--color-text)] text-sm">{moveData.power}</span>
                                       ) : (
                                         <span style={{ color: 'var(--text-muted)' }}>—</span>
                                       )}
                                     </td>
                                     <td className="p-3 text-center font-mono">
                                       {moveData?.pp !== null && moveData?.pp !== undefined ? (
-                                        <span className="text-white text-sm">{moveData.pp}</span>
+                                        <span className="text-[color:var(--color-text)] text-sm">{moveData.pp}</span>
                                       ) : (
                                         <span style={{ color: 'var(--text-muted)' }}>—</span>
                                       )}
                                     </td>
                                     <td className="p-3 text-center font-mono">
                                       {moveData?.accuracy ? (
-                                        <span className="text-white text-sm">{moveData.accuracy}%</span>
+                                        <span className="text-[color:var(--color-text)] text-sm">{moveData.accuracy}%</span>
                                       ) : moveData?.accuracy === null && moveData ? (
                                         <span style={{ color: 'var(--text-muted)' }}>—</span>
                                       ) : (
@@ -765,7 +769,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                               >
                                 {/* Move Name and Type */}
                                 <div className="flex justify-between items-start mb-2">
-                                  <h4 className="capitalize font-bold text-white text-sm">
+                                  <h4 className="capitalize font-bold text-[color:var(--color-text)] text-sm">
                                     {moveName.replace('-', ' ')}
                                   </h4>
                                   {moveData && (
@@ -798,7 +802,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                                   {/* Power */}
                                   <div className="text-xs">
                                     <span style={{ color: 'var(--text-secondary)' }}>Power: </span>
-                                    <span className="font-semibold text-white">
+                                    <span className="font-semibold text-[color:var(--color-text)]">
                                       {moveData?.power || '—'}
                                     </span>
                                   </div>
@@ -806,7 +810,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                                   {/* PP */}
                                   <div className="text-xs">
                                     <span style={{ color: 'var(--text-secondary)' }}>PP: </span>
-                                    <span className="text-white">
+                                    <span className="text-[color:var(--color-text)]">
                                       {moveData?.pp !== null && moveData?.pp !== undefined ? moveData.pp : '—'}
                                     </span>
                                   </div>
@@ -814,7 +818,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                                   {/* Accuracy */}
                                   <div className="text-xs">
                                     <span style={{ color: 'var(--text-secondary)' }}>Acc: </span>
-                                    <span className="text-white">
+                                    <span className="text-[color:var(--color-text)]">
                                       {moveData?.accuracy ? `${moveData.accuracy}%` : '—'}
                                     </span>
                                   </div>

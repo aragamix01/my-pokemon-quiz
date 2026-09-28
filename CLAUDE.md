@@ -65,7 +65,7 @@ Ultra-high-performance Pokemon directory with cross-generation capabilities:
 - **Learning Progress**: Cards show ★ (mastered) or ● (learning) from Flashcards progress, with a "Learning progress" filter (not met / learning / mastered)
 - **Random Button**: Opens a random Pokemon from the current filtered list
 - **Type-Colored Cards**: Cards and compact rows use the first type's soft color (`getTypeCardColor()` in `src/lib/type-card-colors.ts`, separate from the saturated badge colors), white text, a faint Pokeball watermark (`src/components/ui/PokeballMark.tsx`) and a big faded number. Card style `.nx-typecard` (name, Japanese name and type pills on the left, artwork bottom right); sprites use `lighten={false}` because the `lighten` blend mode washes them out on colored backgrounds
-- **Holo Foil Cards**: Cards and compact rows are `HoloCard`s with `still` (foil and glare follow the pointer with a small tilt; no idle drift animation, so large grids stay cheap)
+- **Holo Foil Cards**: Cards and compact rows are `HoloCard`s with `still`, `finish="random"` (seeded by Pokemon id) and `glow` (foil and glare follow the pointer with a small tilt; no idle drift or idle glow, so large grids stay cheap)
 - **Compact View**: "Cards / Compact" toggle above the grid switches to small type-colored row cards (round sprite, name, round type icons via `src/components/ui/TypeIcon.tsx`, number; `.nx-pokerow` in globals.css), 2-4 per row, remembered in localStorage `pokedex-compact-view`
 - **Browse by Game**: Pick a game's own Pokedex (Paldea, Galar, Kitakami, Lumiose...) instead of a generation; list uses that game's order and numbers (`regionalDex` in `usePokemonFilter`, a mode rather than a filter so Reset keeps it)
 
@@ -77,6 +77,7 @@ Ultra-high-performance Pokemon directory with cross-generation capabilities:
 
 ## Pokemon Detail Pages
 Comprehensive individual Pokemon information pages featuring:
+- **Foil finishes**: `HoloCard` `finish` prop: cosmos (the original rainbow + stars), glitter, sunburst, shatter, etched, bubbles, ripple, frame (speckled silver border), or `random` = one picked by `foilFor(seed)` with its own angle, hue shift and grain, so each Pokemon always wears the same finish on its card and its page. `glow` adds a soft type-colored halo while lit, `glow="idle"` also a faint pulse at rest (styles `.nx-holo-fx`, `.fx-*`, `.nx-holo.glow` in globals.css; designed in the Foil Lab canvas)
 - **Holo Foil**: The artwork panel is a `HoloCard` (`src/components/ui/HoloCard.tsx`, `.nx-holo` in globals.css): it tilts toward the pointer or finger with a rainbow foil sheen, star sparkles (two SVG layers moving against each other, masked around the light) and glare; idle it only shows a faint sheen that drifts slowly (`still` turns the drift off). On the detail page `autoShine={5000}` sweeps a light across the card (1.4 s), then rests 5 seconds after each sweep ends, while nobody touches or hovers it (paused when the tab is hidden or with reduced motion), and stays flat with reduced motion
 - **Type Color**: Artwork and types sit on a panel in the first type's card color with a Pokeball watermark (same palette as Pokedex cards); the number badge and the card's top edge use it too. The right column has `min-w-0` so wide rows scroll (`.nx-scroll-x`, thin dark scrollbar) instead of widening the page
 - **Header**: Number, English name, Japanese romaji name and category ("Charizard / Lizardon · Flame Pokémon", from species `genera`)
@@ -137,18 +138,12 @@ Comprehensive Pokemon moves system with complete database:
 - **Model**: Xenova/all-MiniLM-L6-v2 (sentence transformers for semantic similarity)
 
 ## Theme
-- **Pixel Art Style**: Retro 8-bit/16-bit aesthetic with pixelated rendering
-- **Color Scheme**: Retro classic Pokemon pixel style with darker tones
-  - Background: Deep navy (#1a1a2e)
-  - Primary: Dark blue-gray (#16213e) 
-  - Accent: Coral red (#e94560)
-  - Not too light - maintains classic Game Boy Color feel
-- **Typography**: "Press Start 2P" pixel font for authentic retro gaming feel
-- **UI Elements**: 
-  - Pixel-perfect borders and buttons with 3D inset/outset effects
-  - Pokeball loading spinner with spinning animation
-  - Pokemon-themed colors with pixel-smooth image rendering
-- **Interactive Elements**: Buttons have classic pixel game feel with hover/press effects
+- **Pokedex device look**: red header shell with a blue lens and three lights, black band under it (`AppHeader` in `src/components/AppHeader.tsx`, rendered by the root layout on every page). Desktop nav tabs sit in the header (Pokédex / Type Chart / Play & Learn, all `/?section=...`); phones get a fixed bottom tab bar instead (`.dex-bottomnav`). Old `?section=quiz` links open Play & Learn, which holds the silhouette quiz picker plus the Learn menu
+- **Light and dark**: `<html data-theme>` picks the token set in `globals.css`; the moon/sun button in the header toggles it, saved in localStorage `pokemon-theme` (first visit follows the system). `THEME_INIT_SCRIPT` in `src/lib/theme.ts` sets it before paint; `useTheme()` gives the current theme to components that need literal colors (Recharts in `PokemonStatsChart`)
+- **Colors**: light = warm cream #f6f1e7 page, white surfaces, ink #1a1b22 text, Pokeball red #d8261b accent; dark = #111218 page, #1b1d26 surfaces, #f2eee6 text, #ff5a4e accent, Pikachu yellow #ffcb05 for selected chips. Neutral and accent scales run from strongest contrast (100) to closest to the surface (900) in both themes, so `--color-neutral-800` is always a subtle fill and `-100` readable text. Legacy names (`--card-bg`, `--text-secondary`...) point at the new tokens. Use tokens, not hex, for anything on page surfaces; white text is only for type-colored cards
+- **Typography**: Fredoka for headings (`.font-display`, h1-h3), Figtree for text, JetBrains Mono for numbers (`.font-number`), Kanit kept for Thai
+- **Shapes**: pill buttons and chips (`.nx-tab` active = yellow in dark, ink in light), 14-20px card radius, filled red `.btn-primary`
+- **Sprites**: `.lighten` blend mode is switched off in the light theme (it would wash sprites into the cream page)
 
 ## Data Fetching & Loading Architecture
 

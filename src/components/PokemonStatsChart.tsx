@@ -2,16 +2,27 @@
 
 import { RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts'
 import { ProgressBar } from '@/components/ui/ProgressBar'
+import { useTheme } from '@/lib/theme'
 
 // Recharts SVG props don't reliably resolve CSS custom properties, so mirror
-// the Nocturne tokens as literal hex here.
-const NOCTURNE = {
-  accent: '#9184d9',
-  accentLight: '#d2cefd',
-  text: '#e9e9ed',
-  textSecondary: '#b2b6ca',
-  neutral700: '#595d6c',
-  neutral800: '#3f424d',
+// the theme tokens (globals.css) as literal hex here, one set per theme.
+const PALETTES = {
+  dark: {
+    accent: '#ff5a4e',
+    accentLight: '#ffc2bc',
+    text: '#f2eee6',
+    textSecondary: '#a9acba',
+    neutral700: '#3a3d4c',
+    neutral800: '#2a2d3a',
+  },
+  light: {
+    accent: '#d8261b',
+    accentLight: '#fbe1dd',
+    text: '#1a1b22',
+    textSecondary: '#5d6070',
+    neutral700: '#d6ccba',
+    neutral800: '#ebe3d4',
+  },
 }
 
 interface PokemonStat {
@@ -27,6 +38,8 @@ interface PokemonStatsChartProps {
 }
 
 export default function PokemonStatsChart({ stats, showTotal = true }: PokemonStatsChartProps) {
+  const [theme] = useTheme()
+  const palette = PALETTES[theme]
   // Calculate dynamic scaling based on highest stat (with minimum of 100 for very weak Pokemon)
   const maxStat = Math.max(...stats.map(stat => stat.base_stat))
   const chartMax = Math.max(maxStat + 20, 100) // Add 20 for padding, minimum 100
@@ -74,29 +87,29 @@ export default function PokemonStatsChart({ stats, showTotal = true }: PokemonSt
         <ResponsiveContainer width="100%" height={220}>
           <RadarChart data={radarData} margin={{ top: 15, right: 15, bottom: 15, left: 15 }}>
             <PolarGrid
-              stroke={NOCTURNE.neutral700}
+              stroke={palette.neutral700}
               strokeWidth={0.8}
               strokeOpacity={0.5}
             />
             <PolarAngleAxis
               dataKey="stat"
               className="text-xs"
-              tick={{ fill: NOCTURNE.text, fontSize: 10, fontWeight: 500 }}
+              tick={{ fill: palette.text, fontSize: 10, fontWeight: 500 }}
             />
             <PolarRadiusAxis
               angle={90}
               domain={[0, chartMax]}
-              tick={{ fill: NOCTURNE.textSecondary, fontSize: 8 }}
+              tick={{ fill: palette.textSecondary, fontSize: 8 }}
               tickCount={4}
             />
             <Radar
               name="Stats"
               dataKey="value"
-              stroke={NOCTURNE.accent}
-              fill={NOCTURNE.accent}
+              stroke={palette.accent}
+              fill={palette.accent}
               fillOpacity={0.25}
               strokeWidth={2}
-              dot={{ fill: NOCTURNE.accentLight, r: 3, strokeWidth: 1, stroke: NOCTURNE.accent }}
+              dot={{ fill: palette.accentLight, r: 3, strokeWidth: 1, stroke: palette.accent }}
             />
           </RadarChart>
         </ResponsiveContainer>

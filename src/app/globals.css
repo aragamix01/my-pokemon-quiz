@@ -3,57 +3,124 @@
 @tailwind utilities;
 
 
-:root {
-  /* ===== Legacy variable names, repointed to Nocturne values =====
-     Kept so the ~150 existing inline style={{ var(--...) }} call sites
-     across the app pick up the new theme without per-file edits. */
-  --primary-bg: #161826;
-  --secondary-bg: #232532;
-  --card-bg: #232532;
-  --surface-bg: #232532;
-  --bg-secondary: #292b31;
-  --accent-color: #9184d9;
-  --accent-gradient: #9184d9;
-  --success-gradient: #5fae8a;
-  --error-gradient: #c97b7b;
-  --info-gradient: #796cbf;
-  --text-primary: #e9e9ed;
-  --text-secondary: color-mix(in srgb, #e9e9ed 75%, transparent);
-  --text-muted: #9397ab;
-  --border-color: color-mix(in srgb, #e9e9ed 16%, transparent);
+/* ===== Pokedex theme =====
+   Pokeball red + Pikachu yellow on warm cream (light) or deep ink (dark). <html data-theme> picks the set
+   (set before paint by THEME_INIT_SCRIPT in src/lib/theme.ts). Legacy names (--primary-bg, --card-bg...)
+   are kept so the many inline style={{ var(--...) }} call sites follow the theme without per-file edits.
+   The neutral and accent scales run from "strongest contrast with the page" (100) to "closest to the
+   surface" (900) in both themes, so 800 is always a subtle border/hover fill and 100 always readable text. */
+:root,
+:root[data-theme="dark"] {
+  --color-bg: #111218;
+  --color-surface: #1b1d26;
+  --color-surface-2: #252834;
+  --color-text: #f2eee6;
+  --color-accent: #ff5a4e;
+  --color-accent-2: #ffcb05;
+  --color-divider: #2f3242;
+
+  --color-neutral-100: #f2eee6;
+  --color-neutral-200: #e2ded6;
+  --color-neutral-300: #c9c6c0;
+  --color-neutral-400: #a9acba;
+  --color-neutral-500: #8a8d9b;
+  --color-neutral-600: #5f6272;
+  --color-neutral-700: #3a3d4c;
+  --color-neutral-800: #2a2d3a;
+  --color-neutral-900: #1f222c;
+
+  --color-accent-100: #ffe3e0;
+  --color-accent-200: #ffc2bc;
+  --color-accent-300: #ff9a90;
+  --color-accent-400: #ff7a6e;
+  --color-accent-500: #ff5a4e;
+  --color-accent-600: #e23b2e;
+  --color-accent-700: #b8231a;
+  --color-accent-800: #5a1a17;
+  --color-accent-900: #2e1214;
+
+  --dex-red: #b8231a;
+  --dex-red-2: #7e150f;
+  --dex-band: #050507;
+  --chip-on-bg: #ffcb05;
+  --chip-on-text: #1a1b22;
+
+  --shadow-sm: 0 0 0 1px #2a2d3a;
+  --shadow-md: 0 0 0 1px #3a3d4c, 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 0 0 1px #5f6272, 0 16px 40px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.4), 0 10px 30px rgba(0, 0, 0, 0.35);
   --shadow-color: rgba(0, 0, 0, 0.55);
 
-  /* ===== Nocturne tokens ===== */
-  --color-bg: #161826;
-  --color-surface: #232532;
-  --color-text: #e9e9ed;
-  --color-accent: #9184d9;
-  --color-accent-2: #a7a1db;
-  --color-divider: color-mix(in srgb, #e9e9ed 16%, transparent);
+  --success-gradient: #4cc38a;
+  --error-gradient: #ff7a6e;
+  --info-gradient: #7fa8ee;
+}
 
-  --color-neutral-100: #f3f5fe;
-  --color-neutral-200: #e4e7f5;
-  --color-neutral-300: #cfd3e5;
-  --color-neutral-400: #b2b6ca;
-  --color-neutral-500: #9397ab;
-  --color-neutral-600: #75798c;
-  --color-neutral-700: #595d6c;
-  --color-neutral-800: #3f424d;
-  --color-neutral-900: #292b31;
+:root[data-theme="light"] {
+  --color-bg: #f6f1e7;
+  --color-surface: #ffffff;
+  --color-surface-2: #ede5d6;
+  --color-text: #1a1b22;
+  --color-accent: #d8261b;
+  --color-accent-2: #b8860b;
+  --color-divider: #e0d6c4;
 
-  --color-accent-100: #f5f4ff;
-  --color-accent-200: #e7e5fe;
-  --color-accent-300: #d2cefd;
-  --color-accent-400: #b5abfc;
-  --color-accent-500: #968ae0;
-  --color-accent-600: #796cbf;
-  --color-accent-700: #5d5294;
-  --color-accent-800: #423a6a;
-  --color-accent-900: #2b2741;
+  --color-neutral-100: #1a1b22;
+  --color-neutral-200: #2e3040;
+  --color-neutral-300: #454857;
+  --color-neutral-400: #5d6070;
+  --color-neutral-500: #767988;
+  --color-neutral-600: #a7a499;
+  --color-neutral-700: #d6ccba;
+  --color-neutral-800: #ebe3d4;
+  --color-neutral-900: #f3eee4;
 
-  --font-heading: "Inter", var(--font-inter), system-ui, sans-serif;
-  --font-heading-weight: 500;
-  --font-body: "Inter", var(--font-inter), system-ui, sans-serif;
+  --color-accent-100: #7e150f;
+  --color-accent-200: #9a1c14;
+  --color-accent-300: #b8231a;
+  --color-accent-400: #c9261b;
+  --color-accent-500: #d8261b;
+  --color-accent-600: #e5574d;
+  --color-accent-700: #f0928a;
+  --color-accent-800: #fbe1dd;
+  --color-accent-900: #fdf0ee;
+
+  --dex-red: #d8261b;
+  --dex-red-2: #a81a12;
+  --dex-band: #1a1b22;
+  --chip-on-bg: #1a1b22;
+  --chip-on-text: #ffffff;
+
+  --shadow-sm: 0 0 0 1px #e6dccb;
+  --shadow-md: 0 0 0 1px #d6ccba, 0 8px 24px rgba(26, 27, 34, 0.1);
+  --shadow-lg: 0 0 0 1px #a7a499, 0 16px 40px rgba(26, 27, 34, 0.16);
+  --shadow-card: 0 1px 0 rgba(26, 27, 34, 0.06), 0 8px 24px rgba(26, 27, 34, 0.08);
+  --shadow-color: rgba(26, 27, 34, 0.18);
+
+  --success-gradient: #1f8a57;
+  --error-gradient: #c62a1f;
+  --info-gradient: #2a5fa8;
+}
+
+:root {
+  /* legacy names */
+  --primary-bg: var(--color-bg);
+  --secondary-bg: var(--color-surface);
+  --card-bg: var(--color-surface);
+  --surface-bg: var(--color-surface);
+  --bg-secondary: var(--color-surface-2);
+  --accent-color: var(--color-accent);
+  --accent-gradient: var(--color-accent);
+  --text-primary: var(--color-text);
+  --text-secondary: color-mix(in srgb, var(--color-text) 72%, transparent);
+  --text-muted: var(--color-neutral-400);
+  --border-color: var(--color-divider);
+
+  --font-display: var(--font-fredoka), "Fredoka", system-ui, sans-serif;
+  --font-heading: var(--font-fredoka), "Fredoka", system-ui, sans-serif;
+  --font-heading-weight: 600;
+  --font-body: var(--font-figtree), "Figtree", system-ui, sans-serif;
+  --font-number: var(--font-mono), ui-monospace, monospace;
 
   --space-1: 2.8px;
   --space-2: 5.6px;
@@ -62,13 +129,9 @@
   --space-6: 16.8px;
   --space-8: 22.4px;
 
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 14px;
-
-  --shadow-sm: 0 0 0 1px #3f424d;
-  --shadow-md: 0 0 0 1px #595d6c, 0 6px 18px rgba(0, 0, 0, 0.55);
-  --shadow-lg: 0 0 0 1px #9397ab, 0 16px 40px rgba(0, 0, 0, 0.65);
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
 }
 
 body {
@@ -80,7 +143,9 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
+h1, h2, h3 { font-family: var(--font-heading); }
 
 :focus { outline: none; }
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
@@ -102,6 +167,14 @@ body {
   .pixel-text {
     font-family: var(--font-body), var(--font-kanit), system-ui, sans-serif !important;
   }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-number {
+    font-family: var(--font-number);
+  }
 }
 
 /* Sprite treatment — dark/transparent backgrounds blend into the page. */
@@ -109,6 +182,8 @@ body {
   mix-blend-mode: lighten;
   background-color: transparent;
 }
+/* lighten would wash sprites into a light page, so the light theme shows them as they are */
+[data-theme="light"] .lighten { mix-blend-mode: normal; }
 
 /* Fading-edge rule — a Nocturne signature: rules fade to transparent
    at both ends (48px) instead of stopping cleanly. */
@@ -294,21 +369,26 @@ body {
   font-size: 14px; line-height: 1.2; color: var(--color-text);
   background: transparent; border: 1px solid transparent;
   padding: 0 20px; height: 44px;
-  border-radius: var(--radius-md);
+  border-radius: 999px;
   transition: background-color 0.15s ease, border-color 0.15s ease;
   white-space: nowrap;
 }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
-.btn-primary { color: var(--color-accent); border-color: var(--color-accent); }
-.btn-primary:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
-.btn-primary:active { background: color-mix(in srgb, var(--color-accent) 22%, transparent); }
-.btn-secondary { border-color: var(--color-neutral-700); }
-.btn-secondary:hover { background: var(--color-neutral-800); }
+.btn-primary {
+  color: #fff; background: var(--dex-red); border-color: var(--dex-red);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2); font-weight: 700;
+}
+.btn-primary:hover { background: var(--dex-red-2); border-color: var(--dex-red-2); }
+.btn-primary:active { box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.25); }
+.btn-primary:disabled:hover { background: var(--dex-red); }
+.btn-secondary { background: var(--color-surface); border: 1.5px solid var(--color-neutral-700); font-weight: 600; }
+.btn-secondary:hover { border-color: var(--color-neutral-500); }
 .btn-secondary:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
 .btn-ghost { color: var(--color-accent); padding-inline: var(--space-1); height: auto; }
 .btn-ghost:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
 .btn-ghost:active { background: color-mix(in srgb, var(--color-accent) 18%, transparent); }
 .btn-icon { width: 44px; height: 44px; padding: 0; border-radius: 50%; }
+.btn-primary.btn-icon { box-shadow: 0 6px 16px -6px var(--shadow-color); }
 .btn-block { width: 100%; }
 
 /* — tags/pills — */
@@ -332,7 +412,7 @@ body {
   font-family: var(--font-body); font-size: 14px; color: var(--color-text);
   caret-color: var(--color-accent);
   background: var(--color-surface);
-  border: 1px solid var(--color-neutral-700); border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-neutral-700); border-radius: 999px;
 }
 .input:hover { border-color: var(--color-neutral-600); }
 .input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
@@ -340,14 +420,14 @@ body {
 
 /* — tabs — */
 .nx-tab {
-  border: 1px solid var(--color-neutral-700); background: transparent; color: var(--color-text);
-  font-family: var(--font-body); font-size: 14px; font-weight: 500;
-  padding: 0 20px; height: 44px; border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-neutral-700); background: var(--color-surface); color: var(--color-text);
+  font-family: var(--font-body); font-size: 14px; font-weight: 600;
+  padding: 0 18px; height: 44px; border-radius: 999px;
   display: inline-flex; align-items: center; gap: 8px; cursor: pointer; white-space: nowrap;
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
-.nx-tab:hover { background: var(--color-neutral-800); }
-.nx-tab-active { border-color: var(--color-accent); color: var(--color-accent-100); box-shadow: 0 0 0 1px var(--color-accent) inset; }
+.nx-tab:hover { border-color: var(--color-neutral-500); }
+.nx-tab-active, .nx-tab-active:hover { background: var(--chip-on-bg); border-color: var(--chip-on-bg); color: var(--chip-on-text); }
 
 /* — region cards (generation picker) — */
 .nx-region {
@@ -357,7 +437,7 @@ body {
   transition: border-color 0.15s ease;
 }
 .nx-region:hover { border-color: var(--color-accent-600); }
-.nx-region-active { border-color: var(--color-accent); box-shadow: 0 0 0 1px var(--color-accent) inset; }
+.nx-region-active { border-color: var(--chip-on-bg); box-shadow: 0 0 0 1.5px var(--chip-on-bg) inset; }
 
 /* — pokemon card — */
 .nx-pokecard {
@@ -379,6 +459,7 @@ body {
   position: relative; overflow: hidden; display: block; text-align: left; cursor: pointer;
   min-height: 112px; padding: 10px 12px; border-radius: var(--radius-lg); color: #fff;
   transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  box-shadow: 0 6px 16px -8px var(--glow, transparent);
 }
 .nx-typecard:hover { transform: translateY(-2px); filter: brightness(1.05); }
 @media (min-width: 640px) { .nx-typecard { min-height: 132px; padding: 14px 16px; } }
@@ -400,7 +481,7 @@ body {
 
 /* — quiz options — */
 .nx-quizopt {
-  background: var(--color-surface); border: 1px solid var(--color-neutral-700);
+  background: var(--color-surface); border: 1.5px solid var(--color-neutral-700);
   border-radius: var(--radius-md); padding: 14px 20px; color: var(--color-text);
   font-family: var(--font-body); font-size: 15px; font-weight: 500; text-transform: capitalize;
   cursor: pointer; transition: background-color 0.15s ease, border-color 0.15s ease;
@@ -413,10 +494,10 @@ body {
 /* — cards — */
 .card {
   display: flex; flex-direction: column; gap: var(--space-2);
-  padding: var(--space-6); border-radius: var(--radius-md);
-  background: var(--color-surface); box-shadow: var(--shadow-sm);
+  padding: var(--space-6); border-radius: var(--radius-lg);
+  background: var(--color-surface); box-shadow: var(--shadow-card);
 }
-.card-kicker { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); }
+.card-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); }
 .card-title {
   font-family: var(--font-heading); font-weight: var(--font-heading-weight);
   font-size: 17px; line-height: 1.2; color: var(--color-text);
@@ -602,7 +683,155 @@ body {
   from { filter: brightness(1); }
   to { filter: brightness(1.8); }
 }
+/* Foil finishes from the Foil Lab design. HoloCard picks one per card (seeded by the Pokemon id, so a
+   Pokemon always wears the same one) and sets --a (angle), --h (hue shift) and --t (grain) on the card.
+   "cosmos" is the original foil above; the others replace .nx-holo-foil with a .nx-holo-fx layer.
+   Idle cards stay nearly plain; the finish lights up while touched or hovered. */
+.nx-holo-fx {
+  position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  mix-blend-mode: color-dodge; opacity: 0.05;
+  filter: hue-rotate(var(--h, 0deg)) saturate(1.3);
+  transition: opacity 0.35s ease;
+  background-image: repeating-linear-gradient(var(--a, 115deg),
+    #ff5f6d 0%, #ffc371 6%, #f8ff6b 12%, #6bffb8 18%, #5fc8ff 24%, #b36bff 30%, #ff5f6d 36%);
+  background-size: 300% 300%;
+  background-position: var(--pos);
+}
+.nx-holo.active .nx-holo-fx { opacity: 0.6; }
+.fx-glitter {
+  -webkit-mask-image: radial-gradient(circle at 30% 40%, #000 0 0.9px, transparent 1.4px), radial-gradient(circle at 70% 20%, #000 0 0.8px, transparent 1.3px), radial-gradient(circle at 45% 75%, #000 0 1.2px, transparent 1.7px), radial-gradient(circle at 15% 85%, #000 0 0.7px, transparent 1.1px);
+  mask-image: radial-gradient(circle at 30% 40%, #000 0 0.9px, transparent 1.4px), radial-gradient(circle at 70% 20%, #000 0 0.8px, transparent 1.3px), radial-gradient(circle at 45% 75%, #000 0 1.2px, transparent 1.7px), radial-gradient(circle at 15% 85%, #000 0 0.7px, transparent 1.1px);
+  -webkit-mask-size: calc(var(--t, 7) * 1px) calc(var(--t, 7) * 1px), 11px 11px, 13px 13px, 17px 17px;
+  mask-size: calc(var(--t, 7) * 1px) calc(var(--t, 7) * 1px), 11px 11px, 13px 13px, 17px 17px;
+  opacity: 0.1;
+}
+.nx-holo.active .fx-glitter { opacity: 0.7; }
+.fx-sunburst {
+  background-image:
+    repeating-conic-gradient(from var(--a, 0deg) at var(--mx) var(--my), transparent 0deg 3deg, rgba(255,255,255,0.75) 4deg, transparent 5deg 9deg),
+    repeating-linear-gradient(var(--a, 115deg), #ff5f6d 0%, #ffc371 6%, #f8ff6b 12%, #6bffb8 18%, #5fc8ff 24%, #b36bff 30%, #ff5f6d 36%);
+  background-size: 100% 100%, 300% 300%;
+  background-position: 0 0, var(--pos);
+}
+.nx-holo.active .fx-sunburst { opacity: 0.55; }
+.fx-shatter {
+  background-image:
+    repeating-linear-gradient(var(--a, 115deg), transparent 0 calc(var(--t, 7) * 3px), rgba(255,255,255,0.7) calc(var(--t, 7) * 3px) calc(var(--t, 7) * 3px + 1px)),
+    repeating-linear-gradient(calc(var(--a, 115deg) + 62deg), transparent 0 calc(var(--t, 7) * 4px), rgba(255,255,255,0.6) calc(var(--t, 7) * 4px) calc(var(--t, 7) * 4px + 1px)),
+    repeating-linear-gradient(calc(var(--a, 115deg) - 47deg), transparent 0 calc(var(--t, 7) * 5px), rgba(255,255,255,0.55) calc(var(--t, 7) * 5px) calc(var(--t, 7) * 5px + 1px)),
+    repeating-linear-gradient(var(--a, 115deg), #ff5f6d 0%, #ffc371 6%, #f8ff6b 12%, #6bffb8 18%, #5fc8ff 24%, #b36bff 30%, #ff5f6d 36%);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 300% 300%;
+  background-position: 0 0, 0 0, 0 0, var(--pos);
+}
+.fx-etched {
+  background-image:
+    repeating-linear-gradient(var(--a, 115deg), rgba(255,255,255,0.4) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(calc(var(--a, 115deg) + 90deg), #ff5f6d 0%, #ffc371 6%, #f8ff6b 12%, #6bffb8 18%, #5fc8ff 24%, #b36bff 30%, #ff5f6d 36%);
+  background-size: 100% 100%, 300% 300%;
+  background-position: 0 0, var(--pos);
+}
+.fx-bubbles {
+  -webkit-mask-image: radial-gradient(circle, #000 0 2px, transparent 2.6px 5px, #000 5.6px 6.8px, transparent 7.4px);
+  mask-image: radial-gradient(circle, #000 0 2px, transparent 2.6px 5px, #000 5.6px 6.8px, transparent 7.4px);
+  -webkit-mask-size: calc(var(--t, 7) * 2.4px) calc(var(--t, 7) * 2.4px);
+  mask-size: calc(var(--t, 7) * 2.4px) calc(var(--t, 7) * 2.4px);
+  opacity: 0.07;
+}
+.nx-holo.active .fx-bubbles { opacity: 0.45; }
+.fx-ripple {
+  background-image: repeating-radial-gradient(circle at var(--mx) var(--my), #ff5f6d 0, #ffc371 calc(var(--t, 7) * 1.5px), #6bffb8 calc(var(--t, 7) * 3px), #5fc8ff calc(var(--t, 7) * 4.5px), #b36bff calc(var(--t, 7) * 6px), #ff5f6d calc(var(--t, 7) * 7.5px));
+  background-size: 100% 100%;
+  background-position: 0 0;
+  opacity: 0.04;
+}
+.nx-holo.active .fx-ripple { opacity: 0.4; }
+/* Speckled silver border, like the frame of a reverse holo trading card; always visible, it shimmers as the card tilts */
+.fx-frame {
+  mix-blend-mode: normal; opacity: 1; filter: none;
+  padding: var(--fw, 6px); box-sizing: border-box;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  background-image:
+    radial-gradient(circle at 20% 30%, #fff 0 0.8px, transparent 1.3px),
+    radial-gradient(circle at 60% 70%, #ffc4ec 0 1px, transparent 1.5px),
+    radial-gradient(circle at 80% 20%, #b9f1ff 0 0.9px, transparent 1.4px),
+    radial-gradient(circle at 40% 80%, #fff29a 0 1px, transparent 1.5px),
+    radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,0.9), transparent 45%),
+    linear-gradient(160deg, #b9bfca, #eef1f5 35%, #aeb5c1 60%, #e7eaf0);
+  background-size: 5px 5px, 7px 7px, 9px 9px, 11px 11px, 100% 100%, 100% 100%;
+  background-position: var(--sx) var(--sy), calc(var(--sx) * -1) var(--sy), var(--sy) var(--sx), 0 0, 0 0, 0 0;
+}
+.nx-holo.active .fx-frame { opacity: 1; }
+.nx-pokerow .fx-frame { padding: 4px; }
+
+/* Glow: a soft halo in the card's type color (--glow) with a pink/cyan fringe, pushed away from the light.
+   Only while touched; glow="idle" adds a faint slow pulse at rest (detail page card) */
+.nx-holo.glow.active {
+  box-shadow:
+    var(--gx, 0px) var(--gy, 0px) 26px -8px color-mix(in srgb, var(--glow, #fff) 65%, transparent),
+    calc(var(--gx, 0px) * -1) calc(var(--gy, 0px) * -1) 30px -12px rgba(95, 200, 255, 0.3),
+    0 0 20px -10px rgba(255, 95, 109, 0.3);
+}
+.nx-holo.glow-idle:not(.active) { animation: nx-holo-breathe 3.6s ease-in-out infinite alternate; }
+@keyframes nx-holo-breathe {
+  from { box-shadow: 0 0 12px -8px color-mix(in srgb, var(--glow, #fff) 30%, transparent); }
+  to { box-shadow: 0 0 18px -8px color-mix(in srgb, var(--glow, #fff) 42%, transparent); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .nx-holo, .nx-holo.active, .nx-typecard.nx-holo:hover, .nx-pokerow.nx-holo:hover { transform: none; transition: none; }
-  .nx-holo-foil, .nx-holo.active .nx-holo-sparkle { animation: none; }
+  .nx-holo-foil, .nx-holo.active .nx-holo-sparkle, .nx-holo.glow-idle:not(.active) { animation: none; }
 }
+
+/* ══════ Pokedex header (AppHeader) ══════ */
+.dex-header {
+  position: relative; z-index: 30; color: #fff;
+  background: var(--dex-red);
+  border-bottom: 6px solid var(--dex-band);
+}
+.dex-lens {
+  flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: #fff;
+  display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 3px var(--dex-band);
+}
+.dex-lens > span {
+  position: relative; width: 32px; height: 32px; border-radius: 50%; background: #3b8fe8;
+  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.18);
+}
+.dex-lens > span::after {
+  content: ""; position: absolute; left: 22%; top: 18%; width: 28%; height: 28%;
+  border-radius: 50%; background: rgba(255, 255, 255, 0.75);
+}
+@media (min-width: 640px) {
+  .dex-lens { width: 56px; height: 56px; }
+  .dex-lens > span { width: 42px; height: 42px; }
+}
+.dex-led { width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 2px var(--dex-band); }
+.dex-navtab {
+  display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px;
+  border-radius: 999px; color: #fff; font-weight: 700; font-size: 15px; text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+.dex-navtab:hover { background: rgba(255, 255, 255, 0.14); }
+.dex-navtab.on { background: #fff; color: var(--dex-red-2); }
+.dex-iconbtn {
+  flex-shrink: 0; width: 44px; height: 44px; border: 0; border-radius: 999px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.16); color: #fff; transition: background-color 0.15s ease;
+}
+.dex-iconbtn:hover { background: rgba(255, 255, 255, 0.28); }
+.dex-iconbtn:focus-visible, .dex-navtab:focus-visible { outline-color: #fff; }
+.dex-bottomnav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+  display: flex; justify-content: space-around; align-items: center;
+  padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+  background: var(--color-surface); border-top: 1px solid var(--color-divider);
+  box-shadow: 0 -6px 20px -12px var(--shadow-color);
+}
+.dex-bottomnav a {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  min-width: 72px; min-height: 48px; border-radius: 14px;
+  color: var(--text-secondary); text-decoration: none; font-size: 11px; font-weight: 700;
+}
+.dex-bottomnav a.on { color: var(--color-accent); }
+[data-theme="dark"] .dex-bottomnav a.on { color: var(--color-accent-2); }
