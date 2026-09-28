@@ -951,7 +951,9 @@ h1, h2, h3 { font-family: var(--font-heading); }
 
 /* ══════ Type chart matrix ══════ */
 .nx-matrix { border-collapse: separate; border-spacing: 3px; }
-.nx-matrix th, .nx-matrix td { padding: 0; }
+.nx-matrix th, .nx-matrix td { padding: 0; vertical-align: middle; }
+/* block-level so empty cells and text cells sit on the same line (inline buttons align by text baseline) */
+.nx-matrix .colh, .nx-matrix .nx-cell { display: flex; align-items: center; justify-content: center; }
 .nx-matrix .corner {
   width: 92px; vertical-align: bottom; text-align: left; padding: 0 0 4px;
   font-size: 10px; font-weight: 800; line-height: 1.3; color: var(--text-secondary);
