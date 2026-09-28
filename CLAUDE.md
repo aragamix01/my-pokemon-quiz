@@ -26,6 +26,7 @@ Advanced Pokemon identification quiz with flexible generation support:
 - **Cross-Generation Mode**: `/quiz/all` route for ultimate challenge with all 1000+ Pokemon
 
 ## Learn Mode
+- **Play & Learn hub** (`LearnMenu`, home "Play & Learn" tab): "Practise with" chip row (All gens, Gen I-IX, Top 50/100/200, game Pokédex select), then a yellow Daily challenge card (streak, Pokédle and Pixel Reveal buttons with done checks), a red "Who's that Pokémon?" quiz card (silhouette; /quiz/<gen> or /quiz/all), a flashcards progress ring, and a grid of game tiles
 Tools for memorizing Pokemon names, reached from the home page "Learn" tab (`?section=learn`):
 - **Flashcards** (`/learn/[generation]`): Spaced repetition. Each Pokemon goes intro (see name + facts), then choose (4 look-alike options), then type (name from memory, with step-by-step hints and typo tolerance). Leitner boxes schedule reviews; box 4+ counts as mastered. Daily new-card limit (5/10/20), streak, and a collection grid (silhouettes for unseen Pokemon)
 - **Pokedle** (`/guess/[generation]`): Guess a hidden Pokemon in 8 tries; each guess compares type 1/2, generation, color, shape, height, weight (match / close / arrows). Silhouette hint after 4 guesses
@@ -44,6 +45,8 @@ Tools for memorizing Pokemon names, reached from the home page "Learn" tab (`?se
 - **Libraries**: `src/lib/learn-progress.ts` (SRS state in localStorage `pokemon-learn-v1`), `src/lib/pokedle.ts` (clue comparison, stats in `pokemon-guess-v1`), `src/lib/pokemon-names.ts` (display names like "Mr. Mime", fuzzy name matching)
 
 ## Pokedex
+- **Layout**: opens straight on all generations (no generation picker screen). Desktop: every filter in a sticky left sidebar (`PokedexFilterPanel`: generation I-IX, game Pokedex, type chips, category, evolution stage, forms, learning, total stats, habitat, color); phones and tablets: the same panel in a bottom sheet from the "Filters" button. Above the grid: Quick picks (All / Starters / Fan favourites / Legendary / Mythical / Mega; Starters and Fan favourites are `collection` id lists in `usePokemonFilter`, shown in list order), title with count, sort, Cards/Compact, Shiny and Random, then removable chips for each active filter and the Smart (AI) search switch
+- **Header search**: the search box lives in the header (`HeaderSearch` in AppHeader: inline on xl screens, a second header row below that). It writes `?q=` (live on the Pokedex; Enter elsewhere opens the Pokedex); `Pokedex` reads it into the filter. Matches English, species, romaji and numbers ("25", "#0025"); "/" focuses it
 Ultra-high-performance Pokemon directory with cross-generation capabilities:
 - **Cross-Generation Search**: "All" button enables searching across all 1000+ Pokemon from Gen 1-9
 - **Smart Generation Filter**: Individual generation buttons (1-9) or "All" for complete database access
@@ -76,6 +79,7 @@ Ultra-high-performance Pokemon directory with cross-generation capabilities:
 - **Detail page**: "Found in these games" section (`GamePokedexes`) and regional numbers next to each Pokedex entry
 
 ## Pokemon Detail Pages
+- **Layout**: top bar (back to Pokédex, previous / next pills with numbers and names), a sticky left column with the big holo card (types, cry and shiny buttons inside the card, faded number) and form chips, and on the right the title (#, English name, romaji · category), a sticky section tab bar that follows the scroll (About / Stats / Evolution / Matchups / Games / Moves) and one card per section. About = stat tiles + Pokedex entries + abilities/species/breeding. Matchups = `PokemonTypeEffectiveness` grouped by ×4 / ×2 / ×½ / ×¼ / ×0 badges (`.nx-mult`)
 Comprehensive individual Pokemon information pages featuring:
 - **Foil finishes**: `HoloCard` `finish` prop: cosmos (the original rainbow + stars), glitter, sunburst, shatter, etched, bubbles, ripple, frame (speckled silver border), or `random` = one picked by `foilFor(seed)` with its own angle, hue shift and grain, so each Pokemon always wears the same finish on its card and its page. `glow` adds a soft type-colored halo while lit, `glow="idle"` also a faint pulse at rest (styles `.nx-holo-fx`, `.fx-*`, `.nx-holo.glow` in globals.css; designed in the Foil Lab canvas)
 - **Holo Foil**: The artwork panel is a `HoloCard` (`src/components/ui/HoloCard.tsx`, `.nx-holo` in globals.css): it tilts toward the pointer or finger with a rainbow foil sheen, star sparkles (two SVG layers moving against each other, masked around the light) and glare; idle it only shows a faint sheen that drifts slowly (`still` turns the drift off). On the detail page `autoShine={5000}` sweeps a light across the card (1.4 s), then rests 5 seconds after each sweep ends, while nobody touches or hovers it (paused when the tab is hidden or with reduced motion), and stays flat with reduced motion
@@ -110,6 +114,7 @@ Comprehensive Pokemon moves system with complete database:
   - Comprehensive move metadata including generation, contest type, target info
 
 ## Type Effectiveness System
+- **Type Chart layout**: desktop = the full 18×18 matrix (`TypeMatrix`: attacking down the side, defending across the top, green 2 / salmon ½ / black 0; hovering dims the other rows and reads the cell out; clicking a column or cell checks that defending type) with the Matchup checker in a sticky right column. Phones = Checker / Full chart / By type switch, opening on the checker. By type = the Weak to / Strong against / Resists / Immune to lists
 - **Type Chart page** (`src/components/TypeAdvantage.tsx`, home "Type Chart" tab): rows in game order (Stellar left out, it is Terastal-only), mode tabs Weak to / Strong against / Resists / Immune to computed from `EFFECTIVENESS_MATRIX`, plus a Matchup checker (pick 1-2 types or search a Pokemon) in three sections: Selected, damage taken grouped by ×4 / ×2 / ×½ / ×¼ / ×0, and Pokemon with the type(s) as picture + name chips linking to their pages (40 shown, "Show all"). The list includes alternate forms with their own types (Zacian Crowned, Megas, regional forms; src/data/pokemon-forms.json from scripts/fetch-pokemon-forms.js, part of pipeline.js data, read via getTypeForms() in src/lib/pokemon-forms.ts); form chips link to /pokemon/<species>?form=<formId>, which opens the detail page on that form
 - **Uniform pills**: `TypePill` is fixed width (92px) by default everywhere (`fixed={false}` sizes by text); white `.nx-typecard-pill` pills are 64px (`.lg` 84px on the detail panel)
 - Complete Pokemon type effectiveness data and calculations

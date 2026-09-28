@@ -10,6 +10,8 @@ import { TypePill } from '@/components/ui/TypePill'
 import PokemonPicker from '@/components/PokemonPicker'
 import PokemonArt from '@/components/learn/PokemonArt'
 import { TypePanel } from '@/components/ui/TypePanel'
+import { MULTIPLIER_BADGES } from '@/components/PokemonTypeEffectiveness'
+import { getTypeCardColor } from '@/lib/type-card-colors'
 import { cn } from '@/lib/cn'
 import { X } from '@phosphor-icons/react'
 import { getTypeForms, formDisplayName } from '@/lib/pokemon-forms'
@@ -21,13 +23,15 @@ const TYPE_ORDER: PokemonTypeName[] = [
   'flying', 'psychic', 'bug', 'rock', 'ghost', 'dragon', 'dark', 'steel', 'fairy',
 ]
 
+const cap = (t: string) => t.charAt(0).toUpperCase() + t.slice(1)
+
 type Mode = 'weakTo' | 'strongAgainst' | 'resists' | 'immuneTo'
 
-const MODES: Array<{ id: Mode; label: string; title: string; subtitle: string; empty: string }> = [
-  { id: 'weakTo', label: 'Weak to', title: 'Type Weaknesses', subtitle: 'Attacks that do ×2 damage to each type', empty: 'No weaknesses' },
-  { id: 'strongAgainst', label: 'Strong against', title: 'Type Advantages', subtitle: 'Types each attack type does ×2 damage to', empty: 'Not super effective against any type' },
-  { id: 'resists', label: 'Resists', title: 'Type Resistances', subtitle: 'Attacks that do only ×½ damage to each type', empty: 'No resistances' },
-  { id: 'immuneTo', label: 'Immune to', title: 'Type Immunities', subtitle: 'Attacks that do no damage (×0) to each type', empty: 'No immunities' },
+const MODES: Array<{ id: Mode; label: string; subtitle: string; empty: string }> = [
+  { id: 'weakTo', label: 'Weak to', subtitle: 'Attacks that do ×2 damage to each type', empty: 'No weaknesses' },
+  { id: 'strongAgainst', label: 'Strong against', subtitle: 'Types each attack type does ×2 damage to', empty: 'Not super effective against any type' },
+  { id: 'resists', label: 'Resists', subtitle: 'Attacks that do only ×½ damage to each type', empty: 'No resistances' },
+  { id: 'immuneTo', label: 'Immune to', subtitle: 'Attacks that do no damage (×0) to each type', empty: 'No immunities' },
 ]
 
 // multiplier of `attack` hitting `defend`
@@ -42,24 +46,10 @@ function listFor(mode: Mode, type: PokemonTypeName): PokemonTypeName[] {
   }
 }
 
-const GROUPS: Array<{ multiplier: number; label: string; note: string }> = [
-  { multiplier: 4, label: '×4', note: 'Very weak' },
-  { multiplier: 2, label: '×2', note: 'Weak' },
-  { multiplier: 0.5, label: '×½', note: 'Resists' },
-  { multiplier: 0.25, label: '×¼', note: 'Strongly resists' },
-  { multiplier: 0, label: '×0', note: 'Immune' },
-]
+const EFFECT_WORDS: Record<number, string> = { 2: 'super effective, ×2', 0.5: 'not very effective, ×½', 0: 'no effect, ×0', 1: 'normal damage, ×1' }
 
 // How many matching Pokemon to show before "Show all"
 const POKEMON_PREVIEW = 40
-
-function SectionTitle({ children }: { children: React.ReactNode }) {
-  return (
-    <h4 className="text-[11px] uppercase tracking-wide mb-2" style={{ color: 'var(--color-neutral-400)' }}>
-      {children}
-    </h4>
-  )
-}
 
 /** A Pokemon or one of its alternate forms (Zacian Crowned, Alolan Raichu...) */
 interface TypedEntry {
@@ -79,21 +69,39 @@ function PokemonChip({ entry, highlight }: { entry: TypedEntry; highlight?: bool
       href={entry.href}
       className="inline-flex items-center gap-1.5 rounded-full pr-3 max-w-full"
       style={{
-        background: 'var(--color-bg)',
-        border: `1px solid ${highlight ? 'var(--color-accent)' : 'var(--color-neutral-800)'}`,
+        background: 'var(--color-surface-2)',
+        boxShadow: highlight ? '0 0 0 2px var(--color-accent)' : undefined,
       }}
       title={entry.title}
     >
       <TypePanel type={entry.types[0]} watermark={false} className="w-8 h-8 rounded-full p-0.5 flex-shrink-0">
         <PokemonArt id={entry.artId} alt="" lazy className="w-full h-full" />
       </TypePanel>
-      <span className="text-xs truncate" style={{ color: 'var(--color-text)' }}>{entry.name}</span>
+      <span className="text-xs font-semibold truncate" style={{ color: 'var(--color-text)' }}>{entry.name}</span>
     </Link>
   )
 }
 
+/** Type chip with its color dot, used to pick types */
+function TypeChip({ type, on, onClick }: { type: PokemonTypeName; on: boolean; onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick} aria-pressed={on} className={cn('nx-tab sm justify-start px-2 capitalize', on && 'nx-tab-active')}>
+      <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: getTypeCardColor(type) }} />
+      {type}
+    </button>
+  )
+}
+
+interface CheckerState {
+  types: PokemonTypeName[]
+  pokemon: PokemonMetadata | null
+  toggleType: (type: PokemonTypeName) => void
+  pickPokemon: (p: PokemonMetadata) => void
+  clear: () => void
+}
+
 /** Pick one or two types (or a Pokemon) and see how much damage every attack type does, and which Pokemon have those types */
-function MatchupChecker() {
+function MatchupChecker({ types, pokemon, toggleType, pickPokemon, clear }: CheckerState) {
   const allPokemon = useMemo(() => pokemonMetadataService.getAllMetadata(), [])
   // Every Pokemon plus its alternate forms, each with its own types
   const entries = useMemo(() => {
@@ -122,34 +130,12 @@ function MatchupChecker() {
     })
     return list
   }, [allPokemon])
-  const [types, setTypes] = useState<PokemonTypeName[]>([])
-  const [pokemon, setPokemon] = useState<PokemonMetadata | null>(null)
   const [showAll, setShowAll] = useState(false)
 
-  const toggleType = (type: PokemonTypeName) => {
-    setPokemon(null)
-    setShowAll(false)
-    if (types.indexOf(type) !== -1) setTypes(types.filter(t => t !== type))
-    // A third pick replaces the older one, since a Pokemon has at most two types
-    else setTypes(types.length < 2 ? types.concat(type) : [types[1], type])
-  }
-
-  const pickPokemon = (p: PokemonMetadata) => {
-    setPokemon(p)
-    setShowAll(false)
-    setTypes(p.types as PokemonTypeName[])
-  }
-
-  const clear = () => {
-    setPokemon(null)
-    setShowAll(false)
-    setTypes([])
-  }
-
-  const groups = GROUPS.map(g => ({
+  const groups = MULTIPLIER_BADGES.map(g => ({
     ...g,
     attackers: types.length ? TYPE_ORDER.filter(a => calculateDualTypeMultiplier(a, types) === g.multiplier) : [],
-  }))
+  })).filter(g => g.attackers.length > 0)
 
   // One type: every Pokemon and form that has it (single-type ones first). Two types: those with both.
   // Forms sit right after their base Pokemon's national number
@@ -164,82 +150,95 @@ function MatchupChecker() {
   const shown = showAll ? matching : matching.slice(0, POKEMON_PREVIEW)
 
   return (
-    <div className="card mb-4" style={{ gap: 'var(--space-4)' }}>
+    <div className="card" style={{ gap: 16 }}>
       <div>
-        <h3 className="card-title">Matchup checker</h3>
-        <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-          Pick one or two types, or search a Pokemon, to see how much damage each attack does to it.
+        <h2 className="nx-section-title">Matchup checker</h2>
+        <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
+          Pick one or two types, or search a Pokémon.
         </p>
       </div>
 
-      <PokemonPicker pool={allPokemon} onPick={pickPokemon} placeholder="Search a Pokemon (English or Japanese)" />
+      <PokemonPicker pool={allPokemon} onPick={p => { setShowAll(false); pickPokemon(p) }} placeholder="Search a Pokémon (English or Japanese)" />
 
-      <div className="flex flex-wrap gap-2">
+      <div className="grid grid-cols-3 gap-1.5">
         {TYPE_ORDER.map(type => (
-          <TypePill key={type} type={type} selected={types.indexOf(type) !== -1} onClick={() => toggleType(type)} />
+          <TypeChip key={type} type={type} on={types.indexOf(type) !== -1} onClick={() => { setShowAll(false); toggleType(type) }} />
         ))}
       </div>
 
-      {types.length > 0 && (
+      {types.length === 0 ? (
+        <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+          Pick a type above, or click a column in the chart, to see what it is weak to.
+        </p>
+      ) : (
         <>
+          <div className="hr" style={{ margin: 0 }} />
           {/* Selected */}
-          <div className="rounded-md p-3" style={{ background: 'var(--color-bg)' }}>
-            <SectionTitle>Selected</SectionTitle>
-            <div className="flex items-center gap-3">
-              {pokemon && (
-                <TypePanel type={pokemon.types[0]} watermark={false} className="w-12 h-12 rounded-full p-1 flex-shrink-0">
-                  <PokemonArt id={pokemon.id} alt={bothNames(pokemon)} className="w-full h-full" />
-                </TypePanel>
-              )}
-              <div className="flex items-center gap-2 flex-wrap flex-1 min-w-0">
-                {pokemon && <span className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>{bothNames(pokemon)}</span>}
-                {types.map(t => <TypePill key={t} type={t} />)}
+          <div className="flex items-center gap-3">
+            {pokemon && (
+              <TypePanel type={pokemon.types[0]} watermark={false} className="w-12 h-12 rounded-full p-1 flex-shrink-0">
+                <PokemonArt id={pokemon.id} alt={bothNames(pokemon)} className="w-full h-full" />
+              </TypePanel>
+            )}
+            <div className="flex-1 min-w-0">
+              <div className="nx-label">Defending as</div>
+              <div className="font-display text-2xl font-bold leading-tight">
+                {pokemon ? bothNames(pokemon) : types.map(cap).join(' / ')}
               </div>
-              <button type="button" className="btn btn-ghost flex-shrink-0" onClick={clear} aria-label="Clear">
-                <X size={16} /> Clear
-              </button>
             </div>
+            <button type="button" className="btn btn-secondary flex-shrink-0" onClick={() => { setShowAll(false); clear() }} aria-label="Clear">
+              <X size={14} weight="bold" /> Clear
+            </button>
           </div>
 
           {/* Damage taken */}
-          <div>
-            <SectionTitle>Damage taken from each attack type</SectionTitle>
+          <div className="flex flex-col gap-3">
             {groups.map(g => (
-              <div
-                key={g.label}
-                className="flex items-center gap-4 py-2"
-                style={{ borderTop: '1px solid var(--color-neutral-800)' }}
-              >
-                <div className="w-[88px] flex-shrink-0 text-center">
-                  <div className="text-lg font-bold" style={{ color: g.multiplier >= 2 ? 'var(--error-gradient)' : g.multiplier === 0 ? 'var(--color-accent)' : 'var(--success-gradient)' }}>
-                    {g.label}
+              <div key={g.label} className="flex items-start gap-3">
+                <span className={g.className}>{g.label}</span>
+                <div className="flex flex-col gap-1.5 min-w-0">
+                  <span className="text-xs font-bold" style={{ color: 'var(--text-secondary)' }}>{g.title} · {g.attackers.length}</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {g.attackers.map(a => <TypePill key={a} type={a} />)}
                   </div>
-                  <div className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--text-muted)' }}>{g.note}</div>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {g.attackers.length === 0
-                    ? <span className="text-sm" style={{ color: 'var(--text-muted)' }}>—</span>
-                    : g.attackers.map(a => <TypePill key={a} type={a} />)}
                 </div>
               </div>
             ))}
-            <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>All other attack types do normal damage (×1).</p>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Every other attack type does normal damage (×1).</p>
+          </div>
+
+          {/* Attacking with the picked types */}
+          <div className="flex flex-col gap-2">
+            <div className="nx-label">Attacking</div>
+            {types.map(t => {
+              const targets = TYPE_ORDER.filter(d => hit(t, d) === 2)
+              return (
+                <div key={t} className="flex flex-col gap-1.5">
+                  <span className="text-sm font-bold">{cap(t)} moves hit ×2 on</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {targets.length === 0
+                      ? <span className="text-sm" style={{ color: 'var(--text-muted)' }}>nothing</span>
+                      : targets.map(d => <TypePill key={d} type={d} />)}
+                  </div>
+                </div>
+              )
+            })}
           </div>
 
           {/* Pokemon with these types */}
-          <div>
-            <SectionTitle>
-              {types.length === 1 ? 'Pokemon with this type' : 'Pokemon with both types'} ({matching.length})
-            </SectionTitle>
+          <div className="flex flex-col gap-2">
+            <div className="nx-label">
+              {types.length === 1 ? 'Pokémon with this type' : 'Pokémon with both types'} · {matching.length}
+            </div>
             {matching.length === 0 ? (
-              <p className="text-sm" style={{ color: 'var(--text-muted)' }}>No Pokemon has this type combination.</p>
+              <p className="text-sm" style={{ color: 'var(--text-muted)' }}>No Pokémon has this type combination.</p>
             ) : (
               <>
                 <div className="flex flex-wrap gap-2">
                   {shown.map(e => <PokemonChip key={e.key} entry={e} highlight={pokemon?.id === e.artId} />)}
                 </div>
                 {matching.length > POKEMON_PREVIEW && (
-                  <button type="button" className="btn btn-ghost mt-2" onClick={() => setShowAll(!showAll)}>
+                  <button type="button" className="btn btn-secondary self-start" onClick={() => setShowAll(!showAll)}>
                     {showAll ? 'Show fewer' : `Show all ${matching.length}`}
                   </button>
                 )}
@@ -252,54 +251,163 @@ function MatchupChecker() {
   )
 }
 
-export default function TypeAdvantage() {
-  const [mode, setMode] = useState<Mode>('weakTo')
-  const info = MODES.find(m => m.id === mode)!
+/** The classic 18 × 18 chart: attacking type down the side, defending type across the top */
+function TypeMatrix({ picked, onPickDefender }: { picked: PokemonTypeName[]; onPickDefender: (type: PokemonTypeName) => void }) {
+  const [hover, setHover] = useState<{ row: number; col: number } | null>(null)
+  const readout = hover
+    ? `${cap(TYPE_ORDER[hover.row])} attacking ${cap(TYPE_ORDER[hover.col])}: ${EFFECT_WORDS[hit(TYPE_ORDER[hover.row], TYPE_ORDER[hover.col])]}`
+    : 'Hover or tap a cell to read it. Click a column to check that type.'
 
   return (
-    <>
-      <MatchupChecker />
-
-      <div className="card">
-        <div className="text-center mb-4">
-          <h2 className="text-xl mb-1" style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}>
-            {info.title}
-          </h2>
-          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{info.subtitle}</p>
-        </div>
-
-        <div className="flex flex-wrap justify-center gap-2 mb-4">
-          {MODES.map(m => (
-            <button key={m.id} className={cn('nx-tab', mode === m.id && 'nx-tab-active')} onClick={() => setMode(m.id)}>
-              {m.label}
-            </button>
-          ))}
-        </div>
-
-        <div>
-          {TYPE_ORDER.map(type => {
-            const list = listFor(mode, type)
-            return (
-              <div
-                key={type}
-                className="flex items-center gap-5 py-3"
-                style={{ borderBottom: '1px solid var(--color-neutral-800)' }}
-              >
-                <div className="w-[110px] flex-shrink-0 flex justify-center">
-                  <TypePill type={type} />
-                </div>
-                <div className="flex flex-wrap gap-2 min-w-0">
-                  {list.length === 0 ? (
-                    <span className="text-sm" style={{ color: 'var(--text-muted)' }}>{info.empty}</span>
-                  ) : (
-                    list.map(t => <TypePill key={t} type={t} />)
-                  )}
-                </div>
-              </div>
-            )
-          })}
-        </div>
+    <div className="card" style={{ gap: 12 }}>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold" style={{ color: 'var(--text-secondary)' }}>
+        <span className="inline-flex items-center gap-1.5"><span className="nx-cell x2 static">2</span>Super effective</span>
+        <span className="inline-flex items-center gap-1.5"><span className="nx-cell x05 static">½</span>Not very effective</span>
+        <span className="inline-flex items-center gap-1.5"><span className="nx-cell x0 static">0</span>No effect</span>
       </div>
-    </>
+      <div className="nx-scroll-x pb-1" onPointerLeave={() => setHover(null)}>
+        <table className="nx-matrix" aria-label="Type effectiveness chart">
+          <thead>
+            <tr>
+              <th scope="col" className="corner">
+                <span>ATK ↓</span><span>DEF →</span>
+              </th>
+              {TYPE_ORDER.map((d, ci) => (
+                <th key={d} scope="col">
+                  <button
+                    type="button"
+                    className={cn('colh', (hover?.col === ci || picked.indexOf(d) !== -1) && 'on')}
+                    style={{ background: getTypeCardColor(d) }}
+                    onClick={() => onPickDefender(d)}
+                    title={`Check ${cap(d)}`}
+                    aria-label={`Check ${cap(d)} as the defending type`}
+                  >
+                    {d.slice(0, 3).toUpperCase()}
+                  </button>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {TYPE_ORDER.map((a, ri) => (
+              <tr key={a}>
+                <th scope="row">
+                  <span className={cn('rowh', hover?.row === ri && 'on')} style={{ background: getTypeCardColor(a) }}>{cap(a)}</span>
+                </th>
+                {TYPE_ORDER.map((d, ci) => {
+                  const m = hit(a, d)
+                  const lit = !hover || hover.row === ri || hover.col === ci
+                  return (
+                    <td key={d}>
+                      <button
+                        type="button"
+                        className={cn('nx-cell', m === 2 && 'x2', m === 0.5 && 'x05', m === 0 && 'x0', hover?.row === ri && hover?.col === ci && 'here')}
+                        style={{ opacity: lit ? 1 : 0.4 }}
+                        onPointerEnter={() => setHover({ row: ri, col: ci })}
+                        onFocus={() => setHover({ row: ri, col: ci })}
+                        onClick={() => onPickDefender(d)}
+                        aria-label={`${cap(a)} against ${cap(d)}: ${EFFECT_WORDS[m]}`}
+                      >
+                        {m === 2 ? '2' : m === 0.5 ? '½' : m === 0 ? '0' : ''}
+                      </button>
+                    </td>
+                  )
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="text-sm font-semibold min-h-[22px]" aria-live="polite">{readout}</p>
+    </div>
+  )
+}
+
+/** Every type with the types it is weak to / strong against / resists / is immune to */
+function TypeLists() {
+  const [mode, setMode] = useState<Mode>('weakTo')
+  const info = MODES.find(m => m.id === mode)!
+  return (
+    <div className="card" style={{ gap: 12 }}>
+      <div className="flex flex-wrap gap-1.5">
+        {MODES.map(m => (
+          <button key={m.id} type="button" className={cn('nx-tab sm', mode === m.id && 'nx-tab-active')} onClick={() => setMode(m.id)} aria-pressed={mode === m.id}>
+            {m.label}
+          </button>
+        ))}
+      </div>
+      <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{info.subtitle}</p>
+      <div>
+        {TYPE_ORDER.map(type => {
+          const list = listFor(mode, type)
+          return (
+            <div key={type} className="flex items-center gap-4 py-2.5" style={{ borderTop: '1px solid var(--color-divider)' }}>
+              <div className="w-[100px] flex-shrink-0"><TypePill type={type} /></div>
+              <div className="flex flex-wrap gap-1.5 min-w-0">
+                {list.length === 0
+                  ? <span className="text-sm" style={{ color: 'var(--text-muted)' }}>{info.empty}</span>
+                  : list.map(t => <TypePill key={t} type={t} />)}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+type View = 'checker' | 'chart' | 'lists'
+
+export default function TypeAdvantage() {
+  // Phones open on the checker (the full chart is wide); desktop always shows the checker beside the chart
+  const [view, setView] = useState<View>('checker')
+  const [types, setTypes] = useState<PokemonTypeName[]>([])
+  const [pokemon, setPokemon] = useState<PokemonMetadata | null>(null)
+
+  const toggleType = (type: PokemonTypeName) => {
+    setPokemon(null)
+    if (types.indexOf(type) !== -1) setTypes(types.filter(t => t !== type))
+    // A third pick replaces the older one, since a Pokemon has at most two types
+    else setTypes(types.length < 2 ? types.concat(type) : [types[1], type])
+  }
+  const checker: CheckerState = {
+    types,
+    pokemon,
+    toggleType,
+    pickPokemon: p => { setPokemon(p); setTypes(p.types as PokemonTypeName[]) },
+    clear: () => { setPokemon(null); setTypes([]) },
+  }
+  // From the chart: check that defending type on its own
+  const pickDefender = (type: PokemonTypeName) => {
+    setPokemon(null)
+    setTypes([type])
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) setView('checker')
+  }
+
+  const chartOn = view === 'chart' || view === 'checker'
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="nx-seg self-start" role="group" aria-label="View">
+        <button type="button" className={cn('lg:!hidden', view === 'checker' && 'on')} onClick={() => setView('checker')} aria-pressed={view === 'checker'}>Checker</button>
+        <button type="button" className={cn('!hidden lg:!inline-flex', chartOn && 'on')} onClick={() => setView('chart')} aria-pressed={chartOn}>Full chart</button>
+        <button type="button" className={cn('lg:!hidden', view === 'chart' && 'on')} onClick={() => setView('chart')} aria-pressed={view === 'chart'}>Full chart</button>
+        <button type="button" className={cn(view === 'lists' && 'on')} onClick={() => setView('lists')} aria-pressed={view === 'lists'}>By type</button>
+      </div>
+
+      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-6 lg:items-start">
+        <div className="min-w-0">
+          {view === 'checker' && <div className="lg:hidden"><MatchupChecker {...checker} /></div>}
+          {chartOn && (
+            <div className={cn(view === 'checker' && 'hidden lg:block')}>
+              <TypeMatrix picked={types} onPickDefender={pickDefender} />
+            </div>
+          )}
+          {view === 'lists' && <TypeLists />}
+        </div>
+        <aside className="hidden lg:block lg:sticky lg:top-4">
+          <MatchupChecker {...checker} />
+        </aside>
+      </div>
+    </div>
   )
 }

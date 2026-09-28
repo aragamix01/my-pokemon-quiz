@@ -23,6 +23,7 @@ interface UsePokemonFilterState {
   formKind: FormKind | null
   learnFilter: LearnFilter | null
   regionalDex: string | null
+  collection: number[] | null
   totalResults: number
 }
 
@@ -39,6 +40,7 @@ interface UsePokemonFilterActions {
   setFormKind: (kind: FormKind | null) => void
   setLearnFilter: (filter: LearnFilter | null) => void
   setRegionalDex: (name: string | null) => void
+  setCollection: (ids: number[] | null) => void
   resetFilters: () => void
   clearSearch: () => void
 }
@@ -63,6 +65,8 @@ export function usePokemonFilter(generation?: GenerationNumber | null) {
   const [learnFilter, setLearnFilter] = useState<LearnFilter | null>(null)
   // Game Pokedex being browsed instead of a generation. Not a filter: Reset keeps it
   const [regionalDex, setRegionalDex] = useState<string | null>(null)
+  // Hand-picked list of species ids (Pokedex "Quick picks": starters, fan favourites), shown in list order
+  const [collection, setCollection] = useState<number[] | null>(null)
   // Flashcard progress lives in localStorage, so it is read after mount
   const [learnState, setLearnState] = useState<LearnState | null>(null)
   useEffect(() => {
@@ -105,7 +109,15 @@ export function usePokemonFilter(generation?: GenerationNumber | null) {
           return status === learnFilter
         })
       }
-      
+      if (collection) {
+        const rank = new Map(collection.map((id, i) => [id, i]))
+        filtered = filtered.filter(p => rank.has(p.id))
+        // The default sort keeps the collection's own order (most popular first)
+        if (sortOption.value === DEFAULT_SORT.value) {
+          return [...filtered].sort((a, b) => rank.get(a.id)! - rank.get(b.id)!)
+        }
+      }
+
       // Apply sorting
       // In a game Pokedex the default "Pokedex Number" sort means the game's own order
       const sorted = regionalDex && sortOption.value === DEFAULT_SORT.value
@@ -133,7 +145,8 @@ export function usePokemonFilter(generation?: GenerationNumber | null) {
     formKind,
     learnFilter,
     learnState,
-    regionalDex
+    regionalDex,
+    collection
   ])
 
   // Reset filters
@@ -149,6 +162,7 @@ export function usePokemonFilter(generation?: GenerationNumber | null) {
     setEvolutionStage(null)
     setFormKind(null)
     setLearnFilter(null)
+    setCollection(null)
   }, [])
 
   // Clear search only
@@ -170,9 +184,10 @@ export function usePokemonFilter(generation?: GenerationNumber | null) {
       statsRange.max < 800 ||
       evolutionStage !== null ||
       formKind !== null ||
-      learnFilter !== null
+      learnFilter !== null ||
+      collection !== null
     )
-  }, [searchTerm, selectedTypes, sortOption, showLegendary, showMythical, selectedHabitat, selectedColor, statsRange, evolutionStage, formKind, learnFilter])
+  }, [searchTerm, selectedTypes, sortOption, showLegendary, showMythical, selectedHabitat, selectedColor, statsRange, evolutionStage, formKind, learnFilter, collection])
 
   // Get summary statistics for current results
   const summary = useMemo(() => {
@@ -195,6 +210,7 @@ export function usePokemonFilter(generation?: GenerationNumber | null) {
     formKind,
     learnFilter,
     regionalDex,
+    collection,
     totalResults: filteredMetadata.length
   }
 
@@ -211,6 +227,7 @@ export function usePokemonFilter(generation?: GenerationNumber | null) {
     setFormKind,
     setLearnFilter,
     setRegionalDex,
+    setCollection,
     resetFilters,
     clearSearch
   }

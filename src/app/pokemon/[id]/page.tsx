@@ -216,225 +216,225 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
   }
 
 
+  // Section tabs follow the scroll: the last section whose top passed the tab bar is highlighted
+  const [activeSection, setActiveSection] = useState('about')
+  useEffect(() => {
+    if (!data) return
+    const onScroll = () => {
+      let current = 'about'
+      for (const s of DETAIL_SECTIONS) {
+        const el = document.getElementById(s.id)
+        if (el && el.getBoundingClientRect().top < 160) current = s.id
+      }
+      setActiveSection(current)
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [data]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const DETAIL_SECTIONS = [
+    { id: 'about', label: 'About' },
+    { id: 'stats', label: 'Stats' },
+    { id: 'evolution', label: 'Evolution' },
+    { id: 'matchups', label: 'Matchups' },
+    { id: 'games', label: 'Games' },
+    { id: 'moves', label: 'Moves' },
+  ]
+
+  const titleBlock = data && (
+    <div className="min-w-0">
+      <span className="font-number text-sm sm:text-base font-bold" style={{ color: 'var(--color-accent)' }}>
+        #{String(data.species.id).padStart(4, '0')}
+      </span>
+      <h1 className="font-display text-4xl sm:text-5xl font-bold leading-none mt-1" style={{ color: 'var(--color-text)' }}>
+        {getEnglishName()}
+      </h1>
+      <p className="text-base sm:text-lg mt-2" style={{ color: 'var(--text-secondary)' }}>
+        {getJapaneseName() && <span className="font-semibold" style={{ color: 'var(--color-text)' }}>{getJapaneseName()}</span>}
+        {getJapaneseName() && getGenus() ? ' · ' : ''}
+        {getGenus()}
+      </p>
+    </div>
+  )
+
   return (
     <div className="min-h-screen relative">
-      {/* Floating Navigation Buttons */}
-      {previousPokemon && (
-        <Button
-          variant="icon"
-          onClick={() => navigateToPokemon(previousPokemon.id)}
-          title={`Previous: ${previousPokemon.name} #${previousPokemon.id.toString().padStart(3, '0')}`}
-          style={{ position: 'fixed', left: '16px', top: '50%', transform: 'translateY(-50%)', zIndex: 50, width: 52, height: 52 }}
-        >
-          <CaretLeft size={22} />
-        </Button>
-      )}
-
-      {nextPokemon && (
-        <Button
-          variant="icon"
-          onClick={() => navigateToPokemon(nextPokemon.id)}
-          title={`Next: ${nextPokemon.name} #${nextPokemon.id.toString().padStart(3, '0')}`}
-          style={{ position: 'fixed', right: '16px', top: '50%', transform: 'translateY(-50%)', zIndex: 50, width: 52, height: 52 }}
-        >
-          <CaretRight size={22} />
-        </Button>
-      )}
-
-      <div className="relative z-10 max-w-6xl mx-auto p-4">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-6">
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Top bar: back to the Pokedex, previous / next within the generation */}
+        <div className="flex items-center gap-2 mb-5">
           <Button
-            variant="ghost"
+            variant="secondary"
             onClick={() => {
               const generation = searchParams.get('gen')
               router.push(`/?section=pokedex${generation ? `&gen=${generation}` : ''}`)
             }}
           >
-            ← Back
+            <CaretLeft size={16} weight="bold" /> Pokédex
           </Button>
-          {data ? (
-            <div className="text-center min-w-0 px-2">
-              <span
-                className="inline-block text-[11px] font-semibold rounded-full px-2.5 py-0.5 mb-1"
-                style={{ background: getTypeColorForPage(), color: '#fff' }}
-              >
-                #{String(data.species.id).padStart(4, '0')}
-              </span>
-              <h1
-                className="text-2xl sm:text-3xl leading-tight"
-                style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, color: 'var(--color-text)' }}
-              >
-                {getEnglishName()}
-              </h1>
-              <div className="text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
-                {[
-                  data.species.names.find(n => n.language.name === 'ja-roma')?.name,
-                  getGenus(),
-                ].filter(Boolean).join(' · ')}
-              </div>
-            </div>
-          ) : (
-            <h1
-              className="text-lg"
-              style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}
+          <div className="flex-1" />
+          {previousPokemon && (
+            <Button
+              variant="secondary"
+              onClick={() => navigateToPokemon(previousPokemon.id)}
+              aria-label={`Previous: ${previousPokemon.name}`}
+              title={`Previous: ${previousPokemon.name}`}
             >
-              Pokemon Details
-            </h1>
+              <CaretLeft size={16} weight="bold" />
+              <span className="font-number text-xs" style={{ color: 'var(--text-secondary)' }}>#{previousPokemon.id.toString().padStart(4, '0')}</span>
+              <span className="hidden sm:inline capitalize">{previousPokemon.name}</span>
+            </Button>
           )}
-          <div className="w-16"></div>
+          {nextPokemon && (
+            <Button
+              variant="secondary"
+              onClick={() => navigateToPokemon(nextPokemon.id)}
+              aria-label={`Next: ${nextPokemon.name}`}
+              title={`Next: ${nextPokemon.name}`}
+            >
+              <span className="hidden sm:inline capitalize">{nextPokemon.name}</span>
+              <span className="font-number text-xs" style={{ color: 'var(--text-secondary)' }}>#{nextPokemon.id.toString().padStart(4, '0')}</span>
+              <CaretRight size={16} weight="bold" />
+            </Button>
+          )}
         </div>
 
         {loading ? (
           /* Skeleton Loading */
-          <div className="card">
-            <div className="space-y-4 animate-pulse">
-              <div className="h-8 rounded mb-4" style={{ background: 'var(--color-neutral-800)' }}></div>
-              <div className="h-64 rounded mb-4" style={{ background: 'var(--color-neutral-800)' }}></div>
-              <div className="space-y-2">
-                <div className="h-4 rounded" style={{ background: 'var(--color-neutral-800)' }}></div>
-                <div className="h-4 rounded w-3/4" style={{ background: 'var(--color-neutral-800)' }}></div>
-                <div className="h-4 rounded w-1/2" style={{ background: 'var(--color-neutral-800)' }}></div>
-              </div>
+          <div className="grid lg:grid-cols-[380px_minmax(0,1fr)] gap-6 lg:gap-8 animate-pulse">
+            <div className="h-[380px] sm:h-[460px] rounded-[26px]" style={{ background: 'var(--color-neutral-800)' }} />
+            <div className="space-y-4">
+              <div className="h-12 w-2/3 rounded-xl" style={{ background: 'var(--color-neutral-800)' }} />
+              <div className="h-10 w-full rounded-full" style={{ background: 'var(--color-neutral-800)' }} />
+              <div className="h-64 rounded-2xl" style={{ background: 'var(--color-neutral-800)' }} />
             </div>
           </div>
         ) : data ? (
-          <div className="card p-4" style={{ boxShadow: `var(--shadow-sm), inset 0 4px 0 ${getTypeColorForPage()}` }}>
-            <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
-              {/* Left Side - Sprite, Types, Controls */}
-              <div className="flex-shrink-0 lg:w-48 w-full">
-                {/* Artwork and types on a foil panel in the first type's color, like a holo trading card */}
-                <HoloCard
-                  autoShine={5000}
-                  finish="random"
-                  seed={data.species.id}
-                  glow="idle"
-                  glowColor={getTypeColorForPage()}
-                  className="rounded-xl mb-4 px-3 pt-3 pb-3"
-                  style={{ background: getTypeColorForPage() }}
+          <div className="nx-detail">
+          <div className="grid lg:grid-cols-[380px_minmax(0,1fr)] gap-6 lg:gap-8 items-start">
+            {/* Left: the holo card, sticky on desktop */}
+            <div className="lg:sticky lg:top-4 flex flex-col gap-4 min-w-0">
+              <div className="lg:hidden">{titleBlock}</div>
+              {/* Artwork and types on a foil panel in the first type's color, like a holo trading card */}
+              <HoloCard
+                autoShine={5000}
+                finish="random"
+                seed={data.species.id}
+                glow="idle"
+                glowColor={getTypeColorForPage()}
+                className="rounded-[26px] h-[380px] sm:h-[460px]"
+                style={{ background: getTypeColorForPage() }}
+              >
+                <PokeballMark
+                  className="absolute -right-16 -bottom-14 w-72 h-72 sm:w-80 sm:h-80 pointer-events-none"
+                  style={{ color: 'rgba(255,255,255,0.2)' }}
+                />
+                <span
+                  className="absolute left-5 bottom-3 font-number font-bold text-6xl sm:text-7xl leading-none pointer-events-none"
+                  style={{ color: 'rgba(255,255,255,0.26)' }}
+                  aria-hidden
                 >
-                  <PokeballMark
-                    className="absolute -right-6 -bottom-8 w-40 h-40 pointer-events-none"
-                    style={{ color: 'rgba(255,255,255,0.2)' }}
-                  />
-                  <div className="relative w-40 h-40 mx-auto">
-                    <Image
-                      src={getCurrentSprite() || '/pokemon-placeholder.png'}
-                      alt={getEnglishName()}
-                      fill
-                      className="object-contain drop-shadow-md"
-                      draggable={false}
-                    />
-                  </div>
-                  <div className="relative flex gap-2 justify-center flex-wrap mt-2">
-                    {getCurrentForm().types.map((typeInfo, index) => (
-                      <span key={index} className="nx-typecard-pill lg nx-typecard-text">
-                        {typeInfo.type.name}
-                      </span>
-                    ))}
-                  </div>
-                </HoloCard>
-
-                {/* Shiny and Cries buttons */}
-                <div className="flex gap-2 justify-center mb-4">
-                  <Button
-                    variant={showShiny ? 'primary' : 'secondary'}
-                    onClick={() => setShowShiny(!showShiny)}
-                    disabled={!getAllForms()[selectedForm]?.shiny}
-                  >
-                    <Sparkle size={14} weight={showShiny ? 'fill' : 'regular'} />
-                    {showShiny ? 'Normal' : 'Shiny'}
-                  </Button>
-                  <Button
-                    variant={audioPlaying ? 'primary' : 'secondary'}
+                  {String(data.species.id).padStart(3, '0')}
+                </span>
+                <div className="absolute inset-x-4 top-4 flex items-center gap-2 z-[1]">
+                  {getCurrentForm().types.map((typeInfo, index) => (
+                    <span key={index} className="nx-typecard-pill lg nx-typecard-text">
+                      {typeInfo.type.name}
+                    </span>
+                  ))}
+                  <div className="flex-1" />
+                  <button
+                    type="button"
+                    className="dex-iconbtn"
                     onClick={playPokemonCry}
                     disabled={!getCurrentForm()?.cries?.latest || audioPlaying}
+                    aria-label="Play cry"
+                    title="Play cry"
                   >
-                    <SpeakerHigh size={14} />
-                    Cry
-                  </Button>
+                    <SpeakerHigh size={20} weight={audioPlaying ? 'fill' : 'bold'} />
+                  </button>
+                  <button
+                    type="button"
+                    className="dex-iconbtn"
+                    onClick={() => setShowShiny(!showShiny)}
+                    disabled={!getAllForms()[selectedForm]?.shiny}
+                    aria-pressed={showShiny}
+                    aria-label={showShiny ? 'Show normal colors' : 'Show shiny colors'}
+                    title={showShiny ? 'Normal colors' : 'Shiny colors'}
+                    style={showShiny ? { background: '#fff', color: getTypeColorForPage() } : undefined}
+                  >
+                    <Sparkle size={20} weight={showShiny ? 'fill' : 'bold'} />
+                  </button>
                 </div>
+                <div className="absolute left-1/2 top-[53%] -translate-x-1/2 -translate-y-1/2 w-60 h-60 sm:w-80 sm:h-80">
+                  <Image
+                    src={getCurrentSprite() || '/pokemon-placeholder.png'}
+                    alt={getEnglishName()}
+                    fill
+                    className="object-contain drop-shadow-xl"
+                    draggable={false}
+                    priority
+                  />
+                </div>
+              </HoloCard>
 
-                {/* Forms Variety Selections */}
-                {getAllForms().length > 1 && (
-                  <div className="mb-4">
-                    <h4 className="text-sm font-medium mb-2 text-center" style={{ color: 'var(--color-text)' }}>Forms</h4>
-                    <div className="grid grid-cols-2 lg:grid-cols-1 gap-1">
-                      {getAllForms().map((form, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setSelectedForm(index)}
-                          className={cn('nx-tab justify-center lg:justify-start text-xs', selectedForm === index && 'nx-tab-active')}
-                        >
-                          {form.name}
-                        </button>
-                      ))}
-                    </div>
+              {/* Forms */}
+              {getAllForms().length > 1 && (
+                <div className="card" style={{ padding: 16 }}>
+                  <h2 className="nx-label">Forms</h2>
+                  <div className="flex flex-wrap gap-1.5">
+                    {getAllForms().map((form, index) => (
+                      <button
+                        key={index}
+                        type="button"
+                        onClick={() => setSelectedForm(index)}
+                        aria-pressed={selectedForm === index}
+                        className={cn('nx-tab sm', selectedForm === index && 'nx-tab-active')}
+                      >
+                        {form.name}
+                      </button>
+                    ))}
                   </div>
-                )}
-
-                {/* Type Effectiveness Section - In Sidebar */}
-                <div className="mb-4">
-                  <h4 className="text-sm font-bold mb-2 text-center lg:text-left" style={{ color: 'var(--text-primary)' }}>Type Effectiveness</h4>
-                  <PokemonTypeEffectiveness types={extractPokemonTypes(getCurrentForm())} />
                 </div>
-              </div>
+              )}
+            </div>
 
-              {/* Right Side - Information. min-w-0 lets long rows (entry games, moves) scroll or wrap instead of widening the page */}
-              <div className="flex-1 min-w-0 space-y-4">
-                {/* Basic Information Section */}
-                <div className="mb-4">
-                  <h3 className="text-base font-bold mb-3" style={{ color: 'var(--text-primary)' }}>Basic Information</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
-                    <div>
-                      <table className="w-full text-xs">
-                        <tbody>
-                          <tr>
-                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>ID:</td>
-                            <td className="py-1 font-bold">#{data.pokemon.id.toString().padStart(3, '0')}</td>
-                          </tr>
-                          <tr>
-                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Name:</td>
-                            <td className="py-1 font-bold">{getEnglishName()}</td>
-                          </tr>
-                          <tr>
-                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Romaji:</td>
-                            <td className="py-1 font-bold">{getJapaneseName() || 'N/A'}</td>
-                          </tr>
-                          <tr>
-                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Height:</td>
-                            <td className="py-1 font-bold">{(getCurrentForm().height / 10).toFixed(1)} m</td>
-                          </tr>
-                        </tbody>
-                      </table>
+            {/* Right: title, section tabs and sections. min-w-0 lets long rows (entry games, moves) scroll instead of widening the page */}
+            <div className="min-w-0 flex flex-col gap-5">
+              <div className="hidden lg:block">{titleBlock}</div>
+
+              <nav aria-label="Sections" className="nx-sectionnav">
+                {DETAIL_SECTIONS.map(s => (
+                  <a
+                    key={s.id}
+                    href={`#${s.id}`}
+                    className={cn(activeSection === s.id && 'on')}
+                    aria-current={activeSection === s.id ? 'location' : undefined}
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </nav>
+
+              <section id="about" className="card nx-section">
+                <h2 className="nx-section-title">About</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  {[
+                    ['Height', `${(getCurrentForm().height / 10).toFixed(1)} m`],
+                    ['Weight', `${(getCurrentForm().weight / 10).toFixed(1)} kg`],
+                    ['Generation', data.species.generation?.name.replace('generation-', 'Gen ').toUpperCase().replace('GEN', 'Gen') || 'Unknown'],
+                    ['Habitat', data.species.habitat ? data.species.habitat.name.replace('-', ' ').replace(/^./, c => c.toUpperCase()) : 'Unknown'],
+                    ['Catch rate', `${data.species.capture_rate}`],
+                    ['Base EXP', `${getCurrentForm().base_experience || 'N/A'}`],
+                  ].map(([label, value]) => (
+                    <div key={label} className="nx-tile">
+                      <span className="nx-label">{label}</span>
+                      <span className="font-display text-xl font-semibold">{value}</span>
                     </div>
-                    <div>
-                      <table className="w-full text-xs">
-                        <tbody>
-                          <tr>
-                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Weight:</td>
-                            <td className="py-1 font-bold">{(getCurrentForm().weight / 10).toFixed(1)} kg</td>
-                          </tr>
-                          <tr>
-                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Generation:</td>
-                            <td className="py-1 font-bold capitalize">{data.species.generation?.name.replace('generation-', 'Gen ') || 'Unknown'}</td>
-                          </tr>
-                          <tr>
-                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Habitat:</td>
-                            <td className="py-1 font-bold capitalize">{data.species.habitat?.name || 'Unknown'}</td>
-                          </tr>
-                          <tr>
-                            <td className="py-1 font-semibold" style={{ color: 'var(--text-secondary)' }}>Base EXP:</td>
-                            <td className="py-1 font-bold">{getCurrentForm().base_experience || 'N/A'}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <PokedexEntries key={data.species.id} species={data.species} />
+                  ))}
                 </div>
+                <PokedexEntries key={data.species.id} species={data.species} />
 
-                {/* Separator Line */}
                 <div className="hr" />
 
                 {/* Abilities and Species Info Row */}
@@ -579,44 +579,37 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                     </div>
                   </div>
                 </div>
+              </section>
 
-                {/* Separator Line */}
-                <div className="hr" />
+              <section id="stats" className="card nx-section">
+                <h2 className="nx-section-title">Base stats</h2>
+                <PokemonStatsChart stats={getCurrentForm().stats} showTotal={true} />
+                <StatRanks stats={getCurrentForm().stats} />
+              </section>
 
-                {/* Base Stats Section - Radar Chart */}
-                <div className="mb-4">
-                  <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Base Stats</h3>
-                  <PokemonStatsChart stats={getCurrentForm().stats} showTotal={true} />
-                  <StatRanks stats={getCurrentForm().stats} />
-                </div>
+              {data.evolutionChain && (
+                <section id="evolution" className="card nx-section">
+                  <h2 className="nx-section-title">Evolution</h2>
+                  <EvolutionChain
+                    chain={data.evolutionChain.chain}
+                    currentSpeciesId={data.species.id}
+                    currentFormId={getCurrentForm()?.id}
+                    hrefFor={evolutionHref}
+                  />
+                </section>
+              )}
 
-                {/* Separator Line */}
-                <div className="hr" />
+              <section id="matchups" className="card nx-section">
+                <h2 className="nx-section-title">Damage taken</h2>
+                <PokemonTypeEffectiveness types={extractPokemonTypes(getCurrentForm())} />
+              </section>
 
-                {/* Evolution Chain Section */}
-                {data.evolutionChain && (
-                  <div className="mb-4">
-                    <h3 className="text-base font-bold mb-2" style={{ color: 'var(--text-primary)' }}>Evolution Chain</h3>
-                    <EvolutionChain
-                      chain={data.evolutionChain.chain}
-                      currentSpeciesId={data.species.id}
-                      currentFormId={getCurrentForm()?.id}
-                      hrefFor={evolutionHref}
-                    />
-                  </div>
-                )}
-
-                {/* Separator Line */}
-                <div className="hr" />
-
-                {/* Game Pokedexes Section */}
+              <section id="games" className="card nx-section">
                 <GamePokedexes speciesId={data.species.id} />
+              </section>
 
-                {/* Separator Line */}
-                <div className="hr" />
-
-                {/* Moves Section */}
-                <div>
+              {/* Moves Section */}
+              <div id="moves" className="card nx-section">
                   <button
                     onClick={() => setMovesExpanded(!movesExpanded)}
                     className="w-full flex justify-between items-center text-base font-bold mb-2"

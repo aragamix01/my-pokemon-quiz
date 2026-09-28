@@ -1,71 +1,93 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
-import { useRouter } from 'next/navigation'
-import GenerationSelector from '@/components/GenerationSelector'
-import { Button } from '@/components/ui/Button'
-import { ProgressBar } from '@/components/ui/ProgressBar'
+import { useState, useEffect, useMemo, ReactNode } from 'react'
+import Link from 'next/link'
 import { LearnState, loadLearnState, scopeStats } from '@/lib/learn-progress'
-import { GenerationNumber } from '@/types/pokemon'
-import { Cards, MagnifyingGlass, Keyboard, SquaresFour, ImageSquare, TreeStructure, Sword, Ruler, CalendarCheck, Fire } from '@phosphor-icons/react'
-import { dailyStreak, getDailyResult, DAILY_PUZZLES } from '@/lib/daily'
+import { Cards, MagnifyingGlass, Keyboard, SquaresFour, ImageSquare, TreeStructure, Sword, Ruler, Fire, Check, CaretDown } from '@phosphor-icons/react'
+import { dailyStreak, getDailyResult, DAILY_PUZZLES, DailyPuzzle } from '@/lib/daily'
 import { getScope } from '@/lib/game-utils'
-import { DEX_SCOPE_PREFIX } from '@/lib/regional-pokedexes'
-import PokedexSelect from '@/components/PokedexSelect'
+import { DEX_SCOPE_PREFIX, getPokedexes, pokedexOptionLabel } from '@/lib/regional-pokedexes'
 import { POPULAR_SCOPE_PREFIX, POPULAR_TIERS } from '@/lib/popular-pokemon'
+import PokemonArt from '@/components/learn/PokemonArt'
 import { cn } from '@/lib/cn'
 
 const GEN_KEY = 'learn-generation'
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX']
 
-const GAMES = [
+interface Game {
+  path: string
+  title: string
+  icon: ReactNode
+  color: string
+  description: string
+  /** Not scoped by generation; you can use every Pokemon */
+  unscoped?: boolean
+}
+
+const GAMES: Game[] = [
+  {
+    path: 'learn',
+    title: 'Flashcards',
+    icon: <Cards size={22} weight="bold" />,
+    color: '#2a5fa8',
+    description: 'Spaced repetition: see it, pick it, then type it from memory.',
+  },
   {
     path: 'guess',
-    title: 'Pokedle',
-    icon: <MagnifyingGlass size={22} color="var(--color-accent)" />,
-    description: 'Guess a hidden Pokemon in 8 tries. Each guess shows which types, generation, color, shape, height and weight match the answer.',
+    title: 'Pokédle',
+    icon: <MagnifyingGlass size={22} weight="bold" />,
+    color: '#2f9e63',
+    description: 'Guess the hidden Pokémon in 8 tries from type, size and color clues.',
   },
   {
     path: 'name-all',
     title: 'Name Them All',
-    icon: <Keyboard size={22} color="var(--color-accent)" />,
-    description: 'Type every Pokemon you can remember before time runs out. Each name fills its spot in the Pokedex, and the ones you missed are shown at the end.',
+    icon: <Keyboard size={22} weight="bold" />,
+    color: '#c62a1f',
+    description: 'Type every name you remember before time runs out.',
   },
   {
     path: 'memory',
     title: 'Memory Match',
-    icon: <SquaresFour size={22} color="var(--color-accent)" />,
-    description: 'Flip cards to find pairs: a picture with its name, or an English name with its Japanese name.',
+    icon: <SquaresFour size={22} weight="bold" />,
+    color: '#6a55d8',
+    description: 'Flip cards to pair each picture with its name.',
   },
   {
     path: 'reveal',
     title: 'Pixel Reveal',
-    icon: <ImageSquare size={22} color="var(--color-accent)" />,
-    description: 'Name the Pokemon from a blocky, pixelated picture. Every wrong guess makes it sharper and worth fewer points.',
+    icon: <ImageSquare size={22} weight="bold" />,
+    color: '#b7780b',
+    description: 'Name it from a pixelated picture before it gets sharp.',
   },
   {
     path: 'evolution',
     title: 'Evolution Order',
-    icon: <TreeStructure size={22} color="var(--color-accent)" />,
-    description: 'Put an evolution family in order, from first form to final evolution, and learn the names together.',
+    icon: <TreeStructure size={22} weight="bold" />,
+    color: '#1f8a7a',
+    description: 'Put each evolution family in the right order.',
   },
   {
     path: 'type-quiz',
     title: 'Type Quiz',
-    icon: <Sword size={22} color="var(--color-accent)" />,
-    description: 'Which attacks are super effective? What type is this Pokemon? Learn the type chart one question at a time.',
+    icon: <Sword size={22} weight="bold" />,
+    color: '#b83a6e',
+    description: 'Super effective or not? Learn the type chart question by question.',
   },
   {
     path: 'size',
     title: 'Size Compare',
-    icon: <Ruler size={22} color="var(--color-accent)" />,
-    description: 'See any Pokemon next to you at real scale, from tiny Joltik to huge Wailord.',
-    // Not scoped by generation; you can search every Pokemon
+    icon: <Ruler size={22} weight="bold" />,
+    color: '#565a68',
+    description: 'See any Pokémon next to you at real scale.',
     unscoped: true,
   },
 ]
 
+const PUZZLE_LABEL: Record<DailyPuzzle, string> = { pokedle: 'Pokédle', reveal: 'Pixel Reveal' }
+
+/** Play & Learn hub: pick what to practise, then the daily puzzles, the silhouette quiz, flashcards and games */
 export default function LearnMenu() {
-  const router = useRouter()
   // Scope slug shared by every game: "all", "1".."9", a game Pokedex like "dex-paldea", or "popular-50"
   const [slug, setSlug] = useState('1')
   const [learn, setLearn] = useState<LearnState | null>(null)
@@ -83,114 +105,152 @@ export default function LearnMenu() {
 
   const isDex = slug.indexOf(DEX_SCOPE_PREFIX) === 0
   const isPopular = slug.indexOf(POPULAR_SCOPE_PREFIX) === 0
-  const generation: GenerationNumber | null | undefined = isDex || isPopular ? undefined : slug === 'all' ? null : (parseInt(slug, 10) as GenerationNumber)
   const scope = useMemo(() => getScope(slug), [slug])
   const scopeIds = scope.pool.map(p => p.id)
   const progress = learn ? scopeStats(learn, scopeIds) : null
+  // The silhouette quiz runs on one generation or all of them
+  const quizHref = /^[1-9]$/.test(slug) ? `/quiz/${slug}` : '/quiz/all'
 
   // Daily status reads localStorage, so it is only known after mount
-  const [daily, setDaily] = useState<{ streak: number; done: number } | null>(null)
+  const [daily, setDaily] = useState<{ streak: number; done: Record<string, boolean> } | null>(null)
   useEffect(() => {
-    setDaily({
-      streak: dailyStreak(),
-      done: DAILY_PUZZLES.filter(p => getDailyResult(p, slug)).length,
-    })
+    const done: Record<string, boolean> = {}
+    DAILY_PUZZLES.forEach(p => { done[p] = !!getDailyResult(p, slug) })
+    setDaily({ streak: dailyStreak(), done })
   }, [slug])
 
+  const today = new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+  const masteredPct = progress && progress.total ? progress.mastered / progress.total : 0
+  const RING = 2 * Math.PI * 30
+
   return (
-    <div className="flex flex-col gap-4">
-      <div className="text-center">
-        <h2 className="text-2xl mb-1" style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}>
-          Learn Pokemon names
-        </h2>
-        <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-          Pick a generation, the most popular Pokemon, or the Pokedex of the game you&apos;re playing. Progress is saved in this browser.
-        </p>
-      </div>
-      <GenerationSelector
-        title="Learn Pokemon names"
-        onGenerationSelect={gen => selectSlug(gen === null ? 'all' : String(gen))}
-        // undefined highlights nothing while a game Pokedex is picked
-        selectedGeneration={generation as GenerationNumber | null}
-        minimized
-      />
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Popular, all gens:</span>
-        {POPULAR_TIERS.map(n => (
-          <button
-            key={n}
-            type="button"
-            className={cn('nx-tab', slug === POPULAR_SCOPE_PREFIX + n && 'nx-tab-active')}
-            onClick={() => selectSlug(POPULAR_SCOPE_PREFIX + n)}
-          >
-            Top {n}
+    <div className="flex flex-col gap-5">
+      {/* What to practise */}
+      <section className="flex flex-col gap-2" aria-label="Pokémon to practise">
+        <span className="nx-label">Practise with</span>
+        <div className="flex items-center gap-1.5 nx-scroll-x pb-1 -mx-1 px-1">
+          <button type="button" className={cn('nx-tab sm flex-shrink-0', slug === 'all' && 'nx-tab-active')} onClick={() => selectSlug('all')} aria-pressed={slug === 'all'}>
+            All gens
           </button>
-        ))}
-      </div>
-      <PokedexSelect value={isDex ? slug.slice(DEX_SCOPE_PREFIX.length) : ''} onChange={name => selectSlug(DEX_SCOPE_PREFIX + name)} />
-      {(isDex || isPopular) && (
-        <p className="text-center text-sm -mt-2" style={{ color: 'var(--color-accent-400)' }}>
+          {ROMAN.map((label, i) => {
+            const s = String(i + 1)
+            return (
+              <button key={s} type="button" className={cn('nx-tab sm flex-shrink-0', slug === s && 'nx-tab-active')} onClick={() => selectSlug(s)} aria-pressed={slug === s} title={`Generation ${s}`}>
+                Gen {label}
+              </button>
+            )
+          })}
+          {POPULAR_TIERS.map(n => (
+            <button
+              key={n}
+              type="button"
+              className={cn('nx-tab sm flex-shrink-0', slug === POPULAR_SCOPE_PREFIX + n && 'nx-tab-active')}
+              onClick={() => selectSlug(POPULAR_SCOPE_PREFIX + n)}
+              aria-pressed={slug === POPULAR_SCOPE_PREFIX + n}
+            >
+              Top {n}
+            </button>
+          ))}
+          <div className="relative flex-shrink-0">
+            <select
+              value={isDex ? slug.slice(DEX_SCOPE_PREFIX.length) : ''}
+              onChange={e => { if (e.target.value) selectSlug(DEX_SCOPE_PREFIX + e.target.value) }}
+              className={cn('nx-tab sm appearance-none pr-8 cursor-pointer', isDex && 'nx-tab-active')}
+              aria-label="Game Pokédex"
+            >
+              <option value="">Game Pokédex…</option>
+              {getPokedexes().map(dex => (
+                <option key={dex.name} value={dex.name}>{pokedexOptionLabel(dex)} · {dex.entries.length}</option>
+              ))}
+            </select>
+            <CaretDown size={12} weight="bold" className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+          </div>
+        </div>
+        <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
           {isDex
-            ? <>Studying the {scope.label}: {scope.pool.length} Pokemon, in the game&apos;s own order</>
-            : <>Studying the {scope.pool.length} most popular Pokemon from every generation, most popular first</>}
+            ? <>{scope.label}: {scope.pool.length} Pokémon, in the game&apos;s own order</>
+            : isPopular
+              ? <>The {scope.pool.length} most popular Pokémon from every generation, most popular first</>
+              : <>{scope.label}: {scope.pool.length} Pokémon. Progress is saved in this browser.</>}
         </p>
-      )}
+      </section>
 
-      <div className="card" style={{ gap: 'var(--space-4)', boxShadow: '0 0 0 1px var(--color-accent-600)' }}>
-        <div className="flex items-center justify-between gap-2">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {/* Daily challenge */}
+        <section className="nx-hero yellow" aria-label="Daily challenge">
+          <svg className="nx-hero-ball" viewBox="0 0 100 100" aria-hidden><circle cx="50" cy="50" r="42" /><path d="M8 50h28M64 50h28" /><circle cx="50" cy="50" r="14" /></svg>
           <div className="flex items-center gap-2">
-            <CalendarCheck size={22} color="var(--color-accent)" />
-            <h3 className="card-title">Daily Challenge</h3>
+            <span className="nx-label" style={{ color: 'inherit' }}>Daily challenge · {today}</span>
+            <div className="flex-1" />
+            {daily && (
+              <span className="nx-streak" title="Days in a row">
+                <Fire size={14} weight="fill" /> {daily.streak} {daily.streak === 1 ? 'day' : 'days'}
+              </span>
+            )}
           </div>
-          {daily && (
-            <span className="flex items-center gap-1 text-sm" style={{ color: 'var(--color-accent)' }}>
-              <Fire size={16} weight="fill" /> {daily.streak}
-            </span>
-          )}
-        </div>
-        <p className="card-body">
-          Today&apos;s Pokedle and Pixel Reveal: the same puzzles for everyone, one try each.
-          {daily && ` ${daily.done} of ${DAILY_PUZZLES.length} done today.`}
-        </p>
-        <Button block onClick={() => router.push(`/daily/${slug}`)}>
-          {daily && daily.done === DAILY_PUZZLES.length ? 'See today’s results' : 'Play today’s puzzles'}
-        </Button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="card" style={{ gap: 'var(--space-4)' }}>
-          <div className="flex items-center gap-2">
-            <Cards size={22} color="var(--color-accent)" />
-            <h3 className="card-title">Flashcards</h3>
+          <div className="font-display text-2xl font-bold leading-tight">Same puzzles for everyone today</div>
+          <div className="grid grid-cols-2 gap-2 mt-auto">
+            {DAILY_PUZZLES.map((p, i) => (
+              <Link key={p} href={`/daily/${slug}/${p}`} className={cn('nx-hero-btn', i === 0 ? 'solid' : 'soft')}>
+                {daily?.done[p] && <Check size={16} weight="bold" />}
+                {PUZZLE_LABEL[p]}
+              </Link>
+            ))}
           </div>
-          <p className="card-body">
-            Meet a few new Pokemon a day. Each one moves from seeing its name, to picking it from 4 choices,
-            to typing it yourself. Ones you miss come back sooner.
-          </p>
-          {progress && (
-            <ProgressBar
-              value={progress.mastered}
-              max={progress.total}
-              label="Mastered"
-              valueLabel={`${progress.mastered} / ${progress.total} · ${progress.due} due`}
-            />
-          )}
-          <Button block onClick={() => router.push(`/learn/${slug}`)}>Study</Button>
-        </div>
+        </section>
 
-        {GAMES.map(game => (
-          <div key={game.path} className="card" style={{ gap: 'var(--space-4)' }}>
-            <div className="flex items-center gap-2">
-              {game.icon}
-              <h3 className="card-title">{game.title}</h3>
+        {/* Silhouette quiz */}
+        <Link href={quizHref} className="nx-hero red" aria-label="Who's that Pokémon? Silhouette quiz, 10 questions">
+          <svg className="nx-hero-ball" viewBox="0 0 100 100" aria-hidden><circle cx="50" cy="50" r="42" /><path d="M8 50h28M64 50h28" /><circle cx="50" cy="50" r="14" /></svg>
+          <span className="nx-label" style={{ color: 'rgba(255,255,255,0.85)' }}>Quiz · 10 questions</span>
+          <div className="flex items-end gap-3 flex-1">
+            <div className="flex-1 flex flex-col gap-1">
+              <span className="font-display text-2xl font-bold leading-tight">Who&apos;s that Pokémon?</span>
+              <span className="text-sm opacity-90">Name the silhouette</span>
             </div>
-            <p className="card-body">{game.description}</p>
-            <Button block onClick={() => router.push('unscoped' in game ? `/${game.path}` : `/${game.path}/${slug}`)}>
-              {'unscoped' in game ? 'Open' : 'Play'}
-            </Button>
+            <PokemonArt id={25} alt="" silhouette className="w-28 h-28 flex-shrink-0 opacity-90" />
           </div>
-        ))}
+        </Link>
+
+        {/* Flashcard progress */}
+        <section className="card md:col-span-2 lg:col-span-1" style={{ gap: 14 }} aria-label="Flashcards progress">
+          <div className="flex items-center gap-4">
+            <svg width="76" height="76" viewBox="0 0 76 76" role="img" aria-label={progress ? `${progress.mastered} of ${progress.total} mastered` : 'Progress'}>
+              <circle cx="38" cy="38" r="30" fill="none" stroke="var(--color-neutral-800)" strokeWidth="9" />
+              <circle
+                cx="38" cy="38" r="30" fill="none" stroke="var(--color-accent)" strokeWidth="9" strokeLinecap="round"
+                strokeDasharray={`${RING * masteredPct} ${RING}`} transform="rotate(-90 38 38)"
+              />
+              <text x="38" y="43" textAnchor="middle" fontSize="15" fontWeight="700" fill="var(--color-text)" style={{ fontFamily: 'var(--font-number)' }}>
+                {Math.round(masteredPct * 100)}%
+              </text>
+            </svg>
+            <div className="flex-1 min-w-0">
+              <div className="font-display text-xl font-semibold leading-tight">
+                {progress ? `${progress.mastered} of ${progress.total} mastered` : 'Flashcards'}
+              </div>
+              <div className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                {progress ? `${progress.due} due · ${progress.seen} met so far` : 'Learn a few new names a day'}
+              </div>
+            </div>
+          </div>
+          <Link href={`/learn/${slug}`} className="btn btn-primary btn-block">Study flashcards</Link>
+        </section>
       </div>
+
+      {/* Games */}
+      <section className="flex flex-col gap-3" aria-label="Games">
+        <h2 className="nx-section-title">Games</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          {GAMES.map(game => (
+            <Link key={game.path} href={game.unscoped ? `/${game.path}` : `/${game.path}/${slug}`} className="nx-game">
+              <span className="nx-game-icon" style={{ background: game.color }}>{game.icon}</span>
+              <span className="font-display text-lg font-semibold leading-tight">{game.title}</span>
+              <span className="text-[13px] leading-snug" style={{ color: 'var(--text-secondary)' }}>{game.description}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   )
 }

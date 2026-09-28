@@ -1,9 +1,9 @@
 'use client'
 
-import { Suspense } from 'react'
+import { Suspense, useEffect, useRef, useState, FormEvent } from 'react'
 import Link from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { Moon, Sun, SquaresFour, GameController } from '@phosphor-icons/react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Moon, Sun, SquaresFour, GameController, MagnifyingGlass, X } from '@phosphor-icons/react'
 import { useTheme } from '@/lib/theme'
 import { cn } from '@/lib/cn'
 
@@ -62,6 +62,79 @@ function ThemeToggle() {
   )
 }
 
+/**
+ * Pokedex search in the header. On the Pokedex it filters the list as you type (?q= in the URL);
+ * anywhere else Enter opens the Pokedex with the search. "/" focuses it
+ */
+function HeaderSearch({ className }: { className?: string }) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const urlQuery = searchParams.get('q') ?? ''
+  const [value, setValue] = useState(urlQuery)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const onPokedex = pathname === '/' && (searchParams.get('section') ?? 'pokedex') === 'pokedex'
+
+  // Follow the URL (back button, chips that clear the search)
+  useEffect(() => { setValue(urlQuery) }, [urlQuery])
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement
+      if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return
+      if (target.closest('input, textarea, select, [contenteditable="true"]')) return
+      e.preventDefault()
+      inputRef.current?.focus()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
+  const urlFor = (q: string) => {
+    const params = new URLSearchParams(onPokedex ? searchParams.toString() : '')
+    params.set('section', 'pokedex')
+    if (q.trim()) params.set('q', q.trim())
+    else params.delete('q')
+    return `/?${params.toString()}`
+  }
+
+  // Live filtering on the Pokedex, lightly debounced so typing stays smooth
+  useEffect(() => {
+    if (!onPokedex || value.trim() === urlQuery) return
+    const timer = window.setTimeout(() => router.replace(urlFor(value), { scroll: false }), 150)
+    return () => window.clearTimeout(timer)
+  }, [value]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const submit = (e: FormEvent) => {
+    e.preventDefault()
+    if (onPokedex) router.replace(urlFor(value), { scroll: false })
+    else router.push(urlFor(value))
+    inputRef.current?.blur()
+  }
+
+  return (
+    <form role="search" onSubmit={submit} className={cn('dex-search', className)}>
+      <MagnifyingGlass size={18} weight="bold" color="#565a68" aria-hidden />
+      <input
+        ref={inputRef}
+        type="search"
+        value={value}
+        onChange={e => setValue(e.target.value)}
+        placeholder="Search name, romaji or #no."
+        aria-label="Search Pokémon"
+        enterKeyHint="search"
+      />
+      {value ? (
+        <button type="button" className="clear" aria-label="Clear search" onClick={() => { setValue(''); inputRef.current?.focus() }}>
+          <X size={14} weight="bold" />
+        </button>
+      ) : (
+        <kbd className="hidden xl:inline" aria-hidden>/</kbd>
+      )}
+    </form>
+  )
+}
+
 function Nav() {
   const active = useActiveNav()
   return (
@@ -97,11 +170,22 @@ function Nav() {
   )
 }
 
+/** Search on a second header row below large screens, only where you browse Pokemon */
+function SearchRow() {
+  const active = useActiveNav()
+  if (active !== 'pokedex') return null
+  return (
+    <div className="xl:hidden max-w-7xl mx-auto px-4 pb-4 -mt-1">
+      <HeaderSearch />
+    </div>
+  )
+}
+
 /** Pokedex-device header: red shell, blue lens and three lights, black band below */
 export default function AppHeader() {
   return (
     <header className="dex-header">
-      <div className="max-w-6xl mx-auto px-4 h-[68px] sm:h-[84px] flex items-center gap-3 sm:gap-6">
+      <div className="max-w-7xl mx-auto px-4 h-[68px] sm:h-[84px] flex items-center gap-3 sm:gap-5">
         <Link href="/?section=pokedex" className="flex items-center gap-3 min-w-0" aria-label="Pokémon Toolkit home">
           <span className="dex-lens" aria-hidden="true"><span /></span>
           <span className="flex gap-1.5 self-start mt-3 sm:mt-4" aria-hidden="true">
@@ -117,9 +201,13 @@ export default function AppHeader() {
         <div className="flex-1" />
         <Suspense fallback={null}>
           <Nav />
+          <div className="hidden xl:block w-[260px]"><HeaderSearch /></div>
         </Suspense>
         <ThemeToggle />
       </div>
+      <Suspense fallback={null}>
+        <SearchRow />
+      </Suspense>
     </header>
   )
 }

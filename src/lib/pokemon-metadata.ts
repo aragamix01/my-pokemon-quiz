@@ -175,8 +175,12 @@ class PokemonMetadataService {
       }
       
       const normalizedSearchTerm = normalizeString(searchTerm)
-      
+      // "25", "#25" or "#0025" finds Pokedex number 25
+      const numberMatch = searchTerm.match(/^#?0*(\d{1,4})$/)
+      const searchNumber = numberMatch ? parseInt(numberMatch[1]) : null
+
       results = results.filter(p => {
+        if (searchNumber !== null) return p.id === searchNumber
         const normalizedName = normalizeString(p.name)
         const normalizedSpecies = normalizeString(p.species_name)
         // Japanese romaji name, so "Hitokage" finds Charmander

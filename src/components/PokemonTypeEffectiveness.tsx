@@ -1,96 +1,54 @@
 'use client'
 
-import { analyzePokemonTypes, PokemonTypeName, EffectivenessMultiplier } from '@/lib/type-effectiveness'
+import { analyzePokemonTypes, PokemonTypeName } from '@/lib/type-effectiveness'
 import { TypePill } from '@/components/ui/TypePill'
 
 interface PokemonTypeEffectivenessProps {
   types: PokemonTypeName[]
 }
 
+/** Badge colors per multiplier; lightness differs too, so they read without color */
+export const MULTIPLIER_BADGES: Array<{ multiplier: number; label: string; title: string; className: string }> = [
+  { multiplier: 4, label: '4×', title: 'Takes quadruple', className: 'nx-mult x4' },
+  { multiplier: 2, label: '2×', title: 'Weak to', className: 'nx-mult x2' },
+  { multiplier: 0.5, label: '½×', title: 'Resists', className: 'nx-mult x05' },
+  { multiplier: 0.25, label: '¼×', title: 'Strongly resists', className: 'nx-mult x025' },
+  { multiplier: 0, label: '0×', title: 'Immune to', className: 'nx-mult x0' },
+]
+
+/** Damage a Pokemon takes, grouped by multiplier: a badge, then the attacking types */
 export default function PokemonTypeEffectiveness({ types }: PokemonTypeEffectivenessProps) {
   const analysis = analyzePokemonTypes(types)
+  const byMultiplier = (m: number): PokemonTypeName[] =>
+    m === 0
+      ? analysis.immunities
+      : [...analysis.weaknesses, ...analysis.resistances].filter(x => x.multiplier === m).map(x => x.type)
 
-  const getMultiplierLabel = (multiplier: EffectivenessMultiplier): string => {
-    switch (multiplier) {
-      case 0: return ''
-      case 0.25: return '¼×'
-      case 0.5: return '½×'
-      case 1: return '1×'
-      case 2: return '2×'
-      case 4: return '4×'
-      default: return `${multiplier}×`
-    }
+  const groups = MULTIPLIER_BADGES.map(b => ({ ...b, types: byMultiplier(b.multiplier) })).filter(g => g.types.length > 0)
+
+  if (groups.length === 0) {
+    return (
+      <div className="text-sm py-2" style={{ color: 'var(--text-muted)' }}>
+        Takes normal damage from every type
+      </div>
+    )
   }
 
-  // One row per type: pill on the left, multiplier right-aligned so every
-  // multiplier in the panel lines up in a single column.
-  const TypeRow = ({ type, multiplier }: { type: PokemonTypeName; multiplier: EffectivenessMultiplier }) => (
-    <div className="flex items-center justify-between gap-2 py-0.5">
-      <TypePill type={type} />
-      <span className="text-xs tabular-nums flex-shrink-0" style={{ color: 'var(--text-muted)' }}>
-        {multiplier === 0 ? '0×' : getMultiplierLabel(multiplier)}
-      </span>
-    </div>
-  )
-
-  const TypeGroup = ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <div>
-      <h4 className="text-xs font-semibold mb-1.5" style={{ color: 'var(--text-secondary)' }}>
-        {title}
-      </h4>
-      <div className="space-y-0.5">{children}</div>
-    </div>
-  )
-
   return (
-    <div className="space-y-3">
-      {/* Weaknesses Section */}
-      {analysis.weaknesses.length > 0 && (
-        <TypeGroup title="Weak To:">
-          {analysis.weaknesses.map((weakness) => (
-            <TypeRow
-              key={weakness.type}
-              type={weakness.type}
-              multiplier={weakness.multiplier}
-            />
-          ))}
-        </TypeGroup>
-      )}
-
-      {/* Resistances Section */}
-      {analysis.resistances.length > 0 && (
-        <TypeGroup title="Resistant To:">
-          {analysis.resistances.map((resistance) => (
-            <TypeRow
-              key={resistance.type}
-              type={resistance.type}
-              multiplier={resistance.multiplier}
-            />
-          ))}
-        </TypeGroup>
-      )}
-
-      {/* Immunities Section */}
-      {analysis.immunities.length > 0 && (
-        <TypeGroup title="Immune To:">
-          {analysis.immunities.map((immunity) => (
-            <TypeRow
-              key={immunity}
-              type={immunity}
-              multiplier={0}
-            />
-          ))}
-        </TypeGroup>
-      )}
-
-      {/* Show message if no special effectiveness */}
-      {analysis.weaknesses.length === 0 &&
-       analysis.resistances.length === 0 &&
-       analysis.immunities.length === 0 && (
-        <div className="text-xs text-center py-2" style={{ color: 'var(--text-muted)' }}>
-          Neutral effectiveness against all types
+    <div className="flex flex-col gap-3">
+      {groups.map(g => (
+        <div key={g.label} className="flex items-start gap-3">
+          <span className={g.className}>{g.label}</span>
+          <div className="flex flex-col gap-1.5 min-w-0">
+            <span className="text-xs font-bold" style={{ color: 'var(--text-secondary)' }}>
+              {g.title} · {g.types.length}
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {g.types.map(t => <TypePill key={t} type={t} />)}
+            </div>
+          </div>
         </div>
-      )}
+      ))}
     </div>
   )
 }

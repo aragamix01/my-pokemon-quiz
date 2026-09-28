@@ -3,10 +3,8 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Pokedex from '@/components/Pokedex'
-import GenerationSelector from '@/components/GenerationSelector'
 import TypeAdvantage from '@/components/TypeAdvantage'
 import LearnMenu from '@/components/LearnMenu'
-import { GenerationNumber } from '@/types/pokemon'
 
 // Sections are picked from the header nav (?section=...). "quiz" is an old link, now part of Play & Learn
 type Section = 'pokedex' | 'types' | 'learn'
@@ -41,10 +39,6 @@ function HomeContent() {
     sessionStorage.setItem('active-section', activeSection)
   }, [activeSection])
 
-  const startQuiz = (generation: GenerationNumber | null) => {
-    router.push(generation === null ? '/quiz/all' : `/quiz/${generation}`)
-  }
-
   return (
     <div className="max-w-6xl mx-auto">
       {activeSection === 'pokedex' && <Pokedex />}
@@ -59,13 +53,6 @@ function HomeContent() {
       {activeSection === 'learn' && (
         <>
           <SectionTitle title="Play & Learn" subtitle="Quizzes and games to learn every name." />
-          <div className="quiz-selection-area mb-6">
-            <GenerationSelector
-              title="Who's that Pokémon?"
-              subtitle="Name the silhouette · 10 questions per quiz"
-              onGenerationSelect={startQuiz}
-            />
-          </div>
           <LearnMenu />
         </>
       )}

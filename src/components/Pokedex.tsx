@@ -4,17 +4,18 @@ import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Pokemon, GenerationNumber } from '@/types/pokemon'
 import { pokemonAPI } from '@/lib/pokemon-api'
-import GenerationSelector from './GenerationSelector'
 import PokemonImage from './PokemonImage'
 import PokemonSkeleton from './PokemonSkeleton'
-import PokemonSearchBar from './PokemonSearchBar'
-import PokemonFilters from './PokemonFilters'
+import PokedexFilterPanel, { REGION_NAMES } from './PokedexFilterPanel'
 import AISearchBar from './AISearchBar'
 import { usePokemonFilter } from '@/hooks/usePokemonFilter'
 import { pokemonMetadataService } from '@/lib/pokemon-metadata'
 import type { PokemonMetadata } from '@/types/pokemon-metadata'
 import { Button } from '@/components/ui/Button'
-import { Sparkle, MagnifyingGlass, Shuffle, SquaresFour, Rows } from '@phosphor-icons/react'
+import { Sparkle, Shuffle, SquaresFour, Rows, Funnel, CaretDown, X } from '@phosphor-icons/react'
+import { SORT_OPTIONS, FormKind } from '@/lib/pokemon-metadata'
+import { popularIds } from '@/lib/popular-pokemon'
+import { cn } from '@/lib/cn'
 import { TypeIcon } from '@/components/ui/TypeIcon'
 import { HoloCard } from '@/components/ui/HoloCard'
 import { PokeballMark } from '@/components/ui/PokeballMark'
@@ -22,17 +23,30 @@ import { getTypeCardColor } from '@/lib/type-card-colors'
 import { PokemonTypeName } from '@/lib/type-effectiveness'
 import { japaneseName } from '@/lib/pokemon-names'
 import { getPokedex, regionalNumber, pokedexOptionLabel } from '@/lib/regional-pokedexes'
-import PokedexSelect from './PokedexSelect'
 import { LearnState, loadLearnState, isMastered } from '@/lib/learn-progress'
 
 
 const COMPACT_KEY = 'pokedex-compact-view'
 
+// First-stage starters of every generation, Gen 1 to 9
+const STARTER_IDS = [1, 4, 7, 152, 155, 158, 252, 255, 258, 387, 390, 393, 495, 498, 501, 650, 653, 656, 722, 725, 728, 810, 813, 816, 906, 909, 912]
+const FAN_FAVOURITES = popularIds(100)
+
+type QuickPick = 'all' | 'starters' | 'favourites' | 'legendary' | 'mythical' | 'mega'
+const QUICK_PICKS: Array<{ id: QuickPick; label: string }> = [
+  { id: 'all', label: 'All' },
+  { id: 'starters', label: 'Starters' },
+  { id: 'favourites', label: 'Fan favourites' },
+  { id: 'legendary', label: 'Legendary' },
+  { id: 'mythical', label: 'Mythical' },
+  { id: 'mega', label: 'Mega' },
+]
+
 export default function Pokedex() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [selectedGeneration, setSelectedGeneration] = useState<GenerationNumber | null>(null)
-  const [showPokedex, setShowPokedex] = useState(false) // Start false, let restoration logic handle it
+  const [showPokedex, setShowPokedex] = useState(true) // Opens on all generations; restoration may pick another
   const [showShiny, setShowShiny] = useState(false)
   const [pokemon, setPokemon] = useState<Pokemon[]>([])
   const [loading, setLoading] = useState(false)
@@ -50,6 +64,8 @@ export default function Pokedex() {
   }, [])
   // Compact list view (small row cards), remembered in this browser
   const [compactView, setCompactView] = useState(false)
+  // Phone/tablet filter sheet
+  const [filtersOpen, setFiltersOpen] = useState(false)
   useEffect(() => {
     try {
       setCompactView(localStorage.getItem(COMPACT_KEY) === 'true')
@@ -98,6 +114,8 @@ export default function Pokedex() {
     setLearnFilter,
     regionalDex,
     setRegionalDex,
+    collection,
+    setCollection,
     resetFilters,
     clearSearch,
     hasActiveFilters,
@@ -274,15 +292,16 @@ export default function Pokedex() {
       setSelectedGeneration(Number(gen) as GenerationNumber)
       setShowPokedex(true)
     } else {
-      console.log('No generation in URL, checking if we need to show default Pokedex')
-      // Check if user is on main pokedex route without any saved state
-      const hasNoSavedState = !sessionStorage.getItem('pokedex-scroll-position')
-      if (hasNoSavedState) {
-        console.log('No saved state, showing GenerationSelector by default')
-        setShowPokedex(false)
-      }
+      // No generation in the URL: the Pokedex opens on all generations
+      setShowPokedex(true)
     }
   }, [searchParams])
+
+  // Search comes from the header search box (?q=...)
+  const urlQuery = searchParams.get('q') ?? ''
+  useEffect(() => {
+    setSearchTerm(urlQuery)
+  }, [urlQuery, setSearchTerm])
 
   // Restore complete Pokedex state on component mount
   useEffect(() => {
@@ -408,15 +427,15 @@ export default function Pokedex() {
           setFormKind(extra.formKind ?? null)
           setLearnFilter(extra.learnFilter ?? null)
           setRegionalDex(extra.regionalDex ?? null)
+          setCollection(extra.collection ?? null)
         } catch (e) {
           console.error('Failed to parse saved extra filters:', e)
         }
       }
       
     } else {
-      console.log('❌ No saved state found, showing GenerationSelector')
-      // No saved state, start fresh
-      setShowPokedex(false)
+      // No saved state, start fresh on all generations
+      setShowPokedex(true)
     }
   }, [setSearchTerm, setSelectedTypes, setSortOption, setShowLegendary, setShowMythical, setSelectedHabitat, setSelectedColor, setStatsRange]) // Include all setter dependencies
 
@@ -729,7 +748,7 @@ export default function Pokedex() {
     sessionStorage.setItem('pokedex-selected-habitat', selectedHabitat || 'null')
     sessionStorage.setItem('pokedex-selected-color', selectedColor || 'null')
     sessionStorage.setItem('pokedex-stats-range', JSON.stringify(statsRange))
-    sessionStorage.setItem('pokedex-extra-filters', JSON.stringify({ evolutionStage, formKind, learnFilter, regionalDex }))
+    sessionStorage.setItem('pokedex-extra-filters', JSON.stringify({ evolutionStage, formKind, learnFilter, regionalDex, collection }))
     
     console.log('Storing navigation data:', {
       scrollY,
@@ -900,253 +919,292 @@ export default function Pokedex() {
     )
   }, [showShiny, handlePokemonClick, metadataById, learnState, regionalDex, compactView])
 
-  if (!showPokedex) {
-    return (
-      <div className="flex flex-col gap-4">
-        <GenerationSelector
-          title="POKEDEX"
-          subtitle="Browse Pokemon by generation (ordered by Pokedex number)"
-          onGenerationSelect={handleGenerationSelect}
-        />
-        <div className="card" style={{ gap: 'var(--space-3)' }}>
-          <h3 className="card-title text-center">Browse by game</h3>
-          <p className="text-sm text-center" style={{ color: 'var(--text-secondary)' }}>
-            Each game has its own Pokedex with its own numbers, including older Pokemon you can meet there.
-          </p>
-          <PokedexSelect value="" onChange={handleDexSelect} />
-        </div>
-      </div>
-    )
+  // Quick picks: shortcuts over the filters (and hand-picked lists), shown above the grid
+  const sameList = (a: number[] | null, b: number[]) => !!a && a.length === b.length && a[0] === b[0]
+  const activePick: QuickPick | null =
+    sameList(collection, STARTER_IDS) ? 'starters'
+      : sameList(collection, FAN_FAVOURITES) ? 'favourites'
+        : collection ? null
+          : showLegendary === true ? 'legendary'
+            : showMythical === true ? 'mythical'
+              : formKind === 'mega' ? 'mega'
+                : 'all'
+
+  const applyQuickPick = (pick: QuickPick) => {
+    setCollection(null)
+    setShowLegendary(null)
+    setShowMythical(null)
+    if (formKind === 'mega') setFormKind(null)
+    if (pick === 'starters' || pick === 'favourites') {
+      // Lists span every generation
+      setSelectedGeneration(null)
+      setRegionalDex(null)
+      setCollection(pick === 'starters' ? STARTER_IDS : FAN_FAVOURITES)
+    }
+    if (pick === 'legendary') setShowLegendary(true)
+    if (pick === 'mythical') setShowMythical(true)
+    if (pick === 'mega') setFormKind('mega' as FormKind)
+    setPokemon([])
+    setCurrentPage(1)
   }
 
+  const clearHeaderSearch = () => {
+    const params = new URLSearchParams(searchParams.toString())
+    params.delete('q')
+    router.replace(`/?${params.toString()}`, { scroll: false })
+  }
+
+  // Removable chips for everything that narrows the list
+  const activeChips: Array<{ key: string; label: string; clear: () => void }> = [
+    ...(searchTerm ? [{ key: 'q', label: `“${searchTerm}”`, clear: clearHeaderSearch }] : []),
+    ...selectedTypes.map(t => ({ key: `t-${t}`, label: t.charAt(0).toUpperCase() + t.slice(1), clear: () => setSelectedTypes(selectedTypes.filter(x => x !== t)) })),
+    ...(evolutionStage ? [{ key: 'evo', label: `Stage: ${evolutionStage}`, clear: () => setEvolutionStage(null) }] : []),
+    ...(formKind && formKind !== 'mega' ? [{ key: 'form', label: `Form: ${formKind}`, clear: () => setFormKind(null) }] : []),
+    ...(learnFilter ? [{ key: 'learn', label: `Learning: ${learnFilter}`, clear: () => setLearnFilter(null) }] : []),
+    ...(selectedHabitat ? [{ key: 'hab', label: selectedHabitat.replace('-', ' '), clear: () => setSelectedHabitat(null) }] : []),
+    ...(selectedColor ? [{ key: 'col', label: selectedColor, clear: () => setSelectedColor(null) }] : []),
+    ...(statsRange.min > 0 || statsRange.max < 800 ? [{ key: 'stats', label: `Stats ${statsRange.min}–${statsRange.max}`, clear: () => setStatsRange({ min: 0, max: 800 }) }] : []),
+  ]
+  const filterCount = activeChips.filter(c => c.key !== 'q').length + (activePick && activePick !== 'all' ? 1 : 0)
+
+  const dex = regionalDex ? getPokedex(regionalDex) : undefined
+  const title = dex
+    ? `${dex.label} Pokédex`
+    : activePick === 'starters' ? 'Starters'
+      : activePick === 'favourites' ? 'Fan favourites'
+        : selectedGeneration === null ? 'All Pokémon' : `Generation ${selectedGeneration} · ${REGION_NAMES[selectedGeneration - 1]}`
+  const listCount = useAISearch ? aiFilteredPokemon.length : totalResults
+
+  const panel = (
+    <PokedexFilterPanel
+      generation={selectedGeneration}
+      onGenerationChange={handleGenerationSelect}
+      regionalDex={regionalDex}
+      onDexChange={handleDexSelect}
+      selectedTypes={selectedTypes}
+      onTypesChange={setSelectedTypes}
+      showLegendary={showLegendary}
+      onLegendaryChange={setShowLegendary}
+      showMythical={showMythical}
+      onMythicalChange={setShowMythical}
+      selectedHabitat={selectedHabitat}
+      onHabitatChange={setSelectedHabitat}
+      selectedColor={selectedColor}
+      onColorChange={setSelectedColor}
+      statsRange={statsRange}
+      onStatsRangeChange={setStatsRange}
+      evolutionStage={evolutionStage}
+      onEvolutionStageChange={setEvolutionStage}
+      formKind={formKind}
+      onFormKindChange={setFormKind}
+      learnFilter={learnFilter}
+      onLearnFilterChange={setLearnFilter}
+      onResetFilters={() => { resetFilters(); if (searchTerm) clearHeaderSearch() }}
+      hasActiveFilters={hasActiveFilters}
+    />
+  )
+
   return (
-    <>
-      {/* Floating Shiny Toggle */}
-      <Button
-        variant={showShiny ? 'primary' : 'secondary'}
-        onClick={() => setShowShiny(!showShiny)}
-        title={showShiny ? 'Switch to Normal Pokemon' : 'Switch to Shiny Pokemon'}
-        style={{ position: 'fixed', left: '20px', bottom: '20px', zIndex: 1000, borderRadius: '50%', width: 56, height: 56, padding: 0 }}
-      >
-        <Sparkle size={22} weight={showShiny ? 'fill' : 'regular'} />
-      </Button>
+    <div className="lg:grid lg:grid-cols-[272px_minmax(0,1fr)] lg:gap-7 lg:items-start">
+      {/* Desktop: filters always open in a sticky sidebar */}
+      <aside aria-label="Filters" className="hidden lg:block nx-sidebar-wrap">
+        <div className="card nx-sidebar">{panel}</div>
+      </aside>
 
-      <div className="card p-1 sm:p-4">
-      <div className="flex justify-between items-center mb-2 sm:mb-6">
-        <Button variant="ghost" onClick={() => setShowPokedex(false)}>
-          ← Back
-        </Button>
-        <h2
-          className="text-lg sm:text-xl"
-          style={{ fontFamily: 'var(--font-heading)', fontWeight: 'var(--font-heading-weight)', color: 'var(--color-text)' }}
-        >
-          {regionalDex
-            ? `${getPokedex(regionalDex)?.label ?? regionalDex} Pokedex`
-            : selectedGeneration === null ? 'All Generations' : `Generation ${selectedGeneration}`}
-        </h2>
-        <Button
-          variant="ghost"
-          disabled={filteredMetadata.length === 0}
-          onClick={() => handlePokemonClick(filteredMetadata[Math.floor(Math.random() * filteredMetadata.length)].id)}
-          title="Open a random Pokemon from the current list"
-        >
-          <Shuffle size={16} /> Random
-        </Button>
-      </div>
+      {/* Phones and tablets: the same filters in a bottom sheet */}
+      {filtersOpen && (
+        <div className="nx-sheet-backdrop lg:hidden" onClick={() => setFiltersOpen(false)}>
+          <div
+            className="nx-sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Filters"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between -mt-1 mb-3">
+              <span className="nx-sheet-handle" aria-hidden />
+              <button
+                type="button"
+                className="btn btn-secondary btn-icon"
+                aria-label="Close filters"
+                onClick={() => setFiltersOpen(false)}
+              >
+                <X size={18} weight="bold" />
+              </button>
+            </div>
+            {panel}
+            <div className="nx-sheet-footer">
+              <button type="button" className="btn btn-primary btn-block" onClick={() => setFiltersOpen(false)}>
+                Show {listCount} Pokémon
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
-      <GenerationSelector
-        title=""
-        onGenerationSelect={handleGenerationSelect}
-        // Nothing highlighted while a game Pokedex is shown
-        selectedGeneration={regionalDex ? (undefined as unknown as null) : selectedGeneration}
-        minimized={true}
-      />
-      <div className="mb-4">
-        <PokedexSelect value={regionalDex ?? ''} onChange={handleDexSelect} />
-        {regionalDex && getPokedex(regionalDex) && (
-          <p className="text-center text-xs mt-2" style={{ color: 'var(--color-accent-400)' }}>
-            {pokedexOptionLabel(getPokedex(regionalDex)!)}: numbers and order from that game
-          </p>
+      <div className="min-w-0 flex flex-col gap-4">
+        {/* Quick picks */}
+        <div className="flex items-center gap-2 nx-scroll-x pb-1 -mx-1 px-1">
+          <span className="nx-label mr-1 hidden sm:inline flex-shrink-0">Quick picks</span>
+          {QUICK_PICKS.map(p => (
+            <button
+              key={p.id}
+              type="button"
+              aria-pressed={activePick === p.id}
+              onClick={() => applyQuickPick(p.id)}
+              className={cn('nx-tab sm flex-shrink-0', activePick === p.id && 'nx-tab-active')}
+            >
+              {p.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Title and list controls */}
+        <div className="flex flex-wrap items-end gap-2 sm:gap-3">
+          <div className="w-full">
+            <h1 className="font-display text-2xl sm:text-3xl font-bold leading-tight">{title}</h1>
+            <p className="text-sm mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+              {listCount} Pokémon
+              {dex ? ` · ${pokedexOptionLabel(dex)} order` : ` · ${sortOption.label}`}
+            </p>
+          </div>
+          <button
+            type="button"
+            className="btn btn-secondary lg:!hidden"
+            onClick={() => setFiltersOpen(true)}
+            aria-label={`Filters${filterCount ? `, ${filterCount} on` : ''}`}
+          >
+            <Funnel size={16} weight="bold" /> Filters
+            {filterCount > 0 && <span className="nx-count">{filterCount}</span>}
+          </button>
+          <div className="relative">
+            <select
+              value={sortOption.value}
+              onChange={e => {
+                const option = SORT_OPTIONS.find(opt => opt.value === e.target.value)
+                if (option) setSortOption(option)
+              }}
+              className="input pr-9 appearance-none cursor-pointer font-semibold max-w-[190px] sm:max-w-none truncate"
+              style={{ width: 'auto', background: 'var(--color-surface)' }}
+              aria-label="Sort"
+            >
+              {SORT_OPTIONS.map(option => (
+                <option key={option.value} value={option.value}>{option.label}</option>
+              ))}
+            </select>
+            <CaretDown size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" color="var(--color-neutral-400)" />
+          </div>
+          <div className="nx-seg" role="group" aria-label="View">
+            <button type="button" onClick={() => toggleCompactView(false)} className={cn(!compactView && 'on')} aria-pressed={!compactView} title="Card view">
+              <SquaresFour size={16} weight="bold" /><span className="hidden sm:inline">Cards</span>
+            </button>
+            <button type="button" onClick={() => toggleCompactView(true)} className={cn(compactView && 'on')} aria-pressed={compactView} title="Compact list view">
+              <Rows size={16} weight="bold" /><span className="hidden sm:inline">Compact</span>
+            </button>
+          </div>
+          <button
+            type="button"
+            className={cn('nx-tab', showShiny && 'nx-tab-active')}
+            onClick={() => setShowShiny(!showShiny)}
+            aria-pressed={showShiny}
+            title={showShiny ? 'Show normal colors' : 'Show shiny colors'}
+          >
+            <Sparkle size={16} weight={showShiny ? 'fill' : 'bold'} /> Shiny
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary ml-auto"
+            disabled={filteredMetadata.length === 0}
+            onClick={() => handlePokemonClick(filteredMetadata[Math.floor(Math.random() * filteredMetadata.length)].id)}
+            title="Open a random Pokemon from the current list"
+          >
+            <Shuffle size={16} weight="bold" /> Random
+          </button>
+        </div>
+
+        {/* Active filters, each removable, plus the smart (AI) search switch */}
+        <div className="flex flex-wrap items-center gap-1.5">
+          {activeChips.map(chip => (
+            <button key={chip.key} type="button" className="nx-tab sm capitalize" onClick={chip.clear} aria-label={`Remove ${chip.label}`}>
+              {chip.label} <X size={12} weight="bold" />
+            </button>
+          ))}
+          {dex && (
+            <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+              Numbers and order from {pokedexOptionLabel(dex)}
+            </span>
+          )}
+          {isMetadataAvailable && (
+            <button
+              type="button"
+              className={cn('nx-tab sm ml-auto', useAISearch && 'nx-tab-active')}
+              onClick={() => setUseAISearch(!useAISearch)}
+              aria-pressed={useAISearch}
+              title="Describe what you're looking for, like 'fast electric types'"
+            >
+              <Sparkle size={14} weight="bold" /> Smart search
+            </button>
+          )}
+        </div>
+
+        {useAISearch && (
+          <AISearchBar
+            pokemonList={
+              regionalDex
+                ? pokemonMetadataService.searchAndFilter({ regionalDex })
+                : selectedGeneration === null
+                  ? pokemonMetadataService.getAllMetadata()
+                  : pokemonMetadataService.getMetadataByGeneration(selectedGeneration)
+            }
+            onResults={handleAISearchResults}
+            placeholder="Try: 'strong fire starter' or 'fast electric types'"
+            maxResults={50}
+          />
+        )}
+
+        {!isMetadataAvailable && (
+          <div className="card p-4">
+            <div className="text-sm" style={{ color: 'var(--error-gradient)' }}>
+              Search and filters require Pokemon metadata. Run: <code>node scripts/fetch-pokemon-metadata.js</code>
+            </div>
+          </div>
+        )}
+
+        {error ? (
+          <div className="text-center py-8" style={{ color: 'var(--error-gradient)' }}>{error}</div>
+        ) : loading || (!useAISearch && pokemon.length === 0 && totalResults > 0) ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3">
+            <PokemonSkeleton count={20} />
+          </div>
+        ) : (useAISearch ? aiFilteredPokemon.length === 0 : pokemon.length === 0) ? (
+          <div className="card items-center text-center py-10">
+            <div className="font-display text-lg font-semibold">No Pokémon found</div>
+            <div className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+              {useAISearch ? 'Try describing it another way.' : 'Try removing a filter.'}
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className={compactView
+              ? 'grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-1.5 sm:gap-2'
+              : 'grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3'}>
+              {(useAISearch ? aiFilteredPokemon : pokemon).map((p, index) => renderPokemonCard(p, index))}
+            </div>
+
+            {!useAISearch && hasMorePages && (
+              <div className="text-center py-6">
+                <Button variant="secondary" onClick={loadMorePokemon} disabled={isLoadingMore} style={{ minWidth: 160 }}>
+                  {isLoadingMore ? 'Loading…' : 'Load more'}
+                </Button>
+              </div>
+            )}
+
+            <div className="text-center py-4 text-sm" style={{ color: 'var(--text-muted)' }}>
+              Showing {useAISearch ? aiFilteredPokemon.length : pokemon.length} {useAISearch ? 'results' : `of ${totalResults} Pokémon`}
+            </div>
+          </div>
         )}
       </div>
-
-      {/* Unified Search and Controls */}
-      {isMetadataAvailable && (
-        <div className="space-y-3 mb-4 sm:space-y-4 sm:mb-6">
-          {/* Search Mode Toggle */}
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <span
-              className="text-sm font-medium flex items-center gap-1.5"
-              style={{ color: !useAISearch ? 'var(--color-accent-300)' : 'var(--color-neutral-500)' }}
-            >
-              <MagnifyingGlass size={14} /> Classic
-            </span>
-            <button
-              onClick={() => setUseAISearch(!useAISearch)}
-              className="relative inline-flex h-7 w-14 items-center rounded-full transition-colors duration-300"
-              style={{
-                backgroundColor: useAISearch ? 'var(--color-accent-800)' : 'var(--color-neutral-800)',
-                border: '1px solid var(--color-accent)'
-              }}
-              title={useAISearch ? 'Switch to Classic Search' : 'Switch to Smart Search'}
-            >
-              <span
-                className="inline-block h-5 w-5 transform rounded-full transition-transform duration-300"
-                style={{
-                  backgroundColor: 'var(--color-accent)',
-                  transform: useAISearch ? 'translateX(28px)' : 'translateX(3px)',
-                }}
-              />
-            </button>
-            <span
-              className="text-sm font-medium flex items-center gap-1.5"
-              style={{ color: useAISearch ? 'var(--color-accent-300)' : 'var(--color-neutral-500)' }}
-            >
-              <Sparkle size={14} /> AI
-            </span>
-          </div>
-
-          {/* Conditional Search UI */}
-          {useAISearch ? (
-            /* AI Search Bar */
-            <div className="mb-4">
-              <AISearchBar
-                pokemonList={
-                  regionalDex
-                    ? pokemonMetadataService.searchAndFilter({ regionalDex })
-                    : selectedGeneration === null
-                      ? pokemonMetadataService.getAllMetadata()
-                      : pokemonMetadataService.getMetadataByGeneration(selectedGeneration)
-                }
-                onResults={handleAISearchResults}
-                placeholder="Try: 'strong fire starter' or 'fast electric types'"
-                maxResults={50}
-              />
-            </div>
-          ) : (
-            <>
-              {/* Main Control Row */}
-              <div className="flex flex-col sm:flex-row gap-3">
-                {/* Search Box */}
-                <div className="flex-1">
-                  <PokemonSearchBar
-                    value={searchTerm}
-                    onChange={setSearchTerm}
-                    onClear={clearSearch}
-                    placeholder="Search by name (English or Japanese)..."
-                    totalResults={totalResults}
-                  />
-                </div>
-              </div>
-
-              {/* Filter and Sort Controls */}
-              <PokemonFilters
-                sortOption={sortOption}
-                onSortChange={setSortOption}
-                selectedTypes={selectedTypes}
-                onTypesChange={setSelectedTypes}
-                showLegendary={showLegendary}
-                onLegendaryChange={setShowLegendary}
-                showMythical={showMythical}
-                onMythicalChange={setShowMythical}
-                selectedHabitat={selectedHabitat}
-                onHabitatChange={setSelectedHabitat}
-                selectedColor={selectedColor}
-                onColorChange={setSelectedColor}
-                statsRange={statsRange}
-                onStatsRangeChange={setStatsRange}
-                evolutionStage={evolutionStage}
-                onEvolutionStageChange={setEvolutionStage}
-                formKind={formKind}
-                onFormKindChange={setFormKind}
-                learnFilter={learnFilter}
-                onLearnFilterChange={setLearnFilter}
-                onResetFilters={resetFilters}
-                hasActiveFilters={hasActiveFilters}
-              />
-            </>
-          )}
-        </div>
-      )}
-
-      {/* Metadata unavailable warning */}
-      {!isMetadataAvailable && (
-        <div className="card p-4 mb-4">
-          <div className="text-sm" style={{ color: 'var(--error-gradient)' }}>
-            Search and filters require Pokemon metadata. Run: <code>node scripts/fetch-pokemon-metadata.js</code>
-          </div>
-        </div>
-      )}
-
-      {error ? (
-        <div className="text-center py-8" style={{ color: 'var(--error-gradient)' }}>
-          {error}
-        </div>
-      ) : !isMetadataAvailable ? (
-        <div className="text-center py-8">
-          <div className="text-sm" style={{ color: 'var(--text-muted)' }}>
-            Pokemon metadata not available. Please run the metadata fetch script.
-          </div>
-        </div>
-      ) : loading ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
-          <PokemonSkeleton count={20} />
-        </div>
-      ) : (useAISearch ? aiFilteredPokemon.length === 0 : pokemon.length === 0) ? (
-        <div className="text-center py-8">
-          <div className="text-sm" style={{ color: 'var(--text-muted)' }}>
-            {useAISearch ? 'No Pokemon found with AI search' : 'No Pokemon found with current filters'}
-          </div>
-        </div>
-      ) : (
-        <div>
-          <div className="flex justify-end gap-1.5 mb-2">
-            <button
-              onClick={() => toggleCompactView(false)}
-              className={`nx-tab ${!compactView ? 'nx-tab-active' : ''}`}
-              title="Card view"
-              aria-pressed={!compactView}
-            >
-              <SquaresFour size={16} /> Cards
-            </button>
-            <button
-              onClick={() => toggleCompactView(true)}
-              className={`nx-tab ${compactView ? 'nx-tab-active' : ''}`}
-              title="Compact list view"
-              aria-pressed={compactView}
-            >
-              <Rows size={16} /> Compact
-            </button>
-          </div>
-          <div className={compactView
-            ? 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1.5 sm:gap-2'
-            : 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3'}>
-            {(useAISearch ? aiFilteredPokemon : pokemon).map((p, index) => renderPokemonCard(p, index))}
-          </div>
-          
-          {/* Load More Button - only show in classic mode */}
-          {!useAISearch && hasMorePages && (
-            <div className="text-center py-6">
-              <Button onClick={loadMorePokemon} disabled={isLoadingMore} style={{ minWidth: 120 }}>
-                {isLoadingMore ? 'Loading...' : 'Load More'}
-              </Button>
-            </div>
-          )}
-
-          {/* Pokemon count indicator */}
-          <div className="text-center py-4">
-            <div className="text-sm" style={{ color: 'var(--text-muted)' }}>
-              Showing {useAISearch ? aiFilteredPokemon.length : pokemon.length} {useAISearch ? 'results' : `of ${totalResults} Pokemon`}
-              {hasMorePages && (
-                <div className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
-                  Loading {itemsPerLoad} at a time for better performance
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
-    </>
   )
 }
