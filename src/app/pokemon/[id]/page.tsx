@@ -23,6 +23,9 @@ import { getTypeCardColor } from '@/lib/type-card-colors'
 import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { cn } from '@/lib/cn'
+import { markViewed } from '@/lib/recently-viewed'
+import { formatPokemonName } from '@/lib/pokemon-names'
+import PokemonArt from '@/components/learn/PokemonArt'
 import { CaretLeft, CaretRight, Sparkle, SpeakerHigh, CaretDown, CaretUp } from '@phosphor-icons/react'
 
 interface PokemonData {
@@ -43,8 +46,8 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
   const [expandedAbility, setExpandedAbility] = useState<string | null>(null)
   const [audioPlaying, setAudioPlaying] = useState(false)
   const [selectedForm, setSelectedForm] = useState(0)
-  const [previousPokemon, setPreviousPokemon] = useState<Pokemon | null>(null)
-  const [nextPokemon, setNextPokemon] = useState<Pokemon | null>(null)
+  const [previousPokemon, setPreviousPokemon] = useState<{ id: number; name: string } | null>(null)
+  const [nextPokemon, setNextPokemon] = useState<{ id: number; name: string } | null>(null)
 
   const loadPokemonData = useCallback(async () => {
     setLoading(true)
@@ -84,15 +87,23 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
       const formIndex = allForms.findIndex(f => String(f.id) === searchParams.get('form'))
       setSelectedForm(formIndex > 0 ? formIndex : 0)
 
-      // Load previous/next Pokemon navigation
+      markViewed(species.id)
+
+      // Previous / next: within the generation when browsing one, else by national number
       const generation = searchParams.get('gen')
+      const neighbour = (id: number) => {
+        const meta = pokemonMetadataService.getMetadataById(id)
+        return meta ? { id: meta.id, name: formatPokemonName(meta.species_name) } : null
+      }
+      setPreviousPokemon(neighbour(species.id - 1))
+      setNextPokemon(neighbour(species.id + 1))
       if (generation) {
         const genNumber = parseInt(generation) as GenerationNumber
         console.log('Loading navigation for Pokemon', pokemon.id, 'in generation', genNumber)
         const { previous, next } = await pokemonAPI.getPreviousNextPokemon(pokemon.id, genNumber)
         console.log('Navigation data:', { previous: previous?.id, next: next?.id })
-        setPreviousPokemon(previous)
-        setNextPokemon(next)
+        setPreviousPokemon(previous ? { id: previous.id, name: formatPokemonName(previous.species?.name || previous.name) } : null)
+        setNextPokemon(next ? { id: next.id, name: formatPokemonName(next.species?.name || next.name) } : null)
       }
     } catch (error) {
       console.error('Failed to load Pokemon data:', error)
@@ -210,9 +221,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
 
   const navigateToPokemon = (pokemonId: number) => {
     const generation = searchParams.get('gen')
-    if (generation) {
-      router.push(`/pokemon/${pokemonId}?gen=${generation}`)
-    }
+    router.push(generation ? `/pokemon/${pokemonId}?gen=${generation}` : `/pokemon/${pokemonId}`)
   }
 
 
@@ -281,6 +290,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
               title={`Previous: ${previousPokemon.name}`}
             >
               <CaretLeft size={16} weight="bold" />
+              <PokemonArt id={previousPokemon.id} alt="" className="w-8 h-8 -my-1 hidden sm:block" />
               <span className="font-number text-xs" style={{ color: 'var(--text-secondary)' }}>#{previousPokemon.id.toString().padStart(4, '0')}</span>
               <span className="hidden sm:inline capitalize">{previousPokemon.name}</span>
             </Button>
@@ -294,6 +304,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
             >
               <span className="hidden sm:inline capitalize">{nextPokemon.name}</span>
               <span className="font-number text-xs" style={{ color: 'var(--text-secondary)' }}>#{nextPokemon.id.toString().padStart(4, '0')}</span>
+              <PokemonArt id={nextPokemon.id} alt="" className="w-8 h-8 -my-1 hidden sm:block" />
               <CaretRight size={16} weight="bold" />
             </Button>
           )}

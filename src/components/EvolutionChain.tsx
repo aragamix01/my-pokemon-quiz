@@ -302,7 +302,7 @@ function EvoCard({ entry, stage, current }: { entry: Entry; stage?: string; curr
   )
   const style = {
     background: color,
-    boxShadow: current ? `0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-accent)` : `0 6px 14px -8px ${color}`,
+    boxShadow: current ? `0 0 0 2px var(--color-surface), 0 0 0 4.5px var(--color-text)` : `0 6px 14px -8px ${color}`,
   }
   return current ? (
     <div aria-current="page" className={className} style={style}>{body}</div>
@@ -368,7 +368,7 @@ export default function EvolutionChain({ chain, currentSpeciesId, currentFormId,
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex justify-center sm:justify-start overflow-x-auto nx-scroll-x pb-1">
+      <div className="flex justify-center sm:justify-start overflow-x-auto nx-scroll-x p-1.5 -m-1.5">
         <StepView step={tree} currentKey={currentKey} />
       </div>
 
@@ -381,7 +381,7 @@ export default function EvolutionChain({ chain, currentSpeciesId, currentFormId,
             {lines.map(line => (
               <div
                 key={line.entries.map(e => e.key).join('>')}
-                className="flex flex-col sm:flex-row items-center overflow-x-auto nx-scroll-x pb-1"
+                className="flex flex-col sm:flex-row items-center overflow-x-auto nx-scroll-x p-1.5 -m-1.5"
               >
                 {line.entries.map((entry, i) => (
                   <div key={entry.key} className="flex flex-col sm:flex-row items-center w-full sm:w-auto">

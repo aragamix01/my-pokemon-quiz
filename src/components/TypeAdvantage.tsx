@@ -265,7 +265,7 @@ function TypeMatrix({ picked, onPickDefender }: { picked: PokemonTypeName[]; onP
         <span className="inline-flex items-center gap-1.5"><span className="nx-cell x05 static">½</span>Not very effective</span>
         <span className="inline-flex items-center gap-1.5"><span className="nx-cell x0 static">0</span>No effect</span>
       </div>
-      <div className="nx-scroll-x pb-1" onPointerLeave={() => setHover(null)}>
+      <div className="nx-scroll-x p-1.5 -m-1.5" onPointerLeave={() => setHover(null)}>
         <table className="nx-matrix" aria-label="Type effectiveness chart">
           <thead>
             <tr>

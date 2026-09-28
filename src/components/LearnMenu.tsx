@@ -128,7 +128,7 @@ export default function LearnMenu() {
       {/* What to practise */}
       <section className="flex flex-col gap-2" aria-label="Pokémon to practise">
         <span className="nx-label">Practise with</span>
-        <div className="flex items-center gap-1.5 nx-scroll-x pb-1 -mx-1 px-1">
+        <div className="flex items-center gap-1.5 nx-scroll-x p-1 -m-1">
           <button type="button" className={cn('nx-tab sm flex-shrink-0', slug === 'all' && 'nx-tab-active')} onClick={() => selectSlug('all')} aria-pressed={slug === 'all'}>
             All gens
           </button>

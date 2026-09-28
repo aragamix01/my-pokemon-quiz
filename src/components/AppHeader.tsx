@@ -120,7 +120,7 @@ function HeaderSearch({ className }: { className?: string }) {
         type="search"
         value={value}
         onChange={e => setValue(e.target.value)}
-        placeholder="Search name, romaji or #no."
+        placeholder="Search Pokémon or #no."
         aria-label="Search Pokémon"
         enterKeyHint="search"
       />

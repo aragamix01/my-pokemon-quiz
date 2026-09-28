@@ -16,6 +16,7 @@ import { Sparkle, Shuffle, SquaresFour, Rows, Funnel, CaretDown, X } from '@phos
 import { SORT_OPTIONS, FormKind } from '@/lib/pokemon-metadata'
 import { popularIds } from '@/lib/popular-pokemon'
 import { cn } from '@/lib/cn'
+import { loadRecentlyViewed } from '@/lib/recently-viewed'
 import { TypeIcon } from '@/components/ui/TypeIcon'
 import { HoloCard } from '@/components/ui/HoloCard'
 import { PokeballMark } from '@/components/ui/PokeballMark'
@@ -32,7 +33,11 @@ const COMPACT_KEY = 'pokedex-compact-view'
 const STARTER_IDS = [1, 4, 7, 152, 155, 158, 252, 255, 258, 387, 390, 393, 495, 498, 501, 650, 653, 656, 722, 725, 728, 810, 813, 816, 906, 909, 912]
 const FAN_FAVOURITES = popularIds(100)
 
-type QuickPick = 'all' | 'starters' | 'favourites' | 'legendary' | 'mythical' | 'mega'
+// Compact sort names so the sort menu fits on phones: "Pokedex Number (Low to High)" -> "No. ↑"
+const shortSortLabel = (label: string) =>
+  label.replace('Pokedex Number', 'No.').replace(' (Low to High)', ' ↑').replace(' (High to Low)', ' ↓')
+
+type QuickPick = 'all' | 'starters' | 'favourites' | 'legendary' | 'mythical' | 'mega' | 'recent'
 const QUICK_PICKS: Array<{ id: QuickPick; label: string }> = [
   { id: 'all', label: 'All' },
   { id: 'starters', label: 'Starters' },
@@ -40,6 +45,7 @@ const QUICK_PICKS: Array<{ id: QuickPick; label: string }> = [
   { id: 'legendary', label: 'Legendary' },
   { id: 'mythical', label: 'Mythical' },
   { id: 'mega', label: 'Mega' },
+  { id: 'recent', label: 'Recently viewed' },
 ]
 
 export default function Pokedex() {
@@ -64,6 +70,9 @@ export default function Pokedex() {
   }, [])
   // Compact list view (small row cards), remembered in this browser
   const [compactView, setCompactView] = useState(false)
+  // Detail pages opened lately, newest first (localStorage, read after mount)
+  const [recentIds, setRecentIds] = useState<number[]>([])
+  useEffect(() => { setRecentIds(loadRecentlyViewed()) }, [])
   // Phone/tablet filter sheet
   const [filtersOpen, setFiltersOpen] = useState(false)
   useEffect(() => {
@@ -800,8 +809,6 @@ export default function Pokedex() {
       return (
         <HoloCard
           still
-          finish="random"
-          seed={pokemonData.id}
           glow
           glowColor={cardColor}
           key={pokemonData.id}
@@ -852,8 +859,6 @@ export default function Pokedex() {
     return (
       <HoloCard
         still
-        finish="random"
-        seed={pokemonData.id}
         glow
         glowColor={cardColor}
         key={pokemonData.id}
@@ -920,9 +925,10 @@ export default function Pokedex() {
   }, [showShiny, handlePokemonClick, metadataById, learnState, regionalDex, compactView])
 
   // Quick picks: shortcuts over the filters (and hand-picked lists), shown above the grid
-  const sameList = (a: number[] | null, b: number[]) => !!a && a.length === b.length && a[0] === b[0]
+  const sameList = (a: number[] | null, b: number[]) => !!a && a.length === b.length && a.every((id, i) => id === b[i])
   const activePick: QuickPick | null =
     sameList(collection, STARTER_IDS) ? 'starters'
+      : recentIds.length > 0 && sameList(collection, recentIds) ? 'recent'
       : sameList(collection, FAN_FAVOURITES) ? 'favourites'
         : collection ? null
           : showLegendary === true ? 'legendary'
@@ -935,11 +941,11 @@ export default function Pokedex() {
     setShowLegendary(null)
     setShowMythical(null)
     if (formKind === 'mega') setFormKind(null)
-    if (pick === 'starters' || pick === 'favourites') {
+    if (pick === 'starters' || pick === 'favourites' || pick === 'recent') {
       // Lists span every generation
       setSelectedGeneration(null)
       setRegionalDex(null)
-      setCollection(pick === 'starters' ? STARTER_IDS : FAN_FAVOURITES)
+      setCollection(pick === 'starters' ? STARTER_IDS : pick === 'recent' ? recentIds : FAN_FAVOURITES)
     }
     if (pick === 'legendary') setShowLegendary(true)
     if (pick === 'mythical') setShowMythical(true)
@@ -972,6 +978,7 @@ export default function Pokedex() {
     ? `${dex.label} Pokédex`
     : activePick === 'starters' ? 'Starters'
       : activePick === 'favourites' ? 'Fan favourites'
+        : activePick === 'recent' ? 'Recently viewed'
         : selectedGeneration === null ? 'All Pokémon' : `Generation ${selectedGeneration} · ${REGION_NAMES[selectedGeneration - 1]}`
   const listCount = useAISearch ? aiFilteredPokemon.length : totalResults
 
@@ -1044,9 +1051,9 @@ export default function Pokedex() {
 
       <div className="min-w-0 flex flex-col gap-4">
         {/* Quick picks */}
-        <div className="flex items-center gap-2 nx-scroll-x pb-1 -mx-1 px-1">
+        <div className="flex items-center gap-2 nx-scroll-x p-1 -m-1">
           <span className="nx-label mr-1 hidden sm:inline flex-shrink-0">Quick picks</span>
-          {QUICK_PICKS.map(p => (
+          {QUICK_PICKS.filter(p => p.id !== 'recent' || recentIds.length > 0).map(p => (
             <button
               key={p.id}
               type="button"
@@ -1065,7 +1072,7 @@ export default function Pokedex() {
             <h1 className="font-display text-2xl sm:text-3xl font-bold leading-tight">{title}</h1>
             <p className="text-sm mt-0.5" style={{ color: 'var(--text-secondary)' }}>
               {listCount} Pokémon
-              {dex ? ` · ${pokedexOptionLabel(dex)} order` : ` · ${sortOption.label}`}
+              {dex ? ` · ${pokedexOptionLabel(dex)} order` : ` · sorted by ${shortSortLabel(sortOption.label)}`}
             </p>
           </div>
           <button
@@ -1089,7 +1096,7 @@ export default function Pokedex() {
               aria-label="Sort"
             >
               {SORT_OPTIONS.map(option => (
-                <option key={option.value} value={option.value}>{option.label}</option>
+                <option key={option.value} value={option.value}>{shortSortLabel(option.label)}</option>
               ))}
             </select>
             <CaretDown size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" color="var(--color-neutral-400)" />

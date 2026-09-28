@@ -169,7 +169,7 @@ export default function PokedexFilterPanel(props: PokedexFilterPanelProps) {
           </button>
         )}
       >
-        <div className="grid grid-cols-3 gap-1.5">
+        <div className="grid grid-cols-2 gap-1.5">
           {POKEMON_TYPES.map(type => {
             const on = selectedTypes.includes(type)
             return (
