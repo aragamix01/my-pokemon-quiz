@@ -183,7 +183,10 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
         name: formName || 'Default',
         pokemon: form,
         normal: pokemonAPI.getPokemonImageUrl(form, false),
-        shiny: pokemonAPI.getPokemonImageUrl(form, true)
+        shiny: pokemonAPI.getPokemonImageUrl(form, true),
+        // 475px official artwork: the local WebP copies are 300px, too soft for the big card on retina screens
+        normalHiRes: form.sprites.other?.['official-artwork']?.front_default || null,
+        shinyHiRes: form.sprites.other?.['official-artwork']?.front_shiny || null,
       }
     })
   }
@@ -192,6 +195,12 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
     const forms = getAllForms()
     const currentForm = forms[selectedForm] || forms[0]
     return showShiny && currentForm?.shiny ? currentForm.shiny : currentForm?.normal
+  }
+
+  const getCurrentHiRes = () => {
+    const forms = getAllForms()
+    const currentForm = forms[selectedForm] || forms[0]
+    return (showShiny ? currentForm?.shinyHiRes : currentForm?.normalHiRes) || null
   }
 
   const getCurrentForm = () => {
@@ -413,14 +422,12 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
                     <Sparkle size={20} weight={showShiny ? 'fill' : 'bold'} />
                   </button>
                 </div>
-                <div className="absolute left-1/2 top-[53%] -translate-x-1/2 -translate-y-1/2 w-60 h-60 sm:w-80 sm:h-80">
-                  <Image
+                <div className="absolute left-1/2 top-[53%] -translate-x-1/2 -translate-y-1/2 w-56 h-56 sm:w-72 sm:h-72">
+                  <HiResArt
+                    key={getCurrentSprite()}
                     src={getCurrentSprite() || '/pokemon-placeholder.png'}
+                    hiRes={getCurrentHiRes()}
                     alt={getEnglishName()}
-                    fill
-                    className="object-contain drop-shadow-xl"
-                    draggable={false}
-                    priority
                   />
                 </div>
               </HoloCard>
@@ -914,5 +921,38 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
         )}
       </div>
     </div>
+  )
+}
+
+// The local 300px WebP shows at once; the sharper official artwork fades in over it once loaded
+// (and is simply skipped if GitHub fails), so the page never waits on the network
+function HiResArt({ src, hiRes, alt }: { src: string; hiRes: string | null; alt: string }) {
+  const [ready, setReady] = useState(false)
+  const [failed, setFailed] = useState(false)
+  return (
+    <>
+      <Image
+        src={src}
+        alt={hiRes && ready ? '' : alt}
+        fill
+        className="object-contain drop-shadow-xl"
+        style={{ opacity: hiRes && ready ? 0 : 1, transition: 'opacity .25s ease' }}
+        draggable={false}
+        priority
+      />
+      {hiRes && !failed && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={hiRes}
+          alt={ready ? alt : ''}
+          className="absolute inset-0 w-full h-full object-contain drop-shadow-xl"
+          style={{ opacity: ready ? 1 : 0, transition: 'opacity .25s ease' }}
+          draggable={false}
+          decoding="async"
+          onLoad={() => setReady(true)}
+          onError={() => setFailed(true)}
+        />
+      )}
+    </>
   )
 }
