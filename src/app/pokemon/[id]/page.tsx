@@ -244,7 +244,8 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
       if (tops.length === 0) return
       let current = tops[0].id
       tops.forEach(t => { if (t.top < 160) current = t.id })
-      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4
+      // generous margin: iOS Safari's toolbars and rubber-band scrolling keep the sum a few px short
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40
       if (atBottom) {
         const visible = tops.filter(t => t.top < window.innerHeight - 80)
         if (visible.length) current = visible[visible.length - 1].id
@@ -261,6 +262,16 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
       window.removeEventListener('resize', onScroll)
     }
   }, [data]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // On phones the tab bar is wider than the screen: slide the highlighted tab into view (sideways only, never the page)
+  const sectionNav = useRef<HTMLElement>(null)
+  useEffect(() => {
+    const nav = sectionNav.current
+    const tab = nav?.querySelector<HTMLElement>('a.on')
+    if (!nav || !tab || nav.scrollWidth <= nav.clientWidth) return
+    const left = tab.offsetLeft - (nav.clientWidth - tab.offsetWidth) / 2
+    nav.scrollTo({ left: Math.max(0, left), behavior: 'smooth' })
+  }, [activeSection])
 
   const jumpToSection = (id: string) => {
     clickedSection.current = { id, until: performance.now() + 900 }
@@ -439,7 +450,7 @@ export default function PokemonDetailPage({ params }: { params: Promise<{ id: st
             <div className="min-w-0 flex flex-col gap-5">
               <div className="hidden lg:block">{titleBlock}</div>
 
-              <nav aria-label="Sections" className="nx-sectionnav">
+              <nav ref={sectionNav} aria-label="Sections" className="nx-sectionnav">
                 {DETAIL_SECTIONS.map(s => (
                   <a
                     key={s.id}
