@@ -683,6 +683,9 @@ export default function Pokedex() {
   }, [selectedGeneration])
 
   const handleGenerationSelect = (gen: GenerationNumber | null) => {
+    // Re-picking the current generation changes nothing; clearing the list here would leave it empty,
+    // since the loader only reruns when the generation changes
+    if (gen === selectedGeneration && !regionalDex && showPokedex) return
     setRegionalDex(null)
     setSelectedGeneration(gen)
     setPokemon([])
@@ -695,6 +698,7 @@ export default function Pokedex() {
 
   // Browse a game's own Pokedex: all generations, limited to that game's list and order
   const handleDexSelect = (name: string) => {
+    if (name === regionalDex && showPokedex) return
     setSelectedGeneration(null)
     setRegionalDex(name)
     setPokemon([])
