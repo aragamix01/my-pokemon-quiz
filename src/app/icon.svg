@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="lens" cx="0.38" cy="0.34" r="0.75">
+      <stop offset="0" stop-color="#7cc4ff"/>
+      <stop offset="0.55" stop-color="#2f8cf0"/>
+      <stop offset="1" stop-color="#1557b8"/>
+    </radialGradient>
+  </defs>
+  <!-- Pokedex lens: white ring with a dark outline, glossy blue glass and a highlight -->
+  <circle cx="32" cy="32" r="30" fill="#ffffff" stroke="#111218" stroke-width="4"/>
+  <circle cx="32" cy="32" r="20" fill="url(#lens)" stroke="#111218" stroke-width="2.5"/>
+  <ellipse cx="25" cy="24" rx="7" ry="5.5" fill="#ffffff" opacity="0.75" transform="rotate(-25 25 24)"/>
+</svg>
