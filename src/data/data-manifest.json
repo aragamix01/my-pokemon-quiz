@@ -24,9 +24,9 @@
       "upstream": {
         "repo": "PokeAPI/sprites",
         "branch": "master",
-        "sha": "fb3512817b9c3f46952b3f89e82645e77bdcaf49"
+        "sha": "a3a1432e688ea028f12c51371d5253037cb9f17b"
       },
-      "generated_at": "2026-09-28T09:27:47.334Z",
+      "generated_at": "2026-10-05T10:01:22.292Z",
       "script_version": "1.0.0",
       "strategies": [
         "all",
