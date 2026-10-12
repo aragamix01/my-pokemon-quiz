@@ -5,9 +5,9 @@
       "upstream": {
         "repo": "PokeAPI/api-data",
         "branch": "master",
-        "sha": "02a8d9dd1b1a4e102b8b32d786d17017e8c9769a"
+        "sha": "da93b8a7ebc6ee66cde3ed4ba88ea9362721aa18"
       },
-      "generated_at": "2026-09-28T09:21:31.841Z",
+      "generated_at": "2026-10-12T10:14:24.756Z",
       "script_version": "1.0.0",
       "counts": {
         "pokemon": 1025,
@@ -24,9 +24,9 @@
       "upstream": {
         "repo": "PokeAPI/sprites",
         "branch": "master",
-        "sha": "a3a1432e688ea028f12c51371d5253037cb9f17b"
+        "sha": "0dc105d5b12416932f29b594078282ab4be045f5"
       },
-      "generated_at": "2026-10-05T10:01:22.292Z",
+      "generated_at": "2026-10-12T10:20:04.104Z",
       "script_version": "1.0.0",
       "strategies": [
         "all",
@@ -38,9 +38,9 @@
       "upstream": {
         "repo": "PokeAPI/api-data",
         "branch": "master",
-        "sha": "02a8d9dd1b1a4e102b8b32d786d17017e8c9769a"
+        "sha": "da93b8a7ebc6ee66cde3ed4ba88ea9362721aa18"
       },
-      "generated_at": "2026-09-28T09:23:47.192Z",
+      "generated_at": "2026-10-12T10:16:42.317Z",
       "script_version": "1.0.0",
       "model": "Xenova/all-MiniLM-L6-v2",
       "dimension": 384,
