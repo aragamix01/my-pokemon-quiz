@@ -3,7 +3,7 @@
     "model": "Xenova/all-MiniLM-L6-v2",
     "dimension": 384,
     "total_pokemon": 1025,
-    "generated_at": "2026-10-12T10:16:42.169Z"
+    "generated_at": "2026-10-19T08:32:55.764Z"
   },
   "embeddings": {
     "1": [
