@@ -3,79 +3,64 @@
     "version": "1.0",
     "source": "PokeAPI v2",
     "description": "Complete Pokemon type effectiveness data for all 18 types",
-    "lastUpdated": "2026-10-19",
+    "lastUpdated": "2026-10-26",
     "totalTypes": 19
   },
   "types": {
-    "rock": {
-      "id": 6,
-      "name": "rock",
-      "color": "#B8A038",
+    "normal": {
+      "id": 1,
+      "name": "normal",
+      "color": "#A8A878",
       "icons": {
-        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/6.png"
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/1.png"
       },
       "damageRelations": {
-        "superEffectiveAgainst": [
-          "flying",
-          "bug",
-          "fire",
-          "ice"
-        ],
+        "superEffectiveAgainst": [],
         "notVeryEffectiveAgainst": [
-          "fighting",
-          "ground",
+          "rock",
           "steel"
         ],
-        "noEffectAgainst": [],
+        "noEffectAgainst": [
+          "ghost"
+        ],
         "weakTo": [
-          "fighting",
-          "ground",
-          "steel",
-          "water",
-          "grass"
+          "fighting"
         ],
-        "resists": [
-          "normal",
-          "flying",
-          "poison",
-          "fire"
-        ],
-        "immuneTo": []
+        "resists": [],
+        "immuneTo": [
+          "ghost"
+        ]
       },
       "generation": "generation-i"
     },
-    "bug": {
-      "id": 7,
-      "name": "bug",
-      "color": "#A8B820",
+    "water": {
+      "id": 11,
+      "name": "water",
+      "color": "#6890F0",
       "icons": {
-        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/7.png"
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/11.png"
       },
       "damageRelations": {
         "superEffectiveAgainst": [
-          "grass",
-          "psychic",
-          "dark"
-        ],
-        "notVeryEffectiveAgainst": [
-          "fighting",
-          "flying",
-          "poison",
-          "ghost",
-          "steel",
-          "fire",
-          "fairy"
-        ],
-        "noEffectAgainst": [],
-        "weakTo": [
-          "flying",
+          "ground",
           "rock",
           "fire"
         ],
+        "notVeryEffectiveAgainst": [
+          "water",
+          "grass",
+          "dragon"
+        ],
+        "noEffectAgainst": [],
+        "weakTo": [
+          "grass",
+          "electric"
+        ],
         "resists": [
-          "fighting",
-          "ground",
-          "grass"
+          "steel",
+          "fire",
+          "water",
+          "ice"
         ],
         "immuneTo": []
       },
@@ -120,49 +105,6 @@
       },
       "generation": "generation-i"
     },
-    "normal": {
-      "id": 1,
-      "name": "normal",
-      "color": "#A8A878",
-      "icons": {
-        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/1.png"
-      },
-      "damageRelations": {
-        "superEffectiveAgainst": [],
-        "notVeryEffectiveAgainst": [
-          "rock",
-          "steel"
-        ],
-        "noEffectAgainst": [
-          "ghost"
-        ],
-        "weakTo": [
-          "fighting"
-        ],
-        "resists": [],
-        "immuneTo": [
-          "ghost"
-        ]
-      },
-      "generation": "generation-i"
-    },
-    "stellar": {
-      "id": 19,
-      "name": "stellar",
-      "color": "#40E0D0",
-      "icons": {
-        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/19.png"
-      },
-      "damageRelations": {
-        "superEffectiveAgainst": [],
-        "notVeryEffectiveAgainst": [],
-        "noEffectAgainst": [],
-        "weakTo": [],
-        "resists": [],
-        "immuneTo": []
-      },
-      "generation": "generation-ix"
-    },
     "steel": {
       "id": 9,
       "name": "steel",
@@ -206,71 +148,70 @@
       },
       "generation": "generation-ii"
     },
-    "electric": {
-      "id": 13,
-      "name": "electric",
-      "color": "#F8D030",
+    "dark": {
+      "id": 17,
+      "name": "dark",
+      "color": "#705848",
       "icons": {
-        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/13.png"
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/17.png"
       },
       "damageRelations": {
         "superEffectiveAgainst": [
-          "flying",
-          "water"
+          "ghost",
+          "psychic"
         ],
         "notVeryEffectiveAgainst": [
-          "grass",
-          "electric",
-          "dragon"
+          "fighting",
+          "dark",
+          "fairy"
         ],
-        "noEffectAgainst": [
-          "ground"
-        ],
+        "noEffectAgainst": [],
         "weakTo": [
-          "ground"
+          "fighting",
+          "bug",
+          "fairy"
         ],
         "resists": [
-          "flying",
-          "steel",
-          "electric"
+          "ghost",
+          "dark"
         ],
-        "immuneTo": []
+        "immuneTo": [
+          "psychic"
+        ]
       },
-      "generation": "generation-i"
+      "generation": "generation-ii"
     },
-    "ground": {
-      "id": 5,
-      "name": "ground",
-      "color": "#E0C068",
+    "flying": {
+      "id": 3,
+      "name": "flying",
+      "color": "#A890F0",
       "icons": {
-        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/5.png"
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/3.png"
       },
       "damageRelations": {
         "superEffectiveAgainst": [
-          "poison",
-          "rock",
-          "steel",
-          "fire",
-          "electric"
-        ],
-        "notVeryEffectiveAgainst": [
+          "fighting",
           "bug",
           "grass"
         ],
-        "noEffectAgainst": [
-          "flying"
+        "notVeryEffectiveAgainst": [
+          "rock",
+          "steel",
+          "electric"
         ],
+        "noEffectAgainst": [],
         "weakTo": [
-          "water",
-          "grass",
+          "rock",
+          "electric",
           "ice"
         ],
         "resists": [
-          "poison",
-          "rock"
+          "fighting",
+          "bug",
+          "grass"
         ],
         "immuneTo": [
-          "electric"
+          "ground"
         ]
       },
       "generation": "generation-i"
@@ -304,6 +245,60 @@
         ],
         "resists": [
           "ice"
+        ],
+        "immuneTo": []
+      },
+      "generation": "generation-i"
+    },
+    "stellar": {
+      "id": 19,
+      "name": "stellar",
+      "color": "#40E0D0",
+      "icons": {
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/19.png"
+      },
+      "damageRelations": {
+        "superEffectiveAgainst": [],
+        "notVeryEffectiveAgainst": [],
+        "noEffectAgainst": [],
+        "weakTo": [],
+        "resists": [],
+        "immuneTo": []
+      },
+      "generation": "generation-ix"
+    },
+    "bug": {
+      "id": 7,
+      "name": "bug",
+      "color": "#A8B820",
+      "icons": {
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/7.png"
+      },
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "grass",
+          "psychic",
+          "dark"
+        ],
+        "notVeryEffectiveAgainst": [
+          "fighting",
+          "flying",
+          "poison",
+          "ghost",
+          "steel",
+          "fire",
+          "fairy"
+        ],
+        "noEffectAgainst": [],
+        "weakTo": [
+          "flying",
+          "rock",
+          "fire"
+        ],
+        "resists": [
+          "fighting",
+          "ground",
+          "grass"
         ],
         "immuneTo": []
       },
@@ -344,40 +339,6 @@
         "immuneTo": []
       },
       "generation": "generation-i"
-    },
-    "fairy": {
-      "id": 18,
-      "name": "fairy",
-      "color": "#EE99AC",
-      "icons": {
-        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/18.png"
-      },
-      "damageRelations": {
-        "superEffectiveAgainst": [
-          "fighting",
-          "dragon",
-          "dark"
-        ],
-        "notVeryEffectiveAgainst": [
-          "poison",
-          "steel",
-          "fire"
-        ],
-        "noEffectAgainst": [],
-        "weakTo": [
-          "poison",
-          "steel"
-        ],
-        "resists": [
-          "fighting",
-          "bug",
-          "dark"
-        ],
-        "immuneTo": [
-          "dragon"
-        ]
-      },
-      "generation": "generation-vi"
     },
     "grass": {
       "id": 12,
@@ -457,6 +418,73 @@
       },
       "generation": "generation-i"
     },
+    "ghost": {
+      "id": 8,
+      "name": "ghost",
+      "color": "#705898",
+      "icons": {
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/8.png"
+      },
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "ghost",
+          "psychic"
+        ],
+        "notVeryEffectiveAgainst": [
+          "dark"
+        ],
+        "noEffectAgainst": [
+          "normal"
+        ],
+        "weakTo": [
+          "ghost",
+          "dark"
+        ],
+        "resists": [
+          "poison",
+          "bug"
+        ],
+        "immuneTo": [
+          "normal",
+          "fighting"
+        ]
+      },
+      "generation": "generation-i"
+    },
+    "fairy": {
+      "id": 18,
+      "name": "fairy",
+      "color": "#EE99AC",
+      "icons": {
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/18.png"
+      },
+      "damageRelations": {
+        "superEffectiveAgainst": [
+          "fighting",
+          "dragon",
+          "dark"
+        ],
+        "notVeryEffectiveAgainst": [
+          "poison",
+          "steel",
+          "fire"
+        ],
+        "noEffectAgainst": [],
+        "weakTo": [
+          "poison",
+          "steel"
+        ],
+        "resists": [
+          "fighting",
+          "bug",
+          "dark"
+        ],
+        "immuneTo": [
+          "dragon"
+        ]
+      },
+      "generation": "generation-vi"
+    },
     "dragon": {
       "id": 16,
       "name": "dragon",
@@ -521,559 +549,531 @@
       },
       "generation": "generation-i"
     },
-    "dark": {
-      "id": 17,
-      "name": "dark",
-      "color": "#705848",
+    "ground": {
+      "id": 5,
+      "name": "ground",
+      "color": "#E0C068",
       "icons": {
-        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/17.png"
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/5.png"
       },
       "damageRelations": {
         "superEffectiveAgainst": [
-          "ghost",
-          "psychic"
+          "poison",
+          "rock",
+          "steel",
+          "fire",
+          "electric"
         ],
         "notVeryEffectiveAgainst": [
-          "fighting",
-          "dark",
-          "fairy"
-        ],
-        "noEffectAgainst": [],
-        "weakTo": [
-          "fighting",
-          "bug",
-          "fairy"
-        ],
-        "resists": [
-          "ghost",
-          "dark"
-        ],
-        "immuneTo": [
-          "psychic"
-        ]
-      },
-      "generation": "generation-ii"
-    },
-    "flying": {
-      "id": 3,
-      "name": "flying",
-      "color": "#A890F0",
-      "icons": {
-        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/3.png"
-      },
-      "damageRelations": {
-        "superEffectiveAgainst": [
-          "fighting",
           "bug",
           "grass"
         ],
-        "notVeryEffectiveAgainst": [
-          "rock",
-          "steel",
-          "electric"
+        "noEffectAgainst": [
+          "flying"
         ],
-        "noEffectAgainst": [],
         "weakTo": [
-          "rock",
-          "electric",
+          "water",
+          "grass",
           "ice"
         ],
         "resists": [
-          "fighting",
-          "bug",
-          "grass"
+          "poison",
+          "rock"
         ],
         "immuneTo": [
-          "ground"
+          "electric"
         ]
       },
       "generation": "generation-i"
     },
-    "water": {
-      "id": 11,
-      "name": "water",
-      "color": "#6890F0",
+    "rock": {
+      "id": 6,
+      "name": "rock",
+      "color": "#B8A038",
       "icons": {
-        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/11.png"
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/6.png"
       },
       "damageRelations": {
         "superEffectiveAgainst": [
-          "ground",
-          "rock",
-          "fire"
+          "flying",
+          "bug",
+          "fire",
+          "ice"
         ],
         "notVeryEffectiveAgainst": [
-          "water",
-          "grass",
-          "dragon"
+          "fighting",
+          "ground",
+          "steel"
         ],
         "noEffectAgainst": [],
         "weakTo": [
-          "grass",
-          "electric"
+          "fighting",
+          "ground",
+          "steel",
+          "water",
+          "grass"
         ],
         "resists": [
-          "steel",
-          "fire",
-          "water",
-          "ice"
+          "normal",
+          "flying",
+          "poison",
+          "fire"
         ],
         "immuneTo": []
       },
       "generation": "generation-i"
     },
-    "ghost": {
-      "id": 8,
-      "name": "ghost",
-      "color": "#705898",
+    "electric": {
+      "id": 13,
+      "name": "electric",
+      "color": "#F8D030",
       "icons": {
-        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/8.png"
+        "modern": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/13.png"
       },
       "damageRelations": {
         "superEffectiveAgainst": [
-          "ghost",
-          "psychic"
+          "flying",
+          "water"
         ],
         "notVeryEffectiveAgainst": [
-          "dark"
+          "grass",
+          "electric",
+          "dragon"
         ],
         "noEffectAgainst": [
-          "normal"
+          "ground"
         ],
         "weakTo": [
-          "ghost",
-          "dark"
+          "ground"
         ],
         "resists": [
-          "poison",
-          "bug"
+          "flying",
+          "steel",
+          "electric"
         ],
-        "immuneTo": [
-          "normal",
-          "fighting"
-        ]
+        "immuneTo": []
       },
       "generation": "generation-i"
     }
   },
   "effectivenessMatrix": {
-    "rock": {
-      "rock": 1,
-      "bug": 2,
-      "fighting": 0.5,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 0.5,
-      "electric": 1,
-      "ground": 0.5,
-      "ice": 2,
-      "poison": 1,
-      "fairy": 1,
-      "grass": 1,
-      "fire": 2,
-      "dragon": 1,
-      "psychic": 1,
-      "dark": 1,
-      "flying": 2,
-      "water": 1,
-      "ghost": 1
-    },
-    "bug": {
-      "rock": 1,
-      "bug": 1,
-      "fighting": 0.5,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 0.5,
-      "electric": 1,
-      "ground": 1,
-      "ice": 1,
-      "poison": 0.5,
-      "fairy": 0.5,
-      "grass": 2,
-      "fire": 0.5,
-      "dragon": 1,
-      "psychic": 2,
-      "dark": 2,
-      "flying": 0.5,
-      "water": 1,
-      "ghost": 0.5
-    },
-    "fighting": {
-      "rock": 2,
-      "bug": 0.5,
-      "fighting": 1,
-      "normal": 2,
-      "stellar": 1,
-      "steel": 2,
-      "electric": 1,
-      "ground": 1,
-      "ice": 2,
-      "poison": 0.5,
-      "fairy": 0.5,
-      "grass": 1,
-      "fire": 1,
-      "dragon": 1,
-      "psychic": 0.5,
-      "dark": 2,
-      "flying": 0.5,
-      "water": 1,
-      "ghost": 0
-    },
     "normal": {
+      "normal": 1,
+      "water": 1,
+      "fighting": 1,
+      "steel": 0.5,
+      "dark": 1,
+      "flying": 1,
+      "ice": 1,
+      "stellar": 1,
+      "bug": 1,
+      "poison": 1,
+      "grass": 1,
+      "fire": 1,
+      "ghost": 0,
+      "fairy": 1,
+      "dragon": 1,
+      "psychic": 1,
+      "ground": 1,
       "rock": 0.5,
-      "bug": 1,
-      "fighting": 1,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 0.5,
-      "electric": 1,
-      "ground": 1,
-      "ice": 1,
-      "poison": 1,
-      "fairy": 1,
-      "grass": 1,
-      "fire": 1,
-      "dragon": 1,
-      "psychic": 1,
-      "dark": 1,
-      "flying": 1,
-      "water": 1,
-      "ghost": 0
-    },
-    "stellar": {
-      "rock": 1,
-      "bug": 1,
-      "fighting": 1,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 1,
-      "electric": 1,
-      "ground": 1,
-      "ice": 1,
-      "poison": 1,
-      "fairy": 1,
-      "grass": 1,
-      "fire": 1,
-      "dragon": 1,
-      "psychic": 1,
-      "dark": 1,
-      "flying": 1,
-      "water": 1,
-      "ghost": 1
-    },
-    "steel": {
-      "rock": 2,
-      "bug": 1,
-      "fighting": 1,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 0.5,
-      "electric": 0.5,
-      "ground": 1,
-      "ice": 2,
-      "poison": 1,
-      "fairy": 2,
-      "grass": 1,
-      "fire": 0.5,
-      "dragon": 1,
-      "psychic": 1,
-      "dark": 1,
-      "flying": 1,
-      "water": 0.5,
-      "ghost": 1
-    },
-    "electric": {
-      "rock": 1,
-      "bug": 1,
-      "fighting": 1,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 1,
-      "electric": 0.5,
-      "ground": 0,
-      "ice": 1,
-      "poison": 1,
-      "fairy": 1,
-      "grass": 0.5,
-      "fire": 1,
-      "dragon": 0.5,
-      "psychic": 1,
-      "dark": 1,
-      "flying": 2,
-      "water": 2,
-      "ghost": 1
-    },
-    "ground": {
-      "rock": 2,
-      "bug": 0.5,
-      "fighting": 1,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 2,
-      "electric": 2,
-      "ground": 1,
-      "ice": 1,
-      "poison": 2,
-      "fairy": 1,
-      "grass": 0.5,
-      "fire": 2,
-      "dragon": 1,
-      "psychic": 1,
-      "dark": 1,
-      "flying": 0,
-      "water": 1,
-      "ghost": 1
-    },
-    "ice": {
-      "rock": 1,
-      "bug": 1,
-      "fighting": 1,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 0.5,
-      "electric": 1,
-      "ground": 2,
-      "ice": 0.5,
-      "poison": 1,
-      "fairy": 1,
-      "grass": 2,
-      "fire": 0.5,
-      "dragon": 2,
-      "psychic": 1,
-      "dark": 1,
-      "flying": 2,
-      "water": 0.5,
-      "ghost": 1
-    },
-    "poison": {
-      "rock": 0.5,
-      "bug": 1,
-      "fighting": 1,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 0,
-      "electric": 1,
-      "ground": 0.5,
-      "ice": 1,
-      "poison": 0.5,
-      "fairy": 2,
-      "grass": 2,
-      "fire": 1,
-      "dragon": 1,
-      "psychic": 1,
-      "dark": 1,
-      "flying": 1,
-      "water": 1,
-      "ghost": 0.5
-    },
-    "fairy": {
-      "rock": 1,
-      "bug": 1,
-      "fighting": 2,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 0.5,
-      "electric": 1,
-      "ground": 1,
-      "ice": 1,
-      "poison": 0.5,
-      "fairy": 1,
-      "grass": 1,
-      "fire": 0.5,
-      "dragon": 2,
-      "psychic": 1,
-      "dark": 2,
-      "flying": 1,
-      "water": 1,
-      "ghost": 1
-    },
-    "grass": {
-      "rock": 2,
-      "bug": 0.5,
-      "fighting": 1,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 0.5,
-      "electric": 1,
-      "ground": 2,
-      "ice": 1,
-      "poison": 0.5,
-      "fairy": 1,
-      "grass": 0.5,
-      "fire": 0.5,
-      "dragon": 0.5,
-      "psychic": 1,
-      "dark": 1,
-      "flying": 0.5,
-      "water": 2,
-      "ghost": 1
-    },
-    "fire": {
-      "rock": 0.5,
-      "bug": 2,
-      "fighting": 1,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 2,
-      "electric": 1,
-      "ground": 1,
-      "ice": 2,
-      "poison": 1,
-      "fairy": 1,
-      "grass": 2,
-      "fire": 0.5,
-      "dragon": 0.5,
-      "psychic": 1,
-      "dark": 1,
-      "flying": 1,
-      "water": 0.5,
-      "ghost": 1
-    },
-    "dragon": {
-      "rock": 1,
-      "bug": 1,
-      "fighting": 1,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 0.5,
-      "electric": 1,
-      "ground": 1,
-      "ice": 1,
-      "poison": 1,
-      "fairy": 0,
-      "grass": 1,
-      "fire": 1,
-      "dragon": 2,
-      "psychic": 1,
-      "dark": 1,
-      "flying": 1,
-      "water": 1,
-      "ghost": 1
-    },
-    "psychic": {
-      "rock": 1,
-      "bug": 1,
-      "fighting": 2,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 0.5,
-      "electric": 1,
-      "ground": 1,
-      "ice": 1,
-      "poison": 2,
-      "fairy": 1,
-      "grass": 1,
-      "fire": 1,
-      "dragon": 1,
-      "psychic": 0.5,
-      "dark": 0,
-      "flying": 1,
-      "water": 1,
-      "ghost": 1
-    },
-    "dark": {
-      "rock": 1,
-      "bug": 1,
-      "fighting": 0.5,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 1,
-      "electric": 1,
-      "ground": 1,
-      "ice": 1,
-      "poison": 1,
-      "fairy": 0.5,
-      "grass": 1,
-      "fire": 1,
-      "dragon": 1,
-      "psychic": 2,
-      "dark": 0.5,
-      "flying": 1,
-      "water": 1,
-      "ghost": 2
-    },
-    "flying": {
-      "rock": 0.5,
-      "bug": 2,
-      "fighting": 2,
-      "normal": 1,
-      "stellar": 1,
-      "steel": 0.5,
-      "electric": 0.5,
-      "ground": 1,
-      "ice": 1,
-      "poison": 1,
-      "fairy": 1,
-      "grass": 2,
-      "fire": 1,
-      "dragon": 1,
-      "psychic": 1,
-      "dark": 1,
-      "flying": 1,
-      "water": 1,
-      "ghost": 1
+      "electric": 1
     },
     "water": {
-      "rock": 2,
-      "bug": 1,
-      "fighting": 1,
       "normal": 1,
-      "stellar": 1,
+      "water": 0.5,
+      "fighting": 1,
       "steel": 1,
-      "electric": 1,
-      "ground": 2,
-      "ice": 1,
-      "poison": 1,
-      "fairy": 1,
-      "grass": 0.5,
-      "fire": 2,
-      "dragon": 0.5,
-      "psychic": 1,
       "dark": 1,
       "flying": 1,
-      "water": 0.5,
-      "ghost": 1
-    },
-    "ghost": {
-      "rock": 1,
-      "bug": 1,
-      "fighting": 1,
-      "normal": 0,
-      "stellar": 1,
-      "steel": 1,
-      "electric": 1,
-      "ground": 1,
       "ice": 1,
+      "stellar": 1,
+      "bug": 1,
       "poison": 1,
+      "grass": 0.5,
+      "fire": 2,
+      "ghost": 1,
       "fairy": 1,
+      "dragon": 0.5,
+      "psychic": 1,
+      "ground": 2,
+      "rock": 2,
+      "electric": 1
+    },
+    "fighting": {
+      "normal": 2,
+      "water": 1,
+      "fighting": 1,
+      "steel": 2,
+      "dark": 2,
+      "flying": 0.5,
+      "ice": 2,
+      "stellar": 1,
+      "bug": 0.5,
+      "poison": 0.5,
       "grass": 1,
       "fire": 1,
+      "ghost": 0,
+      "fairy": 0.5,
       "dragon": 1,
-      "psychic": 2,
+      "psychic": 0.5,
+      "ground": 1,
+      "rock": 2,
+      "electric": 1
+    },
+    "steel": {
+      "normal": 1,
+      "water": 0.5,
+      "fighting": 1,
+      "steel": 0.5,
+      "dark": 1,
+      "flying": 1,
+      "ice": 2,
+      "stellar": 1,
+      "bug": 1,
+      "poison": 1,
+      "grass": 1,
+      "fire": 0.5,
+      "ghost": 1,
+      "fairy": 2,
+      "dragon": 1,
+      "psychic": 1,
+      "ground": 1,
+      "rock": 2,
+      "electric": 0.5
+    },
+    "dark": {
+      "normal": 1,
+      "water": 1,
+      "fighting": 0.5,
+      "steel": 1,
       "dark": 0.5,
       "flying": 1,
+      "ice": 1,
+      "stellar": 1,
+      "bug": 1,
+      "poison": 1,
+      "grass": 1,
+      "fire": 1,
+      "ghost": 2,
+      "fairy": 0.5,
+      "dragon": 1,
+      "psychic": 2,
+      "ground": 1,
+      "rock": 1,
+      "electric": 1
+    },
+    "flying": {
+      "normal": 1,
       "water": 1,
-      "ghost": 2
+      "fighting": 2,
+      "steel": 0.5,
+      "dark": 1,
+      "flying": 1,
+      "ice": 1,
+      "stellar": 1,
+      "bug": 2,
+      "poison": 1,
+      "grass": 2,
+      "fire": 1,
+      "ghost": 1,
+      "fairy": 1,
+      "dragon": 1,
+      "psychic": 1,
+      "ground": 1,
+      "rock": 0.5,
+      "electric": 0.5
+    },
+    "ice": {
+      "normal": 1,
+      "water": 0.5,
+      "fighting": 1,
+      "steel": 0.5,
+      "dark": 1,
+      "flying": 2,
+      "ice": 0.5,
+      "stellar": 1,
+      "bug": 1,
+      "poison": 1,
+      "grass": 2,
+      "fire": 0.5,
+      "ghost": 1,
+      "fairy": 1,
+      "dragon": 2,
+      "psychic": 1,
+      "ground": 2,
+      "rock": 1,
+      "electric": 1
+    },
+    "stellar": {
+      "normal": 1,
+      "water": 1,
+      "fighting": 1,
+      "steel": 1,
+      "dark": 1,
+      "flying": 1,
+      "ice": 1,
+      "stellar": 1,
+      "bug": 1,
+      "poison": 1,
+      "grass": 1,
+      "fire": 1,
+      "ghost": 1,
+      "fairy": 1,
+      "dragon": 1,
+      "psychic": 1,
+      "ground": 1,
+      "rock": 1,
+      "electric": 1
+    },
+    "bug": {
+      "normal": 1,
+      "water": 1,
+      "fighting": 0.5,
+      "steel": 0.5,
+      "dark": 2,
+      "flying": 0.5,
+      "ice": 1,
+      "stellar": 1,
+      "bug": 1,
+      "poison": 0.5,
+      "grass": 2,
+      "fire": 0.5,
+      "ghost": 0.5,
+      "fairy": 0.5,
+      "dragon": 1,
+      "psychic": 2,
+      "ground": 1,
+      "rock": 1,
+      "electric": 1
+    },
+    "poison": {
+      "normal": 1,
+      "water": 1,
+      "fighting": 1,
+      "steel": 0,
+      "dark": 1,
+      "flying": 1,
+      "ice": 1,
+      "stellar": 1,
+      "bug": 1,
+      "poison": 0.5,
+      "grass": 2,
+      "fire": 1,
+      "ghost": 0.5,
+      "fairy": 2,
+      "dragon": 1,
+      "psychic": 1,
+      "ground": 0.5,
+      "rock": 0.5,
+      "electric": 1
+    },
+    "grass": {
+      "normal": 1,
+      "water": 2,
+      "fighting": 1,
+      "steel": 0.5,
+      "dark": 1,
+      "flying": 0.5,
+      "ice": 1,
+      "stellar": 1,
+      "bug": 0.5,
+      "poison": 0.5,
+      "grass": 0.5,
+      "fire": 0.5,
+      "ghost": 1,
+      "fairy": 1,
+      "dragon": 0.5,
+      "psychic": 1,
+      "ground": 2,
+      "rock": 2,
+      "electric": 1
+    },
+    "fire": {
+      "normal": 1,
+      "water": 0.5,
+      "fighting": 1,
+      "steel": 2,
+      "dark": 1,
+      "flying": 1,
+      "ice": 2,
+      "stellar": 1,
+      "bug": 2,
+      "poison": 1,
+      "grass": 2,
+      "fire": 0.5,
+      "ghost": 1,
+      "fairy": 1,
+      "dragon": 0.5,
+      "psychic": 1,
+      "ground": 1,
+      "rock": 0.5,
+      "electric": 1
+    },
+    "ghost": {
+      "normal": 0,
+      "water": 1,
+      "fighting": 1,
+      "steel": 1,
+      "dark": 0.5,
+      "flying": 1,
+      "ice": 1,
+      "stellar": 1,
+      "bug": 1,
+      "poison": 1,
+      "grass": 1,
+      "fire": 1,
+      "ghost": 2,
+      "fairy": 1,
+      "dragon": 1,
+      "psychic": 2,
+      "ground": 1,
+      "rock": 1,
+      "electric": 1
+    },
+    "fairy": {
+      "normal": 1,
+      "water": 1,
+      "fighting": 2,
+      "steel": 0.5,
+      "dark": 2,
+      "flying": 1,
+      "ice": 1,
+      "stellar": 1,
+      "bug": 1,
+      "poison": 0.5,
+      "grass": 1,
+      "fire": 0.5,
+      "ghost": 1,
+      "fairy": 1,
+      "dragon": 2,
+      "psychic": 1,
+      "ground": 1,
+      "rock": 1,
+      "electric": 1
+    },
+    "dragon": {
+      "normal": 1,
+      "water": 1,
+      "fighting": 1,
+      "steel": 0.5,
+      "dark": 1,
+      "flying": 1,
+      "ice": 1,
+      "stellar": 1,
+      "bug": 1,
+      "poison": 1,
+      "grass": 1,
+      "fire": 1,
+      "ghost": 1,
+      "fairy": 0,
+      "dragon": 2,
+      "psychic": 1,
+      "ground": 1,
+      "rock": 1,
+      "electric": 1
+    },
+    "psychic": {
+      "normal": 1,
+      "water": 1,
+      "fighting": 2,
+      "steel": 0.5,
+      "dark": 0,
+      "flying": 1,
+      "ice": 1,
+      "stellar": 1,
+      "bug": 1,
+      "poison": 2,
+      "grass": 1,
+      "fire": 1,
+      "ghost": 1,
+      "fairy": 1,
+      "dragon": 1,
+      "psychic": 0.5,
+      "ground": 1,
+      "rock": 1,
+      "electric": 1
+    },
+    "ground": {
+      "normal": 1,
+      "water": 1,
+      "fighting": 1,
+      "steel": 2,
+      "dark": 1,
+      "flying": 0,
+      "ice": 1,
+      "stellar": 1,
+      "bug": 0.5,
+      "poison": 2,
+      "grass": 0.5,
+      "fire": 2,
+      "ghost": 1,
+      "fairy": 1,
+      "dragon": 1,
+      "psychic": 1,
+      "ground": 1,
+      "rock": 2,
+      "electric": 2
+    },
+    "rock": {
+      "normal": 1,
+      "water": 1,
+      "fighting": 0.5,
+      "steel": 0.5,
+      "dark": 1,
+      "flying": 2,
+      "ice": 2,
+      "stellar": 1,
+      "bug": 2,
+      "poison": 1,
+      "grass": 1,
+      "fire": 2,
+      "ghost": 1,
+      "fairy": 1,
+      "dragon": 1,
+      "psychic": 1,
+      "ground": 0.5,
+      "rock": 1,
+      "electric": 1
+    },
+    "electric": {
+      "normal": 1,
+      "water": 2,
+      "fighting": 1,
+      "steel": 1,
+      "dark": 1,
+      "flying": 2,
+      "ice": 1,
+      "stellar": 1,
+      "bug": 1,
+      "poison": 1,
+      "grass": 0.5,
+      "fire": 1,
+      "ghost": 1,
+      "fairy": 1,
+      "dragon": 0.5,
+      "psychic": 1,
+      "ground": 0,
+      "rock": 1,
+      "electric": 0.5
     }
   },
   "typesByGeneration": {
     "generation-i": [
-      "rock",
-      "bug",
-      "fighting",
       "normal",
-      "electric",
-      "ground",
+      "water",
+      "fighting",
+      "flying",
       "ice",
+      "bug",
       "poison",
       "grass",
       "fire",
+      "ghost",
       "dragon",
       "psychic",
-      "flying",
-      "water",
-      "ghost"
+      "ground",
+      "rock",
+      "electric"
     ],
     "generation-ii": [
       "steel",
